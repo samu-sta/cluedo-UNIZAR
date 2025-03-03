@@ -1,5 +1,6 @@
 # 🕵️‍♂️ Proyecto Cluedo Digital 🕵️‍♀️
-![2e63ac96-9857-4a3a-8e93-e7e914b19870](https://github.com/user-attachments/assets/1eef4e71-44a8-4617-bf51-4532baa18a5a)
+
+![9d873cc7-5455-4e9e-95f6-58ec55badefe](https://github.com/user-attachments/assets/5fd63e08-ff74-43fe-ab64-5b12fc6a4eca)
 
 
 ## 📜 Descripción
