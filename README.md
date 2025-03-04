@@ -7,6 +7,15 @@
 
 ¡Resuelve el misterio en línea! 🔍 Este proyecto reimagina el clásico juego de mesa Cluedo, permitiendo a jugadores de todo el mundo unirse y desentrañar el caso juntos. 🤝
 
+### 🎮 ¿Cómo se juega?
+
+1. **Crea o únete a una partida** - Tras iniciar sesión, puedes unirte a partidas de 2 a 6 jugadores
+2. **Investiga el crimen** - Como en el juego original, debes descubrir quién cometió el asesinato, con qué arma y en qué habitación
+3. **Realiza acusaciones** - En tu turno, puedes hacer suposiciones o acusaciones finales
+4. **Chatea con otros jugadores** - Comunícate con otros detectives a través del chat integrado en la partida
+
+*Los usuarios solo pueden participar en partidas e interactuar con el chat del juego. El rol de administrador está limitado exclusivamente a la gestión de usuarios (crear, leer, actualizar y eliminar).*
+
 ## 🛠️ Tecnologías Utilizadas
 
 *   **Frontend:**
@@ -19,91 +28,3 @@
     *   🔑 **JSON Web Tokens (JWT):** Para una autenticación segura y basada en tokens.
     *   🗄️ **Sequelize:** ORM (Object-Relational Mapper) para interactuar con la base de datos MySQL.
     *   🐬 **MySQL:** El sistema de gestión de bases de datos relacional.
-
-## 📂 Estructura del Proyecto
-```
-cluedo/
-├── frontend/     # Código fuente del frontend (React)
-├── backend/      # Código fuente del backend (Node.js, Express)
-├── .env.example  # Archivo de ejemplo para la configuración
-├── README.md     # Este archivo
-```
-
-## ⚙️ Instalación
-
-1.  **Clona el repositorio:**
-
-    ```bash
-    git clone https://github.com/samu-sta/cluedo-UNIZAR
-    cd cluedo-UNIZAR
-    ```
-
-2.  **Configura el backend:**
-
-    ```bash
-    cd backend
-    pnpm install
-    cp .env.example .env
-    # ✏️ Edita el archivo .env con tus credenciales de base de datos y clave secreta JWT
-    ```
-
-3.  **Configura el frontend:**
-
-    ```bash
-    cd ../frontend
-    pnpm install
-    ```
-
-## 🚀 Ejecución
-
-1.  **Inicia la base de datos MySQL:** Asegúrate de que tu servidor MySQL esté en ejecución. ⚙️
-
-2.  **Inicia el backend:**
-
-    ```bash
-    cd backend
-    pnpm run dev
-    ```
-
-3.  **Inicia el frontend:**
-
-    ```bash
-    cd ../frontend
-    pnpm run dev
-    ```
-## 🐳 Docker
-
-```bash
-
-# Crear el archivo de variables de entorno:
-cp .env.example .env
-
-# Construir y levantar todos los contenedores
-docker compose up --build
-
-# Para ejecutar en segundo plano
-docker compose up -d --build
-
-# Para ver logs cuando se ejecuta en segundo plano
-docker compose logs -f
-```
-
-
-## 🔑 Autenticación
-
-El sistema utiliza **JWT** para la autenticación de usuarios. 🔐
-
-## 💬 Socket.IO
-
-Implementa comunicación en tiempo real para el juego.
-
-## 🤝 Contribución
-
-1. Fork del repositorio
-2. Crear rama feature/bugfix
-3. Escribir pruebas
-4. Pull request
-
-## 📜 Licencia
-
-Este proyecto está licenciado bajo la Licencia MIT
