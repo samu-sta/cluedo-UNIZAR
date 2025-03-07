@@ -11,7 +11,7 @@ const useStartGames = () => {
 
     // Simulación de búsqueda
     const timeoutId = setTimeout(() => {
-      navigate('/example');
+      navigate('/game/12345');
     }, 3000);
 
     setSearchTimeout(timeoutId);
