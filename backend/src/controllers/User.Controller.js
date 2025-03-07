@@ -1,6 +1,6 @@
 import userSchema from "../schemas/UserSchema.js";
 import argon2 from 'argon2';
-import auth from '../auth/auth.js';
+import auth from '../utils/auth.js';
 import MESSAGES from "../messages/messages.js";
 
 export default class UserController {

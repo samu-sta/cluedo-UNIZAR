@@ -7,6 +7,7 @@ const INVALID_CREDENTIALS = "Credenciales inválidas";
 const LOGOUT_SUCCESS = "Sesión cerrada correctamente";
 const INVALID_DATA = "Datos inválidos";
 const ERROR_500 = "Error interno del servidor";
+const UNAUTHORIZED = "No autorizado";
 
 const MESSAGES = {
   USER_NOT_FOUND,

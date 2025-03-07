@@ -33,6 +33,8 @@ const useLoginPage = (setUser) => {
         return
       }
       setUser(response.user);
+      localStorage.setItem('user', JSON.stringify(response.user));
+
       navigate('/');
     }
     catch (error) {

@@ -13,10 +13,11 @@ import { logoutUser } from './services/User';
 import './App.css';
 
 const App = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
 
   const handleLogout = () => {
     setUser(null);
+    localStorage.removeItem('user');
     logoutUser();
   };
 
