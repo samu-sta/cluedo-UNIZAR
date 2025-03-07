@@ -1,6 +1,20 @@
 import './styles/StartGames.css';
 import useStartGames from '../../hooks/useStartGames';
-const Games = () => {
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+
+const StartGames = ({ user }) => {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  });
+
+
+
   const { isSearching, handleSearchGame, handleCancelSearch } = useStartGames();
 
   return (
@@ -48,4 +62,4 @@ const Games = () => {
   );
 };
 
-export default Games;
+export default StartGames;

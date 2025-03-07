@@ -26,7 +26,7 @@ const App = () => {
         <Route path={ROUTES.HOME} element={<Home user={user} />} />
         <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
         <Route path={ROUTES.LOGIN} element={<LoginPage setUser={setUser} />} />
-        <Route path={ROUTES.GAMES} element={<StartGames />} />
+        <Route path={ROUTES.GAMES} element={<StartGames user={user} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
