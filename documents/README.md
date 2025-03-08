@@ -9,6 +9,7 @@
 - **React Icons 5.5.0**: Biblioteca de iconos
 - **Zod 3.24.2**: Validación de formularios
 - **Vite 6.2.0**: Herramienta de compilación y servidor de desarrollo
+- **Socket.IO Client 5.1.0**: Cliente para comunicación en tiempo real
 
 ### 1.2 Backend
 - **Node.js**: Entorno de ejecución para JavaScript en servidor
@@ -18,10 +19,12 @@
 - **Argon2 0.41.1**: Algoritmo seguro para hash de contraseñas
 - **JSONWebToken 9.0.2**: Implementación de tokens JWT
 - **Cookie-Parser 1.4.7**: Middleware para manejar cookies
+- **Socket.IO 5.0.0**: Servidor para comunicación en tiempo real
 - **CORS**: Middleware para habilitar peticiones entre dominios
 - **Morgan 1.10.0**: Logger de HTTP requests
 - **Dotenv 16.4.7**: Carga variables de entorno desde archivo .env
 - **Zod 3.24.2**: Validación de datos de entrada de peticiones HTTP
+- **UUID 10.0.0**: Generación de identificadores únicos para partidas
 
 
 ## 🏛️ 2. Arquitectura del Proyecto
@@ -31,8 +34,14 @@ cluedo/
 │   ├── src/
 │   │   ├── components/  # Componentes reutilizables
 │   │   ├── pages/       # Páginas de la aplicación
+│   │   │   ├── GameRoom/     # Interfaz de sala de juego
+│   │   │   └── startGames/   # Creación/unión a partidas
 │   │   ├── hooks/       # Custom React hooks
+│   │   │   ├── useGameSocket.jsx  # Hook para gestionar sockets
+│   │   │   └── useStartGames.jsx  # Hook para crear/unir partidas
 │   │   ├── services/    # Servicios para API calls
+│   │   │   ├── Game.js          # Servicios de partidas
+│   │   │   └── Socket.js        # Configuración de Socket.IO
 │   │   └── schemas/     # Esquemas de validación
 │   └── ...
 ├── backend/         # Servidor Node.js
@@ -44,6 +53,7 @@ cluedo/
 │   │   ├── messages/     # Mensajes de respuesta
 │   │   ├── models/       # Modelos de datos
 │   │   ├── routes/       # Definición de rutas
+│   │   ├── socket/       # Configuración de Socket.IO
 │   │   └── schemas/      # Esquemas para validación
 │   └── ...
 └── documents/       # Documentación del proyecto
@@ -116,27 +126,47 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
 - Diseño responsivo para móviles y escritorio
 
 
-## 🐳 7. Docker
+## 🎮 7. Sistema de Partidas y Comunicación en Tiempo Real
+
+### 7.1 Gestión de Partidas
+- **Creación de partidas**: Generación de identificadores únicos (UUID)
+- **Unión a partidas existentes**: Mediante código de partida
+- **Persistencia en memoria**: Las partidas activas se mantienen en un Map centralizado (proximamente en base de datos)
+
+### 7.2 Socket.IO
+- **Arquitectura de comunicación**: Implementación de patrón publisher-subscriber
+- **Autenticación de socket**: Mediante tokens JWT específicos para cada partida
+- **Salas (rooms)**: Cada partida tiene su propia sala para comunicación aislada
+- **Auto-limpieza**: Las partidas se eliminan automáticamente cuando quedan vacías
+- **Reconexión**: Manejo de actualización de página y reconexiones
+- **Eventos principales**:
+  - `playerJoined`: Cuando un nuevo jugador se une a la partida
+  - `playerLeft`: Cuando un jugador abandona la partida
+  - `playerList`: Lista actualizada de jugadores en la sala
+  - `leaveGame`: Abandono explícito de una partida
+
+
+## 🐳 8. Docker
 
 El proyecto está completamente dockerizado para facilitar el desarrollo y despliegue.
 
-### 7.1 Servicios en Docker Compose
+### 8.1 Servicios en Docker Compose
 - **frontend**: Contenedor para la aplicación React (puerto 5173)
 - **backend**: Contenedor para el servidor Node.js (puerto 3000)
 - **db**: Contenedor para MySQL (puerto 3306)
 
-### 7.2 Volúmenes
+### 8.2 Volúmenes
 - Volumen persistente para datos de MySQL
 - Volúmenes para código fuente (desarrollo)
 
-### 7.3 Variables de Entorno
+### 8.3 Variables de Entorno
 Las configuraciones se manejan mediante variables de entorno que se pueden definir en archivos `.env`:
 - Credenciales de base de datos
 - Puerto del frontend y backend
 - URL de API
 - Secreto JWT
 
-### 7.4 Comandos Útiles
+### 8.4 Comandos Útiles
 ```bash
 # Levantar servicios
 docker-compose up -d
@@ -152,7 +182,7 @@ docker-compose up -d --build
 ```
 
 
-## 🛡️ 8. Seguridad
+## 🛡️ 9. Seguridad
 
 - **Contraseñas**: Hashed con Argon2, no se almacenan en texto plano
 - **CORS**: Restricciones de origen cruzado configuradas
@@ -160,9 +190,9 @@ docker-compose up -d --build
 - **Validación**: Todas las entradas son validadas con Zod
 
 
-## ⚙️ 9. Instalación y Configuración (Sin Docker)
+## ⚙️ 10. Instalación y Configuración (Sin Docker)
 
-### 9.1 Instalación de Dependencias
+### 10.1 Instalación de Dependencias
 
 #### Frontend
 ```bash
@@ -182,12 +212,12 @@ cd backend
 npm install
 ```
 
-### 9.2 Configuración de Variables de Entorno
+### 10.2 Configuración de Variables de Entorno
 
 El proyecto requiere que se creen los archivos `.env` donde se encuentren los `.env.example` siguiendo su estructura
 
 
-## 🔮 10. Consideraciones Futuras
+## 🔮 11. Consideraciones Futuras
 
 - Implementación de Socket.IO para comunicación en tiempo real para el juego.
 - Ampliación de características de juego (tablero, cartas, etc.).
