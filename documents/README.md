@@ -160,7 +160,7 @@ El proyecto está completamente dockerizado para facilitar el desarrollo y despl
 - Volúmenes para código fuente (desarrollo)
 
 ### 8.3 Variables de Entorno
-Las configuraciones se manejan mediante variables de entorno que se pueden definir en archivos `.env`:
+Las configuraciones se manejan mediante variables de entorno que se pueden definir en el archivo `.env` siguiendo la estructura del `.env.example`:
 - Credenciales de base de datos
 - Puerto del frontend y backend
 - URL de API
@@ -214,8 +214,26 @@ npm install
 
 ### 10.2 Configuración de Variables de Entorno
 
-El proyecto requiere que se creen los archivos `.env` donde se encuentren los `.env.example` siguiendo su estructura
+El proyecto requiere que se creen los archivos `.env` en la carpeta backend, siguiendo la estructura del `.env.example`
 
+### 10.3 Ejecución del frontend y backend
+
+#### Frontend
+```bash
+# Navegar al directorio frontend
+cd frontend
+
+# Ejecutar en modo desarrollo
+npm run dev
+```
+#### Backend
+```bash
+# Navegar al directorio backend
+cd backend
+
+# Inicializar y ejecutar en modo desarrollo
+npm start
+```
 
 ## 🔮 11. Consideraciones Futuras
 
