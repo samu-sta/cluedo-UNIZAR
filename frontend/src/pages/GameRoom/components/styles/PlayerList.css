@@ -1,0 +1,30 @@
+.player-sidebar {
+  background-color: var(--color-bg-secondary);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.player-sidebar h2 {
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.game-player-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.player-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+}
+
+.player-name {
+  font-weight: 600;
+  color: var(--color-text);
+}

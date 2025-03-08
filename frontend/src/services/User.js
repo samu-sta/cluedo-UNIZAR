@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://localhost:3000/api';
 
 export const registerUser = async (data) => {
   return await fetch(`${API_URL}/user/register`, {
@@ -13,13 +13,13 @@ export const registerUser = async (data) => {
 
 export const loginUser = async (userData) => {
   return await fetch(`${API_URL}/user/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-      credentials: 'include',
-    })
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userData),
+    credentials: 'include',
+  })
     .then((res) => res.json())
 };
 

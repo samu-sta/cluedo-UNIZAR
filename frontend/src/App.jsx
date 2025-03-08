@@ -10,12 +10,14 @@ import GameRoom from './pages/GameRoom/GameRoom.jsx';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ROUTES } from './utils/constants';
 import { logoutUser } from './services/User';
+import { closeSocket } from './services/Socket';
 import './App.css';
 
 const App = () => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  const [user, setUser] = useState(localStorage.getItem('user'))
 
   const handleLogout = () => {
+    closeSocket(); // Cerrar cualquier conexión de socket al cerrar sesión
     setUser(null);
     localStorage.removeItem('user');
     logoutUser();
