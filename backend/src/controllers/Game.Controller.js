@@ -1,12 +1,16 @@
 import MESSAGES from "../messages/messages.js";
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
+// Create a Map to store active games
+// This needs to be declared before the export
+let activeGames = new Map();
+
+// Export the variable so it can be accessed from other files
+export { activeGames };
 
 export default class GameController {
   constructor({ userModel }) {
     this.userModel = userModel;
-    // Almacén temporal para partidas activas
-    this.activeGames = new Map();
   }
 
   // Endpoint para crear una partida
@@ -26,7 +30,7 @@ export default class GameController {
       const gameId = uuidv4();
 
       // Crear nueva partida
-      this.activeGames.set(gameId, {
+      activeGames.set(gameId, {
         players: [{
           username: user.username
         }]
@@ -63,11 +67,11 @@ export default class GameController {
       const userId = req.userId;
 
       // Verificar que el juego existe
-      if (!this.activeGames.has(gameId)) {
+      if (!activeGames.has(gameId)) {
         return res.status(404).json({ error: "Partida no encontrada" });
       }
 
-      const game = this.activeGames.get(gameId);
+      const game = activeGames.get(gameId);
 
       // Obtener datos del usuario
       const user = await this.userModel.findByPk(userId);
@@ -86,7 +90,7 @@ export default class GameController {
       }
 
       // Actualizar la partida
-      this.activeGames.set(gameId, game);
+      activeGames.set(gameId, game);
 
       // Generar token específico para el socket con gameId incluido
       const socketToken = jwt.sign(
