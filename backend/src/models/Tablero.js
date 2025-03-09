@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 
 const Tablero = sequelize.define('Tablero', {
-  id_tablero: {
+  idTablero: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true

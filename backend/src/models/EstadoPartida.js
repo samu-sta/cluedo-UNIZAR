@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 
 const EstadoPartida = sequelize.define('EstadoPartida', {
-  id_estado: {
+  idEstado: {
     type: DataTypes.ENUM('NO_EMPEZADA', 'EN_JUEGO', 'FINALIZADA'),
     primaryKey: true
   }

@@ -4,37 +4,37 @@ import Jugador from './Jugador.js';
 import Carta from './Carta.js';
 
 const Acusacion = sequelize.define('Acusacion', {
-  id_acusacion: {
+  idAcusacion: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  id_jugador: {
+  idJugador: {
     type: DataTypes.INTEGER,
     references: {
       model: Jugador,
-      key: 'id_jugador'
+      key: 'idJugador'
     }
   },
-  id_carta_arma: {
+  idCartaarma: {
     type: DataTypes.INTEGER,
     references: {
       model: Carta,
-      key: 'id_carta'
+      key: 'idCarta'
     }
   },
-  id_carta_personaje: {
+  idCartapersonaje: {
     type: DataTypes.INTEGER,
     references: {
       model: Carta,
-      key: 'id_carta'
+      key: 'idCarta'
     }
   },
-  id_carta_habitacion: {
+  idCartahabitacion: {
     type: DataTypes.INTEGER,
     references: {
       model: Carta,
-      key: 'id_carta'
+      key: 'idCarta'
     }
   },
   final: {

@@ -4,20 +4,20 @@ import Jugador from './Jugador.js';
 import Carta from './Carta.js';
 
 const JugadorCarta = sequelize.define('JugadorCarta', {
-  id_jugador: {
+  idJugador: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     references: {
       model: Jugador,
-      key: 'id_jugador'
+      key: 'idJugador'
     }
   },
-  id_carta: {
+  idCarta: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     references: {
       model: Carta,
-      key: 'id_carta'
+      key: 'idCarta'
     }
   }
 }, {

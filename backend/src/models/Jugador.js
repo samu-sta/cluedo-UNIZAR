@@ -4,24 +4,23 @@ import Usuario from './Usuario.js';
 import Partida from './Partida.js';
 
 const Jugador = sequelize.define('Jugador', {
-  id_jugador: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
-  },
-  id_usuario: {
+  idUsuario: {
     type: DataTypes.INTEGER,
     references: {
       model: Usuario,
-      key: 'id_usuario'
+      key: 'idUsuario'
     }
   },
-  id_partida: {
+  idPartida: {
     type: DataTypes.INTEGER,
     references: {
       model: Partida,
-      key: 'id_partida'
+      key: 'idPartida'
     }
+  },
+  turno: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   },
   id_estado: {
     type: DataTypes.ENUM('JUGANDO', 'EXPULSADO_POR_ACUSACION', 'EXPULSADO_POR_ADMIN'),
