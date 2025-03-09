@@ -3,12 +3,12 @@ import sequelize from '../database/database.js';
 import Jugador from './Jugador.js';
 
 const PosicionJugador = sequelize.define('PosicionJugador', {
-  id_jugador: {
+  idJugador: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     references: {
       model: Jugador,
-      key: 'id_jugador'
+      key: 'idJugador'
     }
   },
   fila: {

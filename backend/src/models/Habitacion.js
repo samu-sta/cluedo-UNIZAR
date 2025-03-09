@@ -3,7 +3,7 @@ import sequelize from '../database/database.js';
 import Tablero from './Tablero.js';
 
 const Habitacion = sequelize.define('Habitacion', {
-  id_habitacion: {
+  idHabitacion: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
@@ -12,11 +12,11 @@ const Habitacion = sequelize.define('Habitacion', {
     type: DataTypes.STRING(100),
     allowNull: false
   },
-  id_tablero: {
+  idTablero: {
     type: DataTypes.INTEGER,
     references: {
       model: Tablero,
-      key: 'id_tablero'
+      key: 'idTablero'
     }
   }
 }, {

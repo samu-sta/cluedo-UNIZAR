@@ -3,7 +3,7 @@ import sequelize from '../database/database.js';
 import Tablero from './Tablero.js';
 
 const Partida = sequelize.define('Partida', {
-  id_partida: {
+  idPartida: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
@@ -20,11 +20,11 @@ const Partida = sequelize.define('Partida', {
     type: DataTypes.INTEGER,
     defaultValue: 0
   },
-  id_tablero: {
+  idTablero: {
     type: DataTypes.INTEGER,
     references: {
       model: Tablero,
-      key: 'id_tablero'
+      key: 'idTablero'
     }
   }
 }, {

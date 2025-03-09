@@ -3,7 +3,7 @@ import sequelize from '../database/database.js';
 import Habitacion from './Habitacion.js';
 
 const Puerta = sequelize.define('Puerta', {
-  id_puerta: {
+  idPuerta: {
     type: DataTypes.INTEGER,
     primaryKey: true
   },
@@ -13,11 +13,11 @@ const Puerta = sequelize.define('Puerta', {
   columna: {
     type: DataTypes.INTEGER
   },
-  id_habitacion: {
+  idHabitacion: {
     type: DataTypes.INTEGER,
     references: {
       model: Habitacion,
-      key: 'id_habitacion'
+      key: 'idHabitacion'
     }
   }
 }, {

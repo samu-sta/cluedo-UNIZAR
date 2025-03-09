@@ -4,33 +4,33 @@ import Partida from './Partida.js';
 import Carta from './Carta.js';
 
 const SolucionPartida = sequelize.define('SolucionPartida', {
-  id_partida: {
+  idPartida: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     references: {
       model: Partida,
-      key: 'id_partida'
+      key: 'idPartida'
     }
   },
-  id_carta_arma: {
+  idCartaarma: {
     type: DataTypes.INTEGER,
     references: {
       model: Carta,
-      key: 'id_carta'
+      key: 'idCarta'
     }
   },
-  id_carta_personaje: {
+  idCartapersonaje: {
     type: DataTypes.INTEGER,
     references: {
       model: Carta,
-      key: 'id_carta'
+      key: 'idCarta'
     }
   },
-  id_carta_habitacion: {
+  idCartahabitacion: {
     type: DataTypes.INTEGER,
     references: {
       model: Carta,
-      key: 'id_carta'
+      key: 'idCarta'
     }
   }
 }, {

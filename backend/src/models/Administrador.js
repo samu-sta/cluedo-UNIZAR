@@ -4,25 +4,17 @@ import Cuenta from './Cuenta.js';
 import Usuario from './Usuario.js';
 
 const Administrador = sequelize.define('Administrador', {
-  id_admin: {
+  idAdmin: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  id_cuenta: {
+  idCuenta: {
     type: DataTypes.INTEGER,
     unique: true,
     references: {
       model: Cuenta,
-      key: 'id_cuenta'
-    }
-  },
-  id_usuario: {
-    type: DataTypes.INTEGER,
-    unique: true,
-    references: {
-      model: Usuario,
-      key: 'id_usuario'
+      key: 'idCuenta'
     }
   }
 }, {

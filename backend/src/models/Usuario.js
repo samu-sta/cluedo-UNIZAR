@@ -3,17 +3,17 @@ import sequelize from '../database/database.js';
 import Cuenta from './Cuenta.js';
 
 const Usuario = sequelize.define('Usuario', {
-  id_usuario: {
+  idUsuario: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  id_cuenta: {
+  idCuenta: {
     type: DataTypes.INTEGER,
     unique: true,
     references: {
       model: Cuenta,
-      key: 'id_cuenta'
+      key: 'idCuenta'
     }
   }
 }, {
