@@ -1,95 +1,46 @@
 import { activeGames } from "../controllers/Game.Controller.js";
-
-const COUNT_DOWN_TIME = 10;
+import GameStateManager from './GameStateManager.js';
+import CountdownManager from './CountdownManager.js';
 
 export const setupSocketHandlers = (io) => {
-  const roomPlayers = new Map();
-  const gameTimers = new Map();
-  const gameCounts = new Map();
+  const gameStateManager = new GameStateManager();
+  const countdownManager = new CountdownManager(io, gameStateManager);
 
   io.on('connection', (socket) => {
-    console.log(`Usuario conectado: ${socket.username} (${socket.userId})`);
+    const { gameId, userId, username } = socket;
 
-    socket.join(socket.gameId);
+    console.log(`Usuario conectado: ${username} (${userId})`);
 
-    if (!roomPlayers.has(socket.gameId)) {
-      roomPlayers.set(socket.gameId, new Map());
-    }
+    socket.join(gameId);
 
-    const gamePlayerMap = roomPlayers.get(socket.gameId);
+    const isNewPlayer = gameStateManager.addPlayer(gameId, userId, { username });
 
-    if (gamePlayerMap.has(socket.userId)) {
-      return;
-    }
+    if (!isNewPlayer) return;
 
-    gamePlayerMap.set(socket.userId, {
-      username: socket.username
+    socket.emit('playerList', {
+      players: gameStateManager.getPlayers(gameId)
     });
 
-    const players = Array.from(gamePlayerMap.values());
+    socket.to(gameId).emit('playerJoined', { username });
 
-    io.to(socket.gameId).emit('playerJoined', {
-      username: socket.username
-    });
-
-    socket.emit('playerList', { players });
-
-    if (gamePlayerMap.size >= 2 && !gameTimers.has(socket.gameId)) {
-      startCountdown(socket.gameId);
+    if (gameStateManager.getPlayerCount(gameId) >= 2) {
+      countdownManager.startCountdown(gameId);
     }
 
     socket.on('disconnect', () => {
-      console.log(`Usuario desconectado: ${socket.username}`);
+      console.log(`Usuario desconectado: ${username}`);
 
-      if (roomPlayers.has(socket.gameId)) {
-        const gamePlayerMap = roomPlayers.get(socket.gameId);
-        gamePlayerMap.delete(socket.userId);
+      if (!gameStateManager.removePlayer(gameId, userId)) return;
 
-        if (gamePlayerMap.size < 2) {
-          clearCountdown(socket.gameId);
-          io.to(socket.gameId).emit('countdownCancelled');
-        }
+      io.to(gameId).emit('playerLeft', { username });
 
-        if (gamePlayerMap.size === 0) {
-          roomPlayers.delete(socket.gameId);
-          activeGames.delete(socket.gameId);
-        }
+      if (gameStateManager.getPlayerCount(gameId) < 2) {
+        countdownManager.cancelCountdown(gameId);
       }
 
-      io.to(socket.gameId).emit('playerLeft', {
-        username: socket.username
-      });
+      if (gameStateManager.getPlayerCount(gameId) === 0) {
+        activeGames.delete(gameId);
+      }
     });
   });
-
-  function startCountdown(gameId) {
-
-    gameCounts.set(gameId, COUNT_DOWN_TIME);
-
-    const timerId = setInterval(() => {
-      let currentCount = gameCounts.get(gameId);
-      currentCount -= 1;
-      gameCounts.set(gameId, currentCount);
-
-      io.to(gameId).emit('countdownUpdate', { seconds: currentCount });
-
-      if (currentCount === 0) {
-        clearInterval(timerId);
-        gameTimers.delete(gameId);
-        gameCounts.delete(gameId);
-
-        io.to(gameId).emit('gameStart');
-      }
-    }, 1000);
-
-    gameTimers.set(gameId, timerId);
-  }
-
-  function clearCountdown(gameId) {
-    if (gameTimers.has(gameId)) {
-      clearInterval(gameTimers.get(gameId));
-      gameTimers.delete(gameId);
-    }
-    gameCounts.delete(gameId);
-  }
 };
