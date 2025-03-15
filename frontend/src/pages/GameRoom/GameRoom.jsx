@@ -18,11 +18,11 @@ const GameRoom = ({ user }) => {
     }
   }, [user, navigate]);
 
-  // Usar nuestro hook personalizado
   const {
     players,
     loading,
     error,
+    countdown,
     gameState,
     sendReady,
     leaveGame
@@ -62,6 +62,7 @@ const GameRoom = ({ user }) => {
       <PlayerList players={players} />
       <GameBoard
         gameId={gameId}
+        countdown={countdown}
         gameState={gameState}
         onReady={sendReady}
         onLeaveGame={handleLeaveGame}

@@ -82,3 +82,39 @@
   align-items: center;
   justify-content: center;
 }
+
+.countdown-container {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.countdown-timer {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--color-accent-yellow);
+  margin: 15px 0;
+}
+
+.countdown-progress {
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  margin: 20px 0;
+  overflow: hidden;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.countdown-bar {
+  height: 100%;
+  background-color: var(--color-accent-yellow);
+  border-radius: 10px;
+  transition: width 1s linear;
+}
+
+.status-badge.playing {
+  background-color: rgba(39, 174, 96, 0.2);
+  color: #27ae60;
+  border: 1px solid rgba(39, 174, 96, 0.3);
+}
