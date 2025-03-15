@@ -1,10 +1,10 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useGameSocket } from '../../hooks/useGameSocket';
-import { PlayerList } from './components/PlayerList';
+import PlayerList from './components/PlayerList';
 import { GameBoard } from './components/GameBoard';
-import useIsMobile from '../../hooks/useIsMobile';
 import GameHeader from './components/GameHeader';
+import useIsMobile from '../../hooks/useIsMobile';
 import './styles/GameRoom.css';
 
 const GameRoom = ({ user }) => {
@@ -59,11 +59,10 @@ const GameRoom = ({ user }) => {
   }
 
   return (
-    <main className={`game-room ${isMobile ? 'game-room-mobile' : ''}`}>
+    <main className={`game-room ${isMobile ? 'mobile' : ''}`}>
       <PlayerList players={players} />
-
-      <main className="game-content">
-        <GameHeader gameId={gameId} gameState={gameState} />
+      <main className={`game-content ${isMobile ? 'mobile' : ''}`}>
+        <GameHeader gameId={gameId} gameState={gameState} onLeaveGame={handleLeaveGame} />
         <GameBoard
           countdown={countdown}
           gameState={gameState}

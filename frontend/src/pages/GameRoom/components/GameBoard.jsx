@@ -1,9 +1,8 @@
 import React from 'react';
 import './styles/GameBoard.css';
 
-export const GameBoard = ({ countdown, gameState, onReady, onLeaveGame }) => {
+export const GameBoard = ({ countdown, gameState }) => {
   return (
-
     <section className="game-board-placeholder">
       {gameState === 'playing' ? (
         <section className="game-in-progress">
@@ -27,18 +26,6 @@ export const GameBoard = ({ countdown, gameState, onReady, onLeaveGame }) => {
           </p>
 
           <nav className="game-controls">
-            <button
-              className="btn primary"
-              onClick={onReady}
-            >
-              Estoy listo
-            </button>
-            <button
-              className="btn outline danger"
-              onClick={onLeaveGame}
-            >
-              Abandonar partida
-            </button>
           </nav>
         </>
       )}

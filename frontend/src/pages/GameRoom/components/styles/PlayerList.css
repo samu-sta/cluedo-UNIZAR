@@ -1,30 +1,83 @@
 .player-sidebar {
-  background-color: var(--color-bg-secondary);
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  min-width: 250px;
+  max-width: 300px;
   padding: 1.5rem;
-  overflow-y: auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.player-sidebar.mobile {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.3rem;
+  text-align: center;
 }
 
 .player-sidebar h2 {
-  color: var(--color-text);
-  margin-bottom: 1.5rem;
   font-size: 1.2rem;
+  color: var(--color-text);
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--color-text-muted);
 }
 
 .game-player-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-player-list.mobile{
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.player-list-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.game-player-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+  animation: cardAppear 0.3s ease-out;
+}
+
+.game-player-item.mobile {
+  padding: 0.5rem;
+  flex-direction: column;
+}
+
+.game-player-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .player-avatar {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  margin-right: 0.75rem;
+  background: linear-gradient(135deg, #3498db, #9b59b6);
+  color: var(--color-text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.player-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .player-name {
-  font-weight: 600;
+  font-weight: 500;
   color: var(--color-text);
 }
