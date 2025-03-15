@@ -4,6 +4,14 @@
   align-items: center;
 }
 
+.game-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .game-header p {
   color: var(--color-text-muted);
   margin: 0;
@@ -15,6 +23,7 @@
   padding: 0.5rem 1rem;
   gap: 0.5rem;
   transition: all 0.3s ease;
+  flex: 0 1 auto;
 }
 
 .copy-icon {
@@ -32,6 +41,7 @@
   border-radius: 4px;
   font-weight: bold;
   text-transform: uppercase;
+  flex: 0 1 auto;
 }
 
 .status-badge.waiting {
@@ -51,4 +61,6 @@
   color: var(--color-accent-red);
   text-decoration: underline;
   font-size: 0.9rem;
+  flex: 0 1 auto;
+  
 }
