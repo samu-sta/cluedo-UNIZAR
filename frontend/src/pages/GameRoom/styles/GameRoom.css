@@ -35,3 +35,12 @@
 .game-error button {
   margin-top: 1.5rem;
 }
+
+.game-content {
+  padding: 2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  height: 100%;
+}

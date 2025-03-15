@@ -4,6 +4,7 @@ import { useGameSocket } from '../../hooks/useGameSocket';
 import { PlayerList } from './components/PlayerList';
 import { GameBoard } from './components/GameBoard';
 import useIsMobile from '../../hooks/useIsMobile';
+import GameHeader from './components/GameHeader';
 import './styles/GameRoom.css';
 
 const GameRoom = ({ user }) => {
@@ -60,13 +61,17 @@ const GameRoom = ({ user }) => {
   return (
     <main className={`game-room ${isMobile ? 'game-room-mobile' : ''}`}>
       <PlayerList players={players} />
-      <GameBoard
-        gameId={gameId}
-        countdown={countdown}
-        gameState={gameState}
-        onReady={sendReady}
-        onLeaveGame={handleLeaveGame}
-      />
+
+      <main className="game-content">
+        <GameHeader gameId={gameId} gameState={gameState} />
+        <GameBoard
+          countdown={countdown}
+          gameState={gameState}
+          onReady={sendReady}
+          onLeaveGame={handleLeaveGame}
+        />
+      </main>
+
     </main>
   );
 };
