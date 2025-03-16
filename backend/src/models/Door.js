@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
-import Habitacion from './Habitacion.js';
+import Room from './Room.js';
 
-const Puerta = sequelize.define('Puerta', {
+const Door = sequelize.define('Door', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true
@@ -10,19 +10,19 @@ const Puerta = sequelize.define('Puerta', {
   row: {
     type: DataTypes.INTEGER
   },
-  colum: {
+  column: {
     type: DataTypes.INTEGER
   },
-  idHabitacion: {
+  roomId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Habitacion,
+      model: Room,
       key: 'id'
     }
   }
 }, {
-  tableName: 'Puerta',
+  tableName: 'Door',
   timestamps: false
 });
 
-export default Puerta;
+export default Door;

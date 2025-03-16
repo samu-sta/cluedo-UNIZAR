@@ -1,23 +1,23 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 
-const Administrador = sequelize.define('Administrador', {
+const Admin = sequelize.define('Admin', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  idCuenta: {
+  accountId: {
     type: DataTypes.INTEGER,
     unique: true,
     references: {
-      model: 'Cuenta',
+      model: 'Account',
       key: 'id'
     }
   }
 }, {
-  tableName: 'Administrador',
+  tableName: 'Admin',
   timestamps: false
 });
 
-export default Administrador;
+export default Admin;

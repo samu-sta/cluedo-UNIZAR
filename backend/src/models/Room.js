@@ -1,23 +1,27 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
+import Board from './Board.js';
 
-const Tablero = sequelize.define('Tablero', {
+const Room = sequelize.define('Room', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  row: {
-    type: DataTypes.INTEGER,
+  name: {
+    type: DataTypes.STRING(100),
     allowNull: false
   },
-  colum: {
+  boardId: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    references: {
+      model: Board,
+      key: 'id'
+    }
   }
 }, {
-  tableName: 'Tablero',
+  tableName: 'Room',
   timestamps: false
 });
 
-export default Tablero;
+export default Room;

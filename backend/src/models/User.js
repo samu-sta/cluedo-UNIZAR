@@ -1,27 +1,23 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
-import Tablero from './Tablero.js';
 
-const Habitacion = sequelize.define('Habitacion', {
+const User = sequelize.define('User', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  name: {
-    type: DataTypes.STRING(100),
-    allowNull: false
-  },
-  idTablero: {
+  accountId: {
     type: DataTypes.INTEGER,
+    unique: true,
     references: {
-      model: Tablero,
+      model: 'Account',
       key: 'id'
     }
   }
 }, {
-  tableName: 'Habitacion',
+  tableName: 'User',
   timestamps: false
 });
 
-export default Habitacion;
+export default User;

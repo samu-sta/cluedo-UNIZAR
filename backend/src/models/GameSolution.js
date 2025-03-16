@@ -1,41 +1,41 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
-import Partida from './Partida.js';
-import Carta from './Carta.js';
+import Game from './Game.js';
+import Card from './Card.js';
 
-const SolucionPartida = sequelize.define('SolucionPartida', {
-  idPartida: {
+const GameSolution = sequelize.define('GameSolution', {
+  gameId: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     references: {
-      model: Partida,
+      model: Game,
       key: 'id'
     }
   },
-  idCartaarma: {
+  weaponCardId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Carta,
+      model: Card,
       key: 'id'
     }
   },
-  idCartapersonaje: {
+  characterCardId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Carta,
+      model: Card,
       key: 'id'
     }
   },
-  idCartahabitacion: {
+  roomCardId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Carta,
+      model: Card,
       key: 'id'
     }
   }
 }, {
-  tableName: 'SolucionPartida',
+  tableName: 'GameSolution',
   timestamps: false
 });
 
-export default SolucionPartida;
+export default GameSolution;

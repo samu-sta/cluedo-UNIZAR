@@ -1,24 +1,23 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
-import Cuenta from './Cuenta.js';
 
-const Usuario = sequelize.define('Usuario', {
+const Board = sequelize.define('Board', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  idCuenta: {
+  row: {
     type: DataTypes.INTEGER,
-    unique: true,
-    references: {
-      model: Cuenta,
-      key: 'id'
-    }
+    allowNull: false
+  },
+  column: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 }, {
-  tableName: 'Usuario',
+  tableName: 'Board',
   timestamps: false
 });
 
-export default Usuario;
+export default Board;

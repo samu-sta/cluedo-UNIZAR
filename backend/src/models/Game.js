@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
-import Tablero from './Tablero.js';
+import Board from './Board.js';
 
-const Partida = sequelize.define('Partida', {
-  idPartida: {
+const Game = sequelize.define('Game', {
+  id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
@@ -13,23 +13,23 @@ const Partida = sequelize.define('Partida', {
     allowNull: false
   },
   state: {
-    type: DataTypes.ENUM('NO_EMPEZADA', 'EN_JUEGO', 'FINALIZADA'),
-    defaultValue: 'NO_EMPEZADA'
+    type: DataTypes.ENUM('NOT_STARTED', 'IN_PROGRESS', 'FINISHED'),
+    defaultValue: 'NOT_STARTED'
   },
   turn: {
     type: DataTypes.INTEGER,
     defaultValue: 0
   },
-  idTablero: {
+  boardId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Tablero,
+      model: Board,
       key: 'id'
     }
   }
 }, {
-  tableName: 'Partida',
+  tableName: 'Game',
   timestamps: false
 });
 
-export default Partida;
+export default Game;

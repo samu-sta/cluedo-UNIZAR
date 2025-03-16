@@ -1,28 +1,28 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
-import Jugador from './Jugador.js';
-import Carta from './Carta.js';
+import Player from './Player.js';
+import Card from './Card.js';
 
-const JugadorCarta = sequelize.define('JugadorCarta', {
+const PlayerCard = sequelize.define('PlayerCard', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     references: {
-      model: Jugador,
+      model: Player,
       key: 'id'
     }
   },
-  idCarta: {
+  cardId: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     references: {
-      model: Carta,
+      model: Card,
       key: 'id'
     }
   }
 }, {
-  tableName: 'Jugador_Carta',
+  tableName: 'Player_Card',
   timestamps: false
 });
 
-export default JugadorCarta;
+export default PlayerCard;

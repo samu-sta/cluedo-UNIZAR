@@ -1,25 +1,25 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
-import Jugador from './Jugador.js';
+import Player from './Player.js';
 
-const PosicionJugador = sequelize.define('PosicionJugador', {
+const PlayerPosition = sequelize.define('PlayerPosition', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     references: {
-      model: Jugador,
+      model: Player,
       key: 'id'
     }
   },
   row: {
     type: DataTypes.INTEGER
   },
-  colum: {
+  column: {
     type: DataTypes.INTEGER
   }
 }, {
-  tableName: 'PosicionJugador',
+  tableName: 'PlayerPosition',
   timestamps: false
 });
 
-export default PosicionJugador;
+export default PlayerPosition;

@@ -1,6 +1,6 @@
 import sequelize from './database/database.js';
-import Cuenta from './models/Cuenta.js';
-import Usuario from './models/Usuario.js';
+import Cuenta from './models/Account.js';
+import Usuario from './models/User.js';
 import Administrador from './models/Administrador.js';
 import { createApp } from './app/app.js';
 
