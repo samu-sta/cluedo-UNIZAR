@@ -15,6 +15,7 @@ const Administrador = sequelize.define('Administrador', {
     references: {
       model: Cuenta,
       key: 'id'
+    }
   }
 }, {
   tableName: 'Administrador',
