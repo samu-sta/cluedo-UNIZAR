@@ -10,15 +10,13 @@ const Administrador = sequelize.define('Administrador', {
   },
   idCuenta: {
     type: DataTypes.INTEGER,
-    unique: true,
-    references: {
-      model: Cuenta,
-      key: 'id'
-    }
+    unique: true
   }
 }, {
   tableName: 'Administrador',
   timestamps: false
 });
+
+Administrador.belongsTo(Cuenta, { foreignKey: 'idCuenta' });
 
 export default Administrador;
