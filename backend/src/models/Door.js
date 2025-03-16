@@ -1,28 +1,28 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
-import Habitacion from './Habitacion.js';
+import Room from './Room.js';
 
-const Puerta = sequelize.define('Puerta', {
-  idPuerta: {
+const Door = sequelize.define('Door', {
+  id: {
     type: DataTypes.INTEGER,
     primaryKey: true
   },
-  fila: {
+  row: {
     type: DataTypes.INTEGER
   },
-  columna: {
+  column: {
     type: DataTypes.INTEGER
   },
-  idHabitacion: {
+  roomId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Habitacion,
-      key: 'idHabitacion'
+      model: Room,
+      key: 'id'
     }
   }
 }, {
-  tableName: 'Puerta',
+  tableName: 'Door',
   timestamps: false
 });
 
-export default Puerta;
+export default Door;

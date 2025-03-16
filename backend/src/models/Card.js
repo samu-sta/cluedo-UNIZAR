@@ -1,32 +1,32 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
-import Habitacion from './Habitacion.js';
+import Room from './Room.js';
 
-const Carta = sequelize.define('Carta', {
-  idCarta: {
+const Card = sequelize.define('Card', {
+  id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  nombre: {
+  name: {
     type: DataTypes.STRING(100),
     allowNull: false
   },
-  tipo: {
-    type: DataTypes.ENUM('arma', 'personaje', 'habitacion'),
+  type: {
+    type: DataTypes.ENUM('weapon', 'character', 'room'),
     allowNull: false
   },
-  idHabitacion: {
+  roomId: {
     type: DataTypes.INTEGER,
     allowNull: true,
     references: {
-      model: Habitacion,
-      key: 'idHabitacion'
+      model: Room,
+      key: 'id'
     }
   }
 }, {
-  tableName: 'Carta',
+  tableName: 'Card',
   timestamps: false
 });
 
-export default Carta;
+export default Card;

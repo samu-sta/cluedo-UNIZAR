@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
-import accountModel from './Account.js';
+import Account from './Account.js';
 
 const AdminModel = sequelize.define('Admin', {
   id: {
@@ -22,4 +22,4 @@ const AdminModel = sequelize.define('Admin', {
 });
 
 
-export default AdminModel;
+export default Admin;

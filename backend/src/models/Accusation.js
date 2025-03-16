@@ -1,53 +1,53 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
-import Jugador from './Jugador.js';
-import Carta from './Carta.js';
+import Player from './Player.js';
+import Card from './Card.js';
 
-const Acusacion = sequelize.define('Acusacion', {
-  idAcusacion: {
+const Accusation = sequelize.define('Accusation', {
+  id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  idJugador: {
+  playerId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Jugador,
-      key: 'idJugador'
+      model: Player,
+      key: 'id'
     }
   },
-  idCartaarma: {
+  weaponCardId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Carta,
-      key: 'idCarta'
+      model: Card,
+      key: 'id'
     }
   },
-  idCartapersonaje: {
+  characterCardId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Carta,
-      key: 'idCarta'
+      model: Card,
+      key: 'id'
     }
   },
-  idCartahabitacion: {
+  roomCardId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Carta,
-      key: 'idCarta'
+      model: Card,
+      key: 'id'
     }
   },
-  final: {
+  isFinal: {
     type: DataTypes.BOOLEAN,
     defaultValue: false
   },
-  fecha: {
+  date: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW
   }
 }, {
-  tableName: 'Acusacion',
+  tableName: 'Accusation',
   timestamps: false
 });
 
-export default Acusacion;
+export default Accusation;
