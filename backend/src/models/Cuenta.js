@@ -2,16 +2,16 @@ import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 
 const Cuenta = sequelize.define('Cuenta', {
-  idCuenta: {
+  id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  nombre: {
+  name: {
     type: DataTypes.STRING(100),
     allowNull: false
   },
-  correo: {
+  email: {
     type: DataTypes.STRING(100),
     allowNull: false,
     unique: true

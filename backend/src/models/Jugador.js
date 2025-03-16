@@ -8,21 +8,21 @@ const Jugador = sequelize.define('Jugador', {
     type: DataTypes.INTEGER,
     references: {
       model: Usuario,
-      key: 'idUsuario'
+      key: 'id'
     }
   },
   idPartida: {
     type: DataTypes.INTEGER,
     references: {
       model: Partida,
-      key: 'idPartida'
+      key: 'id'
     }
   },
-  turno: {
+  turn: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  id_estado: {
+  playerState: {
     type: DataTypes.ENUM('JUGANDO', 'EXPULSADO_POR_ACUSACION', 'EXPULSADO_POR_ADMIN'),
     defaultValue: 'JUGANDO'
   }

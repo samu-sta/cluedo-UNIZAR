@@ -3,16 +3,16 @@ import sequelize from '../database/database.js';
 import Habitacion from './Habitacion.js';
 
 const Carta = sequelize.define('Carta', {
-  idCarta: {
+  id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  nombre: {
+  name: {
     type: DataTypes.STRING(100),
     allowNull: false
   },
-  tipo: {
+  type: {
     type: DataTypes.ENUM('arma', 'personaje', 'habitacion'),
     allowNull: false
   },
@@ -21,7 +21,7 @@ const Carta = sequelize.define('Carta', {
     allowNull: true,
     references: {
       model: Habitacion,
-      key: 'idHabitacion'
+      key: 'id'
     }
   }
 }, {

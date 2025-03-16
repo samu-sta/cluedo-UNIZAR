@@ -8,15 +8,15 @@ const Partida = sequelize.define('Partida', {
     autoIncrement: true,
     primaryKey: true
   },
-  nombre: {
+  name: {
     type: DataTypes.STRING(100),
     allowNull: false
   },
-  estado: {
+  state: {
     type: DataTypes.ENUM('NO_EMPEZADA', 'EN_JUEGO', 'FINALIZADA'),
     defaultValue: 'NO_EMPEZADA'
   },
-  turno: {
+  turn: {
     type: DataTypes.INTEGER,
     defaultValue: 0
   },
@@ -24,7 +24,7 @@ const Partida = sequelize.define('Partida', {
     type: DataTypes.INTEGER,
     references: {
       model: Tablero,
-      key: 'idTablero'
+      key: 'id'
     }
   }
 }, {

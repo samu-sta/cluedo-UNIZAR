@@ -4,7 +4,7 @@ import Cuenta from './Cuenta.js';
 import Usuario from './Usuario.js';
 
 const Administrador = sequelize.define('Administrador', {
-  idAdmin: {
+  id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
@@ -14,8 +14,7 @@ const Administrador = sequelize.define('Administrador', {
     unique: true,
     references: {
       model: Cuenta,
-      key: 'idCuenta'
-    }
+      key: 'id'
   }
 }, {
   tableName: 'Administrador',

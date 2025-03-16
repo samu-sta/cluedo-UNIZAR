@@ -3,18 +3,18 @@ import sequelize from '../database/database.js';
 import Jugador from './Jugador.js';
 
 const PosicionJugador = sequelize.define('PosicionJugador', {
-  idJugador: {
+  id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     references: {
       model: Jugador,
-      key: 'idJugador'
+      key: 'id'
     }
   },
-  fila: {
+  row: {
     type: DataTypes.INTEGER
   },
-  columna: {
+  colum: {
     type: DataTypes.INTEGER
   }
 }, {

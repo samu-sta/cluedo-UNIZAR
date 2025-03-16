@@ -2,16 +2,16 @@ import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 
 const Tablero = sequelize.define('Tablero', {
-  idTablero: {
+  id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  filas: {
+  row: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  columnas: {
+  colum: {
     type: DataTypes.INTEGER,
     allowNull: false
   }

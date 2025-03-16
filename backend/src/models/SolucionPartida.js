@@ -9,28 +9,28 @@ const SolucionPartida = sequelize.define('SolucionPartida', {
     primaryKey: true,
     references: {
       model: Partida,
-      key: 'idPartida'
+      key: 'id'
     }
   },
   idCartaarma: {
     type: DataTypes.INTEGER,
     references: {
       model: Carta,
-      key: 'idCarta'
+      key: 'id'
     }
   },
   idCartapersonaje: {
     type: DataTypes.INTEGER,
     references: {
       model: Carta,
-      key: 'idCarta'
+      key: 'id'
     }
   },
   idCartahabitacion: {
     type: DataTypes.INTEGER,
     references: {
       model: Carta,
-      key: 'idCarta'
+      key: 'id'
     }
   }
 }, {

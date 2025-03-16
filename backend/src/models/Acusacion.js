@@ -4,7 +4,7 @@ import Jugador from './Jugador.js';
 import Carta from './Carta.js';
 
 const Acusacion = sequelize.define('Acusacion', {
-  idAcusacion: {
+  id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
@@ -13,7 +13,7 @@ const Acusacion = sequelize.define('Acusacion', {
     type: DataTypes.INTEGER,
     references: {
       model: Jugador,
-      key: 'idJugador'
+      key: 'id'
     }
   },
   idCartaarma: {
@@ -27,21 +27,21 @@ const Acusacion = sequelize.define('Acusacion', {
     type: DataTypes.INTEGER,
     references: {
       model: Carta,
-      key: 'idCarta'
+      key: 'id'
     }
   },
   idCartahabitacion: {
     type: DataTypes.INTEGER,
     references: {
       model: Carta,
-      key: 'idCarta'
+      key: 'id'
     }
   },
   final: {
     type: DataTypes.BOOLEAN,
     defaultValue: false
   },
-  fecha: {
+  date: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW
   }
