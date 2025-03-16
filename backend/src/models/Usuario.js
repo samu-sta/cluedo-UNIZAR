@@ -10,13 +10,15 @@ const Usuario = sequelize.define('Usuario', {
   },
   idCuenta: {
     type: DataTypes.INTEGER,
-    unique: true
+    unique: true,
+    references: {
+      model: Cuenta,
+      key: 'id'
+    }
   }
 }, {
   tableName: 'Usuario',
   timestamps: false
 });
-
-Usuario.belongsTo(Cuenta, { foreignKey: 'idCuenta' });
 
 export default Usuario;

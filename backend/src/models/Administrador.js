@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
-import CuentaModel from './Cuenta.js';
+import Cuenta from './Cuenta.js';
 
 const Administrador = sequelize.define('Administrador', {
   id: {
@@ -10,13 +10,15 @@ const Administrador = sequelize.define('Administrador', {
   },
   idCuenta: {
     type: DataTypes.INTEGER,
-    unique: true
+    unique: true,
+    references: {
+      model: Cuenta,
+      key: 'id'
+    }
   }
 }, {
   tableName: 'Administrador',
   timestamps: false
 });
-
-Administrador.belongsTo(CuentaModel, { foreignKey: 'idCuenta' });
 
 export default Administrador;
