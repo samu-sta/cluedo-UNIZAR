@@ -9,6 +9,8 @@ export function useGameSocket(gameId) {
   const [socket, setSocket] = useState(null);
   const [countdown, setCountdown] = useState(null);
   const [gameState, setGameState] = useState('waiting');
+  const [winner, setWinner] = useState(null);
+  const [endReason, setEndReason] = useState(null);
 
   useEffect(() => {
     if (!gameId) {
@@ -20,7 +22,8 @@ export function useGameSocket(gameId) {
     const connectToGame = async () => {
       try {
         const response = await joinGame(gameId);
-
+        console.log(response
+        );
         if (!response.success) {
           setError(response.error || 'No se pudo unir a la partida');
           setLoading(false);
@@ -65,6 +68,13 @@ export function useGameSocket(gameId) {
           setGameState('playing');
         });
 
+        socketInstance.on('gameEnd', ({ reason, winner }) => {
+          setCountdown(null);
+          setGameState('ended');
+          setWinner(winner);
+          setEndReason(reason);
+        });
+
         socketInstance.on('error', (error) => {
           setError(typeof error === 'string' ? error : 'Error de comunicación');
         });
@@ -101,6 +111,8 @@ export function useGameSocket(gameId) {
     countdown,
     gameState,
     sendReady,
+    winner,
+    endReason,
     leaveGame
   };
 }

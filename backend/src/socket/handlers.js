@@ -2,12 +2,19 @@ import { activeGames } from "../controllers/Game.Controller.js";
 import GameStateManager from './GameStateManager.js';
 import CountdownManager from './CountdownManager.js';
 
+export const gameStateManager = new GameStateManager();
+
 export const setupSocketHandlers = (io) => {
-  const gameStateManager = new GameStateManager();
   const countdownManager = new CountdownManager(io, gameStateManager);
 
   io.on('connection', (socket) => {
     const { gameId, userId, username } = socket;
+
+    if (gameStateManager.getGameState(gameId) === 'playing') {
+      console.log(`Usuario intentó unirse a partida en progreso: ${username} (${userId})`);
+      socket.disconnect();
+      return;
+    }
 
     console.log(`Usuario conectado: ${username} (${userId})`);
 
@@ -33,6 +40,12 @@ export const setupSocketHandlers = (io) => {
       if (!gameStateManager.removePlayer(gameId, userId)) return;
 
       io.to(gameId).emit('playerLeft', { username });
+
+      if (gameStateManager.getGameState(gameId) === 'playing') {
+        gameStateManager.removeGame(gameId);
+        io.to(gameId).emit('gameEnd', { reason: 'Jugador desconectado' });
+        return;
+      }
 
       if (gameStateManager.getPlayerCount(gameId) < 2) {
         countdownManager.cancelCountdown(gameId);

@@ -1,0 +1,75 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-container.game-ended {
+  background-color: var(--color-background);
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.modal-content {
+  padding: 2rem;
+  text-align: center;
+}
+
+.modal-content h2 {
+  color: var(--color-accent-yellow);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.winner-section {
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.winner-label {
+  color: var(--color-text-muted);
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+}
+
+.winner-name {
+  color: var(--color-accent-yellow);
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.end-reason {
+  color: var(--color-text);
+  margin-bottom: 2rem;
+  line-height: 1.5;
+  font-size: 1.1rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.modal-actions .btn {
+  flex: 1;
+  min-width: 150px;
+  max-width: 200px;
+  text-align: center;
+}

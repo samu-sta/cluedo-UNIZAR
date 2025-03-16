@@ -8,7 +8,8 @@ export default class GameStateManager {
       this.games.set(gameId, {
         players: new Map(),
         timer: null,
-        countdown: null
+        countdown: null,
+        state: 'waiting'
       });
     }
     return this.games.get(gameId);
@@ -56,5 +57,15 @@ export default class GameStateManager {
   getPlayerCount(gameId) {
     if (!this.hasGame(gameId)) return 0;
     return this.getGame(gameId).players.size;
+  }
+
+  setGameState(gameId, state) {
+    if (!this.hasGame(gameId)) return;
+    this.getGame(gameId).state = state;
+  }
+
+  getGameState(gameId) {
+    if (!this.hasGame(gameId)) return 'waiting';
+    return this.getGame(gameId).state;
   }
 }

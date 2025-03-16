@@ -2,6 +2,7 @@ import MESSAGES from "../messages/messages.js";
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import accountModel from "../models/Account.js";
+import { gameStateManager } from "../socket/handlers.js";
 
 let activeGames = new Map();
 
@@ -61,6 +62,10 @@ export default class GameController {
       }
 
       const game = activeGames.get(gameId);
+
+      if (gameStateManager.getGameState(gameId) === 'playing') {
+        return res.status(403).json({ error: "La partida ya ha comenzado" });
+      }
 
       const user = await accountModel.findByPk(userId);
       if (!user) {

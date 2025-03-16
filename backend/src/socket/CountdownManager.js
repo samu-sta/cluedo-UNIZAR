@@ -25,6 +25,7 @@ export default class CountdownManager {
 
       if (game.countdown <= 0) {
         this.stopCountdown(gameId);
+        this.gameStateManager.setGameState(gameId, 'playing');
         this.io.to(gameId).emit('gameStart');
       }
     }, COUNT_INTERVAL);

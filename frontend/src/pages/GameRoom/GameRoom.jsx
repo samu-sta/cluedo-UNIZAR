@@ -3,8 +3,10 @@ import { useEffect } from 'react';
 import { useGameSocket } from '../../hooks/useGameSocket';
 import PlayerList from './components/PlayerList';
 import { GameBoard } from './components/GameBoard';
-import GameHeader from './components/GameHeader';
+import GameEndedModal from './components/GameEndedModal';
+import useGameEndedModal from '../../hooks/useGameEndedModal';
 import useIsMobile from '../../hooks/useIsMobile';
+import GameHeader from './components/GameHeader';
 import './styles/GameRoom.css';
 
 const GameRoom = ({ user }) => {
@@ -12,7 +14,6 @@ const GameRoom = ({ user }) => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
 
-  // Verificar si hay usuario
   useEffect(() => {
     if (!user) {
       navigate('/login', { replace: true });
@@ -25,9 +26,13 @@ const GameRoom = ({ user }) => {
     error,
     countdown,
     gameState,
+    winner,
+    endReason,
     sendReady,
     leaveGame
-  } = useGameSocket(gameId, user?.id);
+  } = useGameSocket(gameId);
+
+  const { showEndedModal, toogleEndedModal } = useGameEndedModal(gameState);
 
   const handleLeaveGame = () => {
     leaveGame();
@@ -59,19 +64,28 @@ const GameRoom = ({ user }) => {
   }
 
   return (
-    <main className={`game-room ${isMobile ? 'mobile' : ''}`}>
-      <PlayerList players={players} />
-      <main className={`game-content ${isMobile ? 'mobile' : ''}`}>
-        <GameHeader gameId={gameId} gameState={gameState} onLeaveGame={handleLeaveGame} />
-        <GameBoard
-          countdown={countdown}
-          gameState={gameState}
-          onReady={sendReady}
-          onLeaveGame={handleLeaveGame}
-        />
+    <>
+      <main className={`game-room ${isMobile ? 'mobile' : ''}`}>
+        <PlayerList players={players} />
+        <main className={`game-content ${isMobile ? 'mobile' : ''}`}>
+          <GameHeader gameId={gameId} gameState={gameState} onLeaveGame={handleLeaveGame} />
+          <GameBoard
+            countdown={countdown}
+            gameState={gameState}
+            onReady={sendReady}
+            onLeaveGame={handleLeaveGame}
+          />
+        </main>
       </main>
 
-    </main>
+      <GameEndedModal
+        isOpen={showEndedModal}
+        winner={winner}
+        reason={endReason}
+        onLeaveGame={handleLeaveGame}
+        toogleEndedModal={toogleEndedModal}
+      />
+    </>
   );
 };
 
