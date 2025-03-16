@@ -8,9 +8,6 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Copy project files
-COPY . .
-
 # Exponer puerto
 EXPOSE 5173
 

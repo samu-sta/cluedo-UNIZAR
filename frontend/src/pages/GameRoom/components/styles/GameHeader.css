@@ -1,0 +1,66 @@
+.game-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.game-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.game-header p {
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.btn.secondary.copy-button {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  flex: 0 1 auto;
+}
+
+.copy-icon {
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+.copy-icon.copied {
+  color: #4CAF50;
+}
+
+.status-badge {
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+  flex: 0 1 auto;
+}
+
+.status-badge.waiting {
+  background-color: rgba(255, 193, 7, 0.81);
+  color: var(--color-text-light);
+  border: 1px solid rgba(255, 193, 7, 0.8);
+}
+
+.status-badge.playing {
+  background-color: rgba(0, 230, 118, 0.81);
+  color: var(--color-text-light);
+  border: 1px solid rgba(0, 230, 118, 0.8);
+}
+
+.btn.leave-game{
+  background-color: inherit;
+  color: var(--color-accent-red);
+  text-decoration: underline;
+  font-size: 0.9rem;
+  flex: 0 1 auto;
+  
+}

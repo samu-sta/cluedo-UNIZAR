@@ -1,12 +1,10 @@
 .game-room {
-  display: grid;
-  grid-template-columns: 1fr 5fr;
+  display: flex;
   overflow: hidden;
 }
 
-.game-room-mobile{
-  grid-template-rows: 0.8fr 3fr;
-  grid-template-columns: 1fr;
+.game-room.mobile {
+  flex-direction: column;
 }
 
 .game-loading,
@@ -34,4 +32,14 @@
 
 .game-error button {
   margin-top: 1.5rem;
+}
+
+.game-content {
+  padding: 0.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+  width: 100%;
 }

@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
+import Account from './Account.js';
 
 const User = sequelize.define('User', {
   id: {
@@ -11,7 +12,7 @@ const User = sequelize.define('User', {
     type: DataTypes.INTEGER,
     unique: true,
     references: {
-      model: 'Account',
+      model: AccountModel,
       key: 'id'
     }
   }

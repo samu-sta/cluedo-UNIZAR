@@ -1,39 +1,35 @@
 import React from 'react';
 import './styles/GameBoard.css';
-export const GameBoard = ({ gameId, onReady, onLeaveGame }) => {
+
+export const GameBoard = ({ countdown, gameState }) => {
   return (
-    <main className="game-content">
-      <header className="game-header">
-        <h1>
-          Partida: {gameId}
-          <span className={`status-badge waiting`}>
-            En espera
-          </span>
-        </h1>
-        <p>
-          Esperando a que todos los jugadores estén listos
-        </p>
-      </header>
+    <section className="game-board-placeholder">
+      {gameState === 'playing' ? (
+        <section className="game-in-progress">
+          <h2>¡La partida ha comenzado!</h2>
+          <main>Tablero de juego aquí</main>
+        </section>
+      ) : (
+        <>
+          <h2>Sala de espera</h2>
+          {gameState === 'countdown' && countdown !== null && (
+            <section className="countdown-container">
+              <h3>La partida comienza en:</h3>
+              <p className="countdown-timer">{countdown}</p>
+            </section>
+          )}
 
-      <section className="game-board-placeholder">
-        <h2>Sala de espera</h2>
+          <p>
+            {gameState === 'waiting'
+              ? 'Se necesitan al menos 2 jugadores para comenzar.'
+              : 'Prepárate, el juego está por comenzar...'}
+          </p>
 
-        <p>La partida comenzará cuando todos los jugadores estén listos.</p>
-        <nav className="game-controls">
-          <button
-            className="btn primary"
-            onClick={onReady}
-          >
-            Estoy listo
-          </button>
-          <button
-            className="btn outline danger"
-            onClick={onLeaveGame}
-          >
-            Abandonar partida
-          </button>
-        </nav>
-      </section>
-    </main>
+          <nav className="game-controls">
+          </nav>
+        </>
+      )}
+    </section>
+
   );
 };

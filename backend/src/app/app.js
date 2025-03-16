@@ -13,7 +13,7 @@ const DEFAULT_PORT = 3000;
 dotenv.config();
 const PORT = process.env.PORT || DEFAULT_PORT;
 
-export const createApp = ({ userModel }) => {
+export const createApp = () => {
   const app = express();
   const server = http.createServer(app);
 
@@ -30,8 +30,8 @@ export const createApp = ({ userModel }) => {
   app.use(express.json());
   app.use(cookieParser());
 
-  app.use('/api/user', UserRoutes({ userModel }));
-  app.use('/api/game', GameRoutes({ userModel }));
+  app.use('/api/user', UserRoutes());
+  app.use('/api/game', GameRoutes());
 
   app.get('/', (req, res) => {
     res.send('Hello World');

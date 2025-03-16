@@ -2,11 +2,10 @@ import userSchema from "../schemas/UserSchema.js";
 import argon2 from 'argon2';
 import auth from '../utils/auth.js';
 import MESSAGES from "../messages/messages.js";
+import userModel from "../models/User.js";
+import accountModel from "../models/Account.js";
 
 export default class UserController {
-  constructor({ userModel }) {
-    this.userModel = userModel;
-  }
 
   register = async (req, res) => {
     const result = userSchema.validateRegisterUser(req.body);
@@ -16,22 +15,36 @@ export default class UserController {
       return res.status(400).json({ error: MESSAGES.INVALID_DATA });
     }
 
-    const existingUser = await this.userModel.findOne({
-      where: {
-        email: result.data.email,
-      }
+    const existingAccount = await accountModel.findOne({
+      where: { email: result.data.email }
     });
 
-    if (existingUser) {
+    if (existingAccount) {
       return res.status(409).json({ error: MESSAGES.EMAIL_ALREADY_EXISTS });
     }
 
     try {
-      result.data.password = await argon2.hash(result.data.password);
-      const newUser = await this.userModel.create(result.data);
-      return res.status(201).send(newUser);
+      const hashedPassword = await argon2.hash(result.data.password);
+
+      const newAccount = await accountModel.create({
+        username: result.data.username,
+        email: result.data.email,
+        password: hashedPassword
+      });
+
+      await userModel.create({
+        id: newAccount.id
+      });
+
+      const responseData = {
+        username: newAccount.username,
+        email: newAccount.email
+      };
+
+      return res.status(201).send(responseData);
     }
     catch (error) {
+      console.error('Registration error:', error);
       return res.status(500).json({ error: MESSAGES.ERROR_500 });
     }
   }
@@ -44,23 +57,26 @@ export default class UserController {
     }
 
     try {
-      const user = await this.userModel.findOne({
-        where: { email: result.data.email, }
+      const account = await accountModel.findOne({
+        where: { email: result.data.email }
       });
 
-      if (!user) {
+      if (!account) {
         return res.status(401).json({ error: MESSAGES.INVALID_CREDENTIALS });
       }
 
-      const isPasswordValid = await argon2.verify(user.password, result.data.password);
+      const isPasswordValid = await argon2.verify(account.password, result.data.password);
 
       if (!isPasswordValid) {
         return res.status(401).json({ error: MESSAGES.INVALID_CREDENTIALS });
       }
 
-      const token = auth.createToken(user);
+      const token = auth.createToken({ id: account.id });
 
-      const { password, id, ...userData } = user.dataValues;
+      const userData = {
+        username: account.username,
+        email: account.email
+      };
 
       return res.status(200).cookie('token', token, {
         httpOnly: true,
@@ -93,18 +109,18 @@ export default class UserController {
       }
 
       const decoded = auth.verifyToken(token);
+      const account = await accountModel.findByPk(decoded.id);
 
-      const user = await this.userModel.findByPk(decoded.id);
-      if (!user) {
-        console.error('User not found with id:', decoded.id);
+      if (!account) {
+        console.error('Account not found for accountId:', decoded.id);
         return res.status(404).json({ error: MESSAGES.USER_NOT_FOUND });
       }
 
       const hashedPassword = await argon2.hash(result.data.newPassword);
 
-      await user.update({ password: hashedPassword });
+      await account.update({ password: hashedPassword });
 
-      return res.status(200).send();
+      return res.status(200).json({ message: 'Password changed successfully' });
     }
     catch (error) {
       console.error('Change password error:', error);

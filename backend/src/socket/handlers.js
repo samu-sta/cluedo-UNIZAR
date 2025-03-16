@@ -1,51 +1,59 @@
 import { activeGames } from "../controllers/Game.Controller.js";
+import GameStateManager from './GameStateManager.js';
+import CountdownManager from './CountdownManager.js';
+
+export const gameStateManager = new GameStateManager();
 
 export const setupSocketHandlers = (io) => {
-  const roomPlayers = new Map();
+  const countdownManager = new CountdownManager(io, gameStateManager);
 
   io.on('connection', (socket) => {
-    console.log(`Usuario conectado: ${socket.username} (${socket.userId})`);
+    const { gameId, userId, username } = socket;
 
-    socket.join(socket.gameId);
-
-    if (!roomPlayers.has(socket.gameId)) {
-      roomPlayers.set(socket.gameId, new Map());
-    }
-
-    const gamePlayerMap = roomPlayers.get(socket.gameId);
-
-    if (gamePlayerMap.has(socket.userId)) {
+    if (gameStateManager.getGameState(gameId) === 'playing') {
+      console.log(`Usuario intentó unirse a partida en progreso: ${username} (${userId})`);
+      socket.disconnect();
       return;
     }
 
-    gamePlayerMap.set(socket.userId, {
-      username: socket.username
+    console.log(`Usuario conectado: ${username} (${userId})`);
+
+    socket.join(gameId);
+
+    const isNewPlayer = gameStateManager.addPlayer(gameId, userId, { username });
+
+    if (!isNewPlayer) return;
+
+    socket.emit('playerList', {
+      players: gameStateManager.getPlayers(gameId)
     });
 
-    const players = Array.from(gamePlayerMap.values());
+    socket.to(gameId).emit('playerJoined', { username });
 
-    io.to(socket.gameId).emit('playerJoined', {
-      username: socket.username
-    });
-
-    socket.emit('playerList', { players });
+    if (gameStateManager.getPlayerCount(gameId) >= 2) {
+      countdownManager.startCountdown(gameId);
+    }
 
     socket.on('disconnect', () => {
-      console.log(`Usuario desconectado: ${socket.username}`);
+      console.log(`Usuario desconectado: ${username}`);
 
-      if (roomPlayers.has(socket.gameId)) {
-        const gamePlayerMap = roomPlayers.get(socket.gameId);
-        gamePlayerMap.delete(socket.userId);
+      if (!gameStateManager.removePlayer(gameId, userId)) return;
 
-        if (gamePlayerMap.size === 0) {
-          roomPlayers.delete(socket.gameId);
-          activeGames.delete(socket.gameId);
-        }
+      io.to(gameId).emit('playerLeft', { username });
+
+      if (gameStateManager.getGameState(gameId) === 'playing') {
+        gameStateManager.removeGame(gameId);
+        io.to(gameId).emit('gameEnd', { reason: 'Jugador desconectado' });
+        return;
       }
 
-      io.to(socket.gameId).emit('playerLeft', {
-        username: socket.username
-      });
+      if (gameStateManager.getPlayerCount(gameId) < 2) {
+        countdownManager.cancelCountdown(gameId);
+      }
+
+      if (gameStateManager.getPlayerCount(gameId) === 0) {
+        activeGames.delete(gameId);
+      }
     });
   });
 };

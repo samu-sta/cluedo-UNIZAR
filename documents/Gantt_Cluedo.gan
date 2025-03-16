@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2025-02-16" view-index="0" gantt-divider-location="734" resource-divider-location="300" version="3.3.3311" locale="en_US">
+    <description/>
+    <view zooming-state="default:7" id="gantt-chart">
+        <field id="tpd3" name="Name" width="541" order="0"/>
+        <field id="tpd4" name="Begin date" width="85" order="1"/>
+        <field id="tpd5" name="End date" width="92" order="2"/>
+        <field id="tpd15" name="Notes" width="20" order="3"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="filter.dueTodayTasks" value="false"/>
+        <option id="filter.overdueTasks" value="false"/>
+        <option id="filter.inProgressTodayTasks" value="false"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Name" width="210" order="0"/>
+        <field id="1" name="Default role" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="1" uid="fdb71de5fb0c4d0b87103861304a4a19" name="Fase 0: Iniciación del proyecto" meeting="false" start="2025-02-20" duration="3" complete="100" expand="true">
+            <depend id="12" type="2" difference="0" hardness="Strong"/>
+            <task id="4" uid="18c9e55414614fa2a9a5c8504ae81d42" name="Repaso doc de requisitos y diseño, y documento de roles" meeting="false" start="2025-02-20" duration="1" complete="100" expand="true">
+                <depend id="9" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="9" uid="d41b8f28a6c840598500c7359dd2bfd0" name="Realizacón del diagrama de gantt y documentación" meeting="false" start="2025-02-21" duration="1" complete="100" expand="true">
+                <depend id="6" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="6" uid="361922aac5a248598d1dd12d762c578d" name="Creación esqueleto del front y back y dockerización" meeting="false" start="2025-02-24" duration="1" complete="100" expand="true"/>
+        </task>
+        <task id="12" uid="c97e967e2526423dacd6bc64d76a8521" name="Fase 1: Páginas de inicio, registro, e inicio de sesión" color="#000000" meeting="false" start="2025-02-25" duration="4" complete="100" expand="true">
+            <depend id="27" type="2" difference="0" hardness="Strong"/>
+            <task id="19" uid="b94c168c40724987a225b4f5d4e93d1f" name="FRONTEND" meeting="false" start="2025-02-25" duration="4" complete="100" expand="true">
+                <task id="21" uid="d7129b46d87d438b924cb91477730517" name="Página de inicio" meeting="false" start="2025-02-25" duration="2" complete="100" expand="true">
+                    <depend id="23" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="23" uid="6abd32b24ae0437ebb9587fffb14e135" name="Página de registro e inicio de sesión" meeting="false" start="2025-02-27" duration="2" complete="100" expand="true"/>
+            </task>
+            <task id="20" uid="fd69c1919d004a7f93339336ca058632" name="BACKEND" meeting="false" start="2025-02-25" duration="3" complete="100" expand="true">
+                <task id="41" uid="83bb6f9c2aad49418ac884d97676a2fd" name="Creación de los modelos (base de datos)" meeting="false" start="2025-02-25" duration="2" complete="100" expand="true">
+                    <depend id="25" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="25" uid="291ecda30d36457fb6e76da14d5da528" name="endpoint registro e inicio de sesión" meeting="false" start="2025-02-27" duration="1" complete="100" expand="true"/>
+            </task>
+        </task>
+        <task id="27" uid="b6836f63b727460fbb3386c5583a1e64" name="Fase 2: Creación y unión mediante código a partidas públicas" meeting="false" start="2025-03-03" duration="5" complete="100" expand="true">
+            <depend id="42" type="2" difference="0" hardness="Strong"/>
+            <task id="29" uid="4cb1a0f35d4e4fbd87ebeaa014dc1bfa" name="FRONTEND" meeting="false" start="2025-03-04" duration="4" complete="100" expand="true">
+                <task id="38" uid="7609002533df46c38e72113740bd25b4" name="Interfaz para Crear/Buscar partidas" meeting="false" start="2025-03-04" duration="2" complete="100" expand="true">
+                    <depend id="39" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="39" uid="7523e79d250c41d09b69c6e67a8f7fc0" name="Interfaz para mostrar partida escuchando a WebSocket" meeting="false" start="2025-03-06" duration="2" complete="100" expand="true"/>
+            </task>
+            <task id="32" uid="8e74c1e33475495c944105e58e55ff7b" name="BACKEND" meeting="false" start="2025-03-03" duration="5" complete="100" expand="true">
+                <task id="33" uid="f10cc142cf8b4b37bbd41b3c38820c26" name="endpoint para crear/unirse a partidas" meeting="false" start="2025-03-03" duration="2" complete="100" expand="true">
+                    <depend id="35" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="35" uid="a1e0a79485db489099857d1b01c3f60d" name="config de WebSockets enviando la lista de usuarios conectados" meeting="false" start="2025-03-05" duration="3" complete="100" expand="true"/>
+            </task>
+        </task>
+        <task id="42" uid="e55c8c44c0cb4587b800df58d679bfe4" name="Fase 3: Introducir tiempo antes de que empiece la partida" meeting="false" start="2025-03-10" duration="5" complete="0" expand="true">
+            <depend id="49" type="2" difference="0" hardness="Strong"/>
+            <task id="43" uid="0fc7913dc1954a6385f38ef6184e6a0a" name="FRONTEND" meeting="false" start="2025-03-12" duration="3" complete="0" expand="true">
+                <task id="47" uid="e48d42bca3524d69ae581da4d87a6231" name="Mostrar tiempo restante al comienzo de partida" meeting="false" start="2025-03-12" duration="2" complete="0" expand="true">
+                    <depend id="48" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="48" uid="af64c6467e3a4df487a26260480b1a5a" name="Visualizar el estado de la partida (sin tablero)" meeting="false" start="2025-03-14" duration="1" complete="0" expand="true"/>
+            </task>
+            <task id="44" uid="a66cfb2fbb4b43e892042a89b9a8a978" name="BACKEND" meeting="false" start="2025-03-10" duration="4" complete="0" expand="true">
+                <task id="45" uid="c5a0e7714cf84d918063b719a4d6dd40" name="Lógica para empezar cuenta atrás" meeting="false" start="2025-03-10" duration="2" complete="0" expand="true">
+                    <depend id="46" type="2" difference="0" hardness="Strong"/>
+                    <depend id="47" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="46" uid="aa5827d972fe4c7488fccd14b4e82d9c" name="Control de acceso tras acabar la cuenta" meeting="false" start="2025-03-12" duration="2" complete="0" expand="true"/>
+            </task>
+        </task>
+        <task id="49" uid="73b8b09bc6bd415bbdfdc7674649038a" name="Fase 4: Inicializar partida, sistema de turnos y movimientos en tablero" meeting="false" start="2025-03-17" duration="10" complete="0" expand="true">
+            <depend id="52" type="2" difference="0" hardness="Strong"/>
+            <task id="50" uid="e1b77c721f714d96b53cdf4f7f2a44d7" name="FRONTEND" meeting="false" start="2025-03-17" duration="10" complete="0" expand="true">
+                <task id="56" uid="9c6bf9bf4b6444f5919cb6e4d9c2dffa" name="mostrar tablero, cartas y turno" meeting="false" start="2025-03-17" duration="5" complete="0" expand="true">
+                    <depend id="57" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="57" uid="e9d099e31d884aecae89c8644d8fa489" name="permitir movimientos en tablero" meeting="false" start="2025-03-24" duration="5" complete="0" expand="true"/>
+            </task>
+            <task id="51" uid="7b283624996d4841bde2df16a266d850" name="BACKEND" meeting="false" start="2025-03-17" duration="10" complete="0" expand="true">
+                <task id="58" uid="9437440fcdb049008e5efca462023b44" name="inicializar y enviar datos a cada jugador" meeting="false" start="2025-03-17" duration="5" complete="0" expand="true">
+                    <depend id="59" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="59" uid="462411f5af1541a38e8ea8a45fc06460" name="Crear sistema de movimientos en el tablero" meeting="false" start="2025-03-24" duration="5" complete="0" expand="true"/>
+            </task>
+        </task>
+        <task id="52" uid="558674390a2749c1bc4e84cfd32a562a" name="Fase 5: Sistema de acusaciones y finalización de la partida" meeting="false" start="2025-03-31" duration="10" complete="0" expand="true">
+            <depend id="55" type="2" difference="0" hardness="Strong"/>
+            <task id="60" uid="ff8cad6c0c01477ebbda146d146133a8" name="FRONTEND" meeting="false" start="2025-03-31" duration="10" complete="0" expand="true">
+                <task id="62" uid="d95bb47e62fd4e70bb00c0b48e9b2afd" name="Permitir hacer una acusación y responderla" meeting="false" start="2025-03-31" duration="6" complete="0" expand="true">
+                    <depend id="63" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="63" uid="851fb78dd36645dd883562a078c77ad8" name="Sistema de acusaciones finales" meeting="false" start="2025-04-08" duration="4" complete="0" expand="true"/>
+            </task>
+            <task id="61" uid="38f0c77a72074ebcb9b8e7b8ac070e38" name="BACKEND" meeting="false" start="2025-03-31" duration="10" complete="0" expand="true">
+                <task id="64" uid="5c6ec4a972d2483c8c42cbee3f179990" name="Manejar comunicación entre jugadores en las acusaciones" meeting="false" start="2025-03-31" duration="6" complete="0" expand="true">
+                    <depend id="65" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="65" uid="2f039b7749b742999f051169c0dd79fb" name="Permitir acusaciones finales" meeting="false" start="2025-04-08" duration="4" complete="0" expand="true"/>
+            </task>
+        </task>
+        <task id="55" uid="4883134c174748d3a1664c10e3236934" name="Fase 6: Testing y tareas finales" meeting="false" start="2025-04-14" duration="12" complete="0" expand="true">
+            <task id="66" uid="1dc16c9ed78b4e0dab8fc965667c19fa" name="Panel de administración del administrador" meeting="false" start="2025-04-14" duration="3" complete="0" expand="true">
+                <depend id="68" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="68" uid="28e53c424efc43bea4481f803ff58abe" name="Selección de tests (unidad, funcionales, etc)" meeting="false" start="2025-04-17" duration="2" complete="0" expand="true">
+                <depend id="69" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="69" uid="7f1744eca65743f49e434c34655984ef" name="Realización y documentación de los tests" meeting="false" start="2025-04-21" duration="5" complete="0" expand="true">
+                <depend id="70" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="70" uid="5ab25c3e6f1b48aa8b5c7db1da5b3d4d" name="Realización de la presentación" meeting="false" start="2025-04-28" duration="2" complete="0" expand="true"/>
+        </task>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>

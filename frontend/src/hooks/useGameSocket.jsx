@@ -7,6 +7,10 @@ export function useGameSocket(gameId) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [socket, setSocket] = useState(null);
+  const [countdown, setCountdown] = useState(null);
+  const [gameState, setGameState] = useState('waiting');
+  const [winner, setWinner] = useState(null);
+  const [endReason, setEndReason] = useState(null);
 
   useEffect(() => {
     if (!gameId) {
@@ -18,7 +22,8 @@ export function useGameSocket(gameId) {
     const connectToGame = async () => {
       try {
         const response = await joinGame(gameId);
-
+        console.log(response
+        );
         if (!response.success) {
           setError(response.error || 'No se pudo unir a la partida');
           setLoading(false);
@@ -48,11 +53,32 @@ export function useGameSocket(gameId) {
           ));
         });
 
+        socketInstance.on('countdownUpdate', ({ seconds }) => {
+          setCountdown(seconds);
+          setGameState('countdown');
+        });
+
+        socketInstance.on('countdownCancelled', () => {
+          setCountdown(null);
+          setGameState('waiting');
+        });
+
+        socketInstance.on('gameStart', () => {
+          setCountdown(null);
+          setGameState('playing');
+        });
+
+        socketInstance.on('gameEnd', ({ reason, winner }) => {
+          setCountdown(null);
+          setGameState('ended');
+          setWinner(winner);
+          setEndReason(reason);
+        });
+
         socketInstance.on('error', (error) => {
           setError(typeof error === 'string' ? error : 'Error de comunicación');
         });
       } catch (err) {
-        console.error('Error al conectarse a la partida:', err);
         setError('Error de conexión al servidor');
         setLoading(false);
       }
@@ -82,7 +108,11 @@ export function useGameSocket(gameId) {
     players,
     loading,
     error,
+    countdown,
+    gameState,
     sendReady,
+    winner,
+    endReason,
     leaveGame
   };
 }
