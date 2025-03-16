@@ -8,7 +8,7 @@ export const initSocket = (socketToken) => {
     closeSocket();
   }
 
-  socket = io(import.meta.env.VITE_API_URL || 'http://localhost:3000', {
+  socket = io('http://localhost:3000', {
     auth: { token: socketToken },
     autoConnect: true,
     withCredentials: true,
