@@ -1,6 +1,5 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
-import Cuenta from './Cuenta.js';
 
 const Usuario = sequelize.define('Usuario', {
   id: {
@@ -10,13 +9,12 @@ const Usuario = sequelize.define('Usuario', {
   },
   idCuenta: {
     type: DataTypes.INTEGER,
-    unique: true
+    unique: true,
+    allowNull: false
   }
 }, {
   tableName: 'Usuario',
   timestamps: false
 });
-
-Usuario.belongsTo(Cuenta, { foreignKey: 'idCuenta' });
 
 export default Usuario;
