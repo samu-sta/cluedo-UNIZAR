@@ -10,7 +10,10 @@ const Administrador = sequelize.define('Administrador', {
   idCuenta: {
     type: DataTypes.INTEGER,
     unique: true,
-    allowNull: false
+    references: {
+      model: 'Cuenta',
+      key: 'id'
+    }
   }
 }, {
   tableName: 'Administrador',
