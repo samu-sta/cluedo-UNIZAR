@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize';
 import AccountModel from '../models/Account.js';
-import userModel from '../models/User.js';
+import UserModel from '../models/User.js';
 import adminModel from '../models/Admin.js';
 
 
@@ -20,7 +20,7 @@ const initDatabase = async () => {
 
 
     await AccountModel.sync({ force: true });
-    await userModel.sync({ force: true });
+    await UserModel.sync({ force: true });
     await adminModel.sync({ force: true });
 
     console.log('Database initialized successfully');

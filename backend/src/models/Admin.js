@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
-import Account from './Account.js';
+import AccountModel from './Account.js';
 
 const AdminModel = sequelize.define('Admin', {
   id: {
@@ -12,7 +12,7 @@ const AdminModel = sequelize.define('Admin', {
     type: DataTypes.INTEGER,
     unique: true,
     references: {
-      model: accountModel,
+      model: AccountModel,
       key: 'id'
     }
   }
@@ -22,4 +22,4 @@ const AdminModel = sequelize.define('Admin', {
 });
 
 
-export default Admin;
+export default AdminModel;
