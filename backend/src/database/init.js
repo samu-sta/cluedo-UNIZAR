@@ -1,8 +1,7 @@
 import { Sequelize } from 'sequelize';
-import AccountModel from '../models/Account.js';
-import UserModel from '../models/User.js';
-import adminModel from '../models/Admin.js';
-
+import setupRelations from '../models/relations.js';
+import sequelize from './database.js';
+import { initGame } from './initGame.js';
 
 const initDatabase = async () => {
   try {
@@ -19,9 +18,10 @@ const initDatabase = async () => {
     console.log('Connection has been established successfully.');
 
 
-    await AccountModel.sync({ force: true });
-    await UserModel.sync({ force: true });
-    await adminModel.sync({ force: true });
+    await sequelize.sync({ force: true });
+    setupRelations();
+    await initGame();
+
 
     console.log('Database initialized successfully');
 

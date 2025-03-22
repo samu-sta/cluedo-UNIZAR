@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 import Board from './Board.js';
 
-const Room = sequelize.define('Room', {
+const RoomModel = sequelize.define('Room', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -21,7 +21,8 @@ const Room = sequelize.define('Room', {
   }
 }, {
   tableName: 'Room',
-  timestamps: false
+  timestamps: false,
+  sequelize
 });
 
-export default Room;
+export default RoomModel;

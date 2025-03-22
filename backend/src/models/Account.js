@@ -22,7 +22,8 @@ const AccountModel = sequelize.define('Account', {
   }
 }, {
   tableName: 'Account',
-  timestamps: false
+  timestamps: false,
+  sequelize
 });
 
 export default AccountModel;

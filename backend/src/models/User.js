@@ -18,7 +18,8 @@ const UserModel = sequelize.define('User', {
   }
 }, {
   tableName: 'User',
-  timestamps: false
+  timestamps: false,
+  sequelize
 });
 
 export default UserModel;
