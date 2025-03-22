@@ -1,40 +1,40 @@
-import Game from './Game.js';
-import Board from './Board.js';
-import Room from './Room.js';
-import Wall from './Wall.js';
-import Door from './Door.js';
-import Card from './Card.js';
-import Account from './Account.js';
-import User from './User.js';
-import Admin from './Admin.js';
+import GameModel from './Game.js';
+import BoardModel from './Board.js';
+import RoomModel from './Room.js';
+import WallModel from './Wall.js';
+import DoorModel from './Door.js';
+import CardModel from './Card.js';
+import AccountModel from './Account.js';
+import UserModel from './User.js';
+import AdminModel from './Admin.js';
 
 export const setupRelations = () => {
   // Relaciones Account -> User/Admin (one-to-one)
-  Account.hasOne(User, { foreignKey: 'accountId' });
-  User.belongsTo(Account, { foreignKey: 'accountId' });
+  AccountModel.hasOne(UserModel, { foreignKey: 'accountId' });
+  UserModel.belongsTo(AccountModel, { foreignKey: 'accountId' });
 
-  Account.hasOne(Admin, { foreignKey: 'accountId' });
-  Admin.belongsTo(Account, { foreignKey: 'accountId' });
+  AccountModel.hasOne(AdminModel, { foreignKey: 'accountId' });
+  AdminModel.belongsTo(AccountModel, { foreignKey: 'accountId' });
 
-  // Relaciones Game -> Board (one-to-many)
-  Game.hasOne(Board, { foreignKey: 'gameId' });
-  Board.belongsTo(Game, { foreignKey: 'gameId' });
+  // Relaciones Game -> Board (one-to-one)
+  GameModel.hasOne(BoardModel, { foreignKey: 'gameId', as: 'board' });
+  BoardModel.belongsTo(GameModel, { foreignKey: 'gameId' });
 
   // Relaciones Game -> Card (one-to-many)
-  Game.hasMany(Card, { foreignKey: 'gameId' });
-  Card.belongsTo(Game, { foreignKey: 'gameId' });
+  GameModel.hasMany(CardModel, { foreignKey: 'gameId', as: 'cards' });
+  CardModel.belongsTo(GameModel, { foreignKey: 'gameId' });
 
   // Relaciones Board -> Room (one-to-many)
-  Board.hasMany(Room, { foreignKey: 'boardId' });
-  Room.belongsTo(Board, { foreignKey: 'boardId' });
+  BoardModel.hasMany(RoomModel, { foreignKey: 'boardId', as: 'rooms' });
+  RoomModel.belongsTo(BoardModel, { foreignKey: 'boardId' });
 
   // Relaciones Room -> Wall (one-to-many)
-  Room.hasMany(Wall, { foreignKey: 'roomId' });
-  Wall.belongsTo(Room, { foreignKey: 'roomId' });
+  RoomModel.hasMany(WallModel, { foreignKey: 'roomId', as: 'walls' });
+  WallModel.belongsTo(RoomModel, { foreignKey: 'roomId' });
 
   // Relaciones Room -> Door (one-to-many)
-  Room.hasMany(Door, { foreignKey: 'roomId' });
-  Door.belongsTo(Room, { foreignKey: 'roomId' });
+  RoomModel.hasMany(DoorModel, { foreignKey: 'roomId', as: 'doors' });
+  DoorModel.belongsTo(RoomModel, { foreignKey: 'roomId' });
 
   console.log('Relaciones de base de datos configuradas correctamente');
 };

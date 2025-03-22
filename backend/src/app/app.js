@@ -7,13 +7,14 @@ import { GameRoutes } from '../routes/Game.Routes.js';
 import cors from 'cors';
 import http from 'http';
 import { configureSocket } from '../socket/index.js';
-
+import setupRelations from '../models/relations.js';
 const DEFAULT_PORT = 3000;
 
 dotenv.config();
 const PORT = process.env.PORT || DEFAULT_PORT;
 
 export const createApp = () => {
+  setupRelations();
   const app = express();
   const server = http.createServer(app);
 
