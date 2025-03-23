@@ -2,11 +2,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useGameSocket } from '../../hooks/useGameSocket';
 import PlayerList from './components/PlayerList';
-import { GameBoard } from './components/GameBoard';
 import GameEndedModal from './components/GameEndedModal';
 import useGameEndedModal from '../../hooks/useGameEndedModal';
 import useIsMobile from '../../hooks/useIsMobile';
 import GameHeader from './components/GameHeader';
+import Board from '../../components/Board/Board';
 import './styles/GameRoom.css';
 
 const GameRoom = ({ user }) => {
@@ -26,6 +26,7 @@ const GameRoom = ({ user }) => {
     error,
     countdown,
     gameState,
+    gameInfo,
     winner,
     endReason,
     sendReady,
@@ -69,9 +70,10 @@ const GameRoom = ({ user }) => {
         <PlayerList players={players} />
         <main className={`game-content ${isMobile ? 'mobile' : ''}`}>
           <GameHeader gameId={gameId} gameState={gameState} onLeaveGame={handleLeaveGame} />
-          <GameBoard
+          <Board
             countdown={countdown}
             gameState={gameState}
+            gameInfo={gameInfo}
             onReady={sendReady}
             onLeaveGame={handleLeaveGame}
           />

@@ -148,3 +148,8 @@
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+@keyframes loading {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}

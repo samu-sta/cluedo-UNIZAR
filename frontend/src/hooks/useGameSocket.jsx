@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { joinGame } from '../services/Game';
-import { initSocket, closeSocket, getSocket } from '../services/Socket';
+import { initSocket, closeSocket } from '../services/Socket';
 
 export function useGameSocket(gameId) {
   const [players, setPlayers] = useState([]);
@@ -10,9 +10,10 @@ export function useGameSocket(gameId) {
   const [gameState, setGameState] = useState('waiting');
   const [winner, setWinner] = useState(null);
   const [endReason, setEndReason] = useState(null);
+  const [gameInfo, setGameInfo] = useState(null);
 
+  const socketRef = useRef(null);
   const joinedGameRef = useRef(false);
-  const socketRef = useRef(getSocket());
 
   useEffect(() => {
     if (!gameId) {
@@ -21,16 +22,9 @@ export function useGameSocket(gameId) {
       return;
     }
 
-    if (socketRef.current && joinedGameRef.current) {
-      console.log('Ya hay una conexión socket activa para esta partida');
-      setLoading(false);
-      return;
-    }
-
     const connectToGame = async () => {
       try {
         if (!joinedGameRef.current) {
-          console.log('Conectando a partida por primera vez:', gameId);
           const response = await joinGame(gameId);
 
           if (!response.success) {
@@ -39,6 +33,7 @@ export function useGameSocket(gameId) {
             return;
           }
 
+          setGameInfo(response.gameInfo);
           const socketInstance = initSocket(response.socketToken);
           socketRef.current = socketInstance;
           joinedGameRef.current = true;
@@ -51,24 +46,22 @@ export function useGameSocket(gameId) {
           setLoading(false);
         });
 
-        socketInstance.on('playerJoined', (data) => {
+        socketInstance.on('playerJoined', ({ username }) => {
           setPlayers(prev => {
-            if (!prev.some(p => p.username === data.username)) {
-              return [...prev, data];
+            if (prev.some(player => player.username === username)) {
+              return prev;
             }
-            return prev;
+            return [...prev, { username }];
           });
         });
 
-        socketInstance.on('playerLeft', (data) => {
-          setPlayers(prev => prev.filter(player =>
-            player.username !== data.username
-          ));
+        socketInstance.on('playerLeft', ({ username }) => {
+          setPlayers(prev => prev.filter(player => player.username !== username));
         });
 
         socketInstance.on('countdownUpdate', ({ seconds }) => {
-          setCountdown(seconds);
           setGameState('countdown');
+          setCountdown(seconds);
         });
 
         socketInstance.on('countdownCancelled', () => {
@@ -103,7 +96,6 @@ export function useGameSocket(gameId) {
     };
   }, [gameId]);
 
-  // Función explícita para abandonar la partida
   const leaveGame = () => {
     if (socketRef.current) {
       socketRef.current.emit('leaveGame');
@@ -119,6 +111,7 @@ export function useGameSocket(gameId) {
     error,
     countdown,
     gameState,
+    gameInfo,
     sendReady: () => socketRef.current?.emit('playerReady'),
     winner,
     endReason,
