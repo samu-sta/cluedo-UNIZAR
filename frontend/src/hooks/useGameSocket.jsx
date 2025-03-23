@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { joinGame } from '../services/Game';
-import { initSocket, closeSocket } from '../services/Socket';
+import { initSocket, closeSocket, getSocket } from '../services/Socket';
 
 export function useGameSocket(gameId) {
   const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [socket, setSocket] = useState(null);
   const [countdown, setCountdown] = useState(null);
   const [gameState, setGameState] = useState('waiting');
   const [winner, setWinner] = useState(null);
   const [endReason, setEndReason] = useState(null);
+
+  const joinedGameRef = useRef(false);
+  const socketRef = useRef(getSocket());
 
   useEffect(() => {
     if (!gameId) {
@@ -19,19 +21,30 @@ export function useGameSocket(gameId) {
       return;
     }
 
+    if (socketRef.current && joinedGameRef.current) {
+      console.log('Ya hay una conexión socket activa para esta partida');
+      setLoading(false);
+      return;
+    }
+
     const connectToGame = async () => {
       try {
-        const response = await joinGame(gameId);
-        console.log(response
-        );
-        if (!response.success) {
-          setError(response.error || 'No se pudo unir a la partida');
-          setLoading(false);
-          return;
+        if (!joinedGameRef.current) {
+          console.log('Conectando a partida por primera vez:', gameId);
+          const response = await joinGame(gameId);
+
+          if (!response.success) {
+            setError(response.error || 'No se pudo unir a la partida');
+            setLoading(false);
+            return;
+          }
+
+          const socketInstance = initSocket(response.socketToken);
+          socketRef.current = socketInstance;
+          joinedGameRef.current = true;
         }
 
-        const socketInstance = initSocket(response.socketToken);
-        setSocket(socketInstance);
+        const socketInstance = socketRef.current;
 
         socketInstance.on('playerList', ({ players }) => {
           setPlayers(players);
@@ -87,20 +100,16 @@ export function useGameSocket(gameId) {
     connectToGame();
 
     return () => {
-      closeSocket();
     };
   }, [gameId]);
 
-  const sendReady = () => {
-    if (socket) {
-      socket.emit('playerReady');
-    }
-  };
-
+  // Función explícita para abandonar la partida
   const leaveGame = () => {
-    if (socket) {
-      socket.emit('leaveGame');
+    if (socketRef.current) {
+      socketRef.current.emit('leaveGame');
       closeSocket();
+      joinedGameRef.current = false;
+      socketRef.current = null;
     }
   };
 
@@ -110,7 +119,7 @@ export function useGameSocket(gameId) {
     error,
     countdown,
     gameState,
-    sendReady,
+    sendReady: () => socketRef.current?.emit('playerReady'),
     winner,
     endReason,
     leaveGame

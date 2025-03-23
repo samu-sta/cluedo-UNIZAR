@@ -1,6 +1,6 @@
 import auth from '../utils/auth.js';
 import MESSAGES from '../messages/messages.js';
-
+import AccountModel from '../models/Account.js';
 export const authMiddleware = async (req, res, next) => {
   try {
     const token = req.cookies.token;
@@ -10,7 +10,13 @@ export const authMiddleware = async (req, res, next) => {
     }
 
     const decoded = auth.verifyToken(token);
-    req.userId = decoded.id;
+    const account = await AccountModel.findByPk(decoded.id);
+
+    if (!account) {
+      return res.status(404).json({ error: MESSAGES.USER_NOT_FOUND });
+    }
+
+    req.account = account;
     next();
   } catch (error) {
     console.error('Authentication error:', error);

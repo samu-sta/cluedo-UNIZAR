@@ -1,4 +1,4 @@
-import { activeGames } from "../controllers/Game.Controller.js";
+import gameController from '../controllers/Game.Controller.js';
 import GameStateManager from './GameStateManager.js';
 import CountdownManager from './CountdownManager.js';
 
@@ -52,7 +52,7 @@ export const setupSocketHandlers = (io) => {
       }
 
       if (gameStateManager.getPlayerCount(gameId) === 0) {
-        activeGames.delete(gameId);
+        gameController.deleteGame(gameId);
       }
     });
   });

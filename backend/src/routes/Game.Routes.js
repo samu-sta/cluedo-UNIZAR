@@ -1,10 +1,9 @@
 import { Router } from 'express';
-import GameController from '../controllers/Game.Controller.js';
+import gameController from '../controllers/Game.Controller.js';
 import { authMiddleware } from '../middlewares/auth.js';
 
 export const GameRoutes = () => {
   const gameRouter = Router();
-  const gameController = new GameController();
 
   gameRouter.use(authMiddleware);
 

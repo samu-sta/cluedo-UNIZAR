@@ -1,12 +1,21 @@
 import { io } from 'socket.io-client';
 
 let socket = null;
+let currentGameId = null;
 
 export const initSocket = (socketToken) => {
+  const tokenData = JSON.parse(atob(socketToken.split('.')[1]));
+  const gameId = tokenData.gameId;
+
+  if (socket && currentGameId === gameId) {
+    return socket;
+  }
 
   if (socket) {
     closeSocket();
   }
+
+  currentGameId = gameId;
 
   socket = io('http://localhost:3000', {
     auth: { token: socketToken },
@@ -37,6 +46,6 @@ export const closeSocket = () => {
   if (socket) {
     socket.disconnect();
     socket = null;
-    console.log('Conexión socket cerrada');
+    currentGameId = null;
   }
 };

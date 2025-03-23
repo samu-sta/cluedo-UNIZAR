@@ -1,3 +1,10 @@
+import GameModel from "../models/Game.js";
+import CardModel from "../models/Card.js";
+import BoardModel from "../models/Board.js";
+import RoomModel from "../models/Room.js";
+import WallModel from "../models/Wall.js";
+import DoorModel from "../models/Door.js";
+
 export const getGame = async () => {
   return await GameModel.findOne({
     attributes: {
