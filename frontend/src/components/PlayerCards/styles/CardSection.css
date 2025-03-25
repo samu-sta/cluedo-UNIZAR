@@ -1,0 +1,33 @@
+.section-title {
+  color: var(--color-accent-yellow);
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: clamp(0.9rem, 0.7rem + 1vw, 1.2rem);
+}
+
+.cards-section{
+  display: flex;
+  flex-direction: column;
+}
+
+.cards-section.leftover {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--color-accent-yellow);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(90px, 25vw, 150px), 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.cards-section.leftover {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.cards-container{
+  display: flex;
+  flex-direction: column;
+}

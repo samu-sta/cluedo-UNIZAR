@@ -56,7 +56,6 @@ export const setupSocketHandlers = (io) => {
       }
     });
 
-    // Manejador para cuando un jugador solicita sus cartas
     socket.on('requestCards', () => {
       if (gameStateManager.getGameState(gameId) !== 'playing') {
         socket.emit('error', 'El juego no ha comenzado');
@@ -64,10 +63,10 @@ export const setupSocketHandlers = (io) => {
       }
 
       const cards = gameStateManager.getPlayerCards(gameId, userId);
-      socket.emit('playerCards', { cards });
+      const leftoverCards = gameStateManager.getLeftoverCards(gameId);
+      socket.emit('playerCards', { cards, leftoverCards });
     });
 
-    // Manejador para iniciar el juego (para pruebas o cuando el anfitrión decide comenzar)
     socket.on('playerReady', () => {
       if (gameStateManager.getGameState(gameId) !== 'waiting') {
         return;

@@ -44,16 +44,30 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-@keyframes cardAppear {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 .player-cards-drawer.expanded .game-card {
-  animation: cardAppear 0.3s ease forwards;
+  animation: leftoverCardAppear 0.5s ease forwards
 }
 
-.player-cards-drawer.expanded .game-card:nth-child(2) { animation-delay: 0.05s; }
-.player-cards-drawer.expanded .game-card:nth-child(3) { animation-delay: 0.1s; }
-.player-cards-drawer.expanded .game-card:nth-child(4) { animation-delay: 0.15s; }
-.player-cards-drawer.expanded .game-card:nth-child(5) { animation-delay: 0.2s; }
+.game-card.leftover {
+  opacity: 0.9;
+  border: 2px dotted var(--color-accent-yellow);
+  position: relative;
+}
+
+.leftover-badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: var(--color-accent-yellow);
+  color: var(--color-primary-dark);
+  font-size: 0.6rem;
+  padding: 2px 5px;
+  border-radius: 10px;
+  transform: rotate(15deg);
+  font-weight: bold;
+  z-index: 2;
+}
+
+.player-cards-drawer.expanded .game-card.leftover {
+  animation: leftoverCardAppear 0.5s ease forwards;
+}

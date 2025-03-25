@@ -22,7 +22,8 @@ const GameRoom = ({ user }) => {
   }, [user, navigate]);
 
   const {
-    players,
+    /*  players, */
+
     loading,
     error,
     countdown,
@@ -31,6 +32,7 @@ const GameRoom = ({ user }) => {
     winner,
     endReason,
     playerCards,
+    leftoverCards,
     sendReady,
     leaveGame
   } = useGameSocket(gameId);
@@ -80,7 +82,7 @@ const GameRoom = ({ user }) => {
             onLeaveGame={handleLeaveGame}
           />
         </main>
-        <PlayerCards cards={playerCards} />
+        <PlayerCards cards={playerCards} leftoverCards={leftoverCards} />
       </main>
 
       <GameEndedModal

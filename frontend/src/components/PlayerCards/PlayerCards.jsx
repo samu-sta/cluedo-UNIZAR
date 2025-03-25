@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import CardDrawer from './components/CardDrawer';
 
-const PlayerCards = ({ cards = [] }) => {
+const PlayerCards = ({ cards = [], leftoverCards }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   if (!cards.length) {
@@ -18,12 +18,19 @@ const PlayerCards = ({ cards = [] }) => {
     rooms: cards.filter(card => card.type === 'room')
   };
 
+  const organizedLeftoverCards = {
+    characters: leftoverCards.filter(card => card.type === 'character'),
+    weapons: leftoverCards.filter(card => card.type === 'weapon'),
+    rooms: leftoverCards.filter(card => card.type === 'room')
+  };
+
   return (
     <CardDrawer
       isCollapsed={isCollapsed}
       toggleCollapse={toggleCollapse}
       totalCards={cards.length}
       cardsData={organizedCards}
+      leftoverCards={organizedLeftoverCards}
     />
   );
 };

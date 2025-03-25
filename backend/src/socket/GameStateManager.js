@@ -120,18 +120,27 @@ export default class GameStateManager {
     const playerCount = players.length;
 
     const shuffledCards = this.shuffleArray([...cards]);
-
     const playerCards = {};
+    const leftoverCards = [];
 
     players.forEach(playerId => {
       playerCards[playerId] = [];
     });
 
+    const cardsPerPlayer = Math.floor(shuffledCards.length / playerCount);
+
     shuffledCards.forEach((card, index) => {
-      const playerIndex = index % playerCount;
-      const playerId = players[playerIndex];
-      playerCards[playerId].push(card);
+      if (index < cardsPerPlayer * playerCount) {
+        const playerIndex = Math.floor(index / cardsPerPlayer);
+        const playerId = players[playerIndex];
+        playerCards[playerId].push(card);
+      } else {
+        leftoverCards.push(card);
+      }
     });
+
+    const game = this.getGame(gameId);
+    game.leftoverCards = leftoverCards;
 
     return playerCards;
   }
@@ -160,5 +169,12 @@ export default class GameStateManager {
       weapon: game.solution.weapon,
       room: game.solution.room
     } : null;
+  }
+
+  getLeftoverCards(gameId) {
+    if (!this.hasGame(gameId)) return [];
+
+    const game = this.getGame(gameId);
+    return game.leftoverCards || [];
   }
 }
