@@ -20,8 +20,6 @@ export const Board = ({ countdown, gameState, gameInfo }) => {
 
   return (
     <section className="game-board-container">
-      <h2>Tablero de Cluedo</h2>
-
       {!boardData ? (
         <LoadingBoard />
       ) : (

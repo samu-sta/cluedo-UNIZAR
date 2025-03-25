@@ -1,3 +1,4 @@
+import { getCards } from "../utils/game.js";
 export default class GameStateManager {
   constructor() {
     this.games = new Map();
@@ -67,5 +68,97 @@ export default class GameStateManager {
   getGameState(gameId) {
     if (!this.hasGame(gameId)) return 'waiting';
     return this.getGame(gameId).state;
+  }
+
+  async setupGame(gameId) {
+    if (!this.hasGame(gameId)) return false;
+
+    const allCards = await this.getAllCards();
+    const solution = this.selectSolution(allCards);
+    const playerCards = this.distributeCards(solution.remainingCards, gameId);
+
+    const game = this.getGame(gameId);
+    game.solution = solution;
+    game.playerCards = playerCards;
+    return true;
+  }
+
+  async getAllCards() {
+    const cards = await getCards();
+    const characters = cards.filter(card => card.type === 'character');
+    const weapons = cards.filter(card => card.type === 'weapon');
+    const rooms = cards.filter(card => card.type === 'room');
+    return { characters, weapons, rooms, allCards: [...characters, ...weapons, ...rooms] };
+  }
+
+  selectSolution(allCards) {
+    const character = this.getRandomCard(allCards.characters);
+    const weapon = this.getRandomCard(allCards.weapons);
+    const room = this.getRandomCard(allCards.rooms);
+
+    const remainingCards = allCards.allCards.filter(card =>
+      card.name !== character.name &&
+      card.name !== weapon.name &&
+      card.name !== room.name
+    );
+
+    return {
+      character,
+      weapon,
+      room,
+      remainingCards
+    };
+  }
+
+  getRandomCard(cards) {
+    const randomIndex = Math.floor(Math.random() * cards.length);
+    return cards[randomIndex];
+  }
+
+  distributeCards(cards, gameId) {
+    const players = Array.from(this.getGame(gameId).players.keys());
+    const playerCount = players.length;
+
+    const shuffledCards = this.shuffleArray([...cards]);
+
+    const playerCards = {};
+
+    players.forEach(playerId => {
+      playerCards[playerId] = [];
+    });
+
+    shuffledCards.forEach((card, index) => {
+      const playerIndex = index % playerCount;
+      const playerId = players[playerIndex];
+      playerCards[playerId].push(card);
+    });
+
+    return playerCards;
+  }
+
+  shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  getPlayerCards(gameId, userId) {
+    if (!this.hasGame(gameId)) return [];
+
+    const game = this.getGame(gameId);
+    return game.playerCards?.[userId] || [];
+  }
+
+  getSolution(gameId) {
+    if (!this.hasGame(gameId)) return null;
+
+    const game = this.getGame(gameId);
+    return game.solution ? {
+      character: game.solution.character,
+      weapon: game.solution.weapon,
+      room: game.solution.room
+    } : null;
   }
 }

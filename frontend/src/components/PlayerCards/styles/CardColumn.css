@@ -1,0 +1,26 @@
+.card-column {
+  flex: 0 0 auto;
+  padding: 0 0.5rem;
+  border-radius: 8px;
+  background-color: var(--color-primary-dark);
+  min-width: clamp(90px, 60px + 15vw, 120px);
+}
+
+.card-column h4 {
+  text-align: center;
+  margin: 0.8rem 0;
+  color: var(--color-text-light);
+  font-size: 1.1rem;
+  white-space: nowrap;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(70px, 50px + 10vw, 90px), 1fr));
+  gap: 0.8rem;
+  padding: 0;
+  padding-bottom: 0.5rem;
+  list-style: none;
+}

@@ -8,6 +8,7 @@ import useIsMobile from '../../hooks/useIsMobile';
 import GameHeader from './components/GameHeader';
 import Board from '../../components/Board/Board';
 import './styles/GameRoom.css';
+import PlayerCards from '../../components/PlayerCards/PlayerCards';
 
 const GameRoom = ({ user }) => {
   const { gameId } = useParams();
@@ -29,6 +30,7 @@ const GameRoom = ({ user }) => {
     gameInfo,
     winner,
     endReason,
+    playerCards,
     sendReady,
     leaveGame
   } = useGameSocket(gameId);
@@ -67,7 +69,7 @@ const GameRoom = ({ user }) => {
   return (
     <>
       <main className={`game-room ${isMobile ? 'mobile' : ''}`}>
-        <PlayerList players={players} />
+        {/*  <PlayerList players={players} /> */}
         <main className={`game-content ${isMobile ? 'mobile' : ''}`}>
           <GameHeader gameId={gameId} gameState={gameState} onLeaveGame={handleLeaveGame} />
           <Board
@@ -78,6 +80,7 @@ const GameRoom = ({ user }) => {
             onLeaveGame={handleLeaveGame}
           />
         </main>
+        <PlayerCards cards={playerCards} />
       </main>
 
       <GameEndedModal

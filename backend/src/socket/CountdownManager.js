@@ -16,18 +16,25 @@ export default class CountdownManager {
 
     game.countdown = COUNTDOWN_TIME;
 
-    game.timer = setInterval(() => {
-      game.countdown -= 1;
+    game.timer = setInterval(async () => {
+      try {
+        game.countdown -= 1;
 
-      this.io.to(gameId).emit('countdownUpdate', {
-        seconds: game.countdown
-      });
+        this.io.to(gameId).emit('countdownUpdate', {
+          seconds: game.countdown
+        });
 
-      if (game.countdown <= 0) {
-        this.stopCountdown(gameId);
-        this.gameStateManager.setGameState(gameId, 'playing');
-        this.io.to(gameId).emit('gameStart');
+        if (game.countdown <= 0) {
+          this.stopCountdown(gameId);
+          await this.onCountdownFinished(gameId);
+          this.gameStateManager.setGameState(gameId, 'playing');
+          this.io.to(gameId).emit('gameStart');
+        }
       }
+      catch (error) {
+        console.log(error);
+      }
+
     }, COUNT_INTERVAL);
   }
 
@@ -46,5 +53,14 @@ export default class CountdownManager {
   cancelCountdown(gameId) {
     this.stopCountdown(gameId);
     this.io.to(gameId).emit('countdownCancelled');
+  }
+
+  async onCountdownFinished(gameId) {
+    if (this.gameStateManager.getGameState(gameId) !== 'waiting') return;
+
+    await this.gameStateManager.setupGame(gameId);
+    this.gameStateManager.setGameState(gameId, 'playing');
+
+    this.io.to(gameId).emit('gameStart');
   }
 }

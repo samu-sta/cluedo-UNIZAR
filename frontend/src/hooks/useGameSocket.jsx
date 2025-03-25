@@ -11,6 +11,7 @@ export function useGameSocket(gameId) {
   const [winner, setWinner] = useState(null);
   const [endReason, setEndReason] = useState(null);
   const [gameInfo, setGameInfo] = useState(null);
+  const [playerCards, setPlayerCards] = useState([]);
 
   const socketRef = useRef(null);
   const joinedGameRef = useRef(false);
@@ -69,9 +70,15 @@ export function useGameSocket(gameId) {
           setGameState('waiting');
         });
 
+        socketInstance.on('playerCards', ({ cards }) => {
+          console.log('Recibidas cartas del jugador:', cards);
+          setPlayerCards(cards);
+        });
+
         socketInstance.on('gameStart', () => {
           setCountdown(null);
           setGameState('playing');
+          socketInstance.emit('requestCards');
         });
 
         socketInstance.on('gameEnd', ({ reason, winner }) => {
@@ -115,6 +122,8 @@ export function useGameSocket(gameId) {
     sendReady: () => socketRef.current?.emit('playerReady'),
     winner,
     endReason,
-    leaveGame
+    leaveGame,
+    playerCards,
+    requestCards: () => socketRef.current?.emit('requestCards')
   };
 }

@@ -50,3 +50,13 @@ export const getGame = async () => {
       }]
   });
 }
+
+export const getCards = async (gameId = 1) => {
+  return await CardModel.findAll({
+    where: { gameId },
+    attributes: {
+      exclude: ['id', 'gameId']
+    },
+    raw: true
+  });
+}
