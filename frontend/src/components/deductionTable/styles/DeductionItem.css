@@ -1,0 +1,61 @@
+.deduction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.8rem;
+  border-radius: 4px;
+  margin-bottom: 0.3rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.deduction-item:hover {
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+.deduction-item.yes {
+  background-color: rgba(74, 222, 128, 0.15);
+  border-left: 3px solid rgb(74, 222, 128);
+}
+
+.deduction-item.no {
+  background-color: rgba(252, 165, 165, 0.15);
+  border-left: 3px solid rgb(252, 165, 165);
+}
+
+.deduction-item.maybe {
+  background-color: rgba(250, 204, 21, 0.15);
+  border-left: 3px solid rgb(250, 204, 21);
+}
+
+.deduction-name {
+  font-size: 0.95rem;
+  flex-grow: 1;
+  color: var(--color-text-muted);
+}
+
+.deduction-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.deduction-icon {
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.deduction-icon.yes {
+  color: rgb(74, 222, 128);
+}
+
+.deduction-icon.no {
+  color: rgb(252, 165, 165);
+}
+
+.deduction-icon.maybe {
+  color: rgb(250, 204, 21);
+}

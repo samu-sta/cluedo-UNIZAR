@@ -9,6 +9,7 @@ import GameHeader from './components/GameHeader';
 import Board from '../../components/Board/Board';
 import './styles/GameRoom.css';
 import PlayerCards from '../../components/PlayerCards/PlayerCards';
+import DeductionTable from '../../components/deductionTable/DeductionTable';
 
 const GameRoom = ({ user }) => {
   const { gameId } = useParams();
@@ -83,6 +84,7 @@ const GameRoom = ({ user }) => {
           />
         </main>
         <PlayerCards cards={playerCards} leftoverCards={leftoverCards} />
+        {gameState === 'playing' && <DeductionTable gameInfo={gameInfo} playerCards={playerCards} leftoverCards={leftoverCards} />}
       </main>
 
       <GameEndedModal

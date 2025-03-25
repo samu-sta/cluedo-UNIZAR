@@ -1,0 +1,9 @@
+.deduction-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(160px, 30%, 200px), 1fr));
+  gap: 1.5rem;
+}
+
+.deduction-grid.mobile {
+  grid-template-columns: 1fr;
+}

@@ -7,7 +7,7 @@ const CardDrawer = ({ isCollapsed, toggleCollapse, totalCards, cardsData, leftov
     <section className={`player-cards-drawer ${isCollapsed ? 'collapsed' : 'expanded'}`}>
       <header className="drawer-header" onClick={toggleCollapse}>
         <h3>Tus Cartas ({totalCards})</h3>
-        <button className={`toggle-drawer ${isCollapsed ? 'collapsed' : 'expanded'}`}
+        <button className={`btn toggle-drawer ${isCollapsed ? 'collapsed' : 'expanded'}`}
           aria-label="Mostrar u ocultar cartas">
           <IoIosArrowDown />
         </button>

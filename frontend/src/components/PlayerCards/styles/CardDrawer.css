@@ -4,19 +4,18 @@
   left: 0;
   right: 0;
   background-color: var(--color-primary-light);
-  border-radius: 12px 12px 0 0;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 900;
+  z-index: 999;
   max-height: 80vh;
-  overflow: hidden;
 }
 
 .player-cards-drawer.collapsed {
-  transform: translateY(calc(100% - 50px));
+  transform: translateY(calc(100%));
 }
 
 .player-cards-drawer.expanded {
   transform: translateY(0);
+  z-index: 999999999;
 }
 
 .drawer-header {
@@ -28,6 +27,11 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   background-color: var(--color-primary-dark);
   height: 50px;
+  width: 50%;
+  z-index: 900;
+  position: fixed;
+  top: -50px;
+  border-radius: 12px 12px 0 0;
 }
 
 .drawer-header h3 {
@@ -38,6 +42,7 @@
 }
 
 .toggle-drawer {
+  position: fixed;
   background: inherit;
   color: var(--color-accent-yellow);
   font-size: 1.2rem;
@@ -58,7 +63,6 @@
 
 .cards-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
   padding: 1rem;
   gap: 1rem;
   overflow-y: auto;
