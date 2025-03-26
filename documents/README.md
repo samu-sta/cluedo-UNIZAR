@@ -1,5 +1,7 @@
 # 🎲 Cluedo UNIZAR - Documentación del Proyecto
 
+> [!NOTE]
+> Esta documentación refleja el estado actual del proyecto a dia 26 de marzo de 2025. Contiene información detallada sobre la arquitectura, componentes y funcionalidades implementadas.
 
 ## 💻 1. Tecnologías Utilizadas
 
@@ -33,12 +35,16 @@ cluedo/
 ├── frontend/        # Aplicación React
 │   ├── src/
 │   │   ├── components/  # Componentes reutilizables
+│   │   │   ├── Board/           # Componentes del tablero de juego
+│   │   │   ├── PlayerCards/     # Visualización de cartas del jugador
+│   │   │   └── deductionTable/  # Tabla de deducciones para el jugador
 │   │   ├── pages/       # Páginas de la aplicación
 │   │   │   ├── GameRoom/     # Interfaz de sala de juego
 │   │   │   └── startGames/   # Creación/unión a partidas
 │   │   ├── hooks/       # Custom React hooks
 │   │   │   ├── useGameSocket.jsx  # Hook para gestionar sockets
-│   │   │   └── useStartGames.jsx  # Hook para crear/unir partidas
+│   │   │   ├── useDeductions.jsx  # Hook para la tabla de deducciones
+│   │   │   └── useIsMobile.jsx    # Hook para detectar dispositivos móviles
 │   │   ├── services/    # Servicios para API calls
 │   │   │   ├── Game.js          # Servicios de partidas
 │   │   │   └── Socket.js        # Configuración de Socket.IO
@@ -53,7 +59,11 @@ cluedo/
 │   │   ├── messages/     # Mensajes de respuesta
 │   │   ├── models/       # Modelos de datos
 │   │   ├── routes/       # Definición de rutas
-│   │   ├── socket/       # Configuración de Socket.IO
+│   │   ├── socket/       # Configuración de Socket.IO y gestión de partidas
+│   │   │   ├── GameStateManager.js  # Gestión del estado de juego
+│   │   │   └── CountdownManager.js  # Gestión de cuenta regresiva
+│   │   ├── config/       # Configuraciones del juego
+│   │   │   └── gameConstants.js    # Constantes para el tablero y cartas
 │   │   └── schemas/      # Esquemas para validación
 │   └── ...
 └── documents/       # Documentación del proyecto
@@ -86,9 +96,27 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
 
 - **Sistema**: MySQL 8.0
 - **ORM**: Sequelize para un manejo minimalista de la base de datos
-- **Tablas principales**:
-  - `user`: Almacena información de usuarios (username, email, password hashed)
+- **Modelos principales**:
+  - `AccountModel`: Almacena información básica de cuentas (username, email, password hashed)
+  - `UserModel`: Establece relación con Account para usuarios regulares
+  - `AdminModel`: Establece relación con Account para administradores
+  - `GameModel`: Información básica del juego
+  - `BoardModel`: Configuración del tablero (filas, columnas)
+  - `RoomModel`: Habitaciones del tablero de juego
+  - `WallModel`: Representa las paredes en las habitaciones
+  - `DoorModel`: Representa las puertas entre habitaciones
+  - `CardModel`: Cartas del juego (armas, personajes, habitaciones)
+- **Relaciones**:
+  - Account → User/Admin (one-to-one)
+  - Game → Board (one-to-one)
+  - Game → Card (one-to-many)
+  - Board → Room (one-to-many)
+  - Room → Wall (one-to-many)
+  - Room → Door (one-to-many)
 - **Inicialización**: El script init.js crea la base de datos y tablas necesarias.
+
+> [!TIP]
+> Para facilitar el desarrollo, se puede utilizar la herramienta MySQL Workbench para visualizar y manipular la estructura de la base de datos directamente.
 
 
 ## 🔌 5. API REST
@@ -99,9 +127,16 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
 - `POST /user/logout`: Cierre de sesión
 - `POST /user/change-password`: Cambio de contraseña
 
-### 5.2 Validación de Datos
+### 5.2 Endpoints de Juego
+- `POST /game/create`: Creación de una nueva partida
+- `POST /game/join/:gameId`: Unirse a una partida existente
+
+### 5.3 Validación de Datos
 - Todas las entradas son validadas mediante esquemas Zod.
 - Manejo consistente de errores con mensajes descriptivos.
+
+> [!WARNING]
+> No se debe omitir la validación de ningún dato de entrada, ya que esto podría comprometer la seguridad de la aplicación y crear vulnerabilidades.
 
 
 ## 🖥️ 6. Frontend
@@ -112,6 +147,10 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
 - `Home`: Página principal con secciones para características y reglas
 - `Login/Register`: Formularios de autenticación
 - `StartGames`: Interfaz para iniciar partidas
+- `GameRoom`: Sala de juego completa
+- `Board`: Tablero interactivo del juego
+- `PlayerCards`: Visor de cartas del jugador
+- `DeductionTable`: Tabla para realizar deducciones durante el juego
 
 ### 6.2 Hooks Personalizados
 - `useIsMobile`: Detección de dispositivos móviles
@@ -119,11 +158,27 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
 - `useLoginPage`: Manejo del formulario de login
 - `useRegisterPage`: Manejo del formulario de registro
 - `useStartGames`: Lógica para iniciar partidas
+- `useGameSocket`: Gestión de la comunicación socket durante la partida
+- `useDeductions`: Estado y lógica para la tabla de deducciones
+- `useGameEndedModal`: Control del modal de fin de partida
 
-### 6.3 Estilos
+### 6.3 Componentes de Juego
+- **Board**: Representación visual del tablero con habitaciones
+- **WaitingRoom**: Sala de espera para jugadores antes de comenzar
+- **PlayerCards**: Visualizador de cartas repartidas al jugador
+  - Muestra cartas de personajes, armas y habitaciones
+  - Sección especial para cartas sobrantes
+- **DeductionTable**: Tabla para realizar deducciones
+  - Permite marcar cartas como confirmadas, descartadas o posibles
+  - Descarta automáticamente las cartas que tiene el jugador y las sobrantes
+  - Interfaz adaptable en dispositivos móviles
+
+
+### 6.4 Estilos
 - CSS modular por componente
 - Variables CSS para temas consistentes
 - Diseño responsivo para móviles y escritorio
+- Animaciones para mejorar la experiencia de usuario
 
 
 ## 🎮 7. Sistema de Partidas y Comunicación en Tiempo Real
@@ -131,9 +186,21 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
 ### 7.1 Gestión de Partidas
 - **Creación de partidas**: Generación de identificadores únicos (UUID)
 - **Unión a partidas existentes**: Mediante código de partida
-- **Persistencia en memoria**: Las partidas activas se mantienen en un Map centralizado (proximamente en base de datos)
+- **Persistencia en memoria principal**: Las partidas activas se mantienen en un Map centralizado
+- **Estados de partida**:
+  - `waiting`: Esperando jugadores
+  - `countdown`: Cuenta regresiva antes de comenzar
+  - `playing`: Partida en curso
+  - `ended`: Partida finalizada
 
-### 7.2 Socket.IO
+### 7.2 Dinámica de Juego
+- **Cartas**: Sistema de cartas con personajes, armas y habitaciones
+- **Inicio de partida**: Comienza cuando hay suficientes jugadores
+- **Cuenta regresiva**: Temporizador de 10 segundos antes de comenzar
+- **Distribución de cartas**: Sistema para repartir cartas a los jugadores
+- **Cartas sobrantes**: Gestión de cartas que quedan sin repartir
+
+### 7.3 Socket.IO
 - **Arquitectura de comunicación**: Implementación de patrón publisher-subscriber
 - **Autenticación de socket**: Mediante tokens JWT específicos para cada partida
 - **Salas (rooms)**: Cada partida tiene su propia sala para comunicación aislada
@@ -143,7 +210,18 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
   - `playerJoined`: Cuando un nuevo jugador se une a la partida
   - `playerLeft`: Cuando un jugador abandona la partida
   - `playerList`: Lista actualizada de jugadores en la sala
+  - `countdownUpdate`: Actualización del contador de inicio
+  - `gameStart`: Inicio de la partida
+  - `playerCards`: Distribución de cartas a los jugadores
+  - `gameEnd`: Finalización de la partida
   - `leaveGame`: Abandono explícito de una partida
+
+
+### 7.4 Interfaz durante el juego
+- **Visualización de cartas**: Componente para ver las cartas asignadas al jugador
+- **Tabla de deducciones**: Herramienta para realizar deducciones lógicas
+- **Modales informativos**: Modales para fin de juego y abandono de partida
+- **Adaptabilidad**: Diseño responsive para diferentes dispositivos
 
 
 ## 🐳 8. Docker
@@ -160,7 +238,11 @@ El proyecto está completamente dockerizado para facilitar el desarrollo y despl
 - Volúmenes para código fuente (desarrollo)
 
 ### 8.3 Variables de Entorno
-Las configuraciones se manejan mediante variables de entorno que se pueden definir en el archivo `.env` siguiendo la estructura del `.env.example`:
+
+> [!IMPORTANT]
+> Nunca incluir archivos .env con credenciales reales en el repositorio. Asegurarse de que estén incluidos en el .gitignore.
+
+Las configuraciones se manejan mediante variables de entorno que se pueden definir en el archivo .env siguiendo la estructura del .env.example:
 - Credenciales de base de datos
 - Puerto del frontend y backend
 - URL de API
@@ -189,6 +271,9 @@ docker-compose up -d --build
 - **Cookies**: HTTP-only para tokens JWT
 - **Validación**: Todas las entradas son validadas con Zod
 
+> [!WARNING]
+> Establecer un JWT_SECRET privado que no se pueda descifrar
+
 
 ## ⚙️ 10. Instalación y Configuración (Sin Docker)
 
@@ -214,7 +299,8 @@ npm install
 
 ### 10.2 Configuración de Variables de Entorno
 
-El proyecto requiere que se creen los archivos `.env` en la carpeta backend, siguiendo la estructura del `.env.example`
+> [!NOTE]
+> El proyecto requiere que se creen los archivos .env en la carpeta backend, siguiendo la estructura del .env.example.
 
 ### 10.3 Ejecución del frontend y backend
 
@@ -235,12 +321,30 @@ cd backend
 npm start
 ```
 
-## 🔮 11. Consideraciones Futuras
+## 📷 11. Capturas de Pantalla
 
-- Implementación de Socket.IO para comunicación en tiempo real para el juego.
-- Ampliación de características de juego (tablero, cartas, etc.).
-- Mejora de sistemas de ranking y estadísticas.
+### 12.1 Página de Inicio
+![home-1](https://github.com/user-attachments/assets/526330b3-b676-40ed-a988-379921742dd4)
+![home-2](https://github.com/user-attachments/assets/78563d1c-2d44-46c4-9465-d622b74a9f73)
+![home-3](https://github.com/user-attachments/assets/876bd374-8307-429c-9a41-dc619cf7f206)
+![home-4](https://github.com/user-attachments/assets/d8211a83-abfc-4089-9270-d6744c5f5000)
 
+
+### 12.2 Interfaz de Juego
+![game-1](https://github.com/user-attachments/assets/54e4fa6d-9fc3-4f35-8561-4155fa812c71)
+![game-2](https://github.com/user-attachments/assets/ebba0655-37eb-42bf-8bb0-3712b18606c1)
+![game-3](https://github.com/user-attachments/assets/3e586cc5-7e48-47d3-88be-c0dbc8a4943a)
+
+
+
+## 🔮 12. Consideraciones Futuras
+
+- Implementación de lógica completa de juego con turnos
+- Sistema de acusaciones y suposiciones
+- Mejora del tablero con movimientos de jugadores
+- Persistencia de partidas en base de datos
+- Implementación de chat durante la partida
+- Sistema de estadísticas y ranking de jugadores
 
 ---
 Esta documentación es un recurso vivo que puede ser ampliado según evolucione el proyecto.
