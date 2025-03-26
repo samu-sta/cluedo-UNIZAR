@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { joinGame } from '../services/Game';
 import { initSocket, closeSocket } from '../services/Socket';
 
-export function useGameSocket(gameId) {
+export function useGameSocket(gameId, user) {
   const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,6 +13,8 @@ export function useGameSocket(gameId) {
   const [gameInfo, setGameInfo] = useState(null);
   const [playerCards, setPlayerCards] = useState([]);
   const [leftoverCards, setLeftoverCards] = useState([]);
+  const [currentTurn, setCurrentTurn] = useState(null);
+  const [isMyTurn, setIsMyTurn] = useState(false);
 
   const socketRef = useRef(null);
   const joinedGameRef = useRef(false);
@@ -72,15 +74,21 @@ export function useGameSocket(gameId) {
         });
 
         socketInstance.on('playerCards', ({ cards, leftoverCards = [] }) => {
-          console.log('Recibidas cartas del jugador:', cards);
           setPlayerCards(cards);
           setLeftoverCards(leftoverCards);
         });
 
-        socketInstance.on('gameStart', () => {
+        socketInstance.on('gameStart', ({ currentTurn }) => {
           setCountdown(null);
           setGameState('playing');
           socketInstance.emit('requestCards');
+          setCurrentTurn(currentTurn);
+          setIsMyTurn(user && currentTurn.playerId === user.id);
+        });
+
+        socketInstance.on('turnUpdate', ({ currentTurn }) => {
+          setCurrentTurn(currentTurn);
+          setIsMyTurn(user && currentTurn.playerId === user.id);
         });
 
         socketInstance.on('gameEnd', ({ reason, winner }) => {
@@ -114,11 +122,21 @@ export function useGameSocket(gameId) {
     }
   };
 
+  const passTurn = () => {
+    const socketInstance = socketRef.current;
+    if (socketInstance && isMyTurn) {
+      socketInstance.emit('passTurn');
+    }
+  };
+
   return {
     players,
     loading,
     error,
     countdown,
+    currentTurn,
+    isMyTurn,
+    passTurn,
     gameState,
     gameInfo,
     sendReady: () => socketRef.current?.emit('playerReady'),

@@ -10,6 +10,7 @@ import Board from '../../components/Board/Board';
 import './styles/GameRoom.css';
 import PlayerCards from '../../components/PlayerCards/PlayerCards';
 import DeductionTable from '../../components/deductionTable/DeductionTable';
+import TurnIndicator from './components/TurnIndicator';
 
 const GameRoom = ({ user }) => {
   const { gameId } = useParams();
@@ -34,9 +35,14 @@ const GameRoom = ({ user }) => {
     endReason,
     playerCards,
     leftoverCards,
+    currentTurn,
+    isMyTurn,
+    passTurn,
     sendReady,
     leaveGame
-  } = useGameSocket(gameId);
+  } = useGameSocket(gameId, user);
+  console.log('Game state is: ', gameState);
+
 
   const { showEndedModal, toogleEndedModal } = useGameEndedModal(gameState);
 
@@ -75,6 +81,13 @@ const GameRoom = ({ user }) => {
         {/*  <PlayerList players={players} /> */}
         <main className={`game-content ${isMobile ? 'mobile' : ''}`}>
           <GameHeader gameId={gameId} gameState={gameState} onLeaveGame={handleLeaveGame} />
+          {gameState === 'playing' && (
+            <TurnIndicator
+              currentTurn={currentTurn}
+              isMyTurn={isMyTurn}
+              onPassTurn={passTurn}
+            />
+          )}
           <Board
             countdown={countdown}
             gameState={gameState}

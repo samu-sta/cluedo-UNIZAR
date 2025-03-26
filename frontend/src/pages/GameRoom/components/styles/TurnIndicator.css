@@ -1,0 +1,76 @@
+.turn-indicator {
+  background-color: var(--color-primary-light);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.turn-indicator.my-turn {
+  background-color: var(--color-accent-yelow-lighter);
+  border-left: 4px solid var(--color-accent-yellow);
+  animation: pulse 2s infinite;
+}
+
+.turn-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.turn-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--color-text);
+}
+
+.turn-indicator.my-turn h3{
+  color: var(--color-accent-yellow);
+}
+
+.turn-indicator h3 {
+  font-weight: normal;
+  color: var(--color-text-light);
+}
+
+.turn-player-name {
+  color: var(--color-accent-yellow);
+  font-weight: bold;
+}
+
+.turn-counter {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.turn-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.turn-notification {
+  margin: 0 0 0.5rem;
+  font-weight: bold;
+  color: var(--color-accent-yellow);
+}
+
+.pass-turn-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 400px) {
+  .turn-indicator {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .turn-actions {
+    margin-top: 1rem;
+    align-items: center;
+  }
+}

@@ -73,6 +73,7 @@ export default class UserController {
       const token = auth.createToken({ id: account.id });
 
       const userData = {
+        id: account.id,
         username: account.username,
         email: account.email
       };

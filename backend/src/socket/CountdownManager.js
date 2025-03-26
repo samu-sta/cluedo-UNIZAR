@@ -61,6 +61,13 @@ export default class CountdownManager {
     await this.gameStateManager.setupGame(gameId);
     this.gameStateManager.setGameState(gameId, 'playing');
 
-    this.io.to(gameId).emit('gameStart');
+    const currentTurn = {
+      playerId: this.gameStateManager.getCurrentTurnPlayer(gameId),
+      playerName: this.gameStateManager.getCurrentTurnPlayerName(gameId),
+      turnIndex: 0,
+      totalPlayers: this.gameStateManager.getGame(gameId).turnOrder.length
+    };
+
+    this.io.to(gameId).emit('gameStart', { currentTurn });
   }
 }

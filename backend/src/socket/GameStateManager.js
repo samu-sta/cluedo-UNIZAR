@@ -80,6 +80,7 @@ export default class GameStateManager {
     const game = this.getGame(gameId);
     game.solution = solution;
     game.playerCards = playerCards;
+    this.setupPlayerTurns(gameId);
     return true;
   }
 
@@ -176,5 +177,49 @@ export default class GameStateManager {
 
     const game = this.getGame(gameId);
     return game.leftoverCards || [];
+  }
+
+  setupPlayerTurns(gameId) {
+    const game = this.getGame(gameId);
+
+    const playerIds = [...game.players.keys()];
+    this.shuffleArray(playerIds);
+
+    game.turnOrder = playerIds;
+    game.currentTurnIndex = 0;
+    game.currentTurnPlayer = playerIds[0];
+  }
+
+  getCurrentTurnPlayer(gameId) {
+    const game = this.getGame(gameId);
+    if (!game || game.turnOrder.length === 0) return null;
+    return game.currentTurnPlayer;
+  }
+
+  getCurrentTurnPlayerName(gameId) {
+    const game = this.getGame(gameId);
+    if (!game || !game.currentTurnPlayer) return null;
+
+    const player = game.players.get(game.currentTurnPlayer);
+    return player ? player.username : null;
+  }
+
+  isPlayerTurn(gameId, playerId) {
+    return this.getCurrentTurnPlayer(gameId) === playerId;
+  }
+
+  nextTurn(gameId) {
+    const game = this.getGame(gameId);
+    if (!game || !game.turnOrder || game.turnOrder.length === 0) return null;
+
+    game.currentTurnIndex = (game.currentTurnIndex + 1) % game.turnOrder.length;
+    game.currentTurnPlayer = game.turnOrder[game.currentTurnIndex];
+
+    return {
+      playerId: game.currentTurnPlayer,
+      playerName: this.getCurrentTurnPlayerName(gameId),
+      turnIndex: game.currentTurnIndex,
+      totalPlayers: game.turnOrder.length
+    };
   }
 }

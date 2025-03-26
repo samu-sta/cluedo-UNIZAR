@@ -77,5 +77,23 @@ export const setupSocketHandlers = (io) => {
         countdownManager.startCountdown(gameId);
       }
     });
+
+    socket.on('passTurn', () => {
+      if (gameStateManager.getGameState(gameId) !== 'playing') {
+        socket.emit('error', 'El juego no está en curso');
+        return;
+      }
+
+      if (!gameStateManager.isPlayerTurn(gameId, userId)) {
+        socket.emit('error', 'No es tu turno');
+        return;
+      }
+
+      const currentTurn = gameStateManager.nextTurn(gameId);
+      console.log('Siguiente turno:', currentTurn);
+      if (currentTurn) {
+        io.to(gameId).emit('turnUpdate', { currentTurn });
+      }
+    });
   });
 };
