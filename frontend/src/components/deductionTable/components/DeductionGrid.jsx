@@ -6,16 +6,19 @@ const DeductionGrid = ({ deductions, updateDeduction, isMobile }) => {
     <div className={`deduction-grid ${isMobile ? 'mobile' : ''}`}>
       <DeductionCategory
         title="Personajes"
+        deductionCategory="characters"
         items={deductions.characters}
         updateDeduction={updateDeduction}
       />
       <DeductionCategory
         title="Armas"
+        deductionCategory="weapons"
         items={deductions.weapons}
         updateDeduction={updateDeduction}
       />
       <DeductionCategory
         title="Habitaciones"
+        deductionCategory="rooms"
         items={deductions.rooms}
         updateDeduction={updateDeduction}
       />

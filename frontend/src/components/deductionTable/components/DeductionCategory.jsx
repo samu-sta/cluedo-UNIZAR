@@ -1,7 +1,7 @@
 import DeductionItem from './DeductionItem';
 import '../styles/DeductionCategory.css';
 
-const DeductionCategory = ({ title, items, updateDeduction }) => {
+const DeductionCategory = ({ title, items, updateDeduction, deductionCategory }) => {
   return (
     <div className="deduction-category">
       <h4>{title}</h4>
@@ -11,7 +11,7 @@ const DeductionCategory = ({ title, items, updateDeduction }) => {
             key={name}
             name={name}
             status={status}
-            onChange={() => updateDeduction(title.toLowerCase(), name)}
+            onChange={() => updateDeduction(deductionCategory, name)}
           />
         ))}
       </ul>
