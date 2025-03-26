@@ -223,6 +223,15 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
 - **Modales informativos**: Modales para fin de juego y abandono de partida
 - **Adaptabilidad**: Diseño responsive para diferentes dispositivos
 
+### 7.5 Sistema de Turnos
+- **Orden aleatorio**: Los turnos de los jugadores se determinan aleatoriamente al iniciar la partida
+- **Indicador visual**: Todos los jugadores pueden ver de quién es el turno actual
+- **Indicación especial**: Cuando es el turno de un jugador, se le muestra una notificación destacada
+- **Control de turno**: El jugador con el turno actual puede pasarlo al siguiente jugador
+- **Estados visuales**:
+  - Turno normal: Muestra el nombre del jugador actual
+  - Mi turno: Destaca visualmente y muestra un botón para pasar turno
+  
 
 ## 🐳 8. Docker
 
