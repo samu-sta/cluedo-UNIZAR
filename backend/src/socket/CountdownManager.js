@@ -1,4 +1,4 @@
-const COUNTDOWN_TIME = 2;
+const COUNTDOWN_TIME = 10;
 const COUNT_INTERVAL = 1000;
 
 export default class CountdownManager {

@@ -39,7 +39,7 @@ const GameRoom = ({ user }) => {
     passTurn,
     sendReady,
     leaveGame
-  } = useGameSocket(gameId, user);
+  } = useGameSocket(gameId);
   console.log('Game state is: ', gameState);
 
 

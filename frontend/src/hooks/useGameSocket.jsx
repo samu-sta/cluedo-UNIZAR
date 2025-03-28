@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { joinGame } from '../services/Game';
 import { initSocket, closeSocket } from '../services/Socket';
 
-export function useGameSocket(gameId, user) {
+export function useGameSocket(gameId) {
   const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,6 +15,7 @@ export function useGameSocket(gameId, user) {
   const [leftoverCards, setLeftoverCards] = useState([]);
   const [currentTurn, setCurrentTurn] = useState(null);
   const [isMyTurn, setIsMyTurn] = useState(false);
+  const user = JSON.parse(localStorage.getItem('user'));
 
 
   const socketRef = useRef(null);
@@ -81,7 +82,6 @@ export function useGameSocket(gameId, user) {
 
         socketInstance.on('gameStart', ({ currentTurn, players }) => {
           setPlayers(players);
-          console.log('player Id: ' + currentTurn.playerId)
           setCountdown(null);
           setGameState('playing');
           socketInstance.emit('requestCards');
