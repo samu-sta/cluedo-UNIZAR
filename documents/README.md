@@ -367,17 +367,12 @@ npm start
 ![game-1](https://github.com/user-attachments/assets/54e4fa6d-9fc3-4f35-8561-4155fa812c71)
 ![game-2](https://github.com/user-attachments/assets/ebba0655-37eb-42bf-8bb0-3712b18606c1)
 ![game-3](https://github.com/user-attachments/assets/3e586cc5-7e48-47d3-88be-c0dbc8a4943a)
-![game-4](https://i.imgur.com/your-dice-image.png)
-![game-5](https://i.imgur.com/your-movement-image.png)
 
 ## 🔮 12. Consideraciones Futuras
 
 - Implementación de lógica completa de juego con acusaciones
 - Sistema de acusaciones y suposiciones
-- Mejoras adicionales al tablero con más interactividad
-- Persistencia de partidas en base de datos
-- Implementación de chat durante la partida
-- Sistema de estadísticas y ranking de jugadores
+- Modulo administrador permitiendo el C.R.U.D de usuarios y partidas
 
 ---
 Esta documentación es un recurso vivo que puede ser ampliado según evolucione el proyecto.
