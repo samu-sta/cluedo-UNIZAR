@@ -1,7 +1,7 @@
-# 🎲 Cluedo UNIZAR - Documentación del Proyecto
+# 🎲 Cluedo UNIZAR - Documentación del Proyecto (Actualizada)
 
 > [!NOTE]
-> Esta documentación refleja el estado actual del proyecto a dia 26 de marzo de 2025. Contiene información detallada sobre la arquitectura, componentes y funcionalidades implementadas.
+> Esta documentación refleja el estado actual del proyecto a día 28 de marzo de 2025. Contiene información detallada sobre la arquitectura, componentes y funcionalidades implementadas.
 
 ## 💻 1. Tecnologías Utilizadas
 
@@ -64,6 +64,8 @@ cluedo/
 │   │   │   └── CountdownManager.js  # Gestión de cuenta regresiva
 │   │   ├── config/       # Configuraciones del juego
 │   │   │   └── gameConstants.js    # Constantes para el tablero y cartas
+│   │   ├── utils/        # Utilidades del juego
+│   │   │   └── board.js           # Algoritmos de movimiento en el tablero
 │   │   └── schemas/      # Esquemas para validación
 │   └── ...
 └── documents/       # Documentación del proyecto
@@ -151,6 +153,7 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
 - `Board`: Tablero interactivo del juego
 - `PlayerCards`: Visor de cartas del jugador
 - `DeductionTable`: Tabla para realizar deducciones durante el juego
+- `DiceRoller`: Componente para lanzar dados y mostrar resultados
 
 ### 6.2 Hooks Personalizados
 - `useIsMobile`: Detección de dispositivos móviles
@@ -172,7 +175,10 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
   - Permite marcar cartas como confirmadas, descartadas o posibles
   - Descarta automáticamente las cartas que tiene el jugador y las sobrantes
   - Interfaz adaptable en dispositivos móviles
-
+- **DiceRoller**: Componente para lanzar y mostrar dados
+  - Visualización de dados con puntos
+  - Animación de lanzamiento
+  - Control de cuándo se pueden lanzar dados
 
 ### 6.4 Estilos
 - CSS modular por componente
@@ -213,9 +219,11 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
   - `countdownUpdate`: Actualización del contador de inicio
   - `gameStart`: Inicio de la partida
   - `playerCards`: Distribución de cartas a los jugadores
+  - `diceRolled`: Resultado de tirar los dados y movimientos válidos
+  - `playersMoved`: Notificación de movimiento de un jugador
+  - `moveSuccess`: Confirmación de un movimiento exitoso
   - `gameEnd`: Finalización de la partida
   - `leaveGame`: Abandono explícito de una partida
-
 
 ### 7.4 Interfaz durante el juego
 - **Visualización de cartas**: Componente para ver las cartas asignadas al jugador
@@ -232,6 +240,23 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
   - Turno normal: Muestra el nombre del jugador actual
   - Mi turno: Destaca visualmente y muestra un botón para pasar turno
   
+### 7.6 Sistema de Dados y Movimiento
+- **Lanzamiento de dados**: Los jugadores pueden lanzar dos dados durante su turno
+- **Visualización de dados**: Representación gráfica del resultado de lanzamiento
+- **Restricciones de lanzamiento**: Solo se puede lanzar una vez por turno
+- **Algoritmo de movimiento**:
+  - Utiliza BFS (búsqueda en anchura) para encontrar todos los movimientos válidos
+  - Calcula automáticamente las casillas donde el jugador puede moverse según el resultado de los dados
+  - Maneja casos especiales como puertas entre habitaciones
+- **Validación de movimientos**:
+  - Verifica que el movimiento esté dentro del rango permitido por los dados
+  - Comprueba que no haya obstáculos (paredes) en el camino
+  - Permite el uso de puertas para moverse entre habitaciones
+- **Visualización de movimientos válidos**:
+  - Las casillas donde el jugador puede moverse se destacan visualmente
+- **Animación de movimiento**:
+  - Animación visual cuando un jugador se mueve por el tablero
+  - Cálculo y visualización de la ruta óptima entre la posición inicial y final
 
 ## 🐳 8. Docker
 
@@ -332,25 +357,24 @@ npm start
 
 ## 📷 11. Capturas de Pantalla
 
-### 12.1 Página de Inicio
+### 11.1 Página de Inicio
 ![home-1](https://github.com/user-attachments/assets/526330b3-b676-40ed-a988-379921742dd4)
 ![home-2](https://github.com/user-attachments/assets/78563d1c-2d44-46c4-9465-d622b74a9f73)
 ![home-3](https://github.com/user-attachments/assets/876bd374-8307-429c-9a41-dc619cf7f206)
 ![home-4](https://github.com/user-attachments/assets/d8211a83-abfc-4089-9270-d6744c5f5000)
 
-
-### 12.2 Interfaz de Juego
+### 11.2 Interfaz de Juego
 ![game-1](https://github.com/user-attachments/assets/54e4fa6d-9fc3-4f35-8561-4155fa812c71)
 ![game-2](https://github.com/user-attachments/assets/ebba0655-37eb-42bf-8bb0-3712b18606c1)
 ![game-3](https://github.com/user-attachments/assets/3e586cc5-7e48-47d3-88be-c0dbc8a4943a)
-
-
+![game-4](https://i.imgur.com/your-dice-image.png)
+![game-5](https://i.imgur.com/your-movement-image.png)
 
 ## 🔮 12. Consideraciones Futuras
 
-- Implementación de lógica completa de juego con turnos
+- Implementación de lógica completa de juego con acusaciones
 - Sistema de acusaciones y suposiciones
-- Mejora del tablero con movimientos de jugadores
+- Mejoras adicionales al tablero con más interactividad
 - Persistencia de partidas en base de datos
 - Implementación de chat durante la partida
 - Sistema de estadísticas y ranking de jugadores
