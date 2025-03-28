@@ -1,6 +1,7 @@
 .game-room {
   display: flex;
   overflow: hidden;
+  background-color: var(--color-primary-dark);
 }
 
 .game-room.mobile {

@@ -1,6 +1,7 @@
 import { getCards } from "../utils/game.js";
 import { getBoard } from "../utils/game.js";
 import { getCharacters } from "../utils/game.js";
+import { createDoorPositionsMap, findValidMoves } from "../utils/board.js";
 export default class GameStateManager {
   constructor() {
     this.games = new Map();
@@ -310,5 +311,63 @@ export default class GameStateManager {
 
     const game = this.getGame(gameId);
     return game.canRollDice;
+  }
+
+  getValidMoves(gameId, playerId) {
+    if (!this.hasGame(gameId) || !this.isPlayerTurn(gameId, playerId)) {
+      return [];
+    }
+
+    const game = this.getGame(gameId);
+    const player = game.players.get(playerId);
+
+    if (!player || !game.diceResult) {
+      return [];
+    }
+
+    const { position } = player;
+    const maxSteps = game.diceResult;
+    const board = game.board;
+
+    const doorPositions = createDoorPositionsMap(board);
+
+    return findValidMoves(position, maxSteps, board, doorPositions);
+  }
+
+  movePlayer(gameId, playerId, targetPosition) {
+    if (!this.hasGame(gameId) || !this.isPlayerTurn(gameId, playerId)) {
+      return { success: false, message: "No es tu turno" };
+    }
+
+    const game = this.getGame(gameId);
+    const player = game.players.get(playerId);
+
+    if (!player) {
+      return { success: false, message: "Jugador no encontrado" };
+    }
+
+    // Verificar que el movimiento es válido
+    const validMoves = this.getValidMoves(gameId, playerId);
+    const isValidMove = validMoves.some(move =>
+      move.row === targetPosition.row && move.column === targetPosition.column
+    );
+
+    if (!isValidMove) {
+      return { success: false, message: "Movimiento no válido" };
+    }
+
+    // Encontrar el camino para animación
+    const movePath = validMoves.find(move =>
+      move.row === targetPosition.row && move.column === targetPosition.column
+    ).path;
+
+    // Actualizar posición del jugador
+    player.position = targetPosition;
+
+    // Movimiento exitoso
+    return {
+      success: true,
+      path: movePath
+    };
   }
 }

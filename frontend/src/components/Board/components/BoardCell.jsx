@@ -1,7 +1,7 @@
 import '../styles/BoardCell.css';
 import PlayerToken from './PlayerToken';
 
-const BoardCell = ({ row, column, boardData, players }) => {
+const BoardCell = ({ row, column, boardData, players, isHighlighted, isInPath, onClick }) => {
   const isWall = boardData.rooms.some(room =>
     room.walls.some(wall => wall.row === row && wall.column === column)
   );
@@ -19,15 +19,21 @@ const BoardCell = ({ row, column, boardData, players }) => {
     'board-cell',
     isWall ? 'wall' : '',
     door ? 'door' : '',
+    isHighlighted ? 'valid-move' : '',
+    isInPath ? 'in-path' : '',
+    door && isHighlighted ? 'door-valid-move' : '',
     roomInfo ? `room-${roomInfo.name.toLowerCase().replace(/\s+/g, '-')}` : ''
   ].filter(Boolean).join(' ');
 
   return (
-    <button className={cellClasses}>
+    <button
+      className={cellClasses}
+      onClick={onClick}
+    >
       {players &&
         players.map(player => {
-          if (player.position.row === row && player.position.column === column) {
-            return <PlayerToken key={player.character} player={player} />;
+          if (player.position && player.position.row === row && player.position.column === column) {
+            return <PlayerToken key={player.id || player.username} player={player} />;
           }
           return null;
         })

@@ -7,12 +7,7 @@
   transition: all 0.2s;
   background-color: inherit;
   padding: 0;
-  cursor: pointer;
-}
-
-.board-cell:focus {
-  outline: 2px solid var(--color-accent-yellow);
-  z-index: 10;
+  pointer-events: none;
 }
 
 .board-cell.wall {
@@ -25,4 +20,29 @@
   background-color: rgba(234, 178, 8, 0.2);
   border: 2px solid #eab20865;
   box-shadow: 0 0 15px rgba(234, 179, 8, 0.3), inset 0 0 8px rgba(234, 179, 8, 0.3);
+}
+
+.valid-move {
+  background-color: rgba(255, 204, 0, 0.3);
+  cursor: pointer;
+  pointer-events: auto;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.door-valid-move {
+  background-color: rgba(0, 255, 0, 0.3);
+}
+
+.valid-move:hover {
+  background-color: rgba(255, 204, 0, 0.5);
+}
+
+.in-path {
+  animation: highlightPath 0.6s ease-in-out forwards;
+}
+
+@keyframes highlightPath {
+  0% { background-color: rgba(255, 255, 255, 0.1); }
+  50% { background-color: rgba(255, 204, 0, 0.6); }
+  100% { background-color: rgba(255, 255, 255, 0.1); }
 }

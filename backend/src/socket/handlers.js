@@ -114,7 +114,43 @@ export const setupSocketHandlers = (io) => {
       }
 
       const { diceResult1, diceResult2 } = gameStateManager.rollDice(gameId);
-      io.to(gameId).emit('diceRolled', { diceResult: [diceResult1, diceResult2] });
+      const validMoves = gameStateManager.getValidMoves(gameId, userId);
+      console.log(validMoves);
+      io.to(gameId).emit('diceRolled', { diceResult: [diceResult1, diceResult2], validMoves });
     });
+
+    socket.on('movePlayer', (targetPosition) => {
+      if (gameStateManager.getGameState(gameId) !== 'playing') {
+        socket.emit('error', 'El juego no está en curso');
+        return;
+      }
+
+      if (!gameStateManager.isPlayerTurn(gameId, userId)) {
+        socket.emit('error', 'No es tu turno');
+        return;
+      }
+
+      console.log('Validando movimiento:', targetPosition);
+
+      // Procesar el movimiento
+      const result = gameStateManager.movePlayer(gameId, userId, targetPosition);
+
+      if (!result.success) {
+        socket.emit('error', result.message);
+        return;
+      }
+
+      // Notificar a todos los jugadores del movimiento
+      const players = gameStateManager.getPlayers(gameId);
+      io.to(gameId).emit('playersMoved', {
+        players,
+        movedPlayer: userId,
+        path: result.path
+      });
+
+      // Si el movimiento fue exitoso, enviar un mensaje de éxito
+      socket.emit('moveSuccess');
+    });
+
   });
 };

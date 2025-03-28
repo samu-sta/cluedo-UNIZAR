@@ -42,7 +42,12 @@ const GameRoom = ({ user }) => {
     rollDice,
     diceResult,
     sendReady,
-    leaveGame
+    leaveGame,
+    validMoves,
+    isMoving,
+    hasRolled,
+    movePlayer,
+    currentPath
   } = useGameSocket(gameId);
 
 
@@ -111,6 +116,12 @@ const GameRoom = ({ user }) => {
             onReady={sendReady}
             onLeaveGame={handleLeaveGame}
             players={players}
+            validMoves={validMoves}
+            isMyTurn={isMyTurn}
+            isMoving={isMoving}
+            movePlayer={movePlayer}
+            currentPath={currentPath}
+            hasRolled={hasRolled}
           />
         </main>
         <PlayerCards cards={playerCards} leftoverCards={leftoverCards} />

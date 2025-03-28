@@ -18,6 +18,11 @@ export function useGameSocket(gameId) {
   const [diceResult, setDiceResult] = useState(null);
   const user = JSON.parse(localStorage.getItem('user'));
 
+  const [validMoves, setValidMoves] = useState([]);
+  const [currentPath, setCurrentPath] = useState(null);
+  const [isMoving, setIsMoving] = useState(false);
+  const [hasRolled, setHasRolled] = useState(false);
+
 
 
   const socketRef = useRef(null);
@@ -93,7 +98,12 @@ export function useGameSocket(gameId) {
 
         socketInstance.on('turnUpdate', ({ currentTurn }) => {
           setCurrentTurn(currentTurn);
-          setIsMyTurn(user && currentTurn.playerId === user.id);
+          const isNowMyTurn = user && currentTurn.playerId === user.id;
+          setIsMyTurn(isNowMyTurn);
+          if (!isNowMyTurn) {
+            setValidMoves([]);
+            setCurrentPath(null);
+          }
         });
 
         socketInstance.on('gameEnd', ({ reason, winner }) => {
@@ -103,13 +113,32 @@ export function useGameSocket(gameId) {
           setEndReason(reason);
         });
 
-        socketInstance.on('diceRolled', ({ diceResult }) => {
+        socketInstance.on('diceRolled', ({ diceResult, validMoves }) => {
           setDiceResult(diceResult);
+          console.log('Valid movesddd:', validMoves);
+          setValidMoves(validMoves);
+        });
+
+        socketInstance.on('playersMoved', ({ players, movedPlayer, path }) => {
+          setPlayers(players);
+
+          if (movedPlayer === user.id) {
+            // Si soy yo quien se mueve, mostrar animación
+            setCurrentPath(path);
+            animateMovement(path);
+          }
+        });
+
+        socketInstance.on('moveSuccess', () => {
+          // Limpiar los movimientos válidos después de moverse
+          setValidMoves([]);
+          setHasRolled(true);
         });
 
         socketInstance.on('error', (error) => {
           setError(typeof error === 'string' ? error : 'Error de comunicación');
         });
+
       } catch (err) {
         setError('Error de conexión al servidor');
         setLoading(false);
@@ -134,9 +163,38 @@ export function useGameSocket(gameId) {
   const passTurn = () => {
     const socketInstance = socketRef.current;
     if (socketInstance && isMyTurn) {
+      setValidMoves([]);
       socketInstance.emit('passTurn');
     }
   };
+
+  const animateMovement = (path) => {
+    if (!path || path.length < 2) return;
+
+    setIsMoving(true);
+    let step = 0;
+
+    const interval = setInterval(() => {
+      step++;
+      if (step >= path.length) {
+        clearInterval(interval);
+        setIsMoving(false);
+        setCurrentPath(null);
+      }
+    }, 300); // 300ms por paso
+  };
+
+  const movePlayer = (position) => {
+    const socketInstance = socketRef.current;
+    if (socketInstance && isMyTurn && !isMoving) {
+      socketInstance.emit('movePlayer', position);
+    }
+  };
+
+  const handleRollDice = () => {
+    socketRef.current?.emit('rollDice')
+    setHasRolled(true);
+  }
 
   return {
     players,
@@ -153,7 +211,12 @@ export function useGameSocket(gameId) {
     endReason,
     leaveGame,
     diceResult,
-    rollDice: () => socketRef.current?.emit('rollDice'),
+    rollDice: handleRollDice,
+    validMoves,
+    isMoving,
+    movePlayer,
+    hasRolled,
+    currentPath,
     playerCards,
     leftoverCards,
     requestCards: () => socketRef.current?.emit('requestCards')
