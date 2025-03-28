@@ -62,9 +62,11 @@ export const initGame = async () => {
     }
 
     const cardsData = [
-      ...CARDS_DATA.characters.map(name => ({
+      ...CARDS_DATA.characters.map(character => ({
         gameId: game.id,
-        name,
+        name: character.name,
+        colorHex: character.color,
+        textColorHex: character.textColor,
         type: 'character'
       })),
 

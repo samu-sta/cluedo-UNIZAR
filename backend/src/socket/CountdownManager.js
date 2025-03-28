@@ -1,4 +1,4 @@
-const COUNTDOWN_TIME = 10;
+const COUNTDOWN_TIME = 2;
 const COUNT_INTERVAL = 1000;
 
 export default class CountdownManager {
@@ -68,6 +68,8 @@ export default class CountdownManager {
       totalPlayers: this.gameStateManager.getGame(gameId).turnOrder.length
     };
 
-    this.io.to(gameId).emit('gameStart', { currentTurn });
+    const players = this.gameStateManager.getPlayers(gameId);
+
+    this.io.to(gameId).emit('gameStart', { currentTurn, players });
   }
 }

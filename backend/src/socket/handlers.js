@@ -7,7 +7,7 @@ export const gameStateManager = new GameStateManager();
 export const setupSocketHandlers = (io) => {
   const countdownManager = new CountdownManager(io, gameStateManager);
 
-  io.on('connection', (socket) => {
+  io.on('connection', async (socket) => {
     const { gameId, userId, username } = socket;
 
     if (gameStateManager.getGameState(gameId) === 'playing') {
@@ -20,7 +20,7 @@ export const setupSocketHandlers = (io) => {
 
     socket.join(gameId);
 
-    const isNewPlayer = gameStateManager.addPlayer(gameId, userId, { username });
+    const isNewPlayer = await gameStateManager.addPlayer(gameId, userId, { username });
 
     if (!isNewPlayer) return;
 
@@ -29,6 +29,7 @@ export const setupSocketHandlers = (io) => {
     });
 
     socket.to(gameId).emit('playerJoined', { username });
+    console.log(`Jugadores en partida ${gameId}:`, gameStateManager.getPlayers(gameId));
 
     if (gameStateManager.getPlayerCount(gameId) >= 2) {
       countdownManager.startCountdown(gameId);

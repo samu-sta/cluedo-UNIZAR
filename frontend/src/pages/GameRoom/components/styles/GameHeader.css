@@ -1,9 +1,43 @@
 .game-header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between; /* Cambiar a space-between para distribuir elementos */
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.game-header.mobile{
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Nueva sección para la información del personaje */
+.character-info {
+  display: flex;
   align-items: center;
 }
 
+.player-character {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.character-label {
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.character-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  border: 2px solid white;
+}
+
+/* Mantener los estilos existentes */
 .game-info {
   display: flex;
   flex-wrap: wrap;
@@ -56,11 +90,10 @@
   border: 1px solid rgba(0, 230, 118, 0.8);
 }
 
-.btn.leave-game{
+.btn.leave-game {
   background-color: inherit;
   color: var(--color-accent-red);
   text-decoration: underline;
   font-size: 0.9rem;
   flex: 0 1 auto;
-  
 }

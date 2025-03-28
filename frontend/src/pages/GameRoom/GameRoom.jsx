@@ -24,8 +24,7 @@ const GameRoom = ({ user }) => {
   }, [user, navigate]);
 
   const {
-    /*  players, */
-
+    players,
     loading,
     error,
     countdown,
@@ -80,7 +79,7 @@ const GameRoom = ({ user }) => {
       <main className={`game-room ${isMobile ? 'mobile' : ''}`}>
         {/*  <PlayerList players={players} /> */}
         <main className={`game-content ${isMobile ? 'mobile' : ''}`}>
-          <GameHeader gameId={gameId} gameState={gameState} onLeaveGame={handleLeaveGame} />
+          <GameHeader gameId={gameId} gameState={gameState} onLeaveGame={handleLeaveGame} players={players} />
           {gameState === 'playing' && (
             <TurnIndicator
               currentTurn={currentTurn}
@@ -94,6 +93,7 @@ const GameRoom = ({ user }) => {
             gameInfo={gameInfo}
             onReady={sendReady}
             onLeaveGame={handleLeaveGame}
+            players={players}
           />
         </main>
         <PlayerCards cards={playerCards} leftoverCards={leftoverCards} />

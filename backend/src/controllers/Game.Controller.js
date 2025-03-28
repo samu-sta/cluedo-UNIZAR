@@ -30,6 +30,7 @@ class GameController {
       const user = req.account;
       const gameId = uuidv4();
 
+
       this.activeGames.set(gameId, {
         players: [{
           username: user.username,

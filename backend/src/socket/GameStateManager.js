@@ -1,16 +1,31 @@
 import { getCards } from "../utils/game.js";
+import { getBoard } from "../utils/game.js";
+import { getCharacters } from "../utils/game.js";
 export default class GameStateManager {
   constructor() {
     this.games = new Map();
   }
 
-  initGame(gameId) {
+  async initGame(gameId) {
+    let board = null;
+    try {
+      board = await getBoard();
+    }
+    catch (error) {
+      console.log(error);
+    }
+
     if (!this.games.has(gameId)) {
       this.games.set(gameId, {
         players: new Map(),
         timer: null,
         countdown: null,
-        state: 'waiting'
+        state: 'waiting',
+        board,
+        solution: null,
+        playerCards: null,
+        leftoverCards: null,
+        diceResult: null
       });
     }
     return this.games.get(gameId);
@@ -24,8 +39,8 @@ export default class GameStateManager {
     return this.games.has(gameId);
   }
 
-  addPlayer(gameId, userId, playerData) {
-    const game = this.initGame(gameId);
+  async addPlayer(gameId, userId, playerData) {
+    const game = await this.initGame(gameId);
     if (!game.players.has(userId)) {
       game.players.set(userId, playerData);
       return true;
@@ -80,6 +95,9 @@ export default class GameStateManager {
     const game = this.getGame(gameId);
     game.solution = solution;
     game.playerCards = playerCards;
+
+    this.setupPlayerPositions(gameId);
+    await this.setPlayerCharacters(gameId);
     this.setupPlayerTurns(gameId);
     return true;
   }
@@ -221,5 +239,51 @@ export default class GameStateManager {
       turnIndex: game.currentTurnIndex,
       totalPlayers: game.turnOrder.length
     };
+  }
+
+  setupPlayerPositions(gameId) {
+    const game = this.getGame(gameId);
+
+    const startingPositions = [
+      { row: 1, column: 7 },
+      { row: 1, column: 13 },
+      { row: 10, column: 18 },
+      { row: 13, column: 1 },
+      { row: 18, column: 7 },
+      { row: 18, column: 13 }
+    ];
+
+    let posIndex = 0;
+    const playerIds = [...game.players.keys()];
+
+    playerIds.forEach(playerId => {
+      game.players.get(playerId).position = startingPositions[posIndex++];
+    });
+  }
+
+  async setPlayerCharacters(gameId) {
+    const game = this.getGame(gameId);
+    if (!game) return;
+
+    try {
+      const characters = await getCharacters();
+      this.assingCharactersToPlayers(game, characters);
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  assingCharactersToPlayers(game, characters) {
+    const availableCharacters = [...characters];
+    const playerIds = [...game.players.keys()];
+
+    playerIds.forEach(playerId => {
+      const randomIndex = Math.floor(Math.random() * availableCharacters.length);
+      const character = availableCharacters[randomIndex];
+      availableCharacters.splice(randomIndex, 1);
+
+      game.players.get(playerId).character = character;
+    });
   }
 }

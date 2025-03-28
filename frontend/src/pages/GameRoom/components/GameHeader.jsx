@@ -1,13 +1,17 @@
-import { useState } from 'react';
 import { FaCheck } from 'react-icons/fa';
 import { LuCopy } from "react-icons/lu";
 import useCopyGameId from '../../../hooks/useCopyGameId';
 import LeaveGameModal from './LeaveGameModal';
 import useLeaveGameModal from '../../../hooks/useLeaveGameModal';
+import useIsMobile from '../../../hooks/useIsMobile';
 import './styles/GameHeader.css';
 
-const GameHeader = ({ gameId, gameState, onLeaveGame }) => {
+const maxWidth = 430;
+
+const GameHeader = ({ gameId, gameState, onLeaveGame, players }) => {
   const { copied, handleCopyGameId } = useCopyGameId({ gameId });
+  const isMobile = useIsMobile(maxWidth);
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const {
     showModal,
@@ -16,9 +20,34 @@ const GameHeader = ({ gameId, gameState, onLeaveGame }) => {
     handleConfirmLeave
   } = useLeaveGameModal({ onLeaveGame });
 
+  const currentPlayer = players.find(player => player.username === user?.username);
+  const character = currentPlayer?.character || null;
+  // Usar directamente los colores del objeto player en lugar de mapas hardcodeados
+  console.log(players);
+
+  const characterName = character?.name;
+  const characterBackground = character?.colorHex || '#000000';
+  const characterTextColor = character?.textColorHex || '#ffffff';
+
   return (
     <>
-      <header className="game-header">
+      <header className={`game-header ${isMobile ? 'mobile' : ''}`}>
+        {/* Sección del personaje (izquierda) */}
+        <section>
+          {character && (
+            <article
+              className="character-badge"
+              style={{
+                backgroundColor: characterBackground,
+                color: characterTextColor
+              }}
+            >
+              {characterName}
+            </article>
+          )}
+        </section>
+
+        {/* Sección de botones y estado (derecha) */}
         <section className="game-info">
           {gameState !== 'playing' &&
             <button

@@ -22,6 +22,15 @@ const CardModel = sequelize.define('Card', {
   type: {
     type: DataTypes.ENUM('weapon', 'character', 'room'),
     allowNull: false
+  },
+  colorHex: {
+    type: DataTypes.STRING(7),
+    allowNull: true
+  },
+  textColorHex: {
+    type: DataTypes.STRING(7),
+    allowNull: true,
+    defaultValue: '#FFFFFF'
   }
 }, {
   tableName: 'Card',

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import BoardCell from './components/BoardCell';
 import RoomLabel from './components/RoomLabel';
+import PlayerToken from './components/PlayerToken';
 import LoadingBoard from './components/LoadingBoard';
 import WaitingRoom from './components/WaitingRoom';
 import './styles/Board.css';
 
-export const Board = ({ countdown, gameState, gameInfo }) => {
+export const Board = ({ countdown, gameState, gameInfo, players }) => {
   const [boardData, setBoardData] = useState(null);
 
   useEffect(() => {
@@ -40,6 +41,7 @@ export const Board = ({ countdown, gameState, gameInfo }) => {
                 row={row}
                 column={column}
                 boardData={boardData}
+                players={players}
               />
             );
           })}

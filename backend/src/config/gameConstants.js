@@ -37,8 +37,8 @@ export const WALLS_CONFIG = {
     { row: 6, column: 1 }, { row: 6, column: 2 }, { row: 6, column: 3 }, { row: 6, column: 4 },
     { row: 6, column: 5 }, { row: 6, column: 6 },
     { row: 10, column: 6 },
-    { row: 11, column: 1 }, { row: 11, column: 2 },
-    { row: 11, column: 5 }, { row: 11, column: 6 }
+    { row: 12, column: 1 }, { row: 12, column: 2 },
+    { row: 12, column: 5 }, { row: 12, column: 6 }, { row: 11, column: 6 }
   ],
 
   // Borde inferior izquierdo
@@ -103,8 +103,8 @@ export const DOORS_CONFIG = {
     { row: 7, column: 6 },
     { row: 8, column: 6 },
     { row: 9, column: 6 },
-    { row: 11, column: 4 },
-    { row: 11, column: 3 }
+    { row: 12, column: 4 },
+    { row: 12, column: 3 }
 
   ],
   'Sala de Billar': [
@@ -140,12 +140,36 @@ export const DOORS_CONFIG = {
 
 export const CARDS_DATA = {
   characters: [
-    'Coronel Mostaza',
-    'Profesor Ciruela',
-    'Señora Blanco',
-    'Señorita Escarlata',
-    'Señor Verde',
-    'Señora Azulino'
+    {
+      name: 'Coronel Mostaza',
+      color: '#e0c100',
+      textColor: '#000000'
+    },
+    {
+      name: 'Profesor Ciruela',
+      color: '#8b008b',
+      textColor: '#ffffff'
+    },
+    {
+      name: 'Señora Blanco',
+      color: '#ffffff',
+      textColor: '#000000'
+    },
+    {
+      name: 'Señorita Escarlata',
+      color: '#ff2400',
+      textColor: '#ffffff'
+    },
+    {
+      name: 'Señor Verde',
+      color: '#008000',
+      textColor: '#ffffff'
+    },
+    {
+      name: 'Señora Azulino',
+      color: '#4169e1',
+      textColor: '#ffffff'
+    }
   ],
   weapons: [
     'Candelabro',

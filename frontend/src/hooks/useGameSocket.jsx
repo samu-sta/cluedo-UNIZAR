@@ -16,6 +16,7 @@ export function useGameSocket(gameId, user) {
   const [currentTurn, setCurrentTurn] = useState(null);
   const [isMyTurn, setIsMyTurn] = useState(false);
 
+
   const socketRef = useRef(null);
   const joinedGameRef = useRef(false);
 
@@ -78,7 +79,9 @@ export function useGameSocket(gameId, user) {
           setLeftoverCards(leftoverCards);
         });
 
-        socketInstance.on('gameStart', ({ currentTurn }) => {
+        socketInstance.on('gameStart', ({ currentTurn, players }) => {
+          setPlayers(players);
+          console.log('player Id: ' + currentTurn.playerId)
           setCountdown(null);
           setGameState('playing');
           socketInstance.emit('requestCards');

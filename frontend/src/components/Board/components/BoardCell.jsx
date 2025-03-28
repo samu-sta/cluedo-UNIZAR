@@ -1,6 +1,7 @@
 import '../styles/BoardCell.css';
+import PlayerToken from './PlayerToken';
 
-const BoardCell = ({ row, column, boardData }) => {
+const BoardCell = ({ row, column, boardData, players }) => {
   const isWall = boardData.rooms.some(room =>
     room.walls.some(wall => wall.row === row && wall.column === column)
   );
@@ -22,7 +23,16 @@ const BoardCell = ({ row, column, boardData }) => {
   ].filter(Boolean).join(' ');
 
   return (
-    <button className={cellClasses} />
+    <button className={cellClasses}>
+      {players &&
+        players.map(player => {
+          if (player.position.row === row && player.position.column === column) {
+            return <PlayerToken key={player.character} player={player} />;
+          }
+          return null;
+        })
+      }
+    </button>
   );
 };
 
