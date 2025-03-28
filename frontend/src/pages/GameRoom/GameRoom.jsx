@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useGameSocket } from '../../hooks/useGameSocket';
 import PlayerList from './components/PlayerList';
 import GameEndedModal from './components/GameEndedModal';
@@ -11,11 +11,13 @@ import './styles/GameRoom.css';
 import PlayerCards from '../../components/PlayerCards/PlayerCards';
 import DeductionTable from '../../components/deductionTable/DeductionTable';
 import TurnIndicator from './components/TurnIndicator';
+import DiceRoller from './components/DiceRoller';
 
 const GameRoom = ({ user }) => {
   const { gameId } = useParams();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const [canRoll, setCanRoll] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -37,11 +39,17 @@ const GameRoom = ({ user }) => {
     currentTurn,
     isMyTurn,
     passTurn,
+    rollDice,
+    diceResult,
     sendReady,
     leaveGame
   } = useGameSocket(gameId);
-  console.log('Game state is: ', gameState);
 
+
+
+  useEffect(() => {
+    setCanRoll(gameState === 'playing' && isMyTurn);
+  }, [gameState, isMyTurn]);
 
   const { showEndedModal, toogleEndedModal } = useGameEndedModal(gameState);
 
@@ -81,11 +89,20 @@ const GameRoom = ({ user }) => {
         <main className={`game-content ${isMobile ? 'mobile' : ''}`}>
           <GameHeader gameId={gameId} gameState={gameState} onLeaveGame={handleLeaveGame} players={players} />
           {gameState === 'playing' && (
-            <TurnIndicator
-              currentTurn={currentTurn}
-              isMyTurn={isMyTurn}
-              onPassTurn={passTurn}
-            />
+            <section className={`game-info ${isMobile ? 'mobile' : ''}`}>
+              <TurnIndicator
+                currentTurn={currentTurn}
+                isMyTurn={isMyTurn}
+                onPassTurn={passTurn}
+              />
+              <DiceRoller
+                diceResult={diceResult}
+                rollDice={rollDice}
+                isMyTurn={isMyTurn}
+                canRoll={canRoll}
+                setCanRoll={setCanRoll}
+              />
+            </section>
           )}
           <Board
             countdown={countdown}

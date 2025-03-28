@@ -48,7 +48,7 @@ const GameHeader = ({ gameId, gameState, onLeaveGame, players }) => {
         </section>
 
         {/* Sección de botones y estado (derecha) */}
-        <section className="game-info">
+        <section className="game-info-header">
           {gameState !== 'playing' &&
             <button
               className="btn secondary copy-button"

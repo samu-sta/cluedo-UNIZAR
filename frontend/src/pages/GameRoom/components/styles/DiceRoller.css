@@ -1,0 +1,44 @@
+.dice-roller {
+  background-color: var(--color-primary-light);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.dice-roller.my-turn {
+  background-color: var(--color-accent-yelow-lighter);
+  border-left: 4px solid var(--color-accent-yellow);
+}
+
+.dice-pair {
+  display: flex;
+  gap: 16px;
+}
+
+.dice-pair.rolling {
+  animation: dice-roll 0.6s ease-in-out;
+}
+
+
+
+.roll-dice-btn {
+  min-width: 120px;
+}
+
+.roll-dice-btn.cantRoll {
+  display: none;
+}
+
+@keyframes dice-roll {
+  0% { transform: rotate(0) scale(1); }
+  20% { transform: rotate(-20deg) scale(1.1); }
+  40% { transform: rotate(15deg) scale(0.9); }
+  60% { transform: rotate(-10deg) scale(1.05); }
+  80% { transform: rotate(5deg) scale(0.95); }
+  100% { transform: rotate(0) scale(1); }
+}

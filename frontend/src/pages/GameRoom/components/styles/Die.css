@@ -1,0 +1,94 @@
+.die {
+  background-color: var(--color-background-dice);
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  grid-template-areas: 
+    "a . c"
+    "e g f"
+    "d . b";
+  gap: 1.5px;
+  position: relative;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  margin: 0;
+}
+
+.dot {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-dice-dot);
+  border-radius: 50%;
+  position: absolute;
+  margin: 0;
+}
+
+.dot-1-1 {
+  grid-area: g;
+}
+
+.dot-2-1 {
+  grid-area: a;
+}
+.dot-2-2 {
+  grid-area: b;
+}
+
+.dot-3-1 {
+  grid-area: a;
+}
+.dot-3-2 {
+  grid-area: g;
+}
+.dot-3-3 {
+  grid-area: b;
+}
+
+.dot-4-1 {
+  grid-area: a;
+}
+.dot-4-2 {
+  grid-area: b;
+}
+.dot-4-3 {
+  grid-area: d;
+}
+.dot-4-4 {
+  grid-area: c;
+}
+
+.dot-5-1 {
+  grid-area: a;
+}
+.dot-5-2 {
+  grid-area: b;
+}
+.dot-5-3 {
+  grid-area: d;
+}
+.dot-5-4 {
+  grid-area: c;
+}
+.dot-5-5 {
+  grid-area: g;
+}
+
+.dot-6-1 {
+  grid-area: a;
+}
+.dot-6-2 {
+  grid-area: b;
+}
+.dot-6-3 {
+  grid-area: d;
+}
+.dot-6-4 {
+  grid-area: c;
+}
+.dot-6-5 {
+  grid-area: e;
+}
+.dot-6-6 {
+  grid-area: f;
+}

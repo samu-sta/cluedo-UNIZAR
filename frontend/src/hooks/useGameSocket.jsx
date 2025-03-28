@@ -15,7 +15,9 @@ export function useGameSocket(gameId) {
   const [leftoverCards, setLeftoverCards] = useState([]);
   const [currentTurn, setCurrentTurn] = useState(null);
   const [isMyTurn, setIsMyTurn] = useState(false);
+  const [diceResult, setDiceResult] = useState(null);
   const user = JSON.parse(localStorage.getItem('user'));
+
 
 
   const socketRef = useRef(null);
@@ -101,6 +103,10 @@ export function useGameSocket(gameId) {
           setEndReason(reason);
         });
 
+        socketInstance.on('diceRolled', ({ diceResult }) => {
+          setDiceResult(diceResult);
+        });
+
         socketInstance.on('error', (error) => {
           setError(typeof error === 'string' ? error : 'Error de comunicación');
         });
@@ -146,6 +152,8 @@ export function useGameSocket(gameId) {
     winner,
     endReason,
     leaveGame,
+    diceResult,
+    rollDice: () => socketRef.current?.emit('rollDice'),
     playerCards,
     leftoverCards,
     requestCards: () => socketRef.current?.emit('requestCards')

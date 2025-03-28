@@ -16,6 +16,9 @@
   --color-text-muted: #a0aec0;
   
   --color-background: #f8fafc;
+  --color-background-dice: #fff;
+  --color-dice-dot: #333;
+
   --color-shadow-light: rgba(0, 0, 0, 0.1);
   --color-shadow-medium: rgba(0, 0, 0, 0.2);
 

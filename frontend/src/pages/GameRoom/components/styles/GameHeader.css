@@ -38,7 +38,7 @@
 }
 
 /* Mantener los estilos existentes */
-.game-info {
+.game-info-header {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;

@@ -96,5 +96,25 @@ export const setupSocketHandlers = (io) => {
         io.to(gameId).emit('turnUpdate', { currentTurn });
       }
     });
+
+    socket.on('rollDice', () => {
+      if (gameStateManager.getGameState(gameId) !== 'playing') {
+        socket.emit('error', 'El juego no está en curso');
+        return;
+      }
+
+      if (!gameStateManager.isPlayerTurn(gameId, userId)) {
+        socket.emit('error', 'No es tu turno');
+        return;
+      }
+
+      if (!gameStateManager.getCanRollDice(gameId)) {
+        socket.emit('error', 'Ya lanzaste los dados');
+        return;
+      }
+
+      const { diceResult1, diceResult2 } = gameStateManager.rollDice(gameId);
+      io.to(gameId).emit('diceRolled', { diceResult: [diceResult1, diceResult2] });
+    });
   });
 };

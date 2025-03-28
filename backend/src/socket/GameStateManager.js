@@ -95,6 +95,7 @@ export default class GameStateManager {
     const game = this.getGame(gameId);
     game.solution = solution;
     game.playerCards = playerCards;
+    game.canRollDice = true;
 
     this.setupPlayerPositions(gameId);
     await this.setPlayerCharacters(gameId);
@@ -233,6 +234,8 @@ export default class GameStateManager {
     game.currentTurnIndex = (game.currentTurnIndex + 1) % game.turnOrder.length;
     game.currentTurnPlayer = game.turnOrder[game.currentTurnIndex];
 
+    game.canRollDice = true;
+
     return {
       playerId: game.currentTurnPlayer,
       playerName: this.getCurrentTurnPlayerName(gameId),
@@ -285,5 +288,27 @@ export default class GameStateManager {
 
       game.players.get(playerId).character = character;
     });
+  }
+
+  rollDice(gameId) {
+    if (!this.hasGame(gameId)) return null;
+
+    const game = this.getGame(gameId);
+    const diceResult1 = Math.floor(Math.random() * 6) + 1;
+    const diceResult2 = Math.floor(Math.random() * 6) + 1;
+    game.diceResult = diceResult1 + diceResult2;
+    game.canRollDice = false;
+
+    return {
+      diceResult1,
+      diceResult2
+    }
+  }
+
+  getCanRollDice(gameId) {
+    if (!this.hasGame(gameId)) return null;
+
+    const game = this.getGame(gameId);
+    return game.canRollDice;
   }
 }
