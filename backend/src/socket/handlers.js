@@ -35,26 +35,41 @@ export const setupSocketHandlers = (io) => {
       countdownManager.startCountdown(gameId);
     }
 
-    socket.on('disconnect', () => {
-      console.log(`Usuario desconectado: ${username}`);
+    const handlePlayerLeave = (reason = 'desconexión') => {
+
+      if (gameStateManager.getGameState(gameId) === 'playing') {
+        const result = gameStateManager.handlePlayerLeaveInGame(gameId, userId);
+
+        if (!result.success) return;
+
+        result.nextTurn && io.to(gameId).emit('turnUpdate', { currentTurn: result.nextTurn });
+
+        if (result.shouldEndGame) {
+          gameStateManager.setGameState(gameId, 'ended');
+
+          const endReason = result.remainingPlayers.length === 0
+            ? 'Todos los jugadores han abandonado la partida'
+            : `${username} ha abandonado la partida. Solo queda un jugador.`;
+
+          io.to(gameId).emit('gameEnd', { reason: endReason, winner: result.winner });
+          return;
+        }
+
+        io.to(gameId).emit('playerLeft', { username });
+        return;
+      }
 
       if (!gameStateManager.removePlayer(gameId, userId)) return;
 
       io.to(gameId).emit('playerLeft', { username });
 
-      if (gameStateManager.getGameState(gameId) === 'playing') {
-        gameStateManager.removeGame(gameId);
-        io.to(gameId).emit('gameEnd', { reason: 'Jugador desconectado' });
-        return;
-      }
+      const playerCount = gameStateManager.getPlayerCount(gameId);
+      playerCount < 2 && countdownManager.cancelCountdown(gameId);
+      playerCount === 0 && gameController.deleteGame(gameId);
+    };
 
-      if (gameStateManager.getPlayerCount(gameId) < 2) {
-        countdownManager.cancelCountdown(gameId);
-      }
-
-      if (gameStateManager.getPlayerCount(gameId) === 0) {
-        gameController.deleteGame(gameId);
-      }
+    socket.on('disconnect', () => {
+      handlePlayerLeave('desconexión');
     });
 
     socket.on('requestCards', () => {

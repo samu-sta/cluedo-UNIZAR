@@ -370,4 +370,43 @@ export default class GameStateManager {
       path: movePath
     };
   }
+
+  handlePlayerLeaveInGame(gameId, userId) {
+
+    if (!this.hasGame(gameId) || this.getGameState(gameId) !== 'playing') {
+      return { success: false };
+    }
+
+    const playerCards = this.getPlayerCards(gameId, userId);
+    const isCurrentTurn = this.isPlayerTurn(gameId, userId);
+
+    this.redistributePlayerCards(gameId, userId);
+    this.removePlayer(gameId, userId);
+
+    const nextTurnInfo = isCurrentTurn ? this.nextTurn(gameId) : null;
+
+    const remainingPlayers = this.getPlayers(gameId);
+    const shouldEndGame = remainingPlayers.length < 2;
+    const winner = shouldEndGame &&
+      remainingPlayers.length === 1 ? remainingPlayers[0].username : null;
+
+    return {
+      success: true,
+      redistributedCards: playerCards || [],
+      nextTurn: nextTurnInfo,
+      shouldEndGame,
+      winner,
+      remainingPlayers
+    };
+  }
+
+  redistributePlayerCards(gameId, userId) {
+    const game = this.getGame(gameId);
+    const playerCards = this.getPlayerCards(gameId, userId);
+
+    if (playerCards?.length) {
+      game.leftoverCards = [...(game.leftoverCards || []), ...playerCards];
+      delete game.playerCards?.[userId];
+    }
+  }
 }

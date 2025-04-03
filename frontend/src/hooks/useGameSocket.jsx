@@ -23,10 +23,13 @@ export function useGameSocket(gameId) {
   const [isMoving, setIsMoving] = useState(false);
   const [hasRolled, setHasRolled] = useState(false);
 
-
-
+  const gameStateRef = useRef('waiting');
   const socketRef = useRef(null);
   const joinedGameRef = useRef(false);
+
+  useEffect(() => {
+    gameStateRef.current = gameState;
+  }, [gameState]);
 
   useEffect(() => {
     if (!gameId) {
@@ -70,6 +73,9 @@ export function useGameSocket(gameId) {
 
         socketInstance.on('playerLeft', ({ username }) => {
           setPlayers(prev => prev.filter(player => player.username !== username));
+          if (gameStateRef.current === 'playing') {
+            socketInstance.emit('requestCards');
+          }
         });
 
         socketInstance.on('countdownUpdate', ({ seconds }) => {
@@ -153,7 +159,6 @@ export function useGameSocket(gameId) {
 
   const leaveGame = () => {
     if (socketRef.current) {
-      socketRef.current.emit('leaveGame');
       closeSocket();
       joinedGameRef.current = false;
       socketRef.current = null;
