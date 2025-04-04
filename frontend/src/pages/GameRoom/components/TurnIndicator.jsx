@@ -1,6 +1,6 @@
 import './styles/TurnIndicator.css';
 
-const TurnIndicator = ({ currentTurn, isMyTurn, onPassTurn }) => {
+const TurnIndicator = ({ currentTurn, isMyTurn, onPassTurn, onMakeAccusation }) => {
   return (
     <article className={`turn-indicator ${isMyTurn ? 'my-turn' : ''}`}>
       <header className="turn-info">
@@ -18,6 +18,13 @@ const TurnIndicator = ({ currentTurn, isMyTurn, onPassTurn }) => {
             onClick={onPassTurn}
           >
             Pasar turno
+          </button>
+
+          <button
+            className="btn danger"
+            onClick={onMakeAccusation}
+          >
+            Hacer Acusación
           </button>
         </section>
       )}

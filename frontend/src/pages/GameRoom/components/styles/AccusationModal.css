@@ -1,0 +1,55 @@
+.accusation-modal {
+  background-color: var(--color-background);
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.accusation-modal h2 {
+  margin: 0;
+}
+
+.accusation-warning {
+  color: var(--color-accent-red);
+  font-weight: bold;
+  padding: 0.75rem;
+  border: 1px solid var(--color-accent-red);
+  border-radius: 4px;
+  background-color: var(--color-background-red);
+  margin: 0;
+}
+
+.accusation-selectors {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.accusation-section h3 {
+  margin: 0;
+  color: var(--color-accent-yellow);
+}
+
+.accusation-section select {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 4px;
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+.accusation-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.accusation-actions button {
+  min-width: 120px;
+}

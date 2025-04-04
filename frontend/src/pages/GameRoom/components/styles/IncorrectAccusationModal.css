@@ -1,0 +1,36 @@
+.incorrect-accusation-modal {
+  background-color: var(--color-background);
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 0.3s ease-out;
+  text-align: center;
+}
+
+.incorrect-accusation-content {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: var(--color-primary-dark);
+  border: 1px solid var(--color-accent-red);
+  border-radius: 8px;
+}
+
+.incorrect-icon {
+  font-size: 4rem;
+  color: var(--color-accent-red);
+  margin: 0;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.incorrect-accusation-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.incorrect-accusation-actions button {
+  min-width: 180px;
+}

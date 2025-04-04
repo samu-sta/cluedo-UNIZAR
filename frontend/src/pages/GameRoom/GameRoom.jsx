@@ -7,11 +7,13 @@ import useGameEndedModal from '../../hooks/useGameEndedModal';
 import useIsMobile from '../../hooks/useIsMobile';
 import GameHeader from './components/GameHeader';
 import Board from '../../components/Board/Board';
+import AccusationModal from './components/AccusationModal';
 import './styles/GameRoom.css';
 import PlayerCards from '../../components/PlayerCards/PlayerCards';
 import DeductionTable from '../../components/deductionTable/DeductionTable';
 import TurnIndicator from './components/TurnIndicator';
 import DiceRoller from './components/DiceRoller';
+import IncorrectAccusationModal from './components/IncorrectAccusationModal';
 
 const GameRoom = ({ user }) => {
   const { gameId } = useParams();
@@ -46,6 +48,13 @@ const GameRoom = ({ user }) => {
     validMoves,
     isMoving,
     hasRolled,
+    makeAccusation,
+    showAccusationModal,
+    setShowAccusationModal,
+    solution,
+    incorrectAccusation,
+    incorrectAccusationMessage,
+    resetIncorrectAccusation,
     movePlayer,
     currentPath
   } = useGameSocket(gameId);
@@ -63,10 +72,23 @@ const GameRoom = ({ user }) => {
     navigate('/games');
   };
 
+  const handleShowAccusation = () => {
+    setShowAccusationModal(true);
+  };
+
+  const handleCloseAccusation = () => {
+    setShowAccusationModal(false);
+  };
+
+  const handleSubmitAccusation = (accusation) => {
+    makeAccusation(accusation);
+    setShowAccusationModal(false);
+  };
+
   if (loading) {
     return (
       <main className="game-loading">
-        <div className="loading-spinner large"></div>
+        <figure className="loading-spinner large"></figure>
         <h2>Conectando a la partida...</h2>
       </main>
     );
@@ -99,6 +121,7 @@ const GameRoom = ({ user }) => {
                 currentTurn={currentTurn}
                 isMyTurn={isMyTurn}
                 onPassTurn={passTurn}
+                onMakeAccusation={handleShowAccusation}
               />
               <DiceRoller
                 diceResult={diceResult}
@@ -128,12 +151,29 @@ const GameRoom = ({ user }) => {
         {gameState === 'playing' && <DeductionTable gameInfo={gameInfo} playerCards={playerCards} leftoverCards={leftoverCards} />}
       </main>
 
+      <AccusationModal
+        isOpen={showAccusationModal}
+        onClose={handleCloseAccusation}
+        onSubmit={handleSubmitAccusation}
+        gameInfo={gameInfo}
+      />
+
       <GameEndedModal
         isOpen={showEndedModal}
         winner={winner}
         reason={endReason}
         onLeaveGame={handleLeaveGame}
         toogleEndedModal={toogleEndedModal}
+        solution={solution}
+      />
+
+      <IncorrectAccusationModal
+        isOpen={incorrectAccusation}
+        message={incorrectAccusationMessage}
+        onLeaveGame={() => {
+          resetIncorrectAccusation();
+          handleLeaveGame();
+        }}
       />
     </>
   );

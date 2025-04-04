@@ -2,7 +2,7 @@ import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import './styles/GameEndedModal.css';
 
-const GameEndedModal = ({ isOpen, winner, reason, toogleEndedModal }) => {
+const GameEndedModal = ({ isOpen, winner, reason, solution, toogleEndedModal }) => {
   const navigate = useNavigate();
 
   if (!isOpen) return null;
@@ -20,33 +20,48 @@ const GameEndedModal = ({ isOpen, winner, reason, toogleEndedModal }) => {
   return createPortal(
     <div className="modal-overlay">
       <article className="modal-container game-ended">
-        <div className="modal-content">
-          <h2>Partida finalizada</h2>
+        <h2>Partida finalizada</h2>
 
-          {winner ? (
-            <div className="winner-section">
-              <p className="winner-label">Ganador:</p>
-              <p className="winner-name">{winner}</p>
-            </div>
-          ) : (
-            <p className="end-reason">{reason || 'La partida ha terminado'}</p>
-          )}
-
-          <section className="modal-actions">
-            <button
-              className="btn secondary"
-              onClick={handleGoToLobby}
-            >
-              Volver al lobby
-            </button>
-            <button
-              className="btn primary"
-              onClick={handlePlayAgain}
-            >
-              Crear nueva partida
-            </button>
+        {winner ? (
+          <section className="winner-section">
+            <p className="winner-label">Ganador:</p>
+            <p className="winner-name">{winner}</p>
           </section>
-        </div>
+        ) : (
+          <p className="end-reason">{reason || 'La partida ha terminado'}</p>
+        )}
+
+        {solution && (
+          <section className="solution-section">
+            <h3>La solución era:</h3>
+            <main className="solution-details">
+              <p className='solution-details-p'>
+                <strong>Personaje:</strong> {solution.character.name}
+              </p>
+              <p className='solution-details-p'>
+                <strong>Arma:</strong> {solution.weapon.name}
+              </p>
+              <p className='solution-details-p'>
+                <strong>Habitación:</strong> {solution.room.name}
+              </p>
+            </main>
+          </section>
+        )}
+
+        <section className="modal-actions">
+          <button
+            className="btn secondary"
+            onClick={handleGoToLobby}
+          >
+            Volver al lobby
+          </button>
+          <button
+            className="btn primary"
+            onClick={handlePlayAgain}
+          >
+            Crear nueva partida
+          </button>
+        </section>
       </article>
     </div>,
     document.body

@@ -7,25 +7,24 @@ const LeaveGameModal = ({ isOpen, onClose, onConfirm }) => {
   return createPortal(
     <div className="modal-overlay">
       <article className="modal-container">
-        <div className="modal-content">
-          <h2>¿Abandonar partida?</h2>
-          <p>¿Estás seguro de que deseas abandonar la partida? Esta acción no se puede deshacer.</p>
+        <h2>¿Abandonar partida?</h2>
+        <p className='leave-modal-content-p'>
+          ¿Estás seguro de que deseas abandonar la partida? Esta acción no se puede deshacer.</p>
 
-          <section className="modal-actions">
-            <button
-              className="btn secondary"
-              onClick={onClose}
-            >
-              Cancelar
-            </button>
-            <button
-              className="btn danger"
-              onClick={onConfirm}
-            >
-              Abandonar partida
-            </button>
-          </section>
-        </div>
+        <section className="modal-actions">
+          <button
+            className="btn secondary"
+            onClick={onClose}
+          >
+            Cancelar
+          </button>
+          <button
+            className="btn danger"
+            onClick={onConfirm}
+          >
+            Abandonar partida
+          </button>
+        </section>
       </article>
     </div>,
     document.body

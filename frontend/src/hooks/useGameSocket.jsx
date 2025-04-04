@@ -22,6 +22,10 @@ export function useGameSocket(gameId) {
   const [currentPath, setCurrentPath] = useState(null);
   const [isMoving, setIsMoving] = useState(false);
   const [hasRolled, setHasRolled] = useState(false);
+  const [showAccusationModal, setShowAccusationModal] = useState(false);
+  const [solution, setSolution] = useState(null);
+  const [incorrectAccusation, setIncorrectAccusation] = useState(false);
+  const [incorrectAccusationMessage, setIncorrectAccusationMessage] = useState('');
 
   const gameStateRef = useRef('waiting');
   const socketRef = useRef(null);
@@ -112,11 +116,12 @@ export function useGameSocket(gameId) {
           }
         });
 
-        socketInstance.on('gameEnd', ({ reason, winner }) => {
+        socketInstance.on('gameEnd', ({ reason, winner, solution }) => {
           setCountdown(null);
           setGameState('ended');
           setWinner(winner);
           setEndReason(reason);
+          setSolution(solution);
         });
 
         socketInstance.on('diceRolled', ({ diceResult, validMoves }) => {
@@ -139,6 +144,11 @@ export function useGameSocket(gameId) {
           // Limpiar los movimientos válidos después de moverse
           setValidMoves([]);
           setHasRolled(true);
+        });
+
+        socketInstance.on('incorrectAccusation', ({ message }) => {
+          setIncorrectAccusation(true);
+          setIncorrectAccusationMessage(message);
         });
 
         socketInstance.on('error', (error) => {
@@ -201,6 +211,12 @@ export function useGameSocket(gameId) {
     setHasRolled(true);
   }
 
+  const makeAccusation = (accusation) => {
+    if (socketRef.current && isMyTurn) {
+      socketRef.current.emit('makeAccusation', accusation);
+    }
+  };
+
   return {
     players,
     loading,
@@ -224,6 +240,13 @@ export function useGameSocket(gameId) {
     currentPath,
     playerCards,
     leftoverCards,
-    requestCards: () => socketRef.current?.emit('requestCards')
+    makeAccusation,
+    showAccusationModal,
+    setShowAccusationModal,
+    solution,
+    requestCards: () => socketRef.current?.emit('requestCards'),
+    incorrectAccusation,
+    incorrectAccusationMessage,
+    resetIncorrectAccusation: () => setIncorrectAccusation(false),
   };
 }

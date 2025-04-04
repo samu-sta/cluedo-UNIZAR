@@ -167,5 +167,65 @@ export const setupSocketHandlers = (io) => {
       socket.emit('moveSuccess');
     });
 
+    socket.on('makeAccusation', (accusation) => {
+
+      if (!validateGameAction(gameId, userId)) return;
+
+      const result = gameStateManager.makeAccusation(gameId, userId, accusation);
+
+      if (!result.success) {
+        socket.emit('error', result.message);
+        return;
+      }
+
+      result.isCorrect
+        ? handleCorrectAccusation(result)
+        : handleIncorrectAccusation(result);
+    });
+
+    function validateGameAction(gameId, userId) {
+      if (gameStateManager.getGameState(gameId) !== 'playing') {
+        socket.emit('error', 'El juego no está en curso');
+        return false;
+      }
+
+      if (!gameStateManager.isPlayerTurn(gameId, userId)) {
+        socket.emit('error', 'No es tu turno');
+        return false;
+      }
+
+      return true;
+    }
+
+    function endGame(reason, winner, solution = null) {
+      gameStateManager.setGameState(gameId, 'ended');
+      io.to(gameId).emit('gameEnd', { reason, winner, solution });
+    }
+
+    function handleCorrectAccusation(result) {
+      endGame(
+        `${username} ha resuelto correctamente el caso.`,
+        username,
+        result.solution
+      );
+    }
+
+    function handleIncorrectAccusation(result) {
+      socket.emit('incorrectAccusation', {
+        message: 'Tu acusación es incorrecta. Has sido eliminado de la partida.'
+      });
+
+      if (result.shouldEndGame) {
+        endGame(
+          `${username} ha sido eliminado por una acusación incorrecta. Solo queda un jugador.`,
+          result.winner,
+          result.solution
+        );
+        return;
+      }
+      const nextTurn = gameStateManager.nextTurn(gameId);
+      nextTurn && io.to(gameId).emit('turnUpdate', { currentTurn: nextTurn });
+    }
+
   });
 };

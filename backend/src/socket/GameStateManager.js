@@ -376,28 +376,7 @@ export default class GameStateManager {
     if (!this.hasGame(gameId) || this.getGameState(gameId) !== 'playing') {
       return { success: false };
     }
-
-    const playerCards = this.getPlayerCards(gameId, userId);
-    const isCurrentTurn = this.isPlayerTurn(gameId, userId);
-
-    this.redistributePlayerCards(gameId, userId);
-    this.removePlayer(gameId, userId);
-
-    const nextTurnInfo = isCurrentTurn ? this.nextTurn(gameId) : null;
-
-    const remainingPlayers = this.getPlayers(gameId);
-    const shouldEndGame = remainingPlayers.length < 2;
-    const winner = shouldEndGame &&
-      remainingPlayers.length === 1 ? remainingPlayers[0].username : null;
-
-    return {
-      success: true,
-      redistributedCards: playerCards || [],
-      nextTurn: nextTurnInfo,
-      shouldEndGame,
-      winner,
-      remainingPlayers
-    };
+    return this.removePlayerInGame(gameId, userId);
   }
 
   redistributePlayerCards(gameId, userId) {
@@ -408,5 +387,92 @@ export default class GameStateManager {
       game.leftoverCards = [...(game.leftoverCards || []), ...playerCards];
       delete game.playerCards?.[userId];
     }
+  }
+
+  removePlayerInGame(gameId, userId) {
+
+    const game = this.getGame(gameId);
+
+    const player = game.players.get(userId);
+    const playerName = player?.username;
+    const playerCards = this.getPlayerCards(gameId, userId);
+    const isCurrentTurn = this.isPlayerTurn(gameId, userId);
+
+    this.redistributePlayerCards(gameId, userId);
+    this.removePlayer(gameId, userId);
+
+    const nextTurnInfo = isCurrentTurn ? this.nextTurn(gameId) : null;
+
+    const remainingPlayers = this.getPlayers(gameId);
+    const shouldEndGame = remainingPlayers.length < 2;
+    const winner = shouldEndGame && remainingPlayers.length === 1
+      ? remainingPlayers[0].username
+      : null;
+
+    return {
+      success: true,
+      playerName,
+      redistributedCards: playerCards || [],
+      nextTurn: nextTurnInfo,
+      shouldEndGame,
+      winner,
+      remainingPlayers,
+      remainingPlayerCount: remainingPlayers.length,
+      solution: shouldEndGame ? game.solution : null
+    };
+  }
+
+  makeAccusation(gameId, playerId, accusation) {
+
+    const validationResult = this.validateAccusationRequest(gameId, playerId);
+    if (!validationResult) {
+      return { success: false, message: validationResult.message };
+    }
+
+    const game = this.getGame(gameId);
+    const solution = game.solution;
+
+    const isCorrect = this.checkAccusation(accusation, solution);
+
+    if (isCorrect) {
+      return {
+        success: true,
+        isCorrect: true,
+        winner: game.players.get(playerId).username,
+        solution
+      };
+    }
+
+    return this.handleIncorrectAccusation(gameId, playerId);
+  }
+
+  validateAccusationRequest(gameId, playerId) {
+    return this.hasGame(gameId) && this.isPlayerTurn(gameId, playerId)
+  }
+
+  checkAccusation(accusation, solution) {
+    return (
+      accusation.character === solution.character.name &&
+      accusation.weapon === solution.weapon.name &&
+      accusation.room === solution.room.name
+    );
+  }
+
+  handleIncorrectAccusation(gameId, playerId) {
+    const result = this.removePlayerInGame(gameId, playerId, { revealSolution: true });
+
+    if (!result.success) {
+      return { success: false, message: "Error al procesar la acusación" };
+    }
+
+    return {
+      success: true,
+      isCorrect: false,
+      eliminatedPlayer: result.playerName,
+      shouldEndGame: result.shouldEndGame,
+      winner: result.winner,
+      remainingPlayers: result.remainingPlayerCount,
+      solution: result.solution
+    };
   }
 }
