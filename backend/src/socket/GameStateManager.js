@@ -97,6 +97,8 @@ export default class GameStateManager {
     game.solution = solution;
     game.playerCards = playerCards;
     game.canRollDice = true;
+    game.hasMoved = false;
+    game.hasSuggested = false;
 
     this.setupPlayerPositions(gameId);
     await this.setPlayerCharacters(gameId);
@@ -236,6 +238,8 @@ export default class GameStateManager {
     game.currentTurnPlayer = game.turnOrder[game.currentTurnIndex];
 
     game.canRollDice = true;
+    game.hasMoved = false;
+    game.hasSuggested = false;
 
     return {
       playerId: game.currentTurnPlayer,
@@ -363,6 +367,7 @@ export default class GameStateManager {
 
     // Actualizar posición del jugador
     player.position = targetPosition;
+    game.hasMoved = true;
 
     // Movimiento exitoso
     return {
@@ -474,5 +479,104 @@ export default class GameStateManager {
       remainingPlayers: result.remainingPlayerCount,
       solution: result.solution
     };
+  }
+
+  getPlayerRoom(gameId, playerId) {
+    if (!this.hasGame(gameId)) return null;
+
+    const game = this.getGame(gameId);
+    const player = game.players.get(playerId);
+
+    if (!player || !player.position) return null;
+
+    const { row, column } = player.position;
+    const board = game.board;
+
+    for (const room of board.rooms) {
+      const isInDoor = room.doors.some(door =>
+        door.row === row && door.column === column
+      );
+
+      if (isInDoor) continue;
+
+      if (this.isPositionInsideRoom(room, { row, column })) {
+        return { roomName: room.name, room };
+      }
+    }
+
+    return null;
+  }
+
+  isPositionInsideRoom(room, position) {
+
+    let minRow = Infinity, maxRow = -Infinity;
+    let minCol = Infinity, maxCol = -Infinity;
+
+    room.walls.forEach(wall => {
+      minRow = Math.min(minRow, wall.row);
+      maxRow = Math.max(maxRow, wall.row);
+      minCol = Math.min(minCol, wall.column);
+      maxCol = Math.max(maxCol, wall.column);
+    });
+
+    room.doors.forEach(door => {
+      minRow = Math.min(minRow, door.row);
+      maxRow = Math.max(maxRow, door.row);
+      minCol = Math.min(minCol, door.column);
+      maxCol = Math.max(maxCol, door.column);
+    });
+
+    return (
+      position.row > boundaries.minRow &&
+      position.row < boundaries.maxRow &&
+      position.column > boundaries.minCol &&
+      position.column < boundaries.maxCol
+    );
+  }
+
+  validateSuggestion(gameId, playerId, suggestion) {
+
+    if (!this.hasGame(gameId)) {
+      return this.createValidationError("Partida no encontrada");
+    }
+
+    if (!this.isPlayerTurn(gameId, playerId)) {
+      return this.createValidationError("No es tu turno");
+    }
+
+    const game = this.getGame(gameId);
+
+    if (game.canRollDice) {
+      return this.createValidationError("Debes tirar los dados primero");
+    }
+
+    if (!game.hasMoved) {
+      return this.createValidationError("Debes moverte antes de hacer una sugerencia");
+    }
+
+    if (game.hasSuggested) {
+      return this.createValidationError("Ya has hecho una sugerencia en este turno");
+    }
+
+    const playerRoom = this.getPlayerRoom(gameId, playerId);
+
+    if (!playerRoom) {
+      return this.createValidationError("No estás en una habitación");
+    }
+
+    if (playerRoom.roomName !== suggestion.room) {
+      return this.createValidationError(
+        `Solo puedes hacer una sugerencia para la habitación donde estás (${playerRoom.roomName})`
+      );
+    }
+
+    return {
+      valid: true,
+      playerRoom
+    };
+  }
+
+  createValidationError(message) {
+    return { valid: false, message };
   }
 }

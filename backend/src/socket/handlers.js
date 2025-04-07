@@ -183,6 +183,35 @@ export const setupSocketHandlers = (io) => {
         : handleIncorrectAccusation(result);
     });
 
+    socket.on('makeSuggestion', (suggestion) => {
+      if (gameStateManager.getGameState(gameId) !== 'playing') {
+        socket.emit('error', 'El juego no está en curso');
+        return;
+      }
+
+      console.log(`Jugador ${username} intenta hacer sugerencia:`, suggestion);
+
+      const validationResult = gameStateManager.validateSuggestion(gameId, userId, suggestion);
+
+      if (!validationResult.valid) {
+        socket.emit('error', validationResult.message);
+        return;
+      }
+
+      // Marcar que se ha hecho una sugerencia en este turno
+      const game = gameStateManager.getGame(gameId);
+      game.hasSuggested = true;
+
+      socket.emit('suggestionMade');
+
+      console.log(`Sugerencia válida de ${username}:`, {
+        character: suggestion.character,
+        weapon: suggestion.weapon,
+        room: suggestion.room,
+        playerRoom: validationResult.playerRoom.roomName
+      });
+    });
+
     function validateGameAction(gameId, userId) {
       if (gameStateManager.getGameState(gameId) !== 'playing') {
         socket.emit('error', 'El juego no está en curso');

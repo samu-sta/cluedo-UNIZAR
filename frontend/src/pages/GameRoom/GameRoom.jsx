@@ -14,6 +14,7 @@ import DeductionTable from '../../components/deductionTable/DeductionTable';
 import TurnIndicator from './components/TurnIndicator';
 import DiceRoller from './components/DiceRoller';
 import IncorrectAccusationModal from './components/IncorrectAccusationModal';
+import SuggestionModal from './components/SuggestionModal';
 
 const GameRoom = ({ user }) => {
   const { gameId } = useParams();
@@ -56,10 +57,27 @@ const GameRoom = ({ user }) => {
     incorrectAccusationMessage,
     resetIncorrectAccusation,
     movePlayer,
-    currentPath
+    currentPath,
+    makeSuggestion,
+    showSuggestionModal,
+    setShowSuggestionModal,
+    canMakeSuggestion,
+    currentRoom,
   } = useGameSocket(gameId);
 
 
+  const handleShowSuggestion = () => {
+    setShowSuggestionModal(true);
+  };
+
+  const handleCloseSuggestion = () => {
+    setShowSuggestionModal(false);
+  };
+
+  const handleSubmitSuggestion = (suggestion) => {
+    makeSuggestion(suggestion);
+    setShowSuggestionModal(false);
+  };
 
   useEffect(() => {
     setCanRoll(gameState === 'playing' && isMyTurn);
@@ -122,6 +140,8 @@ const GameRoom = ({ user }) => {
                 isMyTurn={isMyTurn}
                 onPassTurn={passTurn}
                 onMakeAccusation={handleShowAccusation}
+                onMakeSuggestion={handleShowSuggestion}
+                canMakeSuggestion={canMakeSuggestion}
               />
               <DiceRoller
                 diceResult={diceResult}
@@ -174,6 +194,15 @@ const GameRoom = ({ user }) => {
           resetIncorrectAccusation();
           handleLeaveGame();
         }}
+      />
+
+      <SuggestionModal
+        isOpen={showSuggestionModal}
+        onClose={handleCloseSuggestion}
+        onSubmit={handleSubmitSuggestion}
+        gameInfo={gameInfo}
+        currentRoom={currentRoom}
+
       />
     </>
   );

@@ -1,6 +1,14 @@
 import './styles/TurnIndicator.css';
 
-const TurnIndicator = ({ currentTurn, isMyTurn, onPassTurn, onMakeAccusation }) => {
+const TurnIndicator = ({
+  currentTurn,
+  isMyTurn,
+  onPassTurn,
+  onMakeAccusation,
+  onMakeSuggestion,
+  canMakeSuggestion
+}) => {
+
   return (
     <article className={`turn-indicator ${isMyTurn ? 'my-turn' : ''}`}>
       <header className="turn-info">
@@ -13,18 +21,29 @@ const TurnIndicator = ({ currentTurn, isMyTurn, onPassTurn, onMakeAccusation }) 
       {isMyTurn && (
         <section className="turn-actions">
           <p className="turn-notification">¡Es tu turno!</p>
-          <button
-            className="btn primary pass-turn-btn"
-            onClick={onPassTurn}
-          >
-            Pasar turno
-          </button>
+
+          {/* Botón para hacer sugerencia - solo visible cuando el jugador está en una habitación */}
+          {canMakeSuggestion && (
+            <button
+              className="btn accent"
+              onClick={onMakeSuggestion}
+            >
+              Hacer Sugerencia
+            </button>
+          )}
 
           <button
             className="btn danger"
             onClick={onMakeAccusation}
           >
             Hacer Acusación
+          </button>
+
+          <button
+            className="btn primary pass-turn-btn"
+            onClick={onPassTurn}
+          >
+            Pasar turno
           </button>
         </section>
       )}

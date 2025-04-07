@@ -1,0 +1,64 @@
+.suggestion-modal {
+  background-color: var(--color-background);
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.suggestion-info {
+  color: var(--color-accent-blue);
+  font-weight: normal;
+  margin: 1rem 0;
+  padding: 0.75rem;
+  border: 1px solid var(--color-accent-blue);
+  border-radius: 4px;
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.suggestion-selectors {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.suggestion-section h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: var(--color-accent-blue);
+}
+
+.suggestion-section select {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 4px;
+  border: 1px solid var(--color-primary-light);
+  background-color: var(--color-primary-dark);
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+.suggestion-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.suggestion-actions button {
+  min-width: 120px;
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
