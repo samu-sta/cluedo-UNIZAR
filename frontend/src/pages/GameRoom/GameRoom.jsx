@@ -15,6 +15,7 @@ import TurnIndicator from './components/TurnIndicator';
 import DiceRoller from './components/DiceRoller';
 import IncorrectAccusationModal from './components/IncorrectAccusationModal';
 import SuggestionModal from './components/SuggestionModal';
+import SuggestionResponseModal from './components/SuggestionResponseModal';
 
 const GameRoom = ({ user }) => {
   const { gameId } = useParams();
@@ -63,6 +64,7 @@ const GameRoom = ({ user }) => {
     setShowSuggestionModal,
     canMakeSuggestion,
     currentRoom,
+    hasSuggested,
   } = useGameSocket(gameId);
 
 
@@ -203,6 +205,11 @@ const GameRoom = ({ user }) => {
         gameInfo={gameInfo}
         currentRoom={currentRoom}
 
+      />
+
+      <SuggestionResponseModal
+        players={players}
+        hasSuggested={hasSuggested}
       />
     </>
   );

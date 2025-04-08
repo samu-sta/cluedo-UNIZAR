@@ -99,6 +99,8 @@ export default class GameStateManager {
     game.canRollDice = true;
     game.hasMoved = false;
     game.hasSuggested = false;
+    game.currentSuggestion = null;
+    game.suggestionResponses = {};
 
     this.setupPlayerPositions(gameId);
     await this.setPlayerCharacters(gameId);
@@ -527,10 +529,10 @@ export default class GameStateManager {
     });
 
     return (
-      position.row > boundaries.minRow &&
-      position.row < boundaries.maxRow &&
-      position.column > boundaries.minCol &&
-      position.column < boundaries.maxCol
+      position.row > minRow &&
+      position.row < maxRow &&
+      position.column > minCol &&
+      position.column < maxCol
     );
   }
 
@@ -578,5 +580,11 @@ export default class GameStateManager {
 
   createValidationError(message) {
     return { valid: false, message };
+  }
+
+  setCurrentSuggestion(gameId, suggestion) {
+    const game = this.getGame(gameId);
+    game.currentSuggestion = suggestion;
+    game.suggestionResponses = {};
   }
 }

@@ -1,0 +1,80 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.suggestion-response-modal {
+  background-color: var(--color-text-light);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-header h2{
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--color-text-dark);
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.players-responses-container {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.player-response-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px;
+  border-bottom: 1px solid #eee;
+  height: 150px;
+}
+
+.player-shown-card {
+  display: flex;
+  align-items: center;
+}
+
+
+.no-card {
+  font-style: italic;
+  color: #777;
+  padding: 0.5rem;
+}
+
+.waiting-response {
+  color: #fbaf3c;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+}

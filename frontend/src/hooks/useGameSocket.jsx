@@ -91,10 +91,6 @@ export function useGameSocket(gameId) {
 
   useEffect(() => {
     if (isMyTurn && gameState === 'playing') {
-      console.log('hasRolled:', hasRolled);
-      console.log('hasMoved:', hasMoved);
-      console.log('currentRoom:', currentRoom);
-      console.log('hasSuggested:', hasSuggested);
       setCanMakeSuggestion(hasRolled && hasMoved && checkIfInRoom() && !hasSuggested);
     } else {
       setCanMakeSuggestion(false);
@@ -192,7 +188,6 @@ export function useGameSocket(gameId) {
 
         socketInstance.on('diceRolled', ({ diceResult, validMoves }) => {
           setDiceResult(diceResult);
-          console.log('Valid movesddd:', validMoves);
           setValidMoves(validMoves);
         });
 
@@ -335,6 +330,7 @@ export function useGameSocket(gameId) {
     setShowSuggestionModal,
     canMakeSuggestion,
     currentRoom,
+    hasSuggested,
     resetIncorrectAccusation: () => setIncorrectAccusation(false),
   };
 }
