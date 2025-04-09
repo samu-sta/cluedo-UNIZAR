@@ -16,6 +16,7 @@ import DiceRoller from './components/DiceRoller';
 import IncorrectAccusationModal from './components/IncorrectAccusationModal';
 import SuggestionModal from './components/SuggestionModal';
 import SuggestionResponseModal from './components/SuggestionResponseModal';
+import ShowCardModal from './components/ShowCardModal';
 
 const GameRoom = ({ user }) => {
   const { gameId } = useParams();
@@ -65,6 +66,13 @@ const GameRoom = ({ user }) => {
     canMakeSuggestion,
     currentRoom,
     hasSuggested,
+    currentSuggestion,
+    showCardModal,
+    setShowCardModal,
+    showCard,
+    cardsShown,
+    suggestionResponses,
+    setSuggestionResponses,
   } = useGameSocket(gameId);
 
 
@@ -103,6 +111,13 @@ const GameRoom = ({ user }) => {
   const handleSubmitAccusation = (accusation) => {
     makeAccusation(accusation);
     setShowAccusationModal(false);
+  };
+
+  const handleShowCard = (card) => {
+    if (showCard) {
+      showCard(card);
+    }
+    setShowCardModal(false);
   };
 
   if (loading) {
@@ -170,7 +185,7 @@ const GameRoom = ({ user }) => {
           />
         </main>
         <PlayerCards cards={playerCards} leftoverCards={leftoverCards} />
-        {gameState === 'playing' && <DeductionTable gameInfo={gameInfo} playerCards={playerCards} leftoverCards={leftoverCards} />}
+        {gameState === 'playing' && <DeductionTable gameInfo={gameInfo} playerCards={playerCards} leftoverCards={leftoverCards} cardsShown={cardsShown} />}
       </main>
 
       <AccusationModal
@@ -210,6 +225,15 @@ const GameRoom = ({ user }) => {
       <SuggestionResponseModal
         players={players}
         hasSuggested={hasSuggested}
+        suggestionResponses={suggestionResponses}
+        setSuggestionResponses={setSuggestionResponses}
+      />
+
+      <ShowCardModal
+        isOpen={showCardModal}
+        onSubmit={handleShowCard}
+        playerCards={playerCards}
+        currentSuggestion={currentSuggestion}
       />
     </>
   );

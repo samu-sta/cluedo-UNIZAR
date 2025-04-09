@@ -21,6 +21,10 @@ export function useGameSocket(gameId) {
   const [canMakeSuggestion, setCanMakeSuggestion] = useState(false);
   const [hasMoved, setHasMoved] = useState(false);
   const [hasSuggested, setHasSuggested] = useState(false);
+  const [currentSuggestion, setCurrentSuggestion] = useState(null);
+  const [showCardModal, setShowCardModal] = useState(false);
+  const [cardsShown, setCardsShown] = useState([]);
+  const [suggestionResponses, setSuggestionResponses] = useState([]);
   const user = JSON.parse(localStorage.getItem('user'));
 
   const [validMoves, setValidMoves] = useState([]);
@@ -142,6 +146,7 @@ export function useGameSocket(gameId) {
           if (gameStateRef.current === 'playing') {
             socketInstance.emit('requestCards');
           }
+          setShowCardModal(false);
         });
 
         socketInstance.on('countdownUpdate', ({ seconds }) => {
@@ -160,6 +165,7 @@ export function useGameSocket(gameId) {
         });
 
         socketInstance.on('gameStart', ({ currentTurn, players }) => {
+          setCardsShown([]);
           setPlayers(players);
           setCountdown(null);
           setGameState('playing');
@@ -212,11 +218,29 @@ export function useGameSocket(gameId) {
         socketInstance.on('suggestionMade', () => {
           setHasSuggested(true);
           setCanMakeSuggestion(false);
+          console.log('Sugerencia realizada');
+        });
+
+        socketInstance.on('currentSuggestion', ({ suggestion }) => {
+          setCurrentSuggestion(suggestion);
+          setShowCardModal(true);
+          console.log('Sugerencia actual:', suggestion);
         });
 
         socketInstance.on('incorrectAccusation', ({ message }) => {
           setIncorrectAccusation(true);
           setIncorrectAccusationMessage(message);
+        });
+
+        socketInstance.on('cardShown', ({ username, card }) => {
+          console.log(`El jugador ${username} mostró la carta:`, card);
+          if (!card) return;
+          setSuggestionResponses(prev => [...prev, { username, card }]);
+
+          if (cardsShown.some(shownCard => shownCard.name === card.name)) {
+            return;
+          }
+          setCardsShown(prev => [...prev, card]);
         });
 
         socketInstance.on('error', (error) => {
@@ -331,6 +355,13 @@ export function useGameSocket(gameId) {
     canMakeSuggestion,
     currentRoom,
     hasSuggested,
+    currentSuggestion,
+    showCardModal,
+    cardsShown,
+    suggestionResponses,
+    setSuggestionResponses,
+    setShowCardModal,
+    showCard: (card) => socketRef.current?.emit('showCard', card),
     resetIncorrectAccusation: () => setIncorrectAccusation(false),
   };
 }

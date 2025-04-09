@@ -3,14 +3,15 @@ import CharacterBadge from '../../../components/common/CharacterBadge';
 import GameCard from '../../../components/PlayerCards/components/GameCard';
 import './styles/SuggestionResponseModal.css';
 
-const SuggestionResponseModal = ({ players, hasSuggested }) => {
+const SuggestionResponseModal = ({ players, hasSuggested, suggestionResponses = [], setSuggestionResponses }) => {
   const {
     showResponseModal,
-    suggestionResponses,
     closeResponseModal
-  } = useSuggestionResponseModal({ hasSuggested });
+  } = useSuggestionResponseModal({ hasSuggested, suggestionResponses, setSuggestionResponses });
 
   const user = JSON.parse(localStorage.getItem('user'));
+
+  console.log(suggestionResponses)
 
   if (!showResponseModal) return null;
 

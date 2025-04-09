@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import useIsMobile from './useIsMobile.jsx';
 const IS_MOBILE_WIDTH = 750;
 
-const useDeductions = (gameInfo, playerCards = [], leftoverCards = []) => {
+const useDeductions = (gameInfo, playerCards = [], leftoverCards = [], cardsShown) => {
   const isMobile = useIsMobile(IS_MOBILE_WIDTH);
 
   const [deductions, setDeductions] = useState({
@@ -29,6 +29,10 @@ const useDeductions = (gameInfo, playerCards = [], leftoverCards = []) => {
         cardsToDiscard.set(card.name, true);
       });
 
+      cardsShown.forEach(card => {
+        cardsToDiscard.set(card.name, true);
+      });
+
       gameInfo.cards.forEach(card => {
         const status = cardsToDiscard.has(card.name) ? 'no' : 'unknown';
 
@@ -43,7 +47,7 @@ const useDeductions = (gameInfo, playerCards = [], leftoverCards = []) => {
 
       setDeductions(newDeductions);
     }
-  }, [gameInfo, playerCards, leftoverCards]);
+  }, [gameInfo, playerCards, leftoverCards, cardsShown]);
 
   const updateDeduction = (category, name) => {
     setDeductions(prev => {

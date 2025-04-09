@@ -5,9 +5,9 @@ import DeductionGrid from './components/DeductionGrid';
 import DeductionLegend from './components/DeductionLegend';
 import './styles/DeductionTable.css';
 
-const DeductionTable = ({ gameInfo, playerCards = [], leftoverCards = [] }) => {
+const DeductionTable = ({ gameInfo, playerCards = [], leftoverCards = [], cardsShown }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
-  const { deductions, updateDeduction, isMobile } = useDeductions(gameInfo, playerCards, leftoverCards);
+  const { deductions, updateDeduction, isMobile } = useDeductions(gameInfo, playerCards, leftoverCards, cardsShown);
 
 
   const toggleCollapse = () => {

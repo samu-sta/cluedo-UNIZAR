@@ -1,43 +1,25 @@
 import { useEffect, useState } from 'react';
 
-const mockResponses = [
-  {
-    username: 'sfelipe',
-    card: {
-      name: 'Profesor Ciruela',
-      type: 'character'
-    }
-  },
-  {
-    username: 'samu-stad',
-    card: null
-  },
-
-
-]
-
-export function useSuggestionResponseModal({ hasSuggested }) {
+export function useSuggestionResponseModal({ hasSuggested, suggestionResponses, setSuggestionResponses }) {
   const [showResponseModal, setShowResponseModal] = useState(false);
-  const [suggestionResponses, setSuggestionResponses] = useState({});
 
   useEffect(() => {
     if (hasSuggested) {
-      openResponseModal(mockResponses);
+      openResponseModal();
     }
   }, [hasSuggested]);
 
-  const openResponseModal = (responses) => {
-    setSuggestionResponses(responses);
+  const openResponseModal = () => {
     setShowResponseModal(true);
   };
 
   const closeResponseModal = () => {
     setShowResponseModal(false);
+    setSuggestionResponses([]);
   };
 
   return {
     showResponseModal,
-    suggestionResponses,
     openResponseModal,
     closeResponseModal
   };

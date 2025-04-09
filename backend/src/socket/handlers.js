@@ -200,17 +200,42 @@ export const setupSocketHandlers = (io) => {
 
       suggestion.username = username;
 
-      const game = gameStateManager.setCurrentSuggestion(gameId, suggestion);
-
-
       socket.emit('suggestionMade');
 
-      console.log(`Sugerencia válida de ${username}:`, {
-        character: suggestion.character,
-        weapon: suggestion.weapon,
-        room: suggestion.room,
-        playerRoom: validationResult.playerRoom.roomName
+      socket.to(gameId).emit('currentSuggestion', {
+        suggestion
       });
+    });
+
+    socket.on('showCard', (card) => {
+      if (gameStateManager.getGameState(gameId) !== 'playing') {
+        socket.emit('error', 'El juego no está en curso');
+        return;
+      }
+
+      const result = gameStateManager.showCard(gameId, userId, card);
+
+      if (!result.success) {
+        socket.emit('error', result.message);
+        return;
+      }
+
+      const suggestionMakerUsername = result.suggestionMaker;
+
+      const sockets = Array.from(io.sockets.sockets).map(s => s[1]);
+      const suggestionMakerSocket = sockets.find(
+        s => s.username === suggestionMakerUsername
+      );
+
+      if (!suggestionMakerSocket) {
+        socket.emit('error', 'No se pudo encontrar al jugador que hizo la sugerencia');
+      }
+
+      io.to(suggestionMakerSocket.id).emit('cardShown', {
+        username,
+        card: result.cardShown
+      });
+
     });
 
     function validateGameAction(gameId, userId) {

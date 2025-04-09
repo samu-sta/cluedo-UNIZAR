@@ -100,7 +100,7 @@ export default class GameStateManager {
     game.hasMoved = false;
     game.hasSuggested = false;
     game.currentSuggestion = null;
-    game.suggestionResponses = {};
+    game.suggestionResponses = [];
 
     this.setupPlayerPositions(gameId);
     await this.setPlayerCharacters(gameId);
@@ -585,6 +585,62 @@ export default class GameStateManager {
   setCurrentSuggestion(gameId, suggestion) {
     const game = this.getGame(gameId);
     game.currentSuggestion = suggestion;
-    game.suggestionResponses = {};
+    game.suggestionResponses = [];
+  }
+
+  showCard(gameId, playerId, card) {
+    const validationResult = this.validateShowCardRequest(gameId, playerId, card);
+    if (!validationResult.valid) {
+      return { success: false, message: validationResult.message };
+    }
+
+    const game = this.getGame(gameId);
+    const player = game.players.get(playerId);
+
+    this.registerCardResponse(game, player.username, card);
+
+    return {
+      success: true,
+      suggestionMaker: game.currentSuggestion.username,
+      cardShown: card
+    };
+  }
+
+  validateShowCardRequest(gameId, playerId, card) {
+    if (!this.hasGame(gameId)) {
+      return { valid: false, message: "Partida no encontrada" };
+    }
+
+    const game = this.getGame(gameId);
+
+    if (!game.currentSuggestion) {
+      return { valid: false, message: "No hay una sugerencia activa" };
+    }
+
+    if (!card) {
+      return { valid: true };
+    }
+
+    const playerCards = this.getPlayerCards(gameId, playerId);
+    const hasCard = playerCards.some(c =>
+      c.name === card.name && c.type === card.type
+    );
+
+    if (!hasCard) {
+      return { valid: false, message: "No tienes esa carta" };
+    }
+
+    return { valid: true };
+  }
+
+  registerCardResponse(game, username, card) {
+    if (!game.suggestionResponses) {
+      game.suggestionResponses = [];
+    }
+
+    game.suggestionResponses.push({
+      username,
+      card: card || null
+    });
   }
 }
