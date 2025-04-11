@@ -1,7 +1,7 @@
-# 🎲 Cluedo UNIZAR - Documentación del Proyecto (Actualizada)
+# 🎲 Cluedo UNIZAR - Documentación del Proyecto
 
 > [!NOTE]
-> Esta documentación refleja el estado actual del proyecto a día 28 de marzo de 2025. Contiene información detallada sobre la arquitectura, componentes y funcionalidades implementadas.
+> Esta documentación refleja el estado actual del proyecto a día 11 de abril de 2025. Contiene información detallada sobre la arquitectura, componentes y funcionalidades implementadas.
 
 ## 💻 1. Tecnologías Utilizadas
 
@@ -40,6 +40,9 @@ cluedo/
 │   │   │   └── deductionTable/  # Tabla de deducciones para el jugador
 │   │   ├── pages/       # Páginas de la aplicación
 │   │   │   ├── GameRoom/     # Interfaz de sala de juego
+│   │   │   │   └── components/  # Componentes específicos de la sala de juego
+│   │   │   │       ├── AccusationModal.jsx        # Modal para hacer acusaciones
+│   │   │   │       └── IncorrectAccusationModal.jsx  # Modal para acusaciones fallidas
 │   │   │   └── startGames/   # Creación/unión a partidas
 │   │   ├── hooks/       # Custom React hooks
 │   │   │   ├── useGameSocket.jsx  # Hook para gestionar sockets
@@ -60,12 +63,24 @@ cluedo/
 │   │   ├── models/       # Modelos de datos
 │   │   ├── routes/       # Definición de rutas
 │   │   ├── socket/       # Configuración de Socket.IO y gestión de partidas
-│   │   │   ├── GameStateManager.js  # Gestión del estado de juego
-│   │   │   └── CountdownManager.js  # Gestión de cuenta regresiva
+│   │   │   ├── GameStateManager.js  # Gestión centralizada del estado de juego
+│   │   │   ├── CountdownManager.js  # Gestión de cuenta regresiva
+│   │   │   └── handlers/            # Manejadores de eventos socket
+│   │   │       ├── gameHandlers.js       # Eventos generales del juego
+│   │   │       ├── movementHandlers.js   # Eventos de movimiento
+│   │   │       ├── suggestionHandlers.js # Eventos de sugerencias y acusaciones
+│   │   │       └── utils.js              # Utilidades comunes para handlers
+│   │   ├── services/      # Servicios de lógica de negocio
+│   │   │   ├── GameService.js       # Gestión general de partidas
+│   │   │   ├── BoardService.js      # Gestión del tablero
+│   │   │   ├── CardService.js       # Gestión de cartas
+│   │   │   ├── SuggestionService.js # Gestión de sugerencias y acusaciones
+│   │   │   └── PlayerService.js     # Gestión de jugadores
 │   │   ├── config/       # Configuraciones del juego
 │   │   │   └── gameConstants.js    # Constantes para el tablero y cartas
 │   │   ├── utils/        # Utilidades del juego
-│   │   │   └── board.js           # Algoritmos de movimiento en el tablero
+│   │   │   ├── board.js           # Algoritmos de movimiento en el tablero
+│   │   │   └── game.js            # Utilidades generales del juego
 │   │   └── schemas/      # Esquemas para validación
 │   └── ...
 └── documents/       # Documentación del proyecto
@@ -154,6 +169,13 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
 - `PlayerCards`: Visor de cartas del jugador
 - `DeductionTable`: Tabla para realizar deducciones durante el juego
 - `DiceRoller`: Componente para lanzar dados y mostrar resultados
+- **Modales**:
+  - `AccusationModal`: Interfaz para realizar acusaciones finales
+  - `IncorrectAccusationModal`: Notificación de acusación incorrecta
+  - `SuggestionModal`: Interfaz para realizar sugerencias
+  - `SuggestionResponseModal`: Respuesta a sugerencias de otros jugadores
+  - `ShowCardModal`: Mostrar cartas durante el juego
+  - `GameEndedModal`: Notificación al finalizar la partida
 
 ### 6.2 Hooks Personalizados
 - `useIsMobile`: Detección de dispositivos móviles
@@ -164,6 +186,7 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
 - `useGameSocket`: Gestión de la comunicación socket durante la partida
 - `useDeductions`: Estado y lógica para la tabla de deducciones
 - `useGameEndedModal`: Control del modal de fin de partida
+- `useSuggestionResponse`: Lógica para las respuestas a sugerencias
 
 ### 6.3 Componentes de Juego
 - **Board**: Representación visual del tablero con habitaciones
@@ -212,6 +235,7 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
 - **Salas (rooms)**: Cada partida tiene su propia sala para comunicación aislada
 - **Auto-limpieza**: Las partidas se eliminan automáticamente cuando quedan vacías
 - **Reconexión**: Manejo de actualización de página y reconexiones
+- **Estructura de handlers**: Organización modular en carpetas por funcionalidad
 - **Eventos principales**:
   - `playerJoined`: Cuando un nuevo jugador se une a la partida
   - `playerLeft`: Cuando un jugador abandona la partida
@@ -222,6 +246,10 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
   - `diceRolled`: Resultado de tirar los dados y movimientos válidos
   - `playersMoved`: Notificación de movimiento de un jugador
   - `moveSuccess`: Confirmación de un movimiento exitoso
+  - `suggestion`: Realización de sugerencias durante el juego
+  - `accusation`: Realización de acusaciones finales
+  - `correctAccusation`: Notificación de acusación correcta y fin de juego
+  - `incorrectAccusation`: Notificación de acusación incorrecta y eliminación del jugador
   - `gameEnd`: Finalización de la partida
   - `leaveGame`: Abandono explícito de una partida
 
@@ -257,6 +285,40 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
 - **Animación de movimiento**:
   - Animación visual cuando un jugador se mueve por el tablero
   - Cálculo y visualización de la ruta óptima entre la posición inicial y final
+
+### 7.7 Sistema de Acusaciones y Sugerencias
+
+- **Acusaciones finales**: 
+  - Permiten a un jugador resolver el caso nombrando al culpable, el arma y la habitación
+  - Solo se pueden realizar durante el turno del jugador
+  - Interfaz modal con selección de personaje, arma y habitación
+  - Advertencia clara sobre las consecuencias de una acusación incorrecta
+
+- **Consecuencias**:
+  - **Acusación correcta**: El jugador gana la partida inmediatamente
+  - **Acusación incorrecta**: El jugador es eliminado de la partida
+    - Sus cartas se redistribuyen entre los jugadores restantes
+    - Se pasa el turno al siguiente jugador
+    - Si queda un solo jugador, la partida termina
+
+- **Validación**:
+  - Verificación de que sea el turno del jugador
+  - Comprobación del estado de la partida
+  - Comparación de la acusación con la solución secreta
+
+- **Flujo de proceso**:
+  1. Jugador selecciona "Hacer Acusación" durante su turno
+  2. Sistema muestra modal con opciones de personajes, armas y habitaciones
+  3. Jugador confirma su acusación
+  4. Servidor valida y procesa la acusación
+  5. Notificación del resultado a todos los jugadores
+  6. En caso de acusación incorrecta, se muestra un modal de eliminación
+  7. En caso de acusación correcta, se muestra un modal de victoria y se finaliza el juego
+
+- **Implementación**:
+  - Frontend: Componentes modales (`AccusationModal`, `IncorrectAccusationModal`)
+  - Backend: Servicios de validación y procesamiento (`SuggestionService`)
+  - Comunicación: Eventos socket para transmisión de acusaciones y resultados
 
 ## 🐳 8. Docker
 
@@ -370,9 +432,25 @@ npm start
 
 ## 🔮 12. Consideraciones Futuras
 
-- Implementación de lógica completa de juego con acusaciones
-- Sistema de acusaciones y suposiciones
-- Modulo administrador permitiendo el C.R.U.D de usuarios y partidas
+Actualmente, el equipo se está enfocando en las siguientes áreas de mejora:
+
+### 12.1 Testing
+- Implementación de pruebas unitarias para componentes críticos
+- Pruebas de integración para la comunicación entre frontend y backend
+- Pruebas end-to-end para simular flujos completos de usuario
+- Pruebas de carga para verificar el rendimiento con múltiples partidas simultáneas
+
+### 12.2 Corrección de Bugs
+- Resolver problemas de reconexión cuando un jugador se desconecta temporalmente
+- Corregir comportamiento inconsistente en la tabla de deducciones en dispositivos móviles
+- Solucionar problemas de renderizado en diferentes navegadores
+- Arreglar errores relacionados con la distribución de cartas y validación de movimientos
+
+### 12.3 Refactorización del Frontend
+- Mejorar la estructura de componentes para facilitar mantenimiento
+- Estandarizar el manejo de estado entre componentes
+- Mejorar la experiencia de usuario en dispositivos móviles
+- Implementar mejores prácticas de accesibilidad
 
 ---
-Esta documentación es un recurso vivo que puede ser ampliado según evolucione el proyecto.
+Esta documentación es un recurso vivo que será actualizado conforme el proyecto evolucione.
