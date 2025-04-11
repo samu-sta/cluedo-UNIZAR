@@ -69,6 +69,14 @@
   animation: pulse 2s infinite;
 }
 
+.btn.cancel {
+  background-color: inherit;
+  color: var(--color-accent-red);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
 .accent {
   background: linear-gradient(90deg, var(--color-accent-red), var(--color-accent-yellow));
   -webkit-background-clip: text;
@@ -105,6 +113,8 @@
   bottom: -50px;
   right: -50px;
 }
+
+
 
 @keyframes fadeIn {
   from { opacity: 0; }

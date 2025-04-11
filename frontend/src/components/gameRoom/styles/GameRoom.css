@@ -48,4 +48,12 @@
 .game-info {
   display: flex;
   flex-direction: column;
+  border-radius: 8px;
+  background-color: var(--color-primary-light);
+}
+
+.game-info.my-turn {
+  background-color: var(--color-accent-yelow-lighter);
+  border-left: 4px solid var(--color-accent-yellow);
+  animation: pulse 2s infinite;
 }

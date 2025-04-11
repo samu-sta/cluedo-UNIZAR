@@ -32,12 +32,8 @@ const Header = ({ user, onLogout }) => {
         <ul className={navListClasses}>
           <li className="header-nav-item"><Link to={ROUTES.HOME}>Inicio</Link></li>
           <li className="header-nav-item"><Link to={ROUTES.GAMES}>Partidas</Link></li>
-          <li className="header-nav-item"><Link to={ROUTES.RULES}>Reglas</Link></li>
           {user ? (
             <>
-              <li className="header-nav-item header-profile">
-                <Link to={ROUTES.PROFILE}>Mi perfil</Link>
-              </li>
               <li className="header-nav-item header-logout">
                 <Link to={ROUTES.HOME} onClick={onLogout}>Cerrar sesión</Link>
               </li>

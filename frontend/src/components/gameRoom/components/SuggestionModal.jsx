@@ -29,8 +29,8 @@ const SuggestionModal = ({ isOpen, onClose, onSubmit, gameInfo, currentRoom }) =
           Estás sugiriendo que el crimen ocurrió en la habitación <strong>{currentRoom}</strong>
         </p>
 
-        <div className="suggestion-selectors">
-          <div className="suggestion-section">
+        <main className="suggestion-selectors">
+          <section className="suggestion-section">
             <h3>Personaje</h3>
             <select
               value={selectedCharacter}
@@ -44,9 +44,9 @@ const SuggestionModal = ({ isOpen, onClose, onSubmit, gameInfo, currentRoom }) =
                 </option>
               ))}
             </select>
-          </div>
+          </section>
 
-          <div className="suggestion-section">
+          <section className="suggestion-section">
             <h3>Arma</h3>
             <select
               value={selectedWeapon}
@@ -60,24 +60,24 @@ const SuggestionModal = ({ isOpen, onClose, onSubmit, gameInfo, currentRoom }) =
                 </option>
               ))}
             </select>
-          </div>
-        </div>
+          </section>
+        </main>
 
-        <div className="suggestion-actions">
+        <section className="suggestion-actions">
           <button
-            className="btn secondary"
+            className="btn cancel"
             onClick={onClose}
           >
             Cancelar
           </button>
           <button
-            className="btn accent"
+            className="btn suggestion"
             onClick={handleSubmit}
             disabled={!selectedCharacter || !selectedWeapon}
           >
             Hacer Sugerencia
           </button>
-        </div>
+        </section>
       </article>
     </div>,
     document.body

@@ -148,7 +148,7 @@ const GameRoom = ({ user }) => {
         <main className={`game-content ${isMobile ? 'mobile' : ''}`}>
           <GameHeader gameId={gameId} gameState={gameState} onLeaveGame={handleLeaveGame} players={players} />
           {gameState === 'playing' && (
-            <section className={`game-info ${isMobile ? 'mobile' : ''}`}>
+            <section className={`game-info ${isMobile ? 'mobile' : ''} ${isMyTurn ? 'my-turn' : ''}`}>
               <TurnIndicator
                 currentTurn={currentTurn}
                 isMyTurn={isMyTurn}

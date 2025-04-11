@@ -10,7 +10,7 @@ const TurnIndicator = ({
 }) => {
 
   return (
-    <article className={`turn-indicator ${isMyTurn ? 'my-turn' : ''}`}>
+    <article className='turn-indicator'>
       <header className="turn-info">
         <h3>Turno de: <span className="turn-player-name">{currentTurn.playerName}</span></h3>
         <p className="turn-counter">
@@ -20,12 +20,11 @@ const TurnIndicator = ({
 
       {isMyTurn && (
         <section className="turn-actions">
-          <p className="turn-notification">¡Es tu turno!</p>
 
           {/* Botón para hacer sugerencia - solo visible cuando el jugador está en una habitación */}
           {canMakeSuggestion && (
             <button
-              className="btn accent"
+              className="btn suggestion"
               onClick={onMakeSuggestion}
             >
               Hacer Sugerencia
@@ -33,14 +32,14 @@ const TurnIndicator = ({
           )}
 
           <button
-            className="btn danger"
+            className="btn accusation"
             onClick={onMakeAccusation}
           >
             Hacer Acusación
           </button>
 
           <button
-            className="btn primary pass-turn-btn"
+            className="btn pass-turn"
             onClick={onPassTurn}
           >
             Pasar turno

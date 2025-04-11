@@ -4,12 +4,15 @@
   --color-primary: #1e293b;
   --color-primary-dark: #142030;
   --color-primary-light: #2a3a4d;
+  --color-primary-darker: #0b101e;
   
   --color-accent-red: #ff4d4d;
   --color-accent-yellow: #ffca28;
   --color-accent-yellow-light: #ffd54f;
   --color-accent-yellow-secondary: rgba(255, 202, 40, 0.3);
   --color-accent-yelow-lighter: rgba(255, 201, 40, 0.122);
+  
+  --color-accent-green: #2ecc71;
   
   --color-text-primary: #212529;
   --color-text-light: #ffffff;

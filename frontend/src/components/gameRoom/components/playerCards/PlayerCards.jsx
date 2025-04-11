@@ -12,17 +12,16 @@ const PlayerCards = ({ cards = [], leftoverCards }) => {
     setIsCollapsed(!isCollapsed);
   };
 
-  const organizedCards = {
-    characters: cards.filter(card => card.type === 'character'),
-    weapons: cards.filter(card => card.type === 'weapon'),
-    rooms: cards.filter(card => card.type === 'room')
+  const organizeCardsByType = (cardsArray = []) => {
+    return {
+      characters: cardsArray.filter(card => card.type === 'character'),
+      weapons: cardsArray.filter(card => card.type === 'weapon'),
+      rooms: cardsArray.filter(card => card.type === 'room')
+    };
   };
 
-  const organizedLeftoverCards = {
-    characters: leftoverCards.filter(card => card.type === 'character'),
-    weapons: leftoverCards.filter(card => card.type === 'weapon'),
-    rooms: leftoverCards.filter(card => card.type === 'room')
-  };
+  const organizedCards = organizeCardsByType(cards);
+  const organizedLeftoverCards = organizeCardsByType(leftoverCards || []);
 
   return (
     <CardDrawer

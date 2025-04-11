@@ -1,18 +1,12 @@
 .dice-roller {
-  background-color: var(--color-primary-light);
-  border-radius: 8px;
+  background-color: inherit;
   padding: 1rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   height: 120px;
   display: flex;
   justify-content: space-between;
+  border-radius: 0px 0px 8px 8px;
   align-items: center;
   width: 100%;
-}
-
-.dice-roller.my-turn {
-  background-color: var(--color-accent-yelow-lighter);
-  border-left: 4px solid var(--color-accent-yellow);
 }
 
 .dice-pair {

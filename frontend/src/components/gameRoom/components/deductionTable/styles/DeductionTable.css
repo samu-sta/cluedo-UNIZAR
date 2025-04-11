@@ -29,4 +29,5 @@
   overflow-y: auto;
   max-height: calc(80vh - 50px);
   width: 100%;
+  border-top: 1px solid var(--color-accent-yellow);
 }

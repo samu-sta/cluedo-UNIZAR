@@ -17,3 +17,10 @@
   white-space: nowrap;
   margin: 0;
 }
+
+@media (max-width: 550px) {
+  .room-label {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.4rem;
+  }
+}
