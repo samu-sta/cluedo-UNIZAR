@@ -1,7 +1,7 @@
 import './styles/Header.css';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from 'react-router-dom';
-import useHeader from '../../hooks/useHeader';
+import useHeader from './hooks/useHeader';
 import { ROUTES } from '../../utils/constants';
 
 const Header = ({ user, onLogout }) => {

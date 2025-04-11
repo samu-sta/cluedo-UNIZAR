@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import Header from './components/header/Header.jsx';
 import Footer from './components/footer/Footer.jsx';
-import Home from './pages/home/Home.jsx';
-import NotFound from './pages/NotFound/NotFound.jsx';
-import RegisterPage from './pages/auth/register/RegisterPage.jsx';
-import LoginPage from './pages/auth/login/LoginPage.jsx';
-import StartGames from './pages/startGames/StartGames.jsx';
-import GameRoom from './pages/GameRoom/GameRoom.jsx';
+import Home from './components/home/Home.jsx';
+import NotFound from './components/notFound/NotFound.jsx';
+import RegisterPage from './components/auth/register/RegisterPage.jsx';
+import LoginPage from './components/auth/login/LoginPage.jsx';
+import StartGames from './components/startGames/StartGames.jsx';
+import GameRoom from './components/gameRoom/GameRoom.jsx';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ROUTES } from './utils/constants';
 import { logoutUser } from './services/User';
