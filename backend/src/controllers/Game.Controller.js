@@ -1,7 +1,7 @@
 import MESSAGES from "../messages/messages.js";
 import { v4 as uuidv4 } from 'uuid';
 import { gameStateManager } from "../socket/GameStateManager.js";
-import gameService from "../services/Game.Service.js";
+import gameService from "../services/GameControllerService.js";
 import { GAME_STATES } from "../config/constants.js";
 
 /**

@@ -202,6 +202,13 @@ export const setupSocketHandlers = (io) => {
 
       suggestion.username = username;
 
+      // Establecer la sugerencia actual después de validarla
+      gameStateManager.setCurrentSuggestion(gameId, suggestion);
+
+      // Marcar que el jugador ya ha hecho una sugerencia en este turno
+      const game = gameStateManager.getGame(gameId);
+      game.hasSuggested = true;
+
       socket.emit(SOCKET_EVENTS.SUGGESTION_MADE);
 
       socket.to(gameId).emit(SOCKET_EVENTS.CURRENT_SUGGESTION, {
