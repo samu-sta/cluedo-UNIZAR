@@ -3,6 +3,7 @@ import { turnService } from './TurnService.js';
 import { createDoorPositionsMap, findValidMoves } from '../utils/board.js';
 import { isPositionInsideRoom } from '../utils/game.js';
 import MESSAGES from '../messages/messages.js';
+import { GAME_CONFIG } from '../config/constants.js';
 
 /**
  * Servicio para gestionar los movimientos en el tablero
@@ -17,8 +18,9 @@ class BoardService {
     if (!gameService.hasGame(gameId)) return null;
 
     const game = gameService.getGame(gameId);
-    const diceResult1 = Math.floor(Math.random() * 6) + 1;
-    const diceResult2 = Math.floor(Math.random() * 6) + 1;
+
+    const diceResult1 = Math.floor(Math.random() * GAME_CONFIG.DICE.SIDES) + GAME_CONFIG.DICE.MIN;
+    const diceResult2 = Math.floor(Math.random() * GAME_CONFIG.DICE.SIDES) + GAME_CONFIG.DICE.MIN;
     game.diceResult = diceResult1 + diceResult2;
     game.canRollDice = false;
 

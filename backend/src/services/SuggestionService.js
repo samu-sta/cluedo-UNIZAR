@@ -5,6 +5,7 @@ import { playerService } from './PlayerService.js';
 import { cardService } from './CardService.js';
 import { checkAccusation } from '../utils/game.js';
 import MESSAGES from '../messages/messages.js';
+import { GAME_STATES, GAME_CONFIG } from '../config/constants.js';
 
 /**
  * Servicio para gestionar sugerencias y acusaciones
@@ -226,7 +227,7 @@ class SuggestionService {
    */
   removePlayerAfterIncorrectAccusation(gameId, userId) {
     if (!gameService.hasGame(gameId) ||
-      gameService.getGameState(gameId) !== 'playing') {
+      gameService.getGameState(gameId) !== GAME_STATES.PLAYING) {
       return { success: false };
     }
 
@@ -243,7 +244,7 @@ class SuggestionService {
     const nextTurnInfo = isCurrentTurn ? turnService.nextTurn(gameId) : null;
 
     const remainingPlayers = playerService.getPlayers(gameId);
-    const shouldEndGame = remainingPlayers.length < 2;
+    const shouldEndGame = remainingPlayers.length < GAME_CONFIG.MIN_PLAYERS_FOR_GAME;
     const winner = shouldEndGame && remainingPlayers.length === 1
       ? remainingPlayers[0].username
       : null;

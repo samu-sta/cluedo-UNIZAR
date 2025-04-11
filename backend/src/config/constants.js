@@ -36,3 +36,16 @@ export const SOCKET_EVENTS = {
   INCORRECT_ACCUSATION: 'incorrectAccusation',
   ERROR: 'error'
 };
+
+export const GAME_CONFIG = {
+  MIN_PLAYERS_FOR_GAME: 2,
+  MIN_PLAYERS_TO_START: 2,
+  COUNTDOWN_TIME: 3,
+  COUNT_INTERVAL: 1000,
+  DICE: {
+    MIN: 1,
+    MAX: 6,
+    get SIDES() { return this.MAX - this.MIN + 1; }
+  },
+  ANIMATION_STEP_TIME: 300
+};

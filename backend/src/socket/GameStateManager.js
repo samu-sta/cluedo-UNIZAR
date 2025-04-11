@@ -1,4 +1,4 @@
-import { GAME_STATES } from '../config/constants.js';
+import { GAME_STATES, GAME_CONFIG } from '../config/constants.js';
 import MESSAGES from '../messages/messages.js';
 import { gameService } from '../services/GameService.js';
 import { playerService } from '../services/PlayerService.js';
@@ -322,7 +322,7 @@ class GameStateManager {
     const nextTurnInfo = isCurrentTurn ? this.nextTurn(gameId) : null;
 
     const remainingPlayers = this.getPlayers(gameId);
-    const shouldEndGame = remainingPlayers.length < 2;
+    const shouldEndGame = remainingPlayers.length < GAME_CONFIG.MIN_PLAYERS_FOR_GAME;
     const winner = shouldEndGame && remainingPlayers.length === 1
       ? remainingPlayers[0].username
       : null;

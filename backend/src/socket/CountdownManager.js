@@ -1,8 +1,4 @@
-import { GAME_STATES } from '../config/constants.js';
-import { SOCKET_EVENTS } from '../config/constants.js';
-
-const COUNTDOWN_TIME = 3;
-const COUNT_INTERVAL = 1000;
+import { GAME_STATES, SOCKET_EVENTS, GAME_CONFIG } from '../config/constants.js';
 
 export default class CountdownManager {
   constructor(io, gameStateManager) {
@@ -17,7 +13,7 @@ export default class CountdownManager {
 
     if (game.timer) return;
 
-    game.countdown = COUNTDOWN_TIME;
+    game.countdown = GAME_CONFIG.COUNTDOWN_TIME;
 
     game.timer = setInterval(async () => {
       try {
@@ -38,7 +34,7 @@ export default class CountdownManager {
         console.log(error);
       }
 
-    }, COUNT_INTERVAL);
+    }, GAME_CONFIG.COUNT_INTERVAL);
   }
 
   stopCountdown(gameId) {

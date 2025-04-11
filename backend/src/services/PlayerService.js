@@ -67,7 +67,7 @@ class PlayerService {
     const game = gameService.getGame(gameId);
     if (!game) return;
 
-    const startingPositions = [
+    const STARTING_POSITIONS = [
       { row: 1, column: 7 },
       { row: 1, column: 13 },
       { row: 10, column: 18 },
@@ -80,7 +80,7 @@ class PlayerService {
     const playerIds = [...game.players.keys()];
 
     playerIds.forEach(playerId => {
-      game.players.get(playerId).position = startingPositions[posIndex++];
+      game.players.get(playerId).position = STARTING_POSITIONS[posIndex++];
     });
   }
 }
