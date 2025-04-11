@@ -25,9 +25,10 @@ export default class CountdownManager {
 
         if (game.countdown <= 0) {
           this.stopCountdown(gameId);
+          this.io.to(gameId).emit(SOCKET_EVENTS.COUNTDOWN_UPDATE, {
+            seconds: game.countdown
+          });
           await this.onCountdownFinished(gameId);
-          this.gameStateManager.setGameState(gameId, GAME_STATES.PLAYING);
-          this.io.to(gameId).emit(SOCKET_EVENTS.GAME_START);
         }
       }
       catch (error) {

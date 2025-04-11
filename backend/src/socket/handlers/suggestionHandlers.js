@@ -79,10 +79,8 @@ export const handleMakeSuggestion = (gameStateManager, socket, io, gameId, userI
 
   suggestion.username = username;
 
-  // Establecer la sugerencia actual después de validarla
   gameStateManager.setCurrentSuggestion(gameId, suggestion);
 
-  // Marcar que el jugador ya ha hecho una sugerencia en este turno
   const game = gameStateManager.getGame(gameId);
   game.hasSuggested = true;
 

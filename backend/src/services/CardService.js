@@ -70,7 +70,6 @@ class CardService {
 
     playerIds.forEach(playerId => {
       const character = getRandomItem(availableCharacters);
-      // Eliminar el personaje seleccionado del array de disponibles
       const characterIndex = availableCharacters.findIndex(c => c.name === character.name);
       availableCharacters.splice(characterIndex, 1);
 

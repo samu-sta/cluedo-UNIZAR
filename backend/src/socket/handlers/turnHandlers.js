@@ -47,7 +47,6 @@ export const handleMovePlayer = (gameStateManager, socket, io, gameId, userId, t
     return;
   }
 
-  // Procesar el movimiento
   const result = gameStateManager.movePlayer(gameId, userId, targetPosition);
 
   if (!result.success) {
@@ -55,7 +54,6 @@ export const handleMovePlayer = (gameStateManager, socket, io, gameId, userId, t
     return;
   }
 
-  // Notificar a todos los jugadores del movimiento
   const players = gameStateManager.getPlayers(gameId);
   io.to(gameId).emit(SOCKET_EVENTS.PLAYERS_MOVED, {
     players,
@@ -63,6 +61,5 @@ export const handleMovePlayer = (gameStateManager, socket, io, gameId, userId, t
     path: result.path
   });
 
-  // Si el movimiento fue exitoso, enviar un mensaje de éxito
   socket.emit(SOCKET_EVENTS.MOVE_SUCCESS);
 };

@@ -88,7 +88,6 @@ class BoardService {
       return { success: false, message: MESSAGES.PLAYER_NOT_FOUND };
     }
 
-    // Verificar que el movimiento es válido
     const validMoves = this.getValidMoves(gameId, playerId);
     const isValidMove = validMoves.some(move =>
       move.row === targetPosition.row && move.column === targetPosition.column
@@ -98,16 +97,13 @@ class BoardService {
       return { success: false, message: MESSAGES.INVALID_MOVE };
     }
 
-    // Encontrar el camino para animación
     const movePath = validMoves.find(move =>
       move.row === targetPosition.row && move.column === targetPosition.column
     ).path;
 
-    // Actualizar posición del jugador
     player.position = targetPosition;
     game.hasMoved = true;
 
-    // Movimiento exitoso
     return {
       success: true,
       path: movePath
