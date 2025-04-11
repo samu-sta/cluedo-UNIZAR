@@ -1,3 +1,6 @@
+import { GAME_STATES } from '../config/constants.js';
+import { SOCKET_EVENTS } from '../config/constants.js';
+
 const COUNTDOWN_TIME = 3;
 const COUNT_INTERVAL = 1000;
 
@@ -20,15 +23,15 @@ export default class CountdownManager {
       try {
         game.countdown -= 1;
 
-        this.io.to(gameId).emit('countdownUpdate', {
+        this.io.to(gameId).emit(SOCKET_EVENTS.COUNTDOWN_UPDATE, {
           seconds: game.countdown
         });
 
         if (game.countdown <= 0) {
           this.stopCountdown(gameId);
           await this.onCountdownFinished(gameId);
-          this.gameStateManager.setGameState(gameId, 'playing');
-          this.io.to(gameId).emit('gameStart');
+          this.gameStateManager.setGameState(gameId, GAME_STATES.PLAYING);
+          this.io.to(gameId).emit(SOCKET_EVENTS.GAME_START);
         }
       }
       catch (error) {
@@ -52,14 +55,14 @@ export default class CountdownManager {
 
   cancelCountdown(gameId) {
     this.stopCountdown(gameId);
-    this.io.to(gameId).emit('countdownCancelled');
+    this.io.to(gameId).emit(SOCKET_EVENTS.COUNTDOWN_CANCELLED);
   }
 
   async onCountdownFinished(gameId) {
-    if (this.gameStateManager.getGameState(gameId) !== 'waiting') return;
+    if (this.gameStateManager.getGameState(gameId) !== GAME_STATES.WAITING) return;
 
     await this.gameStateManager.setupGame(gameId);
-    this.gameStateManager.setGameState(gameId, 'playing');
+    this.gameStateManager.setGameState(gameId, GAME_STATES.PLAYING);
 
     const currentTurn = {
       playerId: this.gameStateManager.getCurrentTurnPlayer(gameId),
@@ -70,6 +73,6 @@ export default class CountdownManager {
 
     const players = this.gameStateManager.getPlayers(gameId);
 
-    this.io.to(gameId).emit('gameStart', { currentTurn, players });
+    this.io.to(gameId).emit(SOCKET_EVENTS.GAME_START, { currentTurn, players });
   }
 }

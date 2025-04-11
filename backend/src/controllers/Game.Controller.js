@@ -1,122 +1,74 @@
 import MESSAGES from "../messages/messages.js";
-import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
-import { gameStateManager } from "../socket/handlers.js";
-import { getGame } from "../utils/game.js";
+import { gameStateManager } from "../socket/GameStateManager.js";
+import gameService from "../services/Game.Service.js";
+import { GAME_STATES } from "../config/constants.js";
+
+/**
+ * Controlador para gestionar las partidas del juego a través de HTTP
+ */
 class GameController {
-  constructor() {
 
-    if (GameController.instance) {
-      return GameController.instance;
-    }
-    this.activeGames = new Map();
-    GameController.instance = this;
-  }
-
-  deleteGame = (gameId) => {
-    this.activeGames.delete(gameId);
-  }
-
-  getActiveGames = () => {
-    return this.activeGames;
-  }
-
-  getGameById = (gameId) => {
-    return this.activeGames.get(gameId);
-  }
-
-  createGame = async (req, res) => {
+  /**
+   * Crear una nueva partida
+   * @param {Object} req - Objeto request de Express
+   * @param {Object} res - Objeto response de Express
+   * @returns {Object} Respuesta JSON con los datos de la partida creada
+   */
+  async createGame(req, res) {
     try {
       const user = req.account;
       const gameId = uuidv4();
 
+      gameStateManager.registerGame(gameId, user);
 
-      this.activeGames.set(gameId, {
-        players: [{
-          username: user.username,
-          id: user.id
-        }]
-      });
-      console.log(Array.from(this.activeGames.keys()));
-      console.log('Partida creada:', gameId);
-
-      const socketToken = jwt.sign(
-        {
-          userId: user.id,
-          gameId,
-          username: user.username
-        },
-        process.env.JWT_SECRET,
-        { expiresIn: '1h' }
-      );
-
-      const gameInfo = await getGame();
-
-      return res.status(201).json({
-        success: true,
-        gameId,
-        gameInfo,
-        socketToken
-      });
+      const response = await gameService.prepareGameResponse(user, gameId);
+      return res.status(201).json(response);
     }
     catch (error) {
-      console.error('Error al crear partida:', error);
-      return res.status(500).json({ success: false, message: MESSAGES.ERROR_500 });
+      return res.status(500).json({
+        success: false,
+        message: MESSAGES.ERROR_500
+      });
     }
   }
 
-  joinGame = async (req, res) => {
+  /**
+   * Unirse a una partida existente
+   * @param {Object} req - Objeto request de Express
+   * @param {Object} res - Objeto response de Express
+   * @returns {Object} Respuesta JSON con los datos de la partida
+   */
+  async joinGame(req, res) {
     try {
       const { gameId } = req.params;
       const user = req.account;
-      const userId = user.id;
-      console.log('Usuario intenta unirse a partida:', gameId);
-      console.log(this.activeGames.values());
 
-      if (!this.activeGames.has(gameId)) {
-        return res.status(404).json({ success: false, message: "Partida no encontrada" });
-      }
-
-      const game = this.activeGames.get(gameId);
-
-      if (gameStateManager.getGameState(gameId) === 'playing') {
-        return res.status(403).json({ success: false, message: "La partida ya ha comenzado" });
-      }
-
-      const isAlreadyInGame = game.players.some(player => player.id === userId);
-
-      if (!isAlreadyInGame) {
-        game.players.push({
-          username: user.username,
-          id: userId
+      if (!gameStateManager.gameExists(gameId)) {
+        return res.status(404).json({
+          success: false,
+          message: MESSAGES.GAME_NOT_FOUND
         });
       }
-      console.log(game.players);
 
-      this.activeGames.set(gameId, game);
 
-      const socketToken = jwt.sign(
-        {
-          userId,
-          gameId,
-          username: user.username
-        },
-        process.env.JWT_SECRET,
-        { expiresIn: '1h' }
-      );
+      if (gameStateManager.getGameState(gameId) === GAME_STATES.PLAYING) {
+        return res.status(403).json({
+          success: false,
+          message: MESSAGES.GAME_ALREADY_STARTED
+        });
+      }
 
-      const gameInfo = await getGame();
+      gameStateManager.addPlayerToGame(gameId, user);
 
-      return res.status(200).json({
-        success: true,
-        gameId,
-        gameInfo,
-        socketToken
-      });
+      const response = await gameService.prepareGameResponse(user, gameId);
+      return res.status(200).json(response);
     }
     catch (error) {
-      console.error('Error al unirse a partida:', error);
-      return res.status(500).json({ success: false, message: MESSAGES.ERROR_500 });
+      return res.status(500).json({
+        success: false,
+        message: MESSAGES.ERROR_500
+      });
     }
   }
 }

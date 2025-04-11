@@ -21,9 +21,22 @@ const verifyToken = (token) => {
   }
 }
 
+const generateSocketToken = (user, gameId) => {
+  return jwt.sign(
+    {
+      userId: user.id,
+      gameId,
+      username: user.username
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: '1h' }
+  );
+}
+
 const auth = {
   createToken,
-  verifyToken
+  verifyToken,
+  generateSocketToken
 }
 
 export default auth;

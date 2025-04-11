@@ -1,10 +1,55 @@
-import { getCards } from "../utils/game.js";
-import { getBoard } from "../utils/game.js";
-import { getCharacters } from "../utils/game.js";
+import { getCards, getBoard, getCharacters, getGame } from "../utils/game.js";
 import { createDoorPositionsMap, findValidMoves } from "../utils/board.js";
-export default class GameStateManager {
+import jwt from 'jsonwebtoken';
+import { GAME_STATES } from '../config/constants.js';
+import MESSAGES from '../messages/messages.js';
+
+class GameStateManager {
   constructor() {
     this.games = new Map();
+  }
+
+  /**
+   * Registra una nueva partida HTTP y la inicializa
+   * @param {string} gameId - ID de la partida
+   * @param {Object} user - Datos del usuario creador
+   */
+  registerGame(gameId, user) {
+    this.initGame(gameId);
+
+    console.log('Juegos activos: ', this.games.size);
+
+    this.addPlayer(gameId, user.id, {
+      username: user.username
+    });
+  }
+
+  /**
+   * Verifica si una partida existe
+   * @param {string} gameId - ID de la partida
+   * @returns {boolean} - Verdadero si existe
+   */
+  gameExists(gameId) {
+    return this.hasGame(gameId);
+  }
+
+  /**
+   * Añade un jugador a una partida existente (para API HTTP)
+   * @param {string} gameId - ID de la partida 
+   * @param {Object} user - Datos del usuario
+   * @returns {boolean} - True si el jugador fue añadido, false si ya estaba
+   */
+  addPlayerToGame(gameId, user) {
+    return this.addPlayer(gameId, user.id, { username: user.username });
+  }
+
+  /**
+   * Elimina una partida
+   * @param {string} gameId - ID de la partida
+   * @returns {boolean} - True si la partida fue eliminada
+   */
+  deleteGame(gameId) {
+    return this.removeGame(gameId);
   }
 
   async initGame(gameId) {
@@ -21,7 +66,7 @@ export default class GameStateManager {
         players: new Map(),
         timer: null,
         countdown: null,
-        state: 'waiting',
+        state: GAME_STATES.WAITING,
         board,
         solution: null,
         playerCards: null,
@@ -82,7 +127,7 @@ export default class GameStateManager {
   }
 
   getGameState(gameId) {
-    if (!this.hasGame(gameId)) return 'waiting';
+    if (!this.hasGame(gameId)) return GAME_STATES.WAITING;
     return this.getGame(gameId).state;
   }
 
@@ -342,14 +387,14 @@ export default class GameStateManager {
 
   movePlayer(gameId, playerId, targetPosition) {
     if (!this.hasGame(gameId) || !this.isPlayerTurn(gameId, playerId)) {
-      return { success: false, message: "No es tu turno" };
+      return { success: false, message: MESSAGES.NOT_YOUR_TURN };
     }
 
     const game = this.getGame(gameId);
     const player = game.players.get(playerId);
 
     if (!player) {
-      return { success: false, message: "Jugador no encontrado" };
+      return { success: false, message: MESSAGES.PLAYER_NOT_FOUND };
     }
 
     // Verificar que el movimiento es válido
@@ -359,7 +404,7 @@ export default class GameStateManager {
     );
 
     if (!isValidMove) {
-      return { success: false, message: "Movimiento no válido" };
+      return { success: false, message: MESSAGES.INVALID_MOVE };
     }
 
     // Encontrar el camino para animación
@@ -380,7 +425,7 @@ export default class GameStateManager {
 
   handlePlayerLeaveInGame(gameId, userId) {
 
-    if (!this.hasGame(gameId) || this.getGameState(gameId) !== 'playing') {
+    if (!this.hasGame(gameId) || this.getGameState(gameId) !== GAME_STATES.PLAYING) {
       return { success: false };
     }
     return this.removePlayerInGame(gameId, userId);
@@ -469,7 +514,7 @@ export default class GameStateManager {
     const result = this.removePlayerInGame(gameId, playerId, { revealSolution: true });
 
     if (!result.success) {
-      return { success: false, message: "Error al procesar la acusación" };
+      return { success: false, message: MESSAGES.ACCUSATION_PROCESSING_ERROR };
     }
 
     return {
@@ -539,36 +584,36 @@ export default class GameStateManager {
   validateSuggestion(gameId, playerId, suggestion) {
 
     if (!this.hasGame(gameId)) {
-      return this.createValidationError("Partida no encontrada");
+      return this.createValidationError(MESSAGES.GAME_NOT_FOUND);
     }
 
     if (!this.isPlayerTurn(gameId, playerId)) {
-      return this.createValidationError("No es tu turno");
+      return this.createValidationError(MESSAGES.NOT_YOUR_TURN);
     }
 
     const game = this.getGame(gameId);
 
     if (game.canRollDice) {
-      return this.createValidationError("Debes tirar los dados primero");
+      return this.createValidationError(MESSAGES.MUST_ROLL_DICE_FIRST);
     }
 
     if (!game.hasMoved) {
-      return this.createValidationError("Debes moverte antes de hacer una sugerencia");
+      return this.createValidationError(MESSAGES.MUST_MOVE_BEFORE_SUGGESTION);
     }
 
     if (game.hasSuggested) {
-      return this.createValidationError("Ya has hecho una sugerencia en este turno");
+      return this.createValidationError(MESSAGES.ALREADY_MADE_SUGGESTION);
     }
 
     const playerRoom = this.getPlayerRoom(gameId, playerId);
 
     if (!playerRoom) {
-      return this.createValidationError("No estás en una habitación");
+      return this.createValidationError(MESSAGES.NOT_IN_ROOM);
     }
 
     if (playerRoom.roomName !== suggestion.room) {
       return this.createValidationError(
-        `Solo puedes hacer una sugerencia para la habitación donde estás (${playerRoom.roomName})`
+        `${MESSAGES.SUGGESTION_ROOM_MISMATCH} (${playerRoom.roomName})`
       );
     }
 
@@ -608,13 +653,13 @@ export default class GameStateManager {
 
   validateShowCardRequest(gameId, playerId, card) {
     if (!this.hasGame(gameId)) {
-      return { valid: false, message: "Partida no encontrada" };
+      return { valid: false, message: MESSAGES.GAME_NOT_FOUND };
     }
 
     const game = this.getGame(gameId);
 
     if (!game.currentSuggestion) {
-      return { valid: false, message: "No hay una sugerencia activa" };
+      return { valid: false, message: MESSAGES.NO_ACTIVE_SUGGESTION };
     }
 
     if (!card) {
@@ -627,7 +672,7 @@ export default class GameStateManager {
     );
 
     if (!hasCard) {
-      return { valid: false, message: "No tienes esa carta" };
+      return { valid: false, message: MESSAGES.CARD_NOT_FOUND };
     }
 
     return { valid: true };
@@ -644,3 +689,5 @@ export default class GameStateManager {
     });
   }
 }
+
+export const gameStateManager = new GameStateManager();
