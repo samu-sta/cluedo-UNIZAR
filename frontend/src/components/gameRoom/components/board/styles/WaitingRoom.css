@@ -27,6 +27,7 @@
 .countdown-container h3 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
+  color: var(--color-text-light);
 }
 
 .countdown-timer {
@@ -42,6 +43,6 @@
   text-align: center;
   max-width: 80%;
   line-height: 1.5;
-  color: var(--color-text);
+  color: var(--color-text-light);
   opacity: 0.9;
 }
