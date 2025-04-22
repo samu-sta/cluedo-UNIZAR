@@ -78,6 +78,38 @@ class TurnService {
       totalPlayers: game.turnOrder.length
     };
   }
+
+  /**
+   * Actualiza el orden de turnos cuando un jugador abandona la partida
+   * @param {string} gameId - ID de la partida
+   * @param {string} userId - ID del jugador que abandona
+   * @returns {boolean} True si se actualizó correctamente
+   */
+  updatePlayerTurnOrder(gameId, userId) {
+    const game = gameService.getGame(gameId);
+    if (!game || !game.turnOrder || game.turnOrder.length === 0) return false;
+
+    const playerIndex = game.turnOrder.indexOf(userId);
+    if (playerIndex === -1) return false;
+
+    game.turnOrder.splice(playerIndex, 1);
+
+    if (game.turnOrder.length === 0) {
+      game.currentTurnIndex = -1;
+      game.currentTurnPlayer = null;
+      return true;
+    }
+
+    if (playerIndex <= game.currentTurnIndex) {
+      game.currentTurnIndex = game.currentTurnIndex > 0 ? game.currentTurnIndex - 1 : 0;
+    }
+
+    if (game.currentTurnPlayer === userId) {
+      game.currentTurnPlayer = game.turnOrder[game.currentTurnIndex];
+    }
+
+    return true;
+  }
 }
 
 export const turnService = new TurnService();

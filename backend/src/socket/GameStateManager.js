@@ -317,9 +317,20 @@ class GameStateManager {
     const isCurrentTurn = this.isPlayerTurn(gameId, userId);
 
     this.redistributePlayerCards(gameId, userId);
+
+    // Actualizar el orden de turnos antes de eliminar al jugador
+    turnService.updatePlayerTurnOrder(gameId, userId);
+
     this.removePlayer(gameId, userId);
 
-    const nextTurnInfo = isCurrentTurn ? this.nextTurn(gameId) : null;
+    // Si era el turno del jugador que salió, ya no necesitamos llamar a nextTurn
+    // porque updatePlayerTurnOrder ya ajustó el currentTurnPlayer
+    const nextTurnInfo = isCurrentTurn ? {
+      playerId: game.currentTurnPlayer,
+      playerName: turnService.getCurrentTurnPlayerName(gameId),
+      turnIndex: game.currentTurnIndex,
+      totalPlayers: game.turnOrder ? game.turnOrder.length : 0
+    } : null;
 
     const remainingPlayers = this.getPlayers(gameId);
     const shouldEndGame = remainingPlayers.length < GAME_CONFIG.MIN_PLAYERS_FOR_GAME;
