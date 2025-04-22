@@ -1,3 +1,5 @@
+import { MAX } from "uuid";
+
 export const GAME_STATES = {
   WAITING: 'waiting',
   PLAYING: 'playing',
@@ -40,7 +42,8 @@ export const SOCKET_EVENTS = {
 export const GAME_CONFIG = {
   MIN_PLAYERS_FOR_GAME: 2,
   MIN_PLAYERS_TO_START: 2,
-  COUNTDOWN_TIME: 3,
+  MAX_PLAYERS: 6,
+  COUNTDOWN_TIME: 10,
   COUNT_INTERVAL: 1000,
   DICE: {
     MIN: 1,

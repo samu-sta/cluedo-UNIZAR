@@ -71,6 +71,44 @@ class GameController {
       });
     }
   }
+
+  /**
+   * Buscar una partida aleatoria para unirse
+   * @param {Object} req - Objeto request de Express
+   * @param {Object} res - Objeto response de Express
+   * @returns {Object} Respuesta JSON con los datos de la partida encontrada
+   */
+  async findRandomGame(req, res) {
+    try {
+      const user = req.account;
+      const availableGames = gameStateManager.getAvailableGames();
+
+      // Verificar si hay partidas disponibles
+      if (!availableGames || availableGames.length === 0) {
+        return res.status(404).json({
+          success: false,
+          message: MESSAGES.GAME_NOT_FOUND
+        });
+      }
+
+      // Seleccionar una partida aleatoria
+      const randomIndex = Math.floor(Math.random() * availableGames.length);
+      const randomGameId = availableGames[randomIndex];
+
+      // Añadir al usuario a la partida seleccionada
+      gameStateManager.addPlayerToGame(randomGameId, user);
+
+      // Preparar la respuesta igual que en joinGame
+      const response = await gameService.prepareGameResponse(user, randomGameId);
+      return res.status(200).json(response);
+    }
+    catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: MESSAGES.ERROR_500
+      });
+    }
+  }
 }
 
 const gameController = new GameController();

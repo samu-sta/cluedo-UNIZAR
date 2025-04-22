@@ -31,3 +31,19 @@ export const joinGame = async (gameId) => {
     return { error: 'Error de conexión al servidor' };
   }
 };
+
+export const findRandomGame = async () => {
+  try {
+    const response = await fetch(`${API_URL}/game/random`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include'
+    });
+
+    return await response.json();
+  }
+  catch (error) {
+    console.error('Error finding random game:', error);
+    return { error: 'Error de conexión al servidor' };
+  }
+};

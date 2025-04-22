@@ -9,6 +9,7 @@ export const GameRoutes = () => {
 
   gameRouter.post('/create', gameController.createGame);
   gameRouter.post('/join/:gameId', gameController.joinGame);
+  gameRouter.post('/random', gameController.findRandomGame);
 
   return gameRouter;
 };
