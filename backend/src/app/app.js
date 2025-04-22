@@ -18,7 +18,6 @@ export const createApp = () => {
   const app = express();
   const server = http.createServer(app);
 
-  // Configurar Socket.IO utilizando el módulo separado
   configureSocket(server);
 
   app.use(morgan('dev'));

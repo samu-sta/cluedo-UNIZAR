@@ -11,6 +11,7 @@ const StartGames = ({ user }) => {
     gameId,
     handleCreateGame,
     handleJoinGame,
+    handleFindRandomGame,
     handleGameIdChange,
   } = useStartGames();
 
@@ -38,13 +39,23 @@ const StartGames = ({ user }) => {
         <section className="search-game-container">
           {error && <div className="error-message-games">{error}</div>}
 
-          <button
-            className="btn primary large with-shadow search-button"
-            onClick={handleCreateGame}
-            disabled={isLoading}
-          >
-            {isLoading ? 'Creando partida...' : 'Crear nueva partida'}
-          </button>
+          <div className="game-buttons">
+            <button
+              className="btn primary large with-shadow search-button"
+              onClick={handleCreateGame}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Creando partida...' : 'Crear nueva partida'}
+            </button>
+
+            <button
+              className="btn primary large with-shadow search-button"
+              onClick={handleFindRandomGame}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Buscando partida...' : 'Buscar partida'}
+            </button>
+          </div>
 
           <section className="join-game-form">
             <h3>O únete a una partida existente</h3>

@@ -402,6 +402,25 @@ class GameStateManager {
   showCard(gameId, playerId, card) {
     return suggestionService.showCard(gameId, playerId, card);
   }
+
+  /**
+   * Obtiene las IDs de todas las partidas disponibles para unirse
+   * @returns {Array} - Lista de IDs de partidas disponibles
+   */
+  getAvailableGames() {
+    const availableGames = [];
+    console.log('Juegos activos: ', gameService.getActiveGamesCount());
+
+    // Obtener todas las partidas y filtrar las que están en estado de espera
+    for (const [gameId, game] of gameService.getAllGames()) {
+      if (game.state === GAME_STATES.WAITING &&
+        playerService.getPlayerCount(gameId) < GAME_CONFIG.MAX_PLAYERS) {
+        availableGames.push(gameId);
+      }
+    }
+
+    return availableGames;
+  }
 }
 
 export const gameStateManager = new GameStateManager();

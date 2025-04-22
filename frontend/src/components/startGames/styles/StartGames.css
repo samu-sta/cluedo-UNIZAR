@@ -48,6 +48,29 @@
 .search-button {
   font-size: 1.5rem;
   transition: all 0.3s ease;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.game-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 750px;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn.secondary.search-button {
+  background-color: var(--color-background-lighter, rgba(255, 255, 255, 0.1));
+  color: var(--color-text);
+  border: 2px solid var(--color-accent-yellow);
+  font-weight: 600;
+}
+
+.btn.secondary.search-button:hover {
+  background-color: var(--color-accent-yellow);
+  color: var(--color-text-dark, #000);
 }
 
 .searching-container {

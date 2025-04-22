@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createGame, joinGame } from '../../../services/Game';
+import { createGame, joinGame, findRandomGame } from '../../../services/Game';
 
 const useStartGames = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [gameId, setGameId] = useState('');
 
   const handleCreateGame = async () => {
     setIsLoading(true);
@@ -59,6 +60,31 @@ const useStartGames = () => {
     }
   };
 
+  const handleFindRandomGame = async () => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await findRandomGame();
+
+      if (!response.success) {
+        setError('No hay partidas disponibles');
+        setIsLoading(false);
+        return;
+      }
+
+      navigate(`/game/${response.gameId}`);
+    }
+    catch (err) {
+      setError('Error de conexión al servidor');
+      setIsLoading(false);
+    }
+  };
+
+  const handleGameIdChange = (e) => {
+    setGameId(e.target.value);
+  };
+
   const clearError = () => {
     setError(null);
   };
@@ -66,8 +92,11 @@ const useStartGames = () => {
   return {
     isLoading,
     error,
+    gameId,
     handleCreateGame,
     handleJoinGame,
+    handleFindRandomGame,
+    handleGameIdChange,
     clearError
   };
 };

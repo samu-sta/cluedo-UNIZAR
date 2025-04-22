@@ -93,6 +93,14 @@ class GameService {
   getActiveGamesCount() {
     return this.games.size;
   }
+
+  /**
+   * Obtiene todas las partidas activas
+   * @returns {Map} Map con todas las partidas activas
+   */
+  getAllGames() {
+    return this.games.entries();
+  }
 }
 
 export const gameService = new GameService();
