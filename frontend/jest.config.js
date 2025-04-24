@@ -1,11 +1,14 @@
 export default {
   testEnvironment: 'jest-environment-jsdom',
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   moduleNameMapper: {
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
-    '\\.(jpg|jpeg|png|gif|webp|svg)$': '<rootDir>/__mocks__/fileMock.js'
+    '\\.(css|less)$': '<rootDir>/test/__mocks__/fileMock.js',
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '^../../../../schemas/schemas$': '<rootDir>/test/__mocks__/schemas.js',
+    '^../../../../services/User$': '<rootDir>/src/services/__mocks__/User.js'
   },
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest'
-  }
+    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest']
+  },
+  extensionsToTreatAsEsm: ['.jsx']
 };

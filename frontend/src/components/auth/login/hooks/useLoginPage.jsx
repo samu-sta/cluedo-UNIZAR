@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { userSchema } from '../../../../schemas/schemas';
-import { loginUser } from '../../../../services/User';
 
-const useLoginPage = (setUser) => {
+const useLoginPage = (setUser, loginUser) => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [serverError, setServerError] = useState(null);
