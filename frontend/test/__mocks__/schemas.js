@@ -70,9 +70,8 @@ const validateRegisterUser = fn().mockImplementation((data) => {
     errors.password = "La contraseña debe tener al menos 6 caracteres";
   }
 
-  // Confirm password validation
-  if (data.password !== data.confirmPassword) {
-    errors.confirmPassword = "Las contraseñas no coinciden";
+  if (!data.confirmPassword || data.confirmPassword.length < 6) {
+    errors.confirmPassword = "La confirmación de contraseña debe tener al menos 6 caracteres";
   }
 
   // Return validation result

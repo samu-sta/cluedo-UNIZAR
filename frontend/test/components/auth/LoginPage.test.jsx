@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, act, screen, waitFor } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, MemoryRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from '../../../src/components/auth/login/LoginPage';
 
 describe('LoginPage Component - Integration Test', () => {
@@ -97,18 +97,22 @@ describe('LoginPage Component - Integration Test', () => {
 
   test('check login success using real components', async () => {
     const mockSetUser = jest.fn();
-    const mockLoginUser = jest.fn().mockResolvedValue(Promise.resolve(mockResponse));
+    const mockLoginUser = jest.fn().mockResolvedValue(mockResponse);
 
+    const HomePage = () => <div>Home Page</div>;
 
-    const { getByLabelText, getByRole } = render(
-      <BrowserRouter>
-        <LoginPage setUser={mockSetUser} loginUser={mockLoginUser} />
-      </BrowserRouter>
+    render(
+      <MemoryRouter initialEntries={['/login']}>
+        <Routes>
+          <Route path="/login" element={<LoginPage setUser={mockSetUser} loginUser={mockLoginUser} />} />
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </MemoryRouter>
     );
 
-    const emailInput = getByLabelText('Correo electrónico');
-    const passwordInput = getByLabelText('Contraseña');
-    const submitButton = getByRole('button', { name: 'Iniciar sesión' });
+    const emailInput = screen.getByLabelText('Correo electrónico');
+    const passwordInput = screen.getByLabelText('Contraseña');
+    const submitButton = screen.getByRole('button', { name: 'Iniciar sesión' });
 
     await act(async () => {
       fireEvent.change(emailInput, { target: { value: 'user@example.com' } });
@@ -117,6 +121,7 @@ describe('LoginPage Component - Integration Test', () => {
     });
 
     await waitFor(() => {
+      expect(screen.getByText('Home Page')).toBeInTheDocument();
       expect(mockSetUser).toHaveBeenCalledWith(mockUser);
       expect(localStorage.setItem).toHaveBeenCalledWith('user', JSON.stringify(mockUser));
     });

@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "test": "node --no-warnings node_modules/.bin/jest",
     "test:watch": "node --no-warnings --experimental-vm-modules node_modules/.bin/jest --watch",
-    "test:coverage": "node --no-warnings --experimental-vm-modules node_modules/.bin/jest --coverage"
+    "test:coverage": "node --no-warnings node_modules/.bin/jest --coverage"
   },
   "dependencies": {
     "react": "19.0.0",

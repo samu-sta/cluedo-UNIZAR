@@ -5,8 +5,8 @@ import { REGISTER_FORM_FIELDS } from '../../../utils/constants';
 import FormField from '../components/FormField';
 import "./styles/RegisterPage.css";
 
-const RegisterPage = () => {
-  const { errors, handleSubmit } = useRegisterPage();
+const RegisterPage = ({ registerUser }) => {
+  const { errors, handleSubmit } = useRegisterPage(registerUser);
 
   return (
     <main className="register">
