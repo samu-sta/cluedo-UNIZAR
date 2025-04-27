@@ -5,8 +5,8 @@ import { LOGIN_FORM_FIELDS } from '../../../utils/constants';
 import FormField from '../components/FormField';
 import "./styles/LoginPage.css";
 
-const LoginPage = ({ setUser }) => {
-  const { errors, isLoading, handleSubmit, serverError } = useLoginPage(setUser);
+const LoginPage = ({ setUser, loginUser }) => {
+  const { errors, isLoading, handleSubmit, serverError } = useLoginPage(setUser, loginUser);
 
   return (
     <main className="login">

@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { userSchema } from '../../../../schemas/schemas';
 import { useNavigate } from 'react-router-dom';
-import { registerUser } from '../../../../services/User';
 
-const useRegisterPage = () => {
+const useRegisterPage = (registerUserFn) => {
 
   const [errors, setErrors] = useState({});
 
@@ -24,7 +23,7 @@ const useRegisterPage = () => {
     }
     const { confirmPassword: _confirmPassword, ...rest } = data;
     try {
-      const response = await registerUser(rest);
+      const response = await registerUserFn(rest);
 
       if (response.error) {
         setErrors({ email: response.error });
@@ -34,7 +33,7 @@ const useRegisterPage = () => {
       navigate('/login');
     }
     catch (error) {
-      console.error('Error en el servidor: ' + error.message);
+      console.error('Error en el servidor: ' + (error?.message || 'Unknown error'));
       setErrors({ server: 'Error en el servidor, por favor intente más tarde.' });
     }
   }

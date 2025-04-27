@@ -22,11 +22,6 @@ const RulesSection = ({ isMobile }) => (
             </li>
           ))}
         </ul>
-
-        <Link to={ROUTES.RULES} className="btn outline with-arrow">
-          {HOME.RULES.VIEW_RULES_BTN}
-          <span className="btn-arrow" aria-hidden="true">→</span>
-        </Link>
       </header>
       <img
         src={HOME.IMAGES.GAME_BOARD}

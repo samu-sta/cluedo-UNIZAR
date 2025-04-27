@@ -10,6 +10,8 @@ import GameRoom from './components/gameRoom/GameRoom.jsx';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ROUTES } from './utils/constants';
 import { logoutUser } from './services/User';
+import { loginUser } from './services/User';
+import { registerUser } from './services/User';
 import { closeSocket } from './services/Socket';
 import './App.css';
 
@@ -28,8 +30,8 @@ const App = () => {
       <Header user={user} onLogout={handleLogout} />
       <Routes>
         <Route path={ROUTES.HOME} element={<Home user={user} />} />
-        <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
-        <Route path={ROUTES.LOGIN} element={<LoginPage setUser={setUser} />} />
+        <Route path={ROUTES.REGISTER} element={<RegisterPage registerUser={registerUser} />} />
+        <Route path={ROUTES.LOGIN} element={<LoginPage setUser={setUser} loginUser={loginUser} />} />
         <Route path={ROUTES.GAMES} element={<StartGames user={user} />} />
         <Route path="/game/:gameId" element={<GameRoom user={user} />} />
         <Route path="*" element={<NotFound />} />
