@@ -18,9 +18,13 @@ const ShowCardModal = ({ isOpen, onSubmit, playerCards, currentSuggestion }) => 
         (card.type === 'room' && card.name === currentSuggestion.room)
       );
       setMatchingCards(matching);
-      setSelectedCard(null);
+      if (matching.length === 1) {
+        setSelectedCard(matching[0]);
+      } else {
+        setSelectedCard(null);
+      }
     }
-  }, [currentSuggestion]);
+  }, [currentSuggestion, playerCards]);
 
 
 
