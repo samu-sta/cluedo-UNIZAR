@@ -71,8 +71,8 @@ export function useSuggestions(socket, gameInfo, isMyTurn) {
     });
 
     return (
-      position.row > minRow && position.row < maxRow &&
-      position.column > minCol && position.column < maxCol
+      position.row >= minRow && position.row <= maxRow &&
+      position.column >= minCol && position.column <= maxCol
     );
   };
 
