@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente que muestra los dados y permite al jugador lanzarlos en su turno
+ * @author Samuel Felipe
+ */
 import { useState, useEffect } from 'react';
 import '../styles/DiceRoller.css';
 import Die from './Die';

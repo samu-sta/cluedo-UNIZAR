@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for PlayerCards component which is the main container for displaying all player's cards.
+ * @author Samuel Felipe
+ */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import PlayerCards from '../../../../../src/components/gameRoom/components/playerCards/PlayerCards';

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for SuggestionResponseModal component which displays the responses from other players to the current player's suggestion.
+ * @author Samuel Felipe
+ */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import SuggestionResponseModal from '../../../../src/components/gameRoom/components/SuggestionResponseModal';

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Estilos para la sección heroica principal en la página de inicio
+ * @author Samuel Felipe
+ */
 .home-hero {
   display: grid;
   gap: 2rem;

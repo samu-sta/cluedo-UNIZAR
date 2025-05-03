@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente que muestra las reglas del juego en la página de inicio
+ * @author Samuel Felipe
+ */
 import { Link } from 'react-router-dom';
 import { HOME, ROUTES } from '../../../utils/constants';
 import SectionTitle from './SectionTitle';

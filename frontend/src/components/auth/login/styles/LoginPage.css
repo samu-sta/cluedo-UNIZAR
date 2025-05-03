@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Estilos para la página de inicio de sesión de la aplicación
+ * @author Samuel Felipe
+ */
+
 .login {
   width: 100%;
   display: flex;

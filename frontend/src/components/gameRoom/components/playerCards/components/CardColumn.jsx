@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente que muestra una columna de cartas de un tipo específico (personajes, armas o habitaciones)
+ * @autor Samuel Felipe
+ */
 import GameCard from './GameCard';
 import '../styles/CardColumn.css';
 

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for LeaveGameModal component which handles the confirmation dialog when a player wants to leave a game.
+ * @author Samuel Felipe
+ */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import LeaveGameModal from '../../../../src/components/gameRoom/components/LeaveGameModal';

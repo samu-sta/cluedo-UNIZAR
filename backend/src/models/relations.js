@@ -6,15 +6,11 @@ import DoorModel from './Door.js';
 import CardModel from './Card.js';
 import AccountModel from './Account.js';
 import UserModel from './User.js';
-import AdminModel from './Admin.js';
 
 export const setupRelations = () => {
-  // Relaciones Account -> User/Admin (one-to-one)
+  // Relaciones Account -> User (one-to-one)
   AccountModel.hasOne(UserModel, { foreignKey: 'accountId' });
   UserModel.belongsTo(AccountModel, { foreignKey: 'accountId' });
-
-  AccountModel.hasOne(AdminModel, { foreignKey: 'accountId' });
-  AdminModel.belongsTo(AccountModel, { foreignKey: 'accountId' });
 
   // Relaciones Game -> Board (one-to-one)
   GameModel.hasOne(BoardModel, { foreignKey: 'gameId', as: 'board' });

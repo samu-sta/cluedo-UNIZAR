@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for GameCard component which displays an individual game card with its image and details.
+ * @author Samuel Felipe
+ */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import GameCard from '../../../../../src/components/gameRoom/components/playerCards/components/GameCard';

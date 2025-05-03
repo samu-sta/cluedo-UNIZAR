@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Estilos para los elementos individuales de la lista de deducciones con sus estados visuales
+ * @author Samuel Felipe
+ */
 .deduction-item {
   display: flex;
   justify-content: space-between;

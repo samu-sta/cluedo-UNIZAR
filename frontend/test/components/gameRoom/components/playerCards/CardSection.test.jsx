@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for CardSection component which organizes and displays cards by categories.
+ * @author Samuel Felipe
+ */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import CardSection from '../../../../../src/components/gameRoom/components/playerCards/components/CardSection';

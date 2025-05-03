@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente que muestra la leyenda de los iconos utilizados en la tabla de deducciones
+ * @author Samuel Felipe
+ */
 import { FaCheck, FaQuestion, FaTimes } from "react-icons/fa";
 import '../styles/DeductionLegend.css';
 

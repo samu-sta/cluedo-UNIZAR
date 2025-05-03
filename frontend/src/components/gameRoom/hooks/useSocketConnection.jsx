@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Hook para gestionar la conexión de socket y la comunicación con el servidor
+ * @author Samuel Felipe
+ */
 import { useState, useRef, useEffect } from 'react';
 import { joinGame } from '../../../services/Game';
 import { initSocket, closeSocket } from '../../../services/Socket';

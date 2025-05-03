@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente de insignia que muestra el personaje del usuario
+ * @author Samuel Felipe
+ */
 import './styles/CharacterBadge.css';
 
 const CharacterBadge = ({ character }) => {

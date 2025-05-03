@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for WaitingRoom component which displays a waiting screen before the game starts, including countdown when applicable.
+ * @author Samuel Felipe
+ */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import WaitingRoom from '../../../../../../src/components/gameRoom/components/board/components/WaitingRoom';

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente que representa un dado individual con su valor
+ * @author Samuel Felipe
+ */
 import '../styles/Die.css';
 
 const Die = ({ value }) => {

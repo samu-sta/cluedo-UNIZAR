@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Hook personalizado para gestionar la lógica de creación y unión a partidas
+ * @autor Samuel Felipe
+ */
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createGame, joinGame, findRandomGame } from '../../../services/Game';
@@ -16,7 +20,7 @@ const useStartGames = () => {
       const response = await createGame();
 
       if (!response.success) {
-        setError(response.error || 'Error al crear la partida');
+        setError(response.error || response.message || 'Error al crear la partida');
         setIsLoading(false);
         return;
       }
@@ -45,9 +49,10 @@ const useStartGames = () => {
 
     try {
       const response = await joinGame(gameId);
-
+      console.log(response);
       if (!response.success) {
-        setError(response.error || 'Error al unirse a la partida');
+        // Mostrar el mensaje exacto que viene del servidor
+        setError(response.message || response.error || 'Error al unirse a la partida');
         setIsLoading(false);
         return;
       }
@@ -68,7 +73,7 @@ const useStartGames = () => {
       const response = await findRandomGame();
 
       if (!response.success) {
-        setError('No hay partidas disponibles');
+        setError(response.message || response.error || 'No hay partidas disponibles');
         setIsLoading(false);
         return;
       }

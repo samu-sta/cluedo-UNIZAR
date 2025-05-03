@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for RulesSection component which displays game rules and instructions.
+ * @author Samuel Felipe
+ */
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import RulesSection from '../../../../src/components/home/components/RulesSection';

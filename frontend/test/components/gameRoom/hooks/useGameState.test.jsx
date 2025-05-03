@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for useGameState hook which manages the game's state, players, and related functionality.
+ * @author Samuel Felipe
+ */
 import { renderHook, act } from '@testing-library/react';
 import { useGameState } from '../../../../src/components/gameRoom/hooks/useGameState';
 

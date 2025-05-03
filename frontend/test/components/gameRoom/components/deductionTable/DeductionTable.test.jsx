@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for DeductionTable component which allows players to track their deductions about the game cards.
+ * @author Samuel Felipe
+ */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import DeductionTable from '../../../../../src/components/gameRoom/components/deductionTable/DeductionTable';
