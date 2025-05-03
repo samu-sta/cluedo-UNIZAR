@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Estilos para las secciones de tarjetas que organizan las cartas por categorías
+ * @author Samuel Felipe
+ */
 .section-title {
   color: var(--color-accent-yellow);
   text-align: center;

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente que muestra el indicador de turno actual con acciones disponibles
+ * @author Samuel Felipe
+ */
 import '../styles/TurnIndicator.css';
 
 const TurnIndicator = ({

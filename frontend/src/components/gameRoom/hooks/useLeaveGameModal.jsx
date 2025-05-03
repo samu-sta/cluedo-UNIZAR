@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Hook para gestionar el modal de confirmación al abandonar una partida
+ * @author Samuel Felipe
+ */
 import { useState } from 'react';
 
 const useLeaveGameModal = ({ onLeaveGame }) => {

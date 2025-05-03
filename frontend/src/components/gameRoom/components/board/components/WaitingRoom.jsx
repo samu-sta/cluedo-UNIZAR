@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente que muestra la sala de espera antes de que comience la partida
+ * @author Samuel Felipe
+ */
 import React from 'react';
 import '../styles/WaitingRoom.css';
 

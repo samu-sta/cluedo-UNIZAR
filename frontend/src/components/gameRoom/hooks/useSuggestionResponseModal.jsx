@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Hook para gestionar la visualización del modal de respuestas a sugerencias
+ * @author Samuel Felipe
+ */
 import { useEffect, useState } from 'react';
 
 export function useSuggestionResponseModal({ hasSuggested, suggestionResponses, setSuggestionResponses }) {

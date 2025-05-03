@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente que muestra el tablero de juego donde se mueven los jugadores
+ * @author Samuel Felipe
+ */
 import React, { useState, useEffect } from 'react';
 import BoardCell from './components/BoardCell';
 import RoomLabel from './components/RoomLabel';

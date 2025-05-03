@@ -1,12 +1,27 @@
+/**
+ * @fileoverview Componente para la página de inicio de sesión de usuarios
+ * @author Samuel Felipe
+ */
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../../utils/constants';
 import useLoginPage from './hooks/useLoginPage';
 import { LOGIN_FORM_FIELDS } from '../../../utils/constants';
 import FormField from '../components/FormField';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./styles/LoginPage.css";
 
 const LoginPage = ({ setUser, loginUser }) => {
   const { errors, isLoading, handleSubmit, serverError } = useLoginPage(setUser, loginUser);
+
+  const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate(ROUTES.GAMES);
+    }
+  }, [user, navigate]);
 
   return (
     <main className="login">

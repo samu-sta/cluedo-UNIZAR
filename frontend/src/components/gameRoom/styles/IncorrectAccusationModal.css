@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Estilos para el modal de acusación incorrecta en el juego
+ * @author Samuel Felipe
+ */
+
 .incorrect-accusation-modal {
   background-color: var(--color-background);
   border-radius: 10px;

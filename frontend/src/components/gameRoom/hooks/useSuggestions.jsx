@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Hook para gestionar el estado de las sugerencias y acusaciones durante el juego
+ * @author Samuel Felipe
+ */
 import { useState, useEffect, useCallback } from 'react';
 
 /**

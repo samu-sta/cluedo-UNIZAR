@@ -34,6 +34,8 @@ const LAST_PLAYER_ELIMINATED = "ha sido eliminado por una acusación incorrecta.
 const PLAYER_LEFT_ONE_REMAINING = "ha abandonado la partida. Solo queda un jugador.";
 const GAME_NOT_STARTED = "El juego no ha comenzado";
 const DISCONNECTION = "desconexión";
+const ALREADY_IN_GAME = "Ya estás en una partida";
+const GAME_FULL = "La partida está llena";
 
 const MESSAGES = {
   USER_NOT_FOUND,
@@ -71,7 +73,9 @@ const MESSAGES = {
   LAST_PLAYER_ELIMINATED,
   PLAYER_LEFT_ONE_REMAINING,
   GAME_NOT_STARTED,
-  DISCONNECTION
+  DISCONNECTION,
+  ALREADY_IN_GAME,
+  GAME_FULL
 };
 
 export default MESSAGES;

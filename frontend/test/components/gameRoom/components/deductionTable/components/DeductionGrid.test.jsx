@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for DeductionGrid component which organizes all deduction items in a structured grid layout.
+ * @author Samuel Felipe
+ */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import DeductionGrid from '../../../../../../src/components/gameRoom/components/deductionTable/components/DeductionGrid';

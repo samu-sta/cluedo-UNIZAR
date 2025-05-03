@@ -1,7 +1,12 @@
-const API_URL = 'http://localhost:3000/api';
+/**
+ * @fileoverview Servicios para la comunicación con la API relacionada con usuarios
+ * @author Samuel Felipe
+ */
+
+import { API_URL } from "../utils/constants";
 
 export const registerUser = async (data) => {
-  return await fetch(`${API_URL}/user/register`, {
+  return await fetch(`${API_URL}/api/user/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -12,7 +17,7 @@ export const registerUser = async (data) => {
 }
 
 export const loginUser = async (userData) => {
-  return await fetch(`${API_URL}/user/login`, {
+  return await fetch(`${API_URL}/api/user/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -24,7 +29,7 @@ export const loginUser = async (userData) => {
 };
 
 export const logoutUser = async () => {
-  return await fetch(`${API_URL}/user/logout`, {
+  return await fetch(`${API_URL}/api/user/logout`, {
     method: 'POST',
     credentials: 'include',
   })

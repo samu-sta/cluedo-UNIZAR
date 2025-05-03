@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente modal que permite al jugador hacer una sugerencia sobre el caso
+ * @author Samuel Felipe
+ */
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import '../styles/SuggestionModal.css';

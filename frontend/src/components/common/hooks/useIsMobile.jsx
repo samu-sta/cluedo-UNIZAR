@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Hook personalizado para detectar si la pantalla es móvil
+ * @author Samuel Felipe
+ */
 import { useState, useEffect } from 'react';
 
 const IS_MOBILE_WIDTH = 800;

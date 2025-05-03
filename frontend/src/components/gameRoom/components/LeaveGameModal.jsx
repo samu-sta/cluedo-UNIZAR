@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente modal que permite al jugador confirmar si desea abandonar la partida
+ * @author Samuel Felipe
+ */
 import { createPortal } from 'react-dom';
 import '../styles/LeaveGameModal.css';
 

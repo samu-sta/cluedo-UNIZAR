@@ -83,6 +83,17 @@ class PlayerService {
       game.players.get(playerId).position = STARTING_POSITIONS[posIndex++];
     });
   }
+
+  /**
+   * Verifica si un jugador está en una partida
+   * @param {string} gameId - ID de la partida
+   * @param {string} userId - ID del jugador
+   * @returns {boolean} - True si el jugador está en la partida
+   */
+  isPlayerInGame(gameId, userId) {
+    const game = gameService.getGame(gameId);
+    return game && game.players.has(userId);
+  }
 }
 
 export const playerService = new PlayerService();

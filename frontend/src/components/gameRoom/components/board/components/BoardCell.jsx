@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente de celda individual del tablero de juego
+ * @author Samuel Felipe
+ */
 import '../styles/BoardCell.css';
 import PlayerToken from './PlayerToken';
 

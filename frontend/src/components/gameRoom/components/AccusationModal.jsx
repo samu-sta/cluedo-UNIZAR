@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente modal que permite al jugador hacer una acusación final
+ * @author Samuel Felipe
+ */
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import '../styles/AccusationModal.css';

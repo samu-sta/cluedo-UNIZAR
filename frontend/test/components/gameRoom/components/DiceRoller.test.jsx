@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for DiceRoller component which handles the dice rolling animation and display.
+ * @author Samuel Felipe
+ */
 import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import DiceRoller from '../../../../src/components/gameRoom/components/DiceRoller';

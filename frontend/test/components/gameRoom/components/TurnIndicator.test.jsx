@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for TurnIndicator component which displays the current player's turn and related action buttons.
+ * @author Samuel Felipe
+ */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import TurnIndicator from '../../../../src/components/gameRoom/components/TurnIndicator';

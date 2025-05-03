@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Estilos para el modal que se muestra cuando finaliza una partida
+ * @author Samuel Felipe
+ */
+
 .modal-overlay {
   position: fixed;
   top: 0;

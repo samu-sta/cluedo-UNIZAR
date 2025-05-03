@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for DeductionHeader component which renders the collapsible header of the deduction table.
+ * @author Samuel Felipe
+ */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import DeductionHeader from '../../../../../../src/components/gameRoom/components/deductionTable/components/DeductionHeader';

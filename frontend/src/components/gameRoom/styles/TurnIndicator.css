@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Estilos para el indicador de turno en la sala de juego
+ * @author Samuel Felipe
+ */
 .turn-indicator {
   background-color: inherit;
   border-radius: 8px 8px 0px 0px;

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for DeductionItem component which displays a single item in the deduction table with its current status.
+ * @author Samuel Felipe
+ */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import DeductionItem from '../../../../../../src/components/gameRoom/components/deductionTable/components/DeductionItem';

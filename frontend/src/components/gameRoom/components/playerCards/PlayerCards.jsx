@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente que muestra las cartas que tiene el jugador en su mano
+ * @author Samuel Felipe
+ */
 import { useState } from 'react';
 import CardDrawer from './components/CardDrawer';
 

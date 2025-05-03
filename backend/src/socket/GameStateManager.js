@@ -233,6 +233,16 @@ class GameStateManager {
   }
 
   /**
+   * Verifica si un jugador está en una partida
+   * @param {string} gameId - ID de la partida
+   * @param {string} userId - ID del jugador
+   * @returns {boolean} - True si está en la partida
+   */
+  isPlayerInGame(gameId, userId) {
+    return playerService.isPlayerInGame(gameId, userId);
+  }
+
+  /**
    * Pasa al siguiente turno
    * @param {string} gameId - ID de la partida
    * @returns {Object} - Información del turno

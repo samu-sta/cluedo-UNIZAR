@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Estilos para las etiquetas que identifican cada habitación en el tablero
+ * @author Samuel Felipe
+ */
+
 .room-label {
   position: absolute;
   display: flex;

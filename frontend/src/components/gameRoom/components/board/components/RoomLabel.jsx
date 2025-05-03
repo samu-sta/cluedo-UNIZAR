@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente que muestra el nombre de una habitación en el tablero
+ * @author Samuel Felipe
+ */
 import '../styles/RoomLabel.css';
 
 const RoomLabel = ({ room }) => {

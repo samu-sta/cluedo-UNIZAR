@@ -1,8 +1,13 @@
-const API_URL = 'http://localhost:3000/api';
+/**
+ * @fileoverview Servicios para la comunicación con la API relacionada con juegos
+ * @author Samuel Felipe
+ */
+
+import { API_URL } from "../utils/constants";
 
 export const createGame = async () => {
   try {
-    const response = await fetch(`${API_URL}/game/create`, {
+    const response = await fetch(`${API_URL}/api/game/create`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include'
@@ -18,7 +23,7 @@ export const createGame = async () => {
 
 export const joinGame = async (gameId) => {
   try {
-    const response = await fetch(`${API_URL}/game/join/${gameId}`, {
+    const response = await fetch(`${API_URL}/api/game/join/${gameId}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include'
@@ -34,7 +39,7 @@ export const joinGame = async (gameId) => {
 
 export const findRandomGame = async () => {
   try {
-    const response = await fetch(`${API_URL}/game/random`, {
+    const response = await fetch(`${API_URL}/api/game/random`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include'

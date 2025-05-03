@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Estilos para la cabecera del juego mostrando información del jugador y estado
+ * @author Samuel Felipe
+ */
+
 .game-header {
   display: flex;
   justify-content: space-between; /* Cambiar a space-between para distribuir elementos */
