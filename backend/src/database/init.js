@@ -1,14 +1,3 @@
-/*************************************************
- * Inicialización de la Base de Datos
- * 
- * Este archivo se encarga de inicializar la base de datos
- * del juego Cluedo, eliminando y recreando la base de datos
- * completa, estableciendo las relaciones entre modelos e
- * inicializando los datos de juego necesarios.
- * 
- * Autor: DANIEL SANAGUSTIN
- *************************************************/
-
 import { Sequelize } from 'sequelize';
 import setupRelations from '../models/relations.js';
 import sequelize from './database.js';
@@ -28,9 +17,11 @@ const initDatabase = async () => {
     await tempSequelize.close();
     console.log('Connection has been established successfully.');
 
+
     await sequelize.sync({ force: true });
     setupRelations();
     await initGame();
+
 
     console.log('Database initialized successfully');
 

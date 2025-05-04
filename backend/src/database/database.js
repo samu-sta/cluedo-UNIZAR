@@ -1,14 +1,3 @@
-/*************************************************
- * Configuración de Base de Datos
- * 
- * Este archivo configura la conexión con la base de datos
- * utilizando Sequelize para gestionar la comunicación con
- * MySQL. Carga las variables de entorno necesarias para
- * la conexión.
- * 
- * Autor: DANIEL SANAGUSTIN
- *************************************************/
-
 import Sequelize from 'sequelize';
 import dotenv from 'dotenv';
 
@@ -22,5 +11,6 @@ const sequelize = new Sequelize({
   dialect: 'mysql',
   logging: false
 });
+
 
 export default sequelize;

@@ -1,14 +1,3 @@
-/*************************************************
- * Utilidades de Juego
- * 
- * Este archivo contiene funciones de utilidad para el
- * juego Cluedo, incluyendo operaciones con la base de datos,
- * distribución de cartas, selección de soluciones y
- * verificación de acusaciones.
- * 
- * Autor: DANIEL SANAGUSTIN
- *************************************************/
-
 import GameModel from "../models/Game.js";
 import CardModel from "../models/Card.js";
 import BoardModel from "../models/Board.js";

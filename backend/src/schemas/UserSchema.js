@@ -1,14 +1,3 @@
-/*************************************************
- * Esquema de Usuario
- * 
- * Este archivo define los esquemas de validación para
- * las operaciones de registro e inicio de sesión de
- * usuarios, utilizando la biblioteca Zod para garantizar
- * la integridad de los datos.
- * 
- * Autor: DANIEL SANAGUSTIN
- *************************************************/
-
 import zod from 'zod';
 
 const RegisterUserSchema = zod.object({
@@ -29,6 +18,9 @@ function validateRegisterUser(data) {
 function validateLoginUser(data) {
   return LoginUserSchema.safeParse(data);
 }
+
+
+
 
 const userSchema = {
   validateRegisterUser,

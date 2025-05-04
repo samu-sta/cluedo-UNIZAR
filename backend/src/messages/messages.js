@@ -1,14 +1,3 @@
-/*************************************************
- * Mensajes del Sistema
- * 
- * Este archivo contiene todos los mensajes de texto
- * utilizados en la aplicación, centralizando la gestión
- * de textos para facilitar su mantenimiento y posibles
- * traducciones futuras.
- * 
- * Autor: DANIEL SANAGUSTIN
- *************************************************/
-
 const USER_NOT_FOUND = "Usuario no encontrado";
 const INVALID_PASSWORD = "Contraseña incorrecta";
 const EMAIL_ALREADY_EXISTS = "El email ya existe";

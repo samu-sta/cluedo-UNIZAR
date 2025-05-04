@@ -1,13 +1,3 @@
-/*************************************************
- * Modelo de Pared
- * 
- * Este modelo representa las paredes de las habitaciones
- * en el tablero del juego Cluedo, definiendo su posición
- * y la habitación a la que pertenecen.
- * 
- * Autor: DANIEL SANAGUSTIN
- *************************************************/
-
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 

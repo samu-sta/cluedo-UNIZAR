@@ -1,14 +1,3 @@
-/*************************************************
- * Relaciones entre Modelos
- * 
- * Este archivo configura las relaciones entre los
- * diferentes modelos de la base de datos, estableciendo
- * las conexiones one-to-one y one-to-many necesarias
- * para representar la estructura del juego.
- * 
- * Autor: DANIEL SANAGUSTIN
- *************************************************/
-
 import GameModel from './Game.js';
 import BoardModel from './Board.js';
 import RoomModel from './Room.js';
