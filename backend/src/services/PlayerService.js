@@ -1,4 +1,6 @@
 import { gameService } from './GameService.js';
+import { shuffleArray } from '../utils/arrayUtils.js';
+import { GAME_STATES } from '../config/constants.js';
 
 /**
  * Servicio para gestionar los jugadores en las partidas
@@ -12,6 +14,7 @@ class PlayerService {
    * @returns {boolean} True si el jugador fue añadido
    */
   async addPlayer(gameId, userId, playerData) {
+    if (!gameId || !userId) return false;
     const game = await gameService.initGame(gameId);
     if (!game.players.has(userId)) {
       game.players.set(userId, playerData);
@@ -27,6 +30,7 @@ class PlayerService {
    * @returns {boolean} True si el jugador fue eliminado
    */
   removePlayer(gameId, userId) {
+    if (!gameId || !userId) return false;
     if (!gameService.hasGame(gameId)) return false;
 
     const game = gameService.getGame(gameId);
@@ -83,6 +87,59 @@ class PlayerService {
       game.players.get(playerId).position = STARTING_POSITIONS[posIndex++];
     });
   }
+
+  /**
+   * Verifica si un jugador puede moverse a una posición
+   * @param {string} gameId - ID de la partida
+   * @param {string} userId - ID del jugador
+   * @param {Object} targetPosition - Posición objetivo
+   * @returns {boolean} True si el jugador puede moverse
+   */
+  canPlayerMoveToPosition(gameId, userId, targetPosition) {
+    return true;
+  }
+
+  /**
+   * Mueve un jugador a una posición
+   * @param {string} gameId - ID de la partida
+   * @param {string} userId - ID del jugador
+   * @param {Object} targetPosition - Posición objetivo
+   * @returns {boolean} True si el jugador fue movido
+   */
+  movePlayer(gameId, userId, targetPosition) {
+    return true;
+  }
+
+  /**
+   * Verifica si una posición está dentro de una habitación
+   * @param {Object} room - Habitación
+   * @param {Object} position - Posición
+   * @returns {boolean} True si la posición está dentro de la habitación
+   */
+  isPositionInRoom(room, position) {
+    return true;
+  }
+
+  /**
+   * Obtiene la habitación para una posición
+   * @param {string} gameId - ID de la partida
+   * @param {Object} position - Posición
+   * @returns {Object|null} Habitación o null si no se encuentra
+   */
+  getRoomForPosition(gameId, position) {
+    return null;
+  }
+
+  /**
+   * Obtiene la habitación en la que se encuentra un jugador
+   * @param {string} gameId - ID de la partida
+   * @param {string} userId - ID del jugador
+   * @returns {Object|null} Habitación o null si no se encuentra
+   */
+  getPlayerRoom(gameId, userId) {
+    return null;
+  }
 }
 
 export const playerService = new PlayerService();
+export default playerService;

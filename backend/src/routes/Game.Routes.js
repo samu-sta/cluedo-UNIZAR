@@ -1,15 +1,30 @@
-import { Router } from 'express';
+import express from 'express';
 import gameController from '../controllers/Game.Controller.js';
 import { authMiddleware } from '../middlewares/auth.js';
 
 export const GameRoutes = () => {
-  const gameRouter = Router();
+  const router = express.Router();
 
-  gameRouter.use(authMiddleware);
+  /**
+   * @route POST /api/game
+   * @desc Crear una nueva partida
+   * @access Private (requiere autenticación)
+   */
+  router.post('/', authMiddleware, gameController.createGame);
 
-  gameRouter.post('/create', gameController.createGame);
-  gameRouter.post('/join/:gameId', gameController.joinGame);
-  gameRouter.post('/random', gameController.findRandomGame);
+  /**
+   * @route POST /api/game/:gameId/join
+   * @desc Unirse a una partida existente
+   * @access Private (requiere autenticación)
+   */
+  router.post('/:gameId/join', authMiddleware, gameController.joinGame);
 
-  return gameRouter;
+  /**
+   * @route GET /api/game/random
+   * @desc Buscar una partida disponible para unirse
+   * @access Private (requiere autenticación)
+   */
+  router.get('/random', authMiddleware, gameController.findRandomGame);
+
+  return router;
 };

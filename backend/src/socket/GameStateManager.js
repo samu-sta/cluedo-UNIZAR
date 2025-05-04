@@ -10,7 +10,7 @@ import { suggestionService } from '../services/SuggestionService.js';
 /**
  * Administrador central del estado del juego que coordina los diferentes servicios
  */
-class GameStateManager {
+export class GameStateManager {
   /**
    * Registra una nueva partida HTTP y la inicializa
    * @param {string} gameId - ID de la partida
