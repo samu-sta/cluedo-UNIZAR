@@ -1,3 +1,13 @@
+/*************************************************
+ * Modelo de Cuenta de Usuario
+ * 
+ * Este modelo representa la información de las cuentas 
+ * de usuarios en el sistema, almacenando datos como 
+ * nombre de usuario, correo electrónico y contraseña.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 

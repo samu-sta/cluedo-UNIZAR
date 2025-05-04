@@ -1,3 +1,14 @@
+/*************************************************
+ * Utilidades de Autenticación
+ * 
+ * Este archivo contiene funciones para la gestión de
+ * autenticación mediante JSON Web Tokens (JWT), incluyendo
+ * creación, verificación y generación de tokens para
+ * comunicación por socket.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import jwt from 'jsonwebtoken';
 
 import dotenv from 'dotenv';

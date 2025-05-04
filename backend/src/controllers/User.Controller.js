@@ -1,3 +1,13 @@
+/*************************************************
+ * Controlador de Usuario
+ * 
+ * Este controlador maneja la autenticación de usuarios,
+ * incluyendo el registro de nuevos usuarios, el inicio
+ * de sesión y el cierre de sesión.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import userSchema from "../schemas/UserSchema.js";
 import argon2 from 'argon2';
 import auth from '../utils/auth.js';

@@ -1,3 +1,14 @@
+/*************************************************
+ * Middleware de Autenticación
+ * 
+ * Este middleware verifica los tokens de autenticación
+ * en las solicitudes HTTP, extrayéndolos de las cookies
+ * o del encabezado de autorización para proteger las rutas
+ * que requieren autenticación.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import auth from '../utils/auth.js';
 import MESSAGES from '../messages/messages.js';
 import AccountModel from '../models/Account.js';

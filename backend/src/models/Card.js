@@ -1,3 +1,13 @@
+/*************************************************
+ * Modelo de Carta
+ * 
+ * Este modelo representa las cartas del juego Cluedo,
+ * incluyendo personajes, armas y habitaciones, con sus
+ * respectivas propiedades y colores asociados.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 

@@ -1,3 +1,14 @@
+/*************************************************
+ * Controlador de Juego
+ * 
+ * Este controlador maneja las operaciones relacionadas
+ * con las partidas, incluyendo la creación de partidas,
+ * unirse a partidas existentes y buscar partidas
+ * aleatorias disponibles.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import MESSAGES from "../messages/messages.js";
 import { v4 as uuidv4 } from 'uuid';
 import { gameStateManager } from "../socket/GameStateManager.js";

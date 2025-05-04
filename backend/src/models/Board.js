@@ -1,3 +1,13 @@
+/*************************************************
+ * Modelo de Tablero
+ * 
+ * Este modelo representa el tablero del juego Cluedo,
+ * definiendo sus dimensiones (filas y columnas) y
+ * su relación con la partida a la que pertenece.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 

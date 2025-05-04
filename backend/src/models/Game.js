@@ -1,3 +1,14 @@
+/*************************************************
+ * Modelo de Partida
+ * 
+ * Este modelo representa una partida del juego Cluedo,
+ * almacenando su identificador único y nombre. Es la
+ * entidad principal que conecta todos los elementos
+ * del juego.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 
