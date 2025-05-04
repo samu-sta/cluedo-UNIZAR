@@ -1,11 +1,3 @@
-/**
- * @fileoverview Middleware de autenticación para Socket.IO
- * Este archivo contiene el middleware que verifica los tokens 
- * de autenticación en las conexiones de Socket.IO, asegurando
- * que solo usuarios autenticados puedan conectarse.
- * @author SAMUEL FELIPE
- */
-
 import jwt from 'jsonwebtoken';
 
 export const socketAuthMiddleware = (socket, next) => {

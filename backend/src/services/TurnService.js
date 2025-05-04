@@ -1,11 +1,3 @@
-/**
- * @fileoverview Servicio para gestión de turnos de juego
- * Este servicio maneja la lógica de turnos en el juego, controlando
- * qué jugador está activo, permitiendo pasar el turno al siguiente
- * jugador y estableciendo el orden de turnos.
- * @author SAMUEL FELIPE
- */
-
 import { gameService } from './GameService.js';
 import { shuffleArray } from '../utils/arrayUtils.js';
 

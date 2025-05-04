@@ -1,14 +1,3 @@
-/*************************************************
- * Configuración de Jest
- * 
- * Este archivo define la configuración del entorno
- * de testing con Jest, incluyendo la configuración
- * de transformadores, cobertura, timeouts y rutas
- * para los diferentes tipos de pruebas.
- * 
- * Autor: DANIEL SANAGUSTIN
- *************************************************/
-
 module.exports = {
   // Use the babel transformer for all JavaScript and JSX files        
   transform: {

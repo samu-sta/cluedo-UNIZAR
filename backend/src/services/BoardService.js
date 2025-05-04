@@ -1,15 +1,3 @@
-/**
- * @fileoverview Servicio para gestión del tablero de juego
- * Este servicio proporciona funcionalidades para manejar operaciones
- * relacionadas con el tablero, incluyendo movimientos, validación de
- * posiciones y cálculo de rutas.
- * @author SAMUEL FELIPE
- */
-
-import RoomModel from "../models/Room.js";
-import DoorModel from "../models/Door.js";
-import WallModel from "../models/Wall.js";
-
 import { gameService } from './GameService.js';
 import { GAME_CONFIG } from '../config/constants.js';
 import { findValidMoves, isPositionInsideRoom } from '../utils/board.js';

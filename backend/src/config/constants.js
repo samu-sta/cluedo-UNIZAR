@@ -1,14 +1,3 @@
-/*************************************************
- * Constantes de Configuración
- * 
- * Este archivo define las constantes utilizadas en
- * toda la aplicación, incluyendo estados del juego,
- * configuración de dados, tiempos de espera y número
- * máximo de jugadores.
- * 
- * Autor: DANIEL SANAGUSTIN
- *************************************************/
-
 import { MAX } from "uuid";
 
 export const GAME_STATES = {

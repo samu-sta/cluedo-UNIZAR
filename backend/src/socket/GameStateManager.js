@@ -1,11 +1,3 @@
-/**
- * @fileoverview Gestor de estado de partidas
- * Este gestor mantiene el estado de todas las partidas activas,
- * controlando los jugadores, estados del juego, y proporcionando
- * métodos para registrar partidas nuevas y gestionar sus estados.
- * @author SAMUEL FELIPE
- */
-
 import { GAME_STATES, GAME_CONFIG } from '../config/constants.js';
 import MESSAGES from '../messages/messages.js';
 import { gameService } from '../services/GameService.js';

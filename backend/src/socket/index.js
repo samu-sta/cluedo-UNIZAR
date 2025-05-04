@@ -1,11 +1,3 @@
-/**
- * @fileoverview Configuración principal de Socket.IO
- * Este archivo configura el servidor de Socket.IO, establece
- * los middleware de autenticación y registra los manejadores
- * de eventos para las diferentes acciones del juego.
- * @author SAMUEL FELIPE
- */
-
 import { Server } from 'socket.io';
 import { socketAuthMiddleware } from './middleware.js';
 import { setupSocketHandlers } from './handlers.js';

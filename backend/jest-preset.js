@@ -1,14 +1,3 @@
-/*************************************************
- * Preajustes para Jest
- * 
- * Este archivo configura los preajustes predeterminados
- * para Jest en el proyecto, incluyendo configuración de
- * resolución de módulos, transformadores y patrones de
- * búsqueda de archivos de prueba.
- * 
- * Autor: DANIEL SANAGUSTIN
- *************************************************/
-
 const path = require('path');
 
 // jest-preset.js

@@ -1,11 +1,3 @@
-/**
- * @fileoverview Servicio de gestión de partidas
- * Este servicio proporciona funcionalidades para controlar
- * el estado del juego, como inicializar partidas, gestionar
- * el flujo del juego, y manejar los turnos de los jugadores.
- * @author SAMUEL FELIPE
- */
-
 import { GAME_STATES } from '../config/constants.js';
 import { getBoard } from '../utils/game.js';
 

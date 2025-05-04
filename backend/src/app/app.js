@@ -1,13 +1,3 @@
-/*************************************************
- * Configuración de la Aplicación Express
- * 
- * Este archivo configura la aplicación Express,
- * definiendo middleware, rutas y configuraciones
- * para el servidor web del juego Cluedo.
- * 
- * Autor: DANIEL SANAGUSTIN
- *************************************************/
-
 import express from 'express';
 import morgan from 'morgan';
 import dotenv from 'dotenv';

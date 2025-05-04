@@ -1,11 +1,3 @@
-/**
- * @fileoverview Manejadores de eventos de sugerencias y acusaciones
- * Este archivo gestiona las funciones para procesar sugerencias
- * y acusaciones de los jugadores, incluyendo la validación y
- * respuesta a las mismas durante el juego.
- * @author SAMUEL FELIPE
- */
-
 import { GAME_STATES, SOCKET_EVENTS } from '../../config/constants.js';
 import MESSAGES from '../../messages/messages.js';
 import { validateGameAction, endGame } from './utils.js';

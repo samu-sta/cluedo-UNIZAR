@@ -1,11 +1,3 @@
-/**
- * @fileoverview Utilidades para los manejadores de Socket.IO
- * Este archivo proporciona funciones auxiliares para validar
- * acciones de juego y gestionar la finalización de partidas
- * utilizadas por los diversos manejadores de eventos.
- * @author SAMUEL FELIPE
- */
-
 import { GAME_STATES, SOCKET_EVENTS } from '../../config/constants.js';
 import MESSAGES from '../../messages/messages.js';
 
