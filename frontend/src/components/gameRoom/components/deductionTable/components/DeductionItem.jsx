@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente que representa cada elemento individual en la tabla de deducciones
- * @author Samuel Felipe
- */
 import { FaCheck, FaQuestion, FaTimes } from "react-icons/fa";
 import '../styles/DeductionItem.css';
 

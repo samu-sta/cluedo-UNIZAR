@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for GameEndedModal component which displays a modal when the game has ended.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { useNavigate } from 'react-router-dom';

@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for usePlayerCards hook which manages the player's cards and card-related functionality.
- * @author Samuel Felipe
- */
 import { renderHook, act } from '@testing-library/react';
 import { usePlayerCards } from '../../../../src/components/gameRoom/hooks/usePlayerCards';
 

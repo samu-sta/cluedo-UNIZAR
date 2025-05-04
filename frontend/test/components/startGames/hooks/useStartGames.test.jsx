@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for useStartGames hook which manages game creation and joining logic.
- * @author Samuel Felipe
- */
 import { renderHook, act } from '@testing-library/react';
 import { useNavigate } from 'react-router-dom';
 import useStartGames from '../../../../src/components/startGames/hooks/useStartGames';

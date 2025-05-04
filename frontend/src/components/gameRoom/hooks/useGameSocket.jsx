@@ -1,7 +1,3 @@
-/**
- * @fileoverview Hook personalizado para gestionar la conexión de socket y estado del juego
- * @author Samuel Felipe
- */
 import { useSocketConnection } from './useSocketConnection';
 import { useGameState } from './useGameState';
 import { useGameTurn } from './useGameTurn';

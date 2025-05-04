@@ -1,8 +1,3 @@
-/**
- * @fileoverview Mock de los esquemas de validación para pruebas unitarias
- * @author Samuel Felipe
- */
-
 const fn = () => {
   const mockFn = function (...args) {
     mockFn.calls.push(args);

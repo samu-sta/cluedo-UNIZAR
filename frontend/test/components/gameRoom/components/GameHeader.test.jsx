@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for GameHeader component which displays game status information at the top of the game room.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import GameHeader from '../../../../src/components/gameRoom/components/GameHeader';

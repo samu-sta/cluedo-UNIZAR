@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for LoginPage component which manages user login functionality and form validation.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, fireEvent, act, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter, MemoryRouter, Routes, Route } from 'react-router-dom';
@@ -103,13 +99,13 @@ describe('LoginPage Component - Integration Test', () => {
     const mockSetUser = jest.fn();
     const mockLoginUser = jest.fn().mockResolvedValue(mockResponse);
 
-    const StartGames = () => <div>Partidas</div>;
+    const HomePage = () => <div>Home Page</div>;
 
     render(
       <MemoryRouter initialEntries={['/login']}>
         <Routes>
           <Route path="/login" element={<LoginPage setUser={mockSetUser} loginUser={mockLoginUser} />} />
-          <Route path="/games" element={<StartGames />} />
+          <Route path="/" element={<HomePage />} />
         </Routes>
       </MemoryRouter>
     );
@@ -125,7 +121,7 @@ describe('LoginPage Component - Integration Test', () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByText('Partidas')).toBeInTheDocument();
+      expect(screen.getByText('Home Page')).toBeInTheDocument();
       expect(mockSetUser).toHaveBeenCalledWith(mockUser);
       expect(localStorage.setItem).toHaveBeenCalledWith('user', JSON.stringify(mockUser));
     });

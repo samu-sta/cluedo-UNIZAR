@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for useIsMobile hook which detects if the current viewport is mobile-sized.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { renderHook, act } from '@testing-library/react';
 import useIsMobile from '../../../../src/components/common/hooks/useIsMobile';

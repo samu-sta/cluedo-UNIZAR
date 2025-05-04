@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for FormField component which handles input field rendering with validation.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import FormField from '../../../src/components/auth/components/FormField';

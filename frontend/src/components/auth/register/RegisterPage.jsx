@@ -1,26 +1,12 @@
-/**
- * @fileoverview Componente para la página de registro de usuarios
- * @author Samuel Felipe
- */
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../../utils/constants';
 import useRegisterPage from './hooks/useRegisterPage';
 import { REGISTER_FORM_FIELDS } from '../../../utils/constants';
 import FormField from '../components/FormField';
 import "./styles/RegisterPage.css";
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = ({ registerUser }) => {
   const { errors, handleSubmit } = useRegisterPage(registerUser);
-  const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user) {
-      navigate(ROUTES.GAMES);
-    }
-  }, [user, navigate]);
 
   return (
     <main className="register">

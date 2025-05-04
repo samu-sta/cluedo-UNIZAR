@@ -8,6 +8,7 @@ export const UserRoutes = () => {
   userRouter.post('/register', userController.register);
   userRouter.post('/login', userController.login);
   userRouter.post('/logout', userController.logout);
+  userRouter.post('/change-password', userController.changePassword);
 
   return userRouter;
 }

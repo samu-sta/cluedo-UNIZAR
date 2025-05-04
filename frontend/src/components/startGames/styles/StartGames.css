@@ -1,14 +1,9 @@
-/**
- * @fileoverview Estilos para la página de juegos donde se puede crear o unirse a partidas
- * @author Samuel Felipe
- */
 .games-container {
   width: 100%;
   padding: 2rem 1rem;
   display: flex;
   justify-content: center;
   position: relative;
-  overflow-x: hidden;
 }
 
 .games-content {
@@ -211,10 +206,5 @@
   
   .game-id-form .btn {
     width: 100%;
-  }
-
-  .game-buttons {
-    flex-direction: column;
-    gap: 1rem;
   }
 }

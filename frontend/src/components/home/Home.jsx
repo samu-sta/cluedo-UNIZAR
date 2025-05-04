@@ -1,7 +1,3 @@
-/**
- * @fileoverview Página de inicio que muestra información general sobre el juego
- * @author Samuel Felipe
- */
 import { useEffect } from 'react';
 import useIsMobile from '../common/hooks/useIsMobile';
 import HeroSection from './components/HeroSection';
@@ -12,7 +8,6 @@ import './styles/Home.css';
 
 const Home = () => {
   const isMobile = useIsMobile();
-  const user = JSON.parse(localStorage.getItem('user'));
   useEffect(() => window.scrollTo(0, 0), []);
 
   return (

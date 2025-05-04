@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for useGameEndedModal hook which manages game completion modal state.
- * @author Samuel Felipe
- */
 import { renderHook, act } from '@testing-library/react';
 import useGameEndedModal from '../../../../src/components/gameRoom/hooks/useGameEndedModal';
 

@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for CTASection component which displays call-to-action elements for user registration.
- * @author Samuel Felipe
- */
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import CTASection from '../../../../src/components/home/components/CTASection';

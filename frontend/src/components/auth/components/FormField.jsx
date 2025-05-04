@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente de campo de formulario reutilizable para inputs
- * @author Samuel Felipe
- */
 import React from 'react';
 import "./styles/FormField.css";
 

@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for GameRoom component which serves as the main container for the entire game interface.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';

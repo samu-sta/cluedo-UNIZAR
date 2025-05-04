@@ -1,7 +1,3 @@
-/**
- * @fileoverview Hook para gestionar las cartas del jugador en el juego
- * @author Samuel Felipe
- */
 import { useState, useEffect, useCallback } from 'react';
 
 /**

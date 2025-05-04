@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente modal que muestra las respuestas a una sugerencia realizada
- * @author Samuel Felipe
- */
 import { useSuggestionResponseModal } from '../hooks/useSuggestionResponseModal';
 import CharacterBadge from '../../../components/common/CharacterBadge';
 import GameCard from './playerCards/components/GameCard';

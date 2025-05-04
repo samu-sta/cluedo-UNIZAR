@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for usePlayerMovement hook which handles player movement, dice rolling, and valid moves calculation.
- * @author Samuel Felipe
- */
 import { renderHook, act } from '@testing-library/react';
 import { usePlayerMovement } from '../../../../src/components/gameRoom/hooks/usePlayerMovement';
 

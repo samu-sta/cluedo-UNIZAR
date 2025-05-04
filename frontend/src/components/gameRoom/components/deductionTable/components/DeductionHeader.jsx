@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente que muestra el encabezado de la tabla de deducciones con opción de colapsar
- * @author Samuel Felipe
- */
 import { IoIosArrowDown } from "react-icons/io";
 import '../styles/DeductionHeader.css';
 

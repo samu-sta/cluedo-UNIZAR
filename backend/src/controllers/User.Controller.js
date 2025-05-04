@@ -78,7 +78,9 @@ export default class UserController {
       };
 
       return res.status(200).cookie('token', token, {
-        httpOnly: true
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none'
       }).json({ success: true, user: userData });
     }
     catch (error) {
@@ -88,5 +90,40 @@ export default class UserController {
 
   logout = async (req, res) => {
     return res.status(200).clearCookie('token').json({ success: true });
+  }
+
+  changePassword = async (req, res) => {
+    const result = userSchema.validateChangePassword(req.body);
+
+    if (!result.success) {
+      console.error('Validation error:', result.error);
+      return res.status(400).json({ success: false, error: MESSAGES.INVALID_DATA });
+    }
+
+    try {
+      const token = req.cookies.token;
+      if (!token) {
+        console.error('No token found in cookies');
+        return res.status(401).json({ success: false, error: MESSAGES.UNAUTHORIZED });
+      }
+
+      const decoded = auth.verifyToken(token);
+      const account = await this.accountModel.findByPk(decoded.id);
+
+      if (!account) {
+        console.error('Account not found for accountId:', decoded.id);
+        return res.status(404).json({ success: false, error: MESSAGES.USER_NOT_FOUND });
+      }
+
+      const hashedPassword = await argon2.hash(result.data.newPassword);
+
+      await account.update({ password: hashedPassword });
+
+      return res.status(200).json({ success: true });
+    }
+    catch (error) {
+      console.error('Change password error:', error);
+      return res.status(500).json({ success: false, error: MESSAGES.ERROR_500 });
+    }
   }
 }

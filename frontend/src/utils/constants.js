@@ -1,8 +1,3 @@
-/**
- * @fileoverview Constantes utilizadas en toda la aplicación del frontend
- * @author Samuel Felipe
- */
-
 export const HOME = {
   HERO: {
     ASIDE: "¡Nuevo juego!",
@@ -79,6 +74,7 @@ export const ROUTES = {
   HOME: "/",
   LOGIN: "/login",
   REGISTER: "/register",
+  RULES: "/rules",
   GAMES: "/games",
   PROFILE: "/profile"
 };
@@ -140,5 +136,3 @@ export const LOGIN_FORM_FIELDS = [
     placeholder: 'Ingresa tu contraseña'
   }
 ];
-
-export const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";

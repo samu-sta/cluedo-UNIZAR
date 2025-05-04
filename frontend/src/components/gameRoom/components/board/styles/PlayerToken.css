@@ -1,8 +1,3 @@
-/**
- * @fileoverview Estilos para los tokens que representan a los jugadores en el tablero
- * @author Samuel Felipe
- */
-
 .player-token {
   position: relative;
   width: 80%;

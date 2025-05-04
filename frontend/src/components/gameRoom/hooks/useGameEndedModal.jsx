@@ -1,7 +1,3 @@
-/**
- * @fileoverview Hook para gestionar el modal que se muestra cuando finaliza una partida
- * @author Samuel Felipe
- */
 import { useState, useEffect } from 'react';
 
 const useGameEndedModal = (gameState) => {

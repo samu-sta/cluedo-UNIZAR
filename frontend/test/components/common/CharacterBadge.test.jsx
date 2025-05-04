@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for CharacterBadge component which displays character information with appropriate styling.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import CharacterBadge from '../../../src/components/common/CharacterBadge';

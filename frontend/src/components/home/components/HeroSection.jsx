@@ -1,15 +1,9 @@
-/**
- * @fileoverview Componente de sección de héroe que muestra la introducción principal del juego
- * @author Samuel Felipe
- */
 import { HOME, ROUTES } from "../../../utils/constants";
 import { Link } from "react-router-dom";
 import React from "react";
 import '../styles/HeroSection.css';
 
 const HeroSection = ({ isMobile }) => {
-  const user = JSON.parse(localStorage.getItem('user'));
-
   return (
     <section className={`home-hero ${isMobile ? 'home-hero-mobile' : 'home-hero-desktop'}`}>
       <header className="home-hero-content">
@@ -20,20 +14,12 @@ const HeroSection = ({ isMobile }) => {
         <p className="home-hero-description">{HOME.HERO.DESCRIPTION}</p>
 
         <nav className="home-hero-buttons">
-          {user ? (
-            <Link to={ROUTES.GAMES} className="btn primary with-shadow">
-              Jugar Partida
-            </Link>
-          ) : (
-            <>
-              <Link to={ROUTES.REGISTER} className="btn primary with-shadow">
-                {HOME.HERO.REGISTER_BTN}
-              </Link>
-              <Link to={ROUTES.LOGIN} className="btn secondary">
-                {HOME.HERO.LOGIN_BTN}
-              </Link>
-            </>
-          )}
+          <Link to={ROUTES.REGISTER} className="btn primary with-shadow">
+            {HOME.HERO.REGISTER_BTN}
+          </Link>
+          <Link to={ROUTES.LOGIN} className="btn secondary">
+            {HOME.HERO.LOGIN_BTN}
+          </Link>
         </nav>
 
         <section className="home-hero-stats">

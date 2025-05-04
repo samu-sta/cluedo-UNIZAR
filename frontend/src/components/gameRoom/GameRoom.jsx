@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente de sala de juego que gestiona una partida en curso
- * @author Samuel Felipe
- */
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useGameSocket from './hooks/useGameSocket';

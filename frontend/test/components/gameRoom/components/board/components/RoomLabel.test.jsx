@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for RoomLabel component which displays the name of a room at its calculated center position.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import RoomLabel from '../../../../../../src/components/gameRoom/components/board/components/RoomLabel';

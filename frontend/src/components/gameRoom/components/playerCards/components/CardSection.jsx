@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente que muestra una sección de cartas del juego separadas por categoría
- * @author Samuel Felipe
- */
 import CardColumn from './CardColumn';
 import '../styles/CardSection.css';
 

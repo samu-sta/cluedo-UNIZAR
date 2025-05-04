@@ -1,11 +1,4 @@
-/**
- * @fileoverview Servicio para la gestión de conexiones vía WebSocket
- * @author Samuel Felipe
- */
-
 import { io } from 'socket.io-client';
-
-import { API_URL } from "../utils/constants";
 
 let socket = null;
 let currentGameId = null;
@@ -24,7 +17,7 @@ export const initSocket = (socketToken) => {
 
   currentGameId = gameId;
 
-  socket = io(`${API_URL}`, {
+  socket = io('http://localhost:3000', {
     auth: { token: socketToken },
     autoConnect: true,
     withCredentials: true,

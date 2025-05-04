@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for NotFound component which displays a 404 error page when navigating to non-existent routes.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';

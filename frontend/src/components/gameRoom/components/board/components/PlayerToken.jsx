@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente que representa un token de jugador en el tablero
- * @author Samuel Felipe
- */
 import React from 'react';
 import '../styles/PlayerToken.css';
 

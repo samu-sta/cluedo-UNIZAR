@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for FeatureCard component which displays individual feature information in the home page.
- * @author Samuel Felipe
- */
 import { render, screen, fireEvent } from '@testing-library/react';
 import FeatureCard from '../../../../src/components/home/components/FeatureCard';
 

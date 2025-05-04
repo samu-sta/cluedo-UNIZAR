@@ -1,7 +1,3 @@
-/**
- * @fileoverview Estilos para la leyenda de la tabla de deducciones que muestra los indicadores de estado
- * @author Samuel Felipe
- */
 .deduction-legend {
   display: flex;
   justify-content: center;

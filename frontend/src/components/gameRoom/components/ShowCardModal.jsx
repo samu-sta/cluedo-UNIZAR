@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente modal que permite a los jugadores seleccionar y mostrar una carta como respuesta a una sugerencia
- * @author Samuel Felipe
- */
 import React, { useState, useEffect } from 'react';
 import GameCard from './playerCards/components/GameCard';
 import '../styles/ShowCardModal.css';

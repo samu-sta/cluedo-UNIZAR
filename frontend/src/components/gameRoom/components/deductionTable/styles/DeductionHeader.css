@@ -1,8 +1,3 @@
-/**
- * @fileoverview Estilos para el encabezado de la tabla de deducciones con botón para expandir/colapsar
- * @author Samuel Felipe
- */
-
 .deduction-header {
   display: flex;
   justify-content: space-between;

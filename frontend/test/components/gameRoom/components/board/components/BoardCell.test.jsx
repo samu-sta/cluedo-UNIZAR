@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for BoardCell component which represents an individual cell in the game board with various states and player tokens.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import BoardCell from '../../../../../../src/components/gameRoom/components/board/components/BoardCell';

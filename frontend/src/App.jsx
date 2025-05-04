@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente principal de la aplicación que define la estructura y las rutas
- * @author Samuel Felipe
- */
 import { useState } from 'react';
 import Header from './components/header/Header.jsx';
 import Footer from './components/footer/Footer.jsx';
