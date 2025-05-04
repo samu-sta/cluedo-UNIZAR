@@ -1,4 +1,14 @@
-// Este archivo configura el entorno global antes de ejecutar las pruebas
+/*************************************************
+ * Configuración Global para Pruebas
+ * 
+ * Este archivo configura el entorno global antes de
+ * ejecutar cualquier prueba, estableciendo variables
+ * de entorno y datos de prueba que estarán disponibles
+ * para todas las pruebas del proyecto.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 const path = require('path');
 const fs = require('fs');
 

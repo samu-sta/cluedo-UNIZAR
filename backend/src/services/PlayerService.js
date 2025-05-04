@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Servicio de gestión de jugadores
+ * Este servicio maneja todas las operaciones relacionadas
+ * con los jugadores, como añadir jugadores a la partida,
+ * gestionar su estado, posiciones y acciones en el tablero.
+ * @author SAMUEL FELIPE
+ */
+
 import { gameService } from './GameService.js';
 import { shuffleArray } from '../utils/arrayUtils.js';
 import { GAME_STATES } from '../config/constants.js';
@@ -89,7 +97,6 @@ class PlayerService {
   }
 
   /**
-<<<<<<< HEAD
    * Verifica si un jugador puede moverse a una posición
    * @param {string} gameId - ID de la partida
    * @param {string} userId - ID del jugador
@@ -140,6 +147,8 @@ class PlayerService {
   getPlayerRoom(gameId, userId) {
     return null;
   }
+
+  /**
    * Verifica si un jugador está en una partida
    * @param {string} gameId - ID de la partida
    * @param {string} userId - ID del jugador

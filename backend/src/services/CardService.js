@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Servicio de gestión de cartas del juego
+ * Este servicio maneja la distribución de cartas entre jugadores,
+ * la selección de la solución del juego y las operaciones relacionadas
+ * con verificación de cartas para acusaciones y sugerencias.
+ * @author SAMUEL FELIPE
+ */
+
 import { getCards, getCharacters, distributeCards, selectSolution } from '../utils/game.js';
 import { getRandomItem } from '../utils/arrayUtils.js';
 import { gameService } from './GameService.js';

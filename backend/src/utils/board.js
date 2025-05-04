@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Utilidades para el tablero del juego
+ * Este archivo contiene funciones para calcular movimientos
+ * en el tablero, validar posiciones y encontrar rutas entre
+ * diferentes ubicaciones del juego Cluedo.
+ * @author SAMUEL FELIPE
+ */
+
 export const isWall = (board, row, column) => {
   return board.rooms.some(room =>
     room.walls.some(wall => wall.row === row && wall.column === column)

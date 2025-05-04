@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Manejadores de eventos para Socket.IO
+ * Este archivo configura todos los manejadores de eventos
+ * de Socket.IO para el juego, incluyendo la gestión de conexiones,
+ * acciones de jugadores, turnos y mecánicas del juego.
+ * @author SAMUEL FELIPE
+ */
+
 import { handlePlayerConnection, handlePlayerLeave, handleRequestCards, handlePlayerReady } from './handlers/playerHandlers.js';
 import { handlePassTurn, handleRollDice, handleMovePlayer } from './handlers/turnHandlers.js';
 import { handleMakeAccusation, handleMakeSuggestion, handleShowCard } from './handlers/suggestionHandlers.js';

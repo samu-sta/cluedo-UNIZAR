@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Manejadores de eventos de jugadores para Socket.IO
+ * Este archivo contiene las funciones encargadas de gestionar 
+ * los eventos relacionados con la conexión, desconexión y
+ * acciones básicas de los jugadores en la partida.
+ * @author SAMUEL FELIPE
+ */
+
 import { GAME_STATES, SOCKET_EVENTS } from '../../config/constants.js';
 import MESSAGES from '../../messages/messages.js';
 

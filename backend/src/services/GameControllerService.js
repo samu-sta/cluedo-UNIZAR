@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Servicio principal para el control del juego
+ * Este servicio actúa como controlador central para preparar
+ * respuestas relacionadas con el juego, gestionar tokens de
+ * autenticación y construir estructuras de datos para el cliente.
+ * @author SAMUEL FELIPE
+ */
+
 import { getGame } from "../utils/game.js";
 import auth from "../utils/auth.js";
 import { gameStateManager } from '../socket/GameStateManager.js';

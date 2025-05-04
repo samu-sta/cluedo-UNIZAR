@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Servicio de gestión de sugerencias y acusaciones
+ * Este servicio maneja el proceso de hacer sugerencias y acusaciones
+ * en el juego, incluyendo la validación de las mismas, verificación de
+ * condiciones y gestión de las respuestas de otros jugadores.
+ * @author SAMUEL FELIPE
+ */
+
 import { gameService } from './GameService.js';
 import { turnService } from './TurnService.js';
 import { boardService } from './BoardService.js';

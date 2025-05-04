@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Gestor de cuenta atrás para el juego
+ * Este módulo gestiona las cuentas atrás utilizadas para
+ * iniciar las partidas, permitiendo controlar los temporizadores,
+ * cancelarlos, y notificar las actualizaciones del tiempo.
+ * @author SAMUEL FELIPE
+ */
+
 import { GAME_STATES, SOCKET_EVENTS, GAME_CONFIG } from '../config/constants.js';
 
 export default class CountdownManager {

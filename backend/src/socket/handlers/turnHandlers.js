@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Manejadores de eventos relacionados con los turnos
+ * Este archivo contiene las funciones para gestionar los turnos
+ * de los jugadores, incluyendo tirar dados, moverse por el tablero 
+ * y pasar el turno al siguiente jugador.
+ * @author SAMUEL FELIPE
+ */
+
 import { GAME_STATES, SOCKET_EVENTS } from '../../config/constants.js';
 import MESSAGES from '../../messages/messages.js';
 import { validateGameAction } from './utils.js';

@@ -1,3 +1,14 @@
+/*************************************************
+ * Resolvedor de módulos para Jest
+ * 
+ * Este archivo configura un resolvedor personalizado
+ * para Jest, permitiendo mapear y resolver correctamente
+ * las rutas de importación de los archivos durante
+ * la ejecución de pruebas.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 // jest-resolver.js
 const path = require('path');
 const fs = require('fs');
