@@ -261,55 +261,6 @@ class SuggestionService {
       solution: shouldEndGame ? game.solution : null
     };
   }
-
-  /**
-   * Obtiene la lista de jugadores que pueden refutar una sugerencia
-   * @param {string} gameId - ID de la partida
-   * @param {string} suggestingPlayerId - ID del jugador que hizo la sugerencia
-   * @param {Object} suggestion - Sugerencia realizada
-   * @returns {Array} - Lista de jugadores que pueden refutar
-   */
-  getPlayersWhoCanDisprove(gameId, suggestingPlayerId, suggestion) {
-    if (!gameService.hasGame(gameId)) return [];
-
-    const game = gameService.getGame(gameId);
-    const playerIds = Array.from(game.players.keys()).filter(id => id !== suggestingPlayerId);
-    
-    return playerIds.filter(playerId => {
-      const card = cardService.checkCard(gameId, playerId, suggestion);
-      return card !== null;
-    });
-  }
-
-  /**
-   * Obtiene el siguiente jugador que puede refutar una sugerencia
-   * @param {string} gameId - ID de la partida
-   * @param {Object} suggestion - Sugerencia realizada
-   * @param {string} currentPlayerId - ID del jugador actual
-   * @returns {string|null} - ID del siguiente jugador o null
-   */
-  getNextPlayerToDisprove(gameId, suggestion, currentPlayerId) {
-    if (!gameService.hasGame(gameId)) return null;
-
-    const game = gameService.getGame(gameId);
-    const turnOrder = game.turnOrder || [];
-    
-    if (turnOrder.length <= 1) return null;
-    
-    let currentIndex = turnOrder.indexOf(currentPlayerId);
-    
-    for (let i = 1; i < turnOrder.length; i++) {
-      const nextIndex = (currentIndex + i) % turnOrder.length;
-      const nextPlayerId = turnOrder[nextIndex];
-      
-      if (cardService.checkCard(gameId, nextPlayerId, suggestion)) {
-        return nextPlayerId;
-      }
-    }
-    
-    return null;
-  }
 }
 
 export const suggestionService = new SuggestionService();
-export default suggestionService;

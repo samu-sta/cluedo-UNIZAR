@@ -15,7 +15,7 @@ class GameService {
    * @returns {Object|null} Datos de la partida o null si no existe
    */
   getGame(gameId) {
-    return this.games.get(gameId) || null;
+    return this.games.get(gameId);
   }
 
   /**
@@ -53,27 +53,28 @@ class GameService {
    * @returns {Object} Datos de la partida inicializada
    */
   async initGame(gameId) {
-    if (this.games.has(gameId)) {
-      return this.games.get(gameId);
+    let board = null;
+    try {
+      board = await getBoard();
+    }
+    catch (error) {
+      console.log('Error al cargar el tablero:', error);
     }
 
-    const game = {
-      id: gameId,
-      players: new Map(),
-      state: GAME_STATES.WAITING,
-      board: null,
-      solution: null,
-      playerCards: {},
-      leftoverCards: [],
-      canRollDice: true,
-      hasMoved: false,
-      hasSuggested: false,
-      currentSuggestion: null,
-      suggestionResponses: []
-    };
-
-    this.games.set(gameId, game);
-    return game;
+    if (!this.games.has(gameId)) {
+      this.games.set(gameId, {
+        players: new Map(),
+        timer: null,
+        countdown: null,
+        state: GAME_STATES.WAITING,
+        board,
+        solution: null,
+        playerCards: null,
+        leftoverCards: null,
+        diceResult: null
+      });
+    }
+    return this.games.get(gameId);
   }
 
   /**
@@ -98,23 +99,8 @@ class GameService {
    * @returns {Map} Map con todas las partidas activas
    */
   getAllGames() {
-    return this.games;
-  }
-
-  /**
-   * Prepara una respuesta de partida para la API HTTP
-   * @param {Object} user - Datos del usuario
-   * @param {string} gameId - ID de la partida
-   * @returns {Object} - Respuesta formateada
-   */
-  prepareGameResponse(user, gameId) {
-    return {
-      success: true,
-      gameId,
-      token: 'test-socket-token'
-    };
+    return this.games.entries();
   }
 }
 
 export const gameService = new GameService();
-export default gameService;

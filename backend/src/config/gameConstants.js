@@ -138,12 +138,6 @@ export const DOORS_CONFIG = {
   ]
 };
 
-export const CARD_TYPES = {
-  SUSPECT: 'character',
-  WEAPON: 'weapon',
-  ROOM: 'room'
-};
-
 export const CARDS_DATA = {
   characters: [
     {
@@ -197,6 +191,5 @@ export default {
   WALLS_CONFIG,
   DOORS_CONFIG,
   CARDS_DATA,
-  BOARD_CONFIG,
-  CARD_TYPES
+  BOARD_CONFIG
 };

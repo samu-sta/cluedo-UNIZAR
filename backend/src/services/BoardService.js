@@ -1,160 +1,146 @@
 import { gameService } from './GameService.js';
+import { turnService } from './TurnService.js';
+import { createDoorPositionsMap, findValidMoves } from '../utils/board.js';
+import { isPositionInsideRoom } from '../utils/game.js';
+import MESSAGES from '../messages/messages.js';
 import { GAME_CONFIG } from '../config/constants.js';
-import { findValidMoves, isPositionInsideRoom } from '../utils/board.js';
-import { getBoard } from '../utils/game.js';
 
+/**
+ * Servicio para gestionar los movimientos en el tablero
+ */
 class BoardService {
   /**
-   * Lanza los dados
+   * Lanza los dados para el jugador actual
    * @param {string} gameId - ID de la partida
-   * @returns {Object} - Resultado del lanzamiento
+   * @returns {Object|null} Resultado de los dados
    */
   rollDice(gameId) {
-    if (!gameService.hasGame(gameId)) {
-      return { success: false, message: 'Game not found' };
-    }
+    if (!gameService.hasGame(gameId)) return null;
 
     const game = gameService.getGame(gameId);
 
-    if (!game.canRollDice) {
-      return { success: false, message: 'Cannot roll dice at this time' };
-    }
-
-    const dice1 = Math.floor(Math.random() * GAME_CONFIG.DICE.SIDES) + GAME_CONFIG.DICE.MIN;
-    const dice2 = Math.floor(Math.random() * GAME_CONFIG.DICE.SIDES) + GAME_CONFIG.DICE.MIN;
-    const total = dice1 + dice2;
-
-    game.lastDiceRoll = { dice1, dice2, total };
+    const diceResult1 = Math.floor(Math.random() * GAME_CONFIG.DICE.SIDES) + GAME_CONFIG.DICE.MIN;
+    const diceResult2 = Math.floor(Math.random() * GAME_CONFIG.DICE.SIDES) + GAME_CONFIG.DICE.MIN;
+    game.diceResult = diceResult1 + diceResult2;
     game.canRollDice = false;
-    
+
     return {
-      success: true,
-      dice1,
-      dice2,
-      total
+      diceResult1,
+      diceResult2
     };
   }
 
   /**
-   * Verifica si se pueden lanzar los dados
+   * Verifica si el jugador puede lanzar los dados
    * @param {string} gameId - ID de la partida
-   * @returns {boolean} - True si se pueden lanzar los dados
+   * @returns {boolean} True si puede lanzar los dados
    */
   getCanRollDice(gameId) {
-    if (!gameService.hasGame(gameId)) return false;
-    
+    if (!gameService.hasGame(gameId)) return null;
+
     const game = gameService.getGame(gameId);
-    return game.canRollDice || false;
+    return game.canRollDice;
   }
 
   /**
    * Obtiene los movimientos válidos para un jugador
    * @param {string} gameId - ID de la partida
    * @param {string} playerId - ID del jugador
-   * @returns {Array} - Lista de movimientos válidos
+   * @returns {Array} Lista de posiciones válidas
    */
   getValidMoves(gameId, playerId) {
-    if (!gameService.hasGame(gameId)) return [];
-    
-    const game = gameService.getGame(gameId);
-    const player = game.players.get(playerId);
-    
-    if (!player || !player.position || !game.lastDiceRoll) {
+    if (!gameService.hasGame(gameId) || !turnService.isPlayerTurn(gameId, playerId)) {
       return [];
     }
-    
-    const startPosition = player.position;
-    const maxSteps = game.lastDiceRoll.total;
-    
-    // In a real implementation, we would use board data to calculate valid moves
-    return [
-      { row: startPosition.row + 1, column: startPosition.column },
-      { row: startPosition.row - 1, column: startPosition.column },
-      { row: startPosition.row, column: startPosition.column + 1 },
-      { row: startPosition.row, column: startPosition.column - 1 }
-    ].filter(pos => 
-      pos.row >= 1 && pos.row <= 18 && 
-      pos.column >= 1 && pos.column <= 18
-    );
+
+    const game = gameService.getGame(gameId);
+    const player = game.players.get(playerId);
+
+    if (!player || !game.diceResult) {
+      return [];
+    }
+
+    const { position } = player;
+    const maxSteps = game.diceResult;
+    const board = game.board;
+
+    const doorPositions = createDoorPositionsMap(board);
+
+    return findValidMoves(position, maxSteps, board, doorPositions);
   }
 
   /**
-   * Mueve un jugador
+   * Mueve un jugador a una nueva posición
    * @param {string} gameId - ID de la partida
    * @param {string} playerId - ID del jugador
-   * @param {Object} targetPosition - Posición destino
-   * @returns {Object} - Resultado del movimiento
+   * @param {Object} targetPosition - Nueva posición
+   * @returns {Object} Resultado del movimiento
    */
   movePlayer(gameId, playerId, targetPosition) {
-    if (!gameService.hasGame(gameId)) {
-      return { success: false, message: 'Game not found' };
+    if (!gameService.hasGame(gameId) || !turnService.isPlayerTurn(gameId, playerId)) {
+      return { success: false, message: MESSAGES.NOT_YOUR_TURN };
     }
-    
+
     const game = gameService.getGame(gameId);
     const player = game.players.get(playerId);
-    
+
     if (!player) {
-      return { success: false, message: 'Player not found' };
+      return { success: false, message: MESSAGES.PLAYER_NOT_FOUND };
     }
-    
-    const isValidMove = this.isValidMove(gameId, player.position, targetPosition);
-    
+
+    const validMoves = this.getValidMoves(gameId, playerId);
+    const isValidMove = validMoves.some(move =>
+      move.row === targetPosition.row && move.column === targetPosition.column
+    );
+
     if (!isValidMove) {
-      return { success: false, message: 'Invalid move' };
+      return { success: false, message: MESSAGES.INVALID_MOVE };
     }
-    
-    // Update player position
+
+    const movePath = validMoves.find(move =>
+      move.row === targetPosition.row && move.column === targetPosition.column
+    ).path;
+
     player.position = targetPosition;
     game.hasMoved = true;
-    
+
     return {
       success: true,
-      position: targetPosition
+      path: movePath
     };
   }
 
   /**
-   * Verifica si un movimiento es válido
-   * @param {string} gameId - ID de la partida
-   * @param {Object} startPosition - Posición inicial
-   * @param {Object} targetPosition - Posición destino
-   * @returns {boolean} - True si el movimiento es válido
-   */
-  isValidMove(gameId, startPosition, targetPosition) {
-    // In a real implementation, we would check if the target position is reachable
-    // within the dice roll and considering walls/doors
-    
-    // Simple check: target position must be adjacent to start position
-    const rowDiff = Math.abs(targetPosition.row - startPosition.row);
-    const colDiff = Math.abs(targetPosition.column - startPosition.column);
-    
-    // Allow diagonal moves in this simplified version
-    return rowDiff <= 1 && colDiff <= 1;
-  }
-
-  /**
-   * Obtiene la habitación donde está un jugador
+   * Obtiene la habitación en la que se encuentra un jugador
    * @param {string} gameId - ID de la partida
    * @param {string} playerId - ID del jugador
-   * @returns {Object|null} - Nombre de la habitación o null
+   * @returns {Object|null} Información de la habitación
    */
   getPlayerRoom(gameId, playerId) {
     if (!gameService.hasGame(gameId)) return null;
-    
+
     const game = gameService.getGame(gameId);
     const player = game.players.get(playerId);
-    
-    if (!player || !player.position) {
-      return null;
+
+    if (!player || !player.position) return null;
+
+    const { row, column } = player.position;
+    const board = game.board;
+
+    for (const room of board.rooms) {
+      const isInDoor = room.doors.some(door =>
+        door.row === row && door.column === column
+      );
+
+      if (isInDoor) continue;
+
+      if (isPositionInsideRoom(room, { row, column })) {
+        return { roomName: room.name, room };
+      }
     }
-    
-    // In a real implementation, we would check if the position is inside any room
-    // For testing purposes, let's return a mock room
-    return {
-      roomName: 'Kitchen'
-    };
+
+    return null;
   }
 }
 
 export const boardService = new BoardService();
-export default boardService;

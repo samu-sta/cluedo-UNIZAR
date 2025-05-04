@@ -1,7 +1,6 @@
 import { getCards, getCharacters, distributeCards, selectSolution } from '../utils/game.js';
 import { getRandomItem } from '../utils/arrayUtils.js';
 import { gameService } from './GameService.js';
-import { CARD_TYPES } from '../config/gameConstants.js';
 
 /**
  * Servicio para gestionar las cartas en el juego
@@ -32,140 +31,6 @@ class CardService {
    */
   distributeCardsToPlayers(cards, playerIds) {
     return distributeCards(cards, playerIds);
-  }
-
-  /**
-   * Inicializa el mazo para un juego
-   * @returns {Object} Mazo con las cartas de la solución y las cartas restantes
-   */
-  initializeDeck() {
-    const characters = [
-      { type: CARD_TYPES.SUSPECT, value: 'Colonel Mustard' },
-      { type: CARD_TYPES.SUSPECT, value: 'Mrs. White' },
-      { type: CARD_TYPES.SUSPECT, value: 'Miss Scarlett' }
-    ];
-    
-    const weapons = [
-      { type: CARD_TYPES.WEAPON, value: 'Knife' },
-      { type: CARD_TYPES.WEAPON, value: 'Rope' },
-      { type: CARD_TYPES.WEAPON, value: 'Candlestick' }
-    ];
-    
-    const rooms = [
-      { type: CARD_TYPES.ROOM, value: 'Kitchen' },
-      { type: CARD_TYPES.ROOM, value: 'Ballroom' },
-      { type: CARD_TYPES.ROOM, value: 'Library' }
-    ];
-
-    const murderer = getRandomItem(characters);
-    const murderWeapon = getRandomItem(weapons);
-    const murderRoom = getRandomItem(rooms);
-
-    const remainingCharacters = characters.filter(c => c.value !== murderer.value);
-    const remainingWeapons = weapons.filter(w => w.value !== murderWeapon.value);
-    const remainingRooms = rooms.filter(r => r.value !== murderRoom.value);
-
-    const cards = [
-      ...remainingCharacters,
-      ...remainingWeapons,
-      ...remainingRooms
-    ];
-
-    return {
-      murderer,
-      murderWeapon,
-      murderRoom,
-      cards
-    };
-  }
-
-  /**
-   * Reparte las cartas a los jugadores
-   * @param {string} gameId - ID de la partida
-   * @returns {boolean} - True si se repartieron correctamente, False en caso contrario
-   */
-  dealCards(gameId) {
-    if (!gameService.hasGame(gameId)) {
-      return false;
-    }
-
-    const game = gameService.getGame(gameId);
-    const playerIds = Array.from(game.players.keys());
-    const cards = [...game.deck.cards];
-    
-    // Shuffle cards
-    for (let i = cards.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [cards[i], cards[j]] = [cards[j], cards[i]];
-    }
-    
-    // Calculate cards per player
-    const cardsPerPlayer = Math.floor(cards.length / playerIds.length);
-    
-    // Distribute cards
-    for (let i = 0; i < playerIds.length; i++) {
-      const playerId = playerIds[i];
-      const start = i * cardsPerPlayer;
-      const end = (i === playerIds.length - 1) ? cards.length : (i + 1) * cardsPerPlayer;
-      game.players.get(playerId).cards = cards.slice(start, end);
-    }
-    
-    return true;
-  }
-
-  /**
-   * Verifica si un jugador puede refutar una sugerencia
-   * @param {string} gameId - ID de la partida
-   * @param {string} playerId - ID del jugador
-   * @param {Object} suggestion - Sugerencia a comprobar
-   * @returns {Object|null} - Carta que refuta la sugerencia o null
-   */
-  checkCard(gameId, playerId, suggestion) {
-    if (!gameService.hasGame(gameId)) {
-      return null;
-    }
-    
-    const game = gameService.getGame(gameId);
-    const player = game.players.get(playerId);
-    
-    if (!player || !player.cards || player.cards.length === 0) {
-      return null;
-    }
-    
-    // Check for suspect match
-    const suspectCard = player.cards.find(card => 
-      card.type === CARD_TYPES.SUSPECT && card.value === suggestion.suspect);
-    if (suspectCard) {
-      return suspectCard;
-    }
-    
-    // Check for weapon match
-    const weaponCard = player.cards.find(card => 
-      card.type === CARD_TYPES.WEAPON && card.value === suggestion.weapon);
-    if (weaponCard) {
-      return weaponCard;
-    }
-    
-    // Check for room match
-    const roomCard = player.cards.find(card => 
-      card.type === CARD_TYPES.ROOM && card.value === suggestion.room);
-    if (roomCard) {
-      return roomCard;
-    }
-    
-    return null;
-  }
-
-  /**
-   * Obtiene una carta de un tipo específico para un jugador
-   * @param {string} gameId - ID de la partida
-   * @param {string} playerId - ID del jugador
-   * @param {string} type - Tipo de carta (character, weapon, room)
-   * @returns {Object|null} - Carta del tipo especificado o null si no la tiene
-   */
-  getPlayerCardForType(gameId, playerId, type) {
-    const cards = this.getPlayerCards(gameId, playerId);
-    return cards.find(card => card.type === type) || null;
   }
 
   /**
@@ -222,8 +87,7 @@ class CardService {
     if (!gameService.hasGame(gameId)) return [];
 
     const game = gameService.getGame(gameId);
-    const player = game.players.get(userId);
-    return player?.cards || [];
+    return game.playerCards?.[userId] || [];
   }
 
   /**
@@ -235,10 +99,10 @@ class CardService {
     if (!gameService.hasGame(gameId)) return null;
 
     const game = gameService.getGame(gameId);
-    return game.deck ? {
-      suspect: game.deck.murderer.value,
-      weapon: game.deck.murderWeapon.value,
-      room: game.deck.murderRoom.value
+    return game.solution ? {
+      character: game.solution.character,
+      weapon: game.solution.weapon,
+      room: game.solution.room
     } : null;
   }
 
@@ -271,4 +135,3 @@ class CardService {
 }
 
 export const cardService = new CardService();
-export default cardService;
