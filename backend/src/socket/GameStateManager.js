@@ -19,8 +19,6 @@ class GameStateManager {
   registerGame(gameId, user) {
     gameService.initGame(gameId);
 
-    console.log('Juegos activos: ', gameService.getActiveGamesCount());
-
     playerService.addPlayer(gameId, user.id, {
       username: user.username
     });
@@ -328,13 +326,10 @@ class GameStateManager {
 
     this.redistributePlayerCards(gameId, userId);
 
-    // Actualizar el orden de turnos antes de eliminar al jugador
     turnService.updatePlayerTurnOrder(gameId, userId);
 
     this.removePlayer(gameId, userId);
 
-    // Si era el turno del jugador que salió, ya no necesitamos llamar a nextTurn
-    // porque updatePlayerTurnOrder ya ajustó el currentTurnPlayer
     const nextTurnInfo = isCurrentTurn ? {
       playerId: game.currentTurnPlayer,
       playerName: turnService.getCurrentTurnPlayerName(gameId),
@@ -419,9 +414,7 @@ class GameStateManager {
    */
   getAvailableGames() {
     const availableGames = [];
-    console.log('Juegos activos: ', gameService.getActiveGamesCount());
 
-    // Obtener todas las partidas y filtrar las que están en estado de espera
     for (const [gameId, game] of gameService.getAllGames()) {
       if (game.state === GAME_STATES.WAITING &&
         playerService.getPlayerCount(gameId) < GAME_CONFIG.MAX_PLAYERS) {

@@ -66,8 +66,6 @@ class GameController {
         });
       }
 
-      console.log('player Count: ' + gameStateManager.getPlayerCount(gameId))
-      console.log('max players: ' + GAME_CONFIG.MAX_PLAYERS)
       if (gameStateManager.getPlayerCount(gameId) === GAME_CONFIG.MAX_PLAYERS) {
 
         return res.status(403).json({
@@ -98,7 +96,6 @@ class GameController {
       const user = req.account;
       const availableGames = gameStateManager.getAvailableGames();
 
-      // Verificar si hay partidas disponibles
       if (!availableGames || availableGames.length === 0) {
         return res.status(404).json({
           success: false,
@@ -106,11 +103,9 @@ class GameController {
         });
       }
 
-      // Seleccionar una partida aleatoria
       const randomIndex = Math.floor(Math.random() * availableGames.length);
       const randomGameId = availableGames[randomIndex];
 
-      // Preparar la respuesta igual que en joinGame
       const response = await gameService.prepareGameResponse(user, randomGameId);
       return res.status(200).json(response);
     }
