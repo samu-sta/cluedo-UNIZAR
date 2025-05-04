@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for SectionTitle component which renders formatted section headings for the home page.
- * @author Samuel Felipe
- */
 import { render, screen } from '@testing-library/react';
 import SectionTitle from '../../../../src/components/home/components/SectionTitle';
 

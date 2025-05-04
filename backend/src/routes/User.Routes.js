@@ -6,18 +6,12 @@ export const UserRoutes = () => {
   const router = express.Router();
   const userController = new UserController();
 
-<<<<<<< HEAD
   /**
    * @route POST /api/user/register
    * @desc Registrar nuevo usuario
    * @access Public
    */
   router.post('/register', userController.register);
-=======
-  userRouter.post('/register', userController.register);
-  userRouter.post('/login', userController.login);
-  userRouter.post('/logout', userController.logout);
->>>>>>> 835393ab0392a70e64ef3a7fb12bb762306382d0
 
   /**
    * @route POST /api/user/login

@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente que representa una carta del juego, mostrando su nombre y tipo
- * @author Samuel Felipe
- */
 import '../styles/GameCard.css';
 
 const GameCard = ({ card, type, isLeftover = false, onClick, className }) => {

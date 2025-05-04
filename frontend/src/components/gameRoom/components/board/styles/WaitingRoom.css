@@ -1,8 +1,3 @@
-/**
- * @fileoverview Estilos para la sala de espera del juego y la visualización de la cuenta regresiva
- * @author Samuel Felipe
- */
-
 .game-board-placeholder {
   border-radius: 12px;
   display: flex;

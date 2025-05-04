@@ -1,11 +1,6 @@
-/**
- * @fileoverview Hook personalizado para gestionar la lógica de la página de inicio de sesión
- * @author Samuel Felipe
- */
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { userSchema } from '../../../../schemas/schemas';
-import { ROUTES } from '../../../../utils/constants';
 
 const useLoginPage = (setUser, loginUser) => {
   const [errors, setErrors] = useState({});
@@ -39,7 +34,7 @@ const useLoginPage = (setUser, loginUser) => {
       setUser(response.user);
       localStorage.setItem('user', JSON.stringify(response.user));
 
-      navigate(ROUTES.GAMES);
+      navigate('/');
     }
     catch (error) {
       setServerError('Error en el servidor, por favor intente más tarde.');

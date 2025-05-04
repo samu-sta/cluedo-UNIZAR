@@ -1,7 +1,3 @@
-/**
- * @fileoverview Hook para gestionar el estado del juego y los jugadores
- * @author Samuel Felipe
- */
 import { useState, useEffect, useRef } from 'react';
 
 /**

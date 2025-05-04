@@ -1,7 +1,3 @@
-/**
- * @fileoverview Hook personalizado para gestionar la lógica del componente Header
- * @author Samuel Felipe
- */
 import { useState, useEffect } from 'react';
 import useIsMobile from '../../common/hooks/useIsMobile';
 

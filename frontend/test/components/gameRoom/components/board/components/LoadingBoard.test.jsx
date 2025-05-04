@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for LoadingBoard component which displays a loading spinner and text while the game board is loading.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import LoadingBoard from '../../../../../../src/components/gameRoom/components/board/components/LoadingBoard';

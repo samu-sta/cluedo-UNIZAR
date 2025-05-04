@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for Footer component which displays copyright information and credits at the bottom of pages.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Footer from '../../../src/components/footer/Footer';

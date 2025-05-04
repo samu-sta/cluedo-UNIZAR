@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for SuggestionModal component which allows players to make a suggestion about the crime elements.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen, fireEvent, within } from '@testing-library/react';
 import SuggestionModal from '../../../../src/components/gameRoom/components/SuggestionModal';

@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for Die component which renders a single game dice with animation capabilities.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Die from '../../../../src/components/gameRoom/components/Die';

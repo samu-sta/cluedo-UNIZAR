@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for StartGames component which handles game creation and joining functionality.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { useNavigate } from 'react-router-dom';

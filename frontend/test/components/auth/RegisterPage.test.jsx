@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for RegisterPage component which manages user registration functionality and form validation.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, fireEvent, act, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter, MemoryRouter, Routes, Route } from 'react-router-dom';

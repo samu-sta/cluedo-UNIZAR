@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente modal que muestra un mensaje cuando un jugador hace una acusación incorrecta
- * @author Samuel Felipe
- */
 import { createPortal } from 'react-dom';
 import '../styles/IncorrectAccusationModal.css';
 

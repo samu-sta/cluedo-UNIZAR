@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente de características que muestra las ventajas del juego
- * @author Samuel Felipe
- */
 import { HOME } from '../../../utils/constants';
 import SectionTitle from './SectionTitle';
 import FeatureCard from './FeatureCard';

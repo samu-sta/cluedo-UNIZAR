@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for FeaturesSection component which displays the key features of the application.
- * @author Samuel Felipe
- */
 import { render, screen } from '@testing-library/react';
 import FeaturesSection from '../../../../src/components/home/components/FeaturesSection';
 import { HOME } from '../../../../src/utils/constants';

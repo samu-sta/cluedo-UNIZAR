@@ -16,7 +16,7 @@ export const setupSocketHandlers = (io) => {
   io.on(SOCKET_EVENTS.CONNECT, async (socket) => {
     const { gameId, userId, username } = socket;
 
-    if (gameStateManager.getGameState(gameId) === GAME_STATES.PLAYING || gameStateManager.getPlayerCount(gameId) === GAME_CONFIG.MAX_PLAYERS) {
+    if (gameStateManager.getGameState(gameId) === GAME_STATES.PLAYING) {
       socket.disconnect();
       return;
     }

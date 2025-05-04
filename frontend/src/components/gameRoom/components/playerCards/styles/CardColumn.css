@@ -1,7 +1,3 @@
-/**
- * @fileoverview Estilos para el contenedor de columnas de cartas que agrupa cartas del mismo tipo
- * @author Samuel Felipe
- */
 .card-column {
   flex: 0 0 auto;
   padding: 0 0.5rem;

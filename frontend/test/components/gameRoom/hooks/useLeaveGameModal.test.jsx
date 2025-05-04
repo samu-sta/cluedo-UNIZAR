@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for useLeaveGameModal hook which manages the modal for confirming game abandonment.
- * @author Samuel Felipe
- */
 import { renderHook, act } from '@testing-library/react';
 import useLeaveGameModal from '../../../../src/components/gameRoom/hooks/useLeaveGameModal';
 

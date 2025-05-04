@@ -1,8 +1,3 @@
-/**
- * @fileoverview Estilos para el modal de confirmación al abandonar una partida
- * @author Samuel Felipe
- */
-
 .modal-overlay {
   position: fixed;
   top: 0;

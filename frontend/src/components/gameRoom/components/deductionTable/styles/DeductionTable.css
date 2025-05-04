@@ -1,7 +1,3 @@
-/**
- * @fileoverview Estilos para el contenedor principal de la tabla de deducciones que permite mostrar/ocultar el panel
- * @author Samuel Felipe
- */
 /* Estilos del contenedor principal */
 .deduction-table-container {
   position: fixed;

@@ -1,7 +1,3 @@
-/**
- * @fileoverview Hook para gestionar los turnos del juego y las acciones permitidas en cada fase
- * @author Samuel Felipe
- */
 import { useState, useEffect } from 'react';
 
 /**

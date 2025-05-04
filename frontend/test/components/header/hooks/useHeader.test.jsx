@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for useHeader hook which manages the responsive behavior of the header navigation.
- * @author Samuel Felipe
- */
 import { renderHook, act } from '@testing-library/react';
 import useHeader from '../../../../src/components/header/hooks/useHeader';
 import useIsMobile from '../../../../src/components/common/hooks/useIsMobile';

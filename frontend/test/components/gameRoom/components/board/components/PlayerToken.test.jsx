@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for PlayerToken component which represents a player's piece on the game board.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import PlayerToken from '../../../../../../src/components/gameRoom/components/board/components/PlayerToken';

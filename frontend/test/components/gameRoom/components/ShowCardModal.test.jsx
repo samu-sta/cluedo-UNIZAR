@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for ShowCardModal component which displays cards during the suggestion/accusation phase.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import ShowCardModal from '../../../../src/components/gameRoom/components/ShowCardModal';

@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for useGameTurn hook which manages the turn-based logic and actions in the game.
- * @author Samuel Felipe
- */
 import { renderHook, act } from '@testing-library/react';
 import { useGameTurn } from '../../../../src/components/gameRoom/hooks/useGameTurn';
 

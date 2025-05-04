@@ -89,7 +89,6 @@ class PlayerService {
   }
 
   /**
-<<<<<<< HEAD
    * Verifica si un jugador puede moverse a una posición
    * @param {string} gameId - ID de la partida
    * @param {string} userId - ID del jugador
@@ -139,15 +138,6 @@ class PlayerService {
    */
   getPlayerRoom(gameId, userId) {
     return null;
-  }
-   * Verifica si un jugador está en una partida
-   * @param {string} gameId - ID de la partida
-   * @param {string} userId - ID del jugador
-   * @returns {boolean} - True si el jugador está en la partida
-   */
-  isPlayerInGame(gameId, userId) {
-    const game = gameService.getGame(gameId);
-    return game && game.players.has(userId);
   }
 }
 

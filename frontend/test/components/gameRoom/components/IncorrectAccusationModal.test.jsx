@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for IncorrectAccusationModal component which displays a modal when a player makes an incorrect accusation.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import IncorrectAccusationModal from '../../../../src/components/gameRoom/components/IncorrectAccusationModal';

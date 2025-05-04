@@ -1,7 +1,3 @@
-/**
- * @fileoverview Hook personalizado para gestionar la lógica de la página de registro
- * @author Samuel Felipe
- */
 import { useState } from 'react';
 import { userSchema } from '../../../../schemas/schemas';
 import { useNavigate } from 'react-router-dom';

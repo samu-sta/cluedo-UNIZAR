@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente de tarjeta que muestra una característica individual del juego
- * @author Samuel Felipe
- */
 import '../styles/FeatureCard.css';
 
 const FeatureCard = ({ icon, iconLabel, title, description }) => {

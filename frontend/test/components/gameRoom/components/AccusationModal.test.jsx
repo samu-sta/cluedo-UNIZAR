@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for AccusationModal component which allows players to make final accusations about the crime elements.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen, fireEvent, within } from '@testing-library/react';
 import AccusationModal from '../../../../src/components/gameRoom/components/AccusationModal';

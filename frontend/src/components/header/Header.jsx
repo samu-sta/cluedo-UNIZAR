@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente de cabecera que muestra el título de la aplicación y la navegación principal
- * @author Samuel Felipe
- */
 import './styles/Header.css';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from 'react-router-dom';

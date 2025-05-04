@@ -1,7 +1,3 @@
-/**
- * @fileoverview Estilos para el modal de acusaciones durante el juego
- * @author Samuel Felipe
- */
 .accusation-modal {
   background-color: var(--color-background);
   border-radius: 10px;

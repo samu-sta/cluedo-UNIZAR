@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for useLoginPage hook which manages login form state and validation.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { renderHook } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';

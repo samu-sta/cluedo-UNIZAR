@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for CardDrawer component which displays the player's cards in a collapsible drawer.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import CardDrawer from '../../../../../src/components/gameRoom/components/playerCards/components/CardDrawer';

@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for DeductionLegend component which displays the icons and meanings of different deduction states.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import DeductionLegend from '../../../../../../src/components/gameRoom/components/deductionTable/components/DeductionLegend';

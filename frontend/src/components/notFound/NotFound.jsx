@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente de página no encontrada que se muestra cuando una ruta no existe
- * @author Samuel Felipe
- */
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../utils/constants";
 import "./NotFound.css";

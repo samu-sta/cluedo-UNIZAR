@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente modal que se muestra cuando finaliza una partida
- * @author Samuel Felipe
- */
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import useGameEndedModal from '../hooks/useGameEndedModal';

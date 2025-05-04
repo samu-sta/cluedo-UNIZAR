@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente que muestra la cuadrícula de deducciones organizando los elementos por categorías
- * @author Samuel Felipe
- */
 import DeductionCategory from './DeductionCategory';
 import '../styles/DeductionGrid.css';
 

@@ -1,8 +1,3 @@
-/**
- * @fileoverview Estilos para el componente de carga mientras se inicializa el tablero
- * @author Samuel Felipe
- */
-
 .loading-board {
   display: flex;
   flex-direction: column;

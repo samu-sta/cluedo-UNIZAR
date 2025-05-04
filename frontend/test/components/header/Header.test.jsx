@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for Header component which handles the responsive navigation bar of the application.
- * @author Samuel Felipe
- */
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Header from '../../../src/components/header/Header';

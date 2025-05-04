@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for useCopyGameId hook which manages copying game ID to clipboard.
- * @author Samuel Felipe
- */
 import { renderHook, act } from '@testing-library/react';
 import useCopyGameId from '../../../../src/components/gameRoom/hooks/useCopyGameId';
 

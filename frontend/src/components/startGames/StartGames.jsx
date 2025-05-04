@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente principal para la página de gestión de partidas
- * @autor Samuel Felipe
- */
 import './styles/StartGames.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -28,6 +24,7 @@ const StartGames = ({ user }) => {
   return (
     <main className="games-container">
       <span className="decorative-element circle top-left" aria-hidden="true"></span>
+      <span className="decorative-element dots bottom-right" aria-hidden="true"></span>
 
       <section className="games-content">
         <header className="games-header">

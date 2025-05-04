@@ -1,7 +1,3 @@
-/**
- * @fileoverview Tests for CardColumn component which renders a column of game cards of the same type.
- * @author Samuel Felipe
- */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import CardColumn from '../../../../../src/components/gameRoom/components/playerCards/components/CardColumn';

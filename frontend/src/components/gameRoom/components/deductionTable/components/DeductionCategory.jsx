@@ -1,7 +1,3 @@
-/**
- * @fileoverview Componente que organiza los elementos en categorías dentro de la tabla de deducciones
- * @author Samuel Felipe
- */
 import DeductionItem from './DeductionItem';
 import '../styles/DeductionCategory.css';
 
