@@ -13,7 +13,6 @@ export default class UserController {
 
   register = async (req, res) => {
     const result = userSchema.validateRegisterUser(req.body);
-    console.log(result);
 
     if (!result.success) {
       return res.status(400).json({ success: false, error: MESSAGES.INVALID_DATA });

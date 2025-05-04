@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { gameStateManager } from "../socket/GameStateManager.js";
 import gameService from "../services/GameControllerService.js";
 import { GAME_STATES } from "../config/constants.js";
-
+import { GAME_CONFIG } from "../config/constants.js";
 /**
  * Controlador para gestionar las partidas del juego a través de HTTP
  */
@@ -59,7 +59,20 @@ class GameController {
         });
       }
 
-      gameStateManager.addPlayerToGame(gameId, user);
+      if (gameStateManager.isPlayerInGame(gameId, user)) {
+        return res.status(403).json({
+          success: false,
+          message: MESSAGES.ALREADY_IN_GAME
+        });
+      }
+
+      if (gameStateManager.getPlayerCount(gameId) === GAME_CONFIG.MAX_PLAYERS) {
+
+        return res.status(403).json({
+          success: false,
+          message: MESSAGES.GAME_FULL
+        });
+      }
 
       const response = await gameService.prepareGameResponse(user, gameId);
       return res.status(200).json(response);
@@ -83,7 +96,6 @@ class GameController {
       const user = req.account;
       const availableGames = gameStateManager.getAvailableGames();
 
-      // Verificar si hay partidas disponibles
       if (!availableGames || availableGames.length === 0) {
         return res.status(404).json({
           success: false,
@@ -91,14 +103,9 @@ class GameController {
         });
       }
 
-      // Seleccionar una partida aleatoria
       const randomIndex = Math.floor(Math.random() * availableGames.length);
       const randomGameId = availableGames[randomIndex];
 
-      // Añadir al usuario a la partida seleccionada
-      gameStateManager.addPlayerToGame(randomGameId, user);
-
-      // Preparar la respuesta igual que en joinGame
       const response = await gameService.prepareGameResponse(user, randomGameId);
       return res.status(200).json(response);
     }
