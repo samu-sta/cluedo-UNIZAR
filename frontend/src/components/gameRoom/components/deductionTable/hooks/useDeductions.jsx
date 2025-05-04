@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Hook personalizado para gestionar el estado y la lógica de la tabla de deducciones
+ * @author Samuel Felipe
+ */
 import { useState, useEffect } from 'react';
 import useIsMobile from '../../../../common/hooks/useIsMobile';
 const IS_MOBILE_WIDTH = 750;

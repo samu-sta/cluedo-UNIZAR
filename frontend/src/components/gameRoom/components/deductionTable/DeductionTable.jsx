@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente que muestra la tabla de deducción donde el jugador anota sus pistas
+ * @author Samuel Felipe
+ */
 import { useState } from 'react';
 import useDeductions from './hooks/useDeductions';
 import DeductionHeader from './components/DeductionHeader';

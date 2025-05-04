@@ -1,7 +1,7 @@
 # 🎲 Cluedo UNIZAR - Documentación del Proyecto
 
 > [!NOTE]
-> Esta documentación refleja el estado actual del proyecto a día 11 de abril de 2025. Contiene información detallada sobre la arquitectura, componentes y funcionalidades implementadas.
+> Esta documentación refleja el estado actual del proyecto completo a día 3 de mayo de 2025. Contiene información detallada sobre la arquitectura, componentes y funcionalidades implementadas.
 
 ## 💻 1. Tecnologías Utilizadas
 
@@ -22,14 +22,11 @@
 - **JSONWebToken 9.0.2**: Implementación de tokens JWT
 - **Cookie-Parser 1.4.7**: Middleware para manejar cookies
 - **Socket.IO 5.0.0**: Servidor para comunicación en tiempo real
-- **CORS**: Middleware para habilitar peticiones entre dominios
-- **Morgan 1.10.0**: Logger de HTTP requests
 - **Dotenv 16.4.7**: Carga variables de entorno desde archivo .env
 - **Zod 3.24.2**: Validación de datos de entrada de peticiones HTTP
-- **UUID 10.0.0**: Generación de identificadores únicos para partidas
-
 
 ## 🏛️ 2. Arquitectura del Proyecto
+
 ```
 cluedo/
 ├── frontend/        # Aplicación React
@@ -52,7 +49,6 @@ cluedo/
 │   │   │   ├── Game.js          # Servicios de partidas
 │   │   │   └── Socket.js        # Configuración de Socket.IO
 │   │   └── schemas/     # Esquemas de validación
-│   └── ...
 ├── backend/         # Servidor Node.js
 │   ├── src/
 │   │   ├── app/          # Configuración de la aplicación
@@ -81,11 +77,8 @@ cluedo/
 │   │   ├── utils/        # Utilidades del juego
 │   │   │   ├── board.js           # Algoritmos de movimiento en el tablero
 │   │   │   └── game.js            # Utilidades generales del juego
-│   │   └── schemas/      # Esquemas para validación
-│   └── ...
 └── documents/       # Documentación del proyecto
 ```
-
 
 ## 🔐 3. Sistema de Autenticación
 
@@ -97,7 +90,6 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
   - Registro de usuarios (`/user/register`)
   - Inicio de sesión (`/user/login`)
   - Cierre de sesión (`/user/logout`)
-  - Cambio de contraseña (`/user/change-password`)
 - **Expiración de Tokens**: Los tokens expiran después de 24 horas (86400 segundos).
 
 ### 3.1 Flujo de Autenticación
@@ -108,7 +100,6 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
 5. Las solicitudes posteriores incluyen automáticamente esta cookie
 6. El backend verifica el token en cada solicitud protegida
 
-
 ## 🗄️ 4. Base de Datos
 
 - **Sistema**: MySQL 8.0
@@ -116,7 +107,6 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
 - **Modelos principales**:
   - `AccountModel`: Almacena información básica de cuentas (username, email, password hashed)
   - `UserModel`: Establece relación con Account para usuarios regulares
-  - `AdminModel`: Establece relación con Account para administradores
   - `GameModel`: Información básica del juego
   - `BoardModel`: Configuración del tablero (filas, columnas)
   - `RoomModel`: Habitaciones del tablero de juego
@@ -124,7 +114,7 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
   - `DoorModel`: Representa las puertas entre habitaciones
   - `CardModel`: Cartas del juego (armas, personajes, habitaciones)
 - **Relaciones**:
-  - Account → User/Admin (one-to-one)
+  - Account → User (one-to-one)
   - Game → Board (one-to-one)
   - Game → Card (one-to-many)
   - Board → Room (one-to-many)
@@ -132,17 +122,12 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
   - Room → Door (one-to-many)
 - **Inicialización**: El script init.js crea la base de datos y tablas necesarias.
 
-> [!TIP]
-> Para facilitar el desarrollo, se puede utilizar la herramienta MySQL Workbench para visualizar y manipular la estructura de la base de datos directamente.
-
-
 ## 🔌 5. API REST
 
 ### 5.1 Endpoints de Usuario
 - `POST /user/register`: Registro de nuevos usuarios
 - `POST /user/login`: Autenticación de usuarios
 - `POST /user/logout`: Cierre de sesión
-- `POST /user/change-password`: Cambio de contraseña
 
 ### 5.2 Endpoints de Juego
 - `POST /game/create`: Creación de una nueva partida
@@ -151,10 +136,6 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
 ### 5.3 Validación de Datos
 - Todas las entradas son validadas mediante esquemas Zod.
 - Manejo consistente de errores con mensajes descriptivos.
-
-> [!WARNING]
-> No se debe omitir la validación de ningún dato de entrada, ya que esto podría comprometer la seguridad de la aplicación y crear vulnerabilidades.
-
 
 ## 🖥️ 6. Frontend
 
@@ -208,7 +189,6 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
 - Variables CSS para temas consistentes
 - Diseño responsivo para móviles y escritorio
 - Animaciones para mejorar la experiencia de usuario
-
 
 ## 🎮 7. Sistema de Partidas y Comunicación en Tiempo Real
 
@@ -267,7 +247,7 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
 - **Estados visuales**:
   - Turno normal: Muestra el nombre del jugador actual
   - Mi turno: Destaca visualmente y muestra un botón para pasar turno
-  
+
 ### 7.6 Sistema de Dados y Movimiento
 - **Lanzamiento de dados**: Los jugadores pueden lanzar dos dados durante su turno
 - **Visualización de dados**: Representación gráfica del resultado de lanzamiento
@@ -335,9 +315,6 @@ El proyecto está completamente dockerizado para facilitar el desarrollo y despl
 
 ### 8.3 Variables de Entorno
 
-> [!IMPORTANT]
-> Nunca incluir archivos .env con credenciales reales en el repositorio. Asegurarse de que estén incluidos en el .gitignore.
-
 Las configuraciones se manejan mediante variables de entorno que se pueden definir en el archivo .env siguiendo la estructura del .env.example:
 - Credenciales de base de datos
 - Puerto del frontend y backend
@@ -359,17 +336,12 @@ docker-compose logs -f
 docker-compose up -d --build
 ```
 
-
 ## 🛡️ 9. Seguridad
 
 - **Contraseñas**: Hashed con Argon2, no se almacenan en texto plano
 - **CORS**: Restricciones de origen cruzado configuradas
 - **Cookies**: HTTP-only para tokens JWT
 - **Validación**: Todas las entradas son validadas con Zod
-
-> [!WARNING]
-> Establecer un JWT_SECRET privado que no se pueda descifrar
-
 
 ## ⚙️ 10. Instalación y Configuración (Sin Docker)
 
@@ -395,8 +367,7 @@ npm install
 
 ### 10.2 Configuración de Variables de Entorno
 
-> [!NOTE]
-> El proyecto requiere que se creen los archivos .env en la carpeta backend, siguiendo la estructura del .env.example.
+El proyecto requiere que se creen los archivos .env en la carpeta backend, siguiendo la estructura del .env.example.
 
 ### 10.3 Ejecución del frontend y backend
 
@@ -417,40 +388,40 @@ cd backend
 npm start
 ```
 
-## 📷 11. Capturas de Pantalla
+## 🧪 11. Testing
 
-### 11.1 Página de Inicio
-![home-1](https://github.com/user-attachments/assets/526330b3-b676-40ed-a988-379921742dd4)
-![home-2](https://github.com/user-attachments/assets/78563d1c-2d44-46c4-9465-d622b74a9f73)
-![home-3](https://github.com/user-attachments/assets/876bd374-8307-429c-9a41-dc619cf7f206)
-![home-4](https://github.com/user-attachments/assets/d8211a83-abfc-4089-9270-d6744c5f5000)
+El proyecto está completamente testeado utilizando Jest como framework de pruebas.
 
-### 11.2 Interfaz de Juego
-![game-1](https://github.com/user-attachments/assets/54e4fa6d-9fc3-4f35-8561-4155fa812c71)
-![game-2](https://github.com/user-attachments/assets/ebba0655-37eb-42bf-8bb0-3712b18606c1)
-![game-3](https://github.com/user-attachments/assets/3e586cc5-7e48-47d3-88be-c0dbc8a4943a)
+### 11.1 Cobertura de Pruebas
+- **Cobertura global superior al 80%** en los componentes y lógica de negocio
+- Suite completa de pruebas unitarias para componentes y hooks
+- Pruebas de integración para flujos críticos (autenticación, juego, movimientos)
+- Mocks para servicios externos y comunicación socket
 
-## 🔮 12. Consideraciones Futuras
+### 11.2 Categorías de Pruebas
+- **Componentes UI**: Verificación de renderizado y comportamiento
+- **Hooks personalizados**: Validación de lógica de estado
+- **Servicios**: Pruebas de comunicación con el backend
+- **Lógica de juego**: Validación de movimientos, sugerencias y acusaciones
+- **Comunicación socket**: Verificación de eventos y respuestas
 
-Actualmente, el equipo se está enfocando en las siguientes áreas de mejora:
+### 11.3 Ejecución de Pruebas
+```bash
+# Ejecutar todas las pruebas frontend
+cd frontend
+npm test
 
-### 12.1 Testing
-- Implementación de pruebas unitarias para componentes críticos
-- Pruebas de integración para la comunicación entre frontend y backend
-- Pruebas end-to-end para simular flujos completos de usuario
-- Pruebas de carga para verificar el rendimiento con múltiples partidas simultáneas
+# Ejecutar todas las pruebas backend
+cd backend
+npm test
 
-### 12.2 Corrección de Bugs
-- Resolver problemas de reconexión cuando un jugador se desconecta temporalmente
-- Corregir comportamiento inconsistente en la tabla de deducciones en dispositivos móviles
-- Solucionar problemas de renderizado en diferentes navegadores
-- Arreglar errores relacionados con la distribución de cartas y validación de movimientos
+# Ejecutar pruebas con informe de cobertura
+npm run test:coverage
 
-### 12.3 Refactorización del Frontend
-- Mejorar la estructura de componentes para facilitar mantenimiento
-- Estandarizar el manejo de estado entre componentes
-- Mejorar la experiencia de usuario en dispositivos móviles
-- Implementar mejores prácticas de accesibilidad
+# Ejecutar pruebas en modo vigilancia
+npm run test:watch
+```
 
 ---
-Esta documentación es un recurso vivo que será actualizado conforme el proyecto evolucione.
+
+Esta documentación representa el estado final del proyecto Cluedo UNIZAR.

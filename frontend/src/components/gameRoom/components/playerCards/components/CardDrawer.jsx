@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente que implementa un cajón desplegable para mostrar las cartas del jugador
+ * @author Samuel Felipe
+ */
 import { IoIosArrowDown } from "react-icons/io";
 import CardSection from './CardSection';
 import '../styles/CardDrawer.css';

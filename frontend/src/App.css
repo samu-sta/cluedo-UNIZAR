@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Estilos globales de la aplicación que definen los componentes comunes y animaciones
+ * @author Samuel Felipe
+ */
+
 .btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;

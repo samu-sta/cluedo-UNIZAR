@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente que muestra el encabezado de la sala de juego con información básica
+ * @author Samuel Felipe
+ */
 import { FaCheck } from 'react-icons/fa';
 import { LuCopy } from "react-icons/lu";
 import useCopyGameId from '../hooks/useCopyGameId';

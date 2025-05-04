@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for DeductionCategory component which groups deduction items by category (characters, weapons, rooms).
+ * @author Samuel Felipe
+ */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import DeductionCategory from '../../../../../../src/components/gameRoom/components/deductionTable/components/DeductionCategory';

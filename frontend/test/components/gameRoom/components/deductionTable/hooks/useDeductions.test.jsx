@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for useDeductions hook which manages the state and logic for the deduction table functionality.
+ * @author Samuel Felipe
+ */
 import { renderHook, act } from '@testing-library/react';
 import useDeductions from '../../../../../../src/components/gameRoom/components/deductionTable/hooks/useDeductions';
 

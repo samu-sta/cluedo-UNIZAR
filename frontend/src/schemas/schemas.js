@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Esquemas de validación utilizados en los formularios de la aplicación
+ * @author Samuel Felipe
+ */
+
 import { z } from "zod";
 
 const RegisterUserSchema = z.object({

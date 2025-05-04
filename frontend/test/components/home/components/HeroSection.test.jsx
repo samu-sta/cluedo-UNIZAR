@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for HeroSection component which displays the main landing section with call-to-action buttons.
+ * @author Samuel Felipe
+ */
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import HeroSection from '../../../../src/components/home/components/HeroSection';

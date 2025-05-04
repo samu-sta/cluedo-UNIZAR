@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Estilos para la sala de juego principal
+ * @author Samuel Felipe
+ */
 .game-room {
   display: flex;
   overflow: hidden;

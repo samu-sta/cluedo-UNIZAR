@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for useSuggestionResponseModal hook which manages the display of response modals for game suggestions.
+ * @author Samuel Felipe
+ */
 import { renderHook, act } from '@testing-library/react';
 import { useSuggestionResponseModal } from '../../../../src/components/gameRoom/hooks/useSuggestionResponseModal';
 

@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Estilos para las celdas individuales del tablero del juego Cluedo
+ * @author Samuel Felipe
+ */
+
 .board-cell {
   position: relative;
   border: 0.5px solid rgba(255, 255, 255, 0.05);

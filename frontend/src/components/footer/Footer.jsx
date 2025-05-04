@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Componente de pie de página que muestra los créditos y derechos de autor
+ * @author Samuel Felipe
+ */
 import './styles/Footer.css';
 
 const Footer = () => {

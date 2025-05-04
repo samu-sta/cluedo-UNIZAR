@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for Home component which serves as the landing page of the application.
+ * @author Samuel Felipe
+ */
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Home from '../../../src/components/home/Home';

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Estilos para la lista de jugadores en la sala de juego
+ * @author Samuel Felipe
+ */
 .player-sidebar {
   width: 100%;
   min-width: 250px;

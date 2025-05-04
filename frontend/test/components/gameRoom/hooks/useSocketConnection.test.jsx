@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for useSocketConnection hook which manages the WebSocket connection to the game server.
+ * @author Samuel Felipe
+ */
 import { renderHook, act, waitFor } from '@testing-library/react';
 import { useSocketConnection } from '../../../../src/components/gameRoom/hooks/useSocketConnection';
 import { joinGame } from '../../../../src/services/Game';

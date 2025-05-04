@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Estilos para las tarjetas individuales del juego, definiendo apariencia y animaciones
+ * @author Samuel Felipe
+ */
 .game-card {
   width: clamp(70px, 50px + 10vw, 90px);
   height: clamp(100px, 80px + 10vw, 120px);

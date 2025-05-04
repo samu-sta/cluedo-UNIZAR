@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Hook para gestionar el movimiento de jugadores y los lanzamientos de dados durante el juego
+ * @author Samuel Felipe
+ */
 import { useState, useEffect, useCallback } from 'react';
 
 /**

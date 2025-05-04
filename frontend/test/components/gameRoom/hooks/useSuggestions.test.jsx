@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for useSuggestions hook which handles making suggestions and accusations in the game.
+ * @author Samuel Felipe
+ */
 import { renderHook, act } from '@testing-library/react';
 import { useSuggestions } from '../../../../src/components/gameRoom/hooks/useSuggestions';
 

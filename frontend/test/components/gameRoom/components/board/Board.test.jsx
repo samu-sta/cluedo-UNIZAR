@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Tests for Board component which renders the game board with cells, rooms, and player positions.
+ * @author Cluedo-UNIZAR Team
+ */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Board } from '../../../../../src/components/gameRoom/components/board/Board';

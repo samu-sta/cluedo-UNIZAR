@@ -205,9 +205,9 @@ export const isPositionInsideRoom = (room, position) => {
   });
 
   return (
-    position.row > minRow &&
-    position.row < maxRow &&
-    position.column > minCol &&
-    position.column < maxCol
+    position.row >= minRow &&
+    position.row <= maxRow &&
+    position.column >= minCol &&
+    position.column <= maxCol
   );
 };

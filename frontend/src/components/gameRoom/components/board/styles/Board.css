@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Estilos para el tablero principal del juego Cluedo y su contenedor
+ * @author Samuel Felipe
+ */
+
 .game-board-container {
   display: flex;
   flex-direction: column;

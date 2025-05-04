@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Estilos para las tarjetas de los jugadores y el cajón deslizante que las contiene
+ * @author Samuel Felipe
+ */
 .player-cards-drawer {
   position: fixed;
   bottom: 0;

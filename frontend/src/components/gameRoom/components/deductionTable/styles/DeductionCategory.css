@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Estilos para las categorías de la tabla de deducciones con animaciones de aparición
+ * @author Samuel Felipe
+ */
 .deduction-category {
   background-color: var(--color-primary-dark);
   border-radius: 8px;

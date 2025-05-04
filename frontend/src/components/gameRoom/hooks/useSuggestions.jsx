@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Hook para gestionar el estado de las sugerencias y acusaciones durante el juego
+ * @author Samuel Felipe
+ */
 import { useState, useEffect, useCallback } from 'react';
 
 /**
@@ -67,8 +71,8 @@ export function useSuggestions(socket, gameInfo, isMyTurn) {
     });
 
     return (
-      position.row > minRow && position.row < maxRow &&
-      position.column > minCol && position.column < maxCol
+      position.row >= minRow && position.row <= maxRow &&
+      position.column >= minCol && position.column <= maxCol
     );
   };
 
