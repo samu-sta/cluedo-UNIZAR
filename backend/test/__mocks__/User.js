@@ -1,3 +1,13 @@
+/*************************************************
+ * Test de integración para mock del modelo User
+ * 
+ * Este mock simula el comportamiento del modelo
+ * User, permitiendo realizar pruebas unitarias e
+ * integradas sin depender de una base de datos real.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 const mockUsers = new Map();
 let lastId = 1;
 

@@ -1,3 +1,13 @@
+/*************************************************
+ * Inicialización de la base de datos
+ * 
+ * Este archivo se encarga de inicializar la base de
+ * datos, recreando las tablas y añadiendo los datos
+ * iniciales necesarios para el juego.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { Sequelize } from 'sequelize';
 import setupRelations from '../models/relations.js';
 import sequelize from './database.js';

@@ -1,3 +1,13 @@
+/*************************************************
+ * Controlador de juego
+ * 
+ * Este controlador gestiona las operaciones relacionadas
+ * con partidas, incluyendo creación, unión y búsqueda
+ * de partidas disponibles a través de la API REST.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import MESSAGES from "../messages/messages.js";
 import { v4 as uuidv4 } from 'uuid';
 import { gameStateManager } from "../socket/GameStateManager.js";

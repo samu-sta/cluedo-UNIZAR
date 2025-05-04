@@ -1,3 +1,13 @@
+/*************************************************
+ * Utilidades para tests
+ * 
+ * Colección de funciones auxiliares para facilitar
+ * las pruebas de unidad e integración, incluyendo
+ * mocks de objetos de Express y funciones comunes.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 // Utilidades comunes para todos los tests
 import { jest } from '@jest/globals';
 

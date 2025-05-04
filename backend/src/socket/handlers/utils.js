@@ -1,3 +1,12 @@
+/*************************************************
+ * Utilidades para el manejo de eventos de socket
+ * 
+ * Contiene funciones para validar acciones de juego,
+ * finalizar juegos y manejar eventos de socket.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { GAME_STATES, SOCKET_EVENTS } from '../../config/constants.js';
 import MESSAGES from '../../messages/messages.js';
 

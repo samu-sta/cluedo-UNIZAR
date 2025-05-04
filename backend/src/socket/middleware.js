@@ -1,4 +1,15 @@
+/*************************************************
+ * Middleware de autenticación para WebSocket
+ * 
+ * Verifica la validez de los tokens y credenciales de
+ * los usuarios que se conectan mediante WebSockets,
+ * asegurando conexiones autorizadas al juego.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
 export const socketAuthMiddleware = (socket, next) => {
   try {

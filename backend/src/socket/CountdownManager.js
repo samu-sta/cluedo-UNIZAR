@@ -1,3 +1,13 @@
+/*************************************************
+ * Gestor de cuenta atrás para el juego
+ * 
+ * Proporciona funcionalidad para gestionar temporizadores
+ * de cuenta atrás durante el juego, como el tiempo para
+ * iniciar una partida o limitar un turno.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { GAME_STATES, SOCKET_EVENTS, GAME_CONFIG } from '../config/constants.js';
 
 export default class CountdownManager {

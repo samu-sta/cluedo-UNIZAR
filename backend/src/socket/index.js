@@ -1,3 +1,13 @@
+/*************************************************
+ * Configuración del servidor WebSocket
+ * 
+ * Inicializa y configura el servidor Socket.io para
+ * la comunicación en tiempo real, aplicando middleware
+ * de autenticación y configurando manejadores.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { Server } from 'socket.io';
 import { socketAuthMiddleware } from './middleware.js';
 import { setupSocketHandlers } from './handlers.js';

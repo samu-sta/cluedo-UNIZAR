@@ -1,3 +1,13 @@
+/*************************************************
+ * Modelo de datos para cartas del juego
+ * 
+ * Define la estructura de datos para las cartas
+ * del juego Cluedo, incluyendo personajes, armas 
+ * y habitaciones con sus características visuales.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 

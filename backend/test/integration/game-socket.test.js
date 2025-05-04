@@ -1,10 +1,10 @@
 /*************************************************
- * Test de integración para sockets de juego
+ * Test de integración para sockets del juego
  * 
- * Este test verifica la integración correcta
- * entre socket.io y la lógica del juego Cluedo,
- * validando la comunicación en tiempo real entre
- * los jugadores y el servidor.
+ * Este test verifica la comunicación en tiempo real
+ * mediante WebSockets, validando la sincronización
+ * del estado del juego entre servidor y clientes,
+ * así como eventos del juego.
  * 
  * Autor: DANIEL SANAGUSTIN
  *************************************************/

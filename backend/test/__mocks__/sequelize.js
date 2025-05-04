@@ -1,3 +1,13 @@
+/*************************************************
+ * Test de integración para mock de Sequelize
+ * 
+ * Este mock simula el comportamiento de Sequelize
+ * y sus métodos para permitir pruebas sin requerir
+ * una conexión a base de datos real.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 // Mock for Sequelize
 const DataTypes = {
   STRING: jest.fn().mockImplementation(() => 'STRING'),

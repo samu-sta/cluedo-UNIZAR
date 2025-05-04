@@ -1,3 +1,13 @@
+/*************************************************
+ * Modelo de datos para habitaciones del tablero
+ * 
+ * Define la estructura de datos para las habitaciones
+ * del tablero de juego, estableciendo su relación con
+ * el tablero y sus características básicas.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 import Board from './Board.js';

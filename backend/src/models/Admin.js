@@ -1,3 +1,13 @@
+/*************************************************
+ * Modelo de datos para administradores
+ * 
+ * Define la estructura de datos para los usuarios
+ * administradores, estableciendo su relación con
+ * las cuentas del sistema y sus permisos especiales.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 import AccountModel from './Account.js';

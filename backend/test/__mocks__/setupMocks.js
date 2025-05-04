@@ -1,3 +1,13 @@
+/*************************************************
+ * Configuración centralizada de mocks para tests
+ * 
+ * Este archivo centraliza todos los mocks necesarios 
+ * para las pruebas, evitando problemas con las 
+ * variables fuera de ámbito en jest.mock.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 /**
  * Este archivo centraliza todos los mocks necesarios para las pruebas
  * Evita problemas con las variables fuera de ámbito en jest.mock

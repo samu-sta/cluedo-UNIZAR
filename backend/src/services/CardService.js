@@ -1,3 +1,13 @@
+/*************************************************
+ * Servicio de gestión de cartas
+ * 
+ * Proporciona funcionalidades para manejar las cartas
+ * del juego, incluyendo reparto, selección de solución
+ * y gestión de cartas por jugador.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { getCards, getCharacters, distributeCards, selectSolution } from '../utils/game.js';
 import { getRandomItem } from '../utils/arrayUtils.js';
 import { gameService } from './GameService.js';

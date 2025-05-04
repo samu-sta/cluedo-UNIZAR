@@ -1,3 +1,13 @@
+/*************************************************
+ * Configuración de relaciones entre modelos
+ * 
+ * Este archivo define las relaciones entre todos los
+ * modelos de datos de la aplicación, estableciendo
+ * las asociaciones necesarias para el ORM Sequelize.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import GameModel from './Game.js';
 import BoardModel from './Board.js';
 import RoomModel from './Room.js';

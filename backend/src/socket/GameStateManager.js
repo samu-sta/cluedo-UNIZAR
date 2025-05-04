@@ -1,3 +1,13 @@
+/*************************************************
+ * Gestor de estado del juego
+ * 
+ * Gestiona el estado global de las partidas en curso,
+ * coordinando la comunicación entre servicios y
+ * proporcionando acceso centralizado a los datos.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { GAME_STATES, GAME_CONFIG } from '../config/constants.js';
 import MESSAGES from '../messages/messages.js';
 import { gameService } from '../services/GameService.js';

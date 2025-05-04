@@ -1,3 +1,13 @@
+/*************************************************
+ * Test de integración para mock de CardService
+ * 
+ * Este mock simula el servicio de gestión de cartas,
+ * permitiendo probar la creación, distribución y
+ * verificación de cartas del juego.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { jest } from '@jest/globals';
 import { CHARACTERS, WEAPONS, ROOMS } from '../../../src/config/gameConstants.js';
 

@@ -1,3 +1,13 @@
+/*************************************************
+ * Esquemas de validación de usuarios
+ * 
+ * Define esquemas y validaciones para operaciones
+ * relacionadas con usuarios, como registro, inicio de 
+ * sesión y cambio de contraseña, utilizando zod.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import zod from 'zod';
 
 const RegisterUserSchema = zod.object({

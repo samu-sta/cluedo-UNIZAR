@@ -1,3 +1,13 @@
+/*************************************************
+ * Test de integración para mock de GameControllerService
+ * 
+ * Este mock simula el servicio de control del juego,
+ * permitiendo probar la gestión centralizada de
+ * estados y lógica del juego Cluedo.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { jest } from '@jest/globals';
 import auth from '../../../src/utils/auth.js';
 import { GAME_STATES } from '../../../src/config/constants.js';

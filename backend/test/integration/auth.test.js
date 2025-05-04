@@ -1,3 +1,14 @@
+/*************************************************
+ * Test de integración para autenticación
+ * 
+ * Este test verifica el funcionamiento del sistema
+ * de autenticación, incluyendo generación de tokens,
+ * verificación de credenciales y manejo de sesiones
+ * de usuario en la aplicación.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import request from 'supertest';
 import { createApp } from '../../src/app/app.js';
 import { jest } from '@jest/globals';

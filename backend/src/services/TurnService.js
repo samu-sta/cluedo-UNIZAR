@@ -1,3 +1,13 @@
+/*************************************************
+ * Servicio de gestión de turnos
+ * 
+ * Controla el flujo de turnos entre jugadores,
+ * determinando quién tiene el turno actual y
+ * gestionando el cambio de turnos.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { gameService } from './GameService.js';
 import { shuffleArray } from '../utils/arrayUtils.js';
 

@@ -1,3 +1,13 @@
+/*************************************************
+ * Modelo de datos para usuarios
+ * 
+ * Define la estructura de datos para los usuarios
+ * del juego, estableciendo su relación con las
+ * cuentas en el sistema.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 import AccountModel from './Account.js';

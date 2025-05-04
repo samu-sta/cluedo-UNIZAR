@@ -1,3 +1,13 @@
+/*************************************************
+ * Test de integración para mock de database
+ * 
+ * Este mock simula las funciones de la capa de 
+ * base de datos, permitiendo probar la aplicación 
+ * sin necesidad de conexión a base de datos real.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 // Mock de la base de datos para tests
 import { jest } from '@jest/globals';
 

@@ -1,3 +1,14 @@
+/*************************************************
+ * Test de integración para API del juego
+ * 
+ * Este test verifica la funcionalidad de la API
+ * del juego, incluyendo creación, recuperación y
+ * gestión de estados del juego, así como la
+ * interacción con la base de datos.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 const request = require('supertest');
 const app = require('../../src/app/app');
 const { MESSAGES } = require('../../src/messages/messages');

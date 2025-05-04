@@ -1,3 +1,13 @@
+/*************************************************
+ * Inicialización de datos del juego
+ * 
+ * Este archivo se encarga de crear los datos iniciales
+ * del juego en la base de datos, incluyendo tablero,
+ * habitaciones, paredes, puertas y cartas.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import GameModel from '../models/Game.js';
 import BoardModel from '../models/Board.js';
 import RoomModel from '../models/Room.js';

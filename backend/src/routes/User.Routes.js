@@ -1,3 +1,12 @@
+/*************************************************
+ * Enrutamiento de Usuarios
+ * 
+ * Define las rutas para la gestión de usuarios,
+ * incluyendo registro, inicio de sesión,
+ * cierre de sesión y cambio de contraseña.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
 import { Router } from 'express';
 import UserController from '../controllers/User.Controller.js';
 

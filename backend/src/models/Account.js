@@ -1,3 +1,13 @@
+/*************************************************
+ * Modelo de datos para cuentas de usuario
+ * 
+ * Define la estructura de datos para las cuentas
+ * de usuario en el sistema, almacenando información
+ * de autenticación y datos personales básicos.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 

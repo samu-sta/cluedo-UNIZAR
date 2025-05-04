@@ -1,3 +1,13 @@
+/*************************************************
+ * Test de integración para mock de SuggestionService
+ * 
+ * Este mock simula el servicio de sugerencias del juego,
+ * permitiendo probar la validación y respuesta a
+ * sugerencias y acusaciones de los jugadores.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { jest } from '@jest/globals';
 import MESSAGES from '../../../src/messages/messages.js';
 

@@ -1,3 +1,13 @@
+/*************************************************
+ * Test de integración para mock de TurnService
+ * 
+ * Este mock simula el servicio de gestión de turnos,
+ * permitiendo probar la lógica de alternancia entre
+ * jugadores y control del flujo de juego.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { jest } from '@jest/globals';
 import MESSAGES from '../../../src/messages/messages.js';
 

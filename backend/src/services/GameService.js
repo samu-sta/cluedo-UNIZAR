@@ -1,3 +1,13 @@
+/*************************************************
+ * Servicio de gestión de partidas
+ * 
+ * Se encarga del ciclo de vida de las partidas,
+ * incluyendo creación, actualización y eliminación,
+ * así como gestión de su estado.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { GAME_STATES } from '../config/constants.js';
 import { getBoard } from '../utils/game.js';
 

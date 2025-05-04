@@ -1,3 +1,13 @@
+/*************************************************
+ * Modelo de datos para el tablero de juego
+ * 
+ * Define la estructura de datos para el tablero
+ * del juego Cluedo, especificando sus dimensiones
+ * y la relación con la partida correspondiente.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 

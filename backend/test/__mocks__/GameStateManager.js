@@ -1,3 +1,13 @@
+/*************************************************
+ * Test de integración para mock de GameStateManager
+ * 
+ * Este mock simula la gestión del estado del juego,
+ * permitiendo realizar pruebas del flujo de juego,
+ * manejo de turnos y acciones de los jugadores.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { jest } from '@jest/globals';
 import MESSAGES from '../../src/messages/messages.js';
 

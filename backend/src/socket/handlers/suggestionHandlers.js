@@ -1,3 +1,10 @@
+/*************************************************
+ * Socket Handlers para el juego de Cluedo
+ * 
+ * Este módulo maneja las acciones de los jugadores
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
 import { GAME_STATES, SOCKET_EVENTS } from '../../config/constants.js';
 import MESSAGES from '../../messages/messages.js';
 import { validateGameAction, endGame } from './utils.js';

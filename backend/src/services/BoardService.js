@@ -1,3 +1,13 @@
+/*************************************************
+ * Servicio de gestión del tablero de juego
+ * 
+ * Proporciona funcionalidades para manejar el tablero,
+ * como la validación de movimientos, cálculo de 
+ * posiciones válidas y gestión de dados.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { gameService } from './GameService.js';
 import { turnService } from './TurnService.js';
 import { createDoorPositionsMap, findValidMoves } from '../utils/board.js';

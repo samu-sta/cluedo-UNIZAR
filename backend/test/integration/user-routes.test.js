@@ -1,10 +1,10 @@
 /*************************************************
  * Test de integración para rutas de usuario
  * 
- * Este test verifica la integración correcta
- * entre las rutas de usuario, controladores y
- * modelos, validando la creación, recuperación y
- * actualización de perfiles de usuario.
+ * Este test verifica la correcta integración entre
+ * las rutas de usuario, controladores y modelos,
+ * validando el registro, gestión de perfiles y
+ * actualización de datos de usuarios.
  * 
  * Autor: DANIEL SANAGUSTIN
  *************************************************/

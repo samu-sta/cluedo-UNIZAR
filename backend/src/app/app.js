@@ -1,3 +1,13 @@
+/*************************************************
+ * Configuración principal de la aplicación
+ * 
+ * Inicializa y configura la aplicación Express,
+ * estableciendo middleware, rutas, y servicios
+ * necesarios para el funcionamiento del backend.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import express from 'express';
 import morgan from 'morgan';
 import dotenv from 'dotenv';

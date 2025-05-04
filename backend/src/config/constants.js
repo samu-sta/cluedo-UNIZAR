@@ -1,3 +1,13 @@
+/*************************************************
+ * Constantes generales de la aplicación
+ * 
+ * Este archivo define las constantes generales usadas
+ * en toda la aplicación, incluyendo estados del juego,
+ * configuraciones y límites.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { MAX } from "uuid";
 
 export const GAME_STATES = {

@@ -1,3 +1,13 @@
+/*************************************************
+ * Utilidades para el tablero de juego
+ * 
+ * Funciones para la manipulación y validación del
+ * tablero de juego, incluyendo detección de paredes,
+ * puertas y cálculo de movimientos posibles.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 export const isWall = (board, row, column) => {
   return board.rooms.some(room =>
     room.walls.some(wall => wall.row === row && wall.column === column)

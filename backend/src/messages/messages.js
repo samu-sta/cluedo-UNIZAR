@@ -1,3 +1,13 @@
+/*************************************************
+ * Mensajes y textos de la aplicación
+ * 
+ * Este archivo centraliza todos los mensajes utilizados
+ * en la aplicación, facilitando la internacionalización
+ * y mejorando la consistencia de los textos mostrados.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 const USER_NOT_FOUND = "Usuario no encontrado";
 const INVALID_PASSWORD = "Contraseña incorrecta";
 const EMAIL_ALREADY_EXISTS = "El email ya existe";

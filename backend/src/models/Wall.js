@@ -1,3 +1,13 @@
+/*************************************************
+ * Modelo de datos para paredes del tablero
+ * 
+ * Define la estructura de datos para las paredes
+ * del tablero de juego, incluyendo su posición y
+ * la habitación a la que pertenecen.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 

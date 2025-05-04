@@ -1,4 +1,14 @@
-import { GAME_STATES, SOCKET_EVENTS } from '../../config/constants.js';
+/*************************************************
+ * Manejadores de eventos de turnos
+ * 
+ * Contiene los controladores específicos para eventos
+ * relacionados con turnos de juego, incluyendo movimiento
+ * de jugadores, lanzamiento de dados y cambio de turnos.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
+import { SOCKET_EVENTS, GAME_STATES } from '../../config/constants.js';
 import MESSAGES from '../../messages/messages.js';
 import { validateGameAction } from './utils.js';
 

@@ -1,3 +1,13 @@
+/*************************************************
+ * Servicio de gestión de jugadores
+ * 
+ * Proporciona funcionalidades para administrar los
+ * jugadores en una partida, incluyendo entrada, salida
+ * y posicionamiento en el tablero.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { gameService } from './GameService.js';
 
 /**

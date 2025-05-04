@@ -1,5 +1,16 @@
+/*************************************************
+ * Servicio de control del juego
+ * 
+ * Gestiona la creación de respuestas para la API,
+ * preparando datos de partidas y generando tokens
+ * para la conexión de WebSockets.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { getGame } from "../utils/game.js";
 import auth from "../utils/auth.js";
+import { gameService } from './GameService.js';
 
 /**
  * Servicio para gestionar funcionalidades relacionadas con partidas

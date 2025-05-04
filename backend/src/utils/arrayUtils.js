@@ -1,3 +1,13 @@
+/*************************************************
+ * Utilidades para manipulación de arrays
+ * 
+ * Este archivo contiene funciones auxiliares para
+ * trabajar con arrays, como mezclar elementos o
+ * seleccionar elementos aleatorios.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 /**
  * Shuffles an array using the Fisher-Yates algorithm
  * @param {Array} array - The array to shuffle

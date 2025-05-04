@@ -1,3 +1,13 @@
+/*************************************************
+ * Utilidades de autenticación
+ * 
+ * Funciones para la gestión de tokens JWT, incluyendo
+ * creación, verificación y generación de tokens para
+ * conexiones de socket.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import jwt from 'jsonwebtoken';
 
 import dotenv from 'dotenv';

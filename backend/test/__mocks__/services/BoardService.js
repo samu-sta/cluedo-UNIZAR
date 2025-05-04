@@ -1,3 +1,13 @@
+/*************************************************
+ * Test de integración para mock de BoardService
+ * 
+ * Este mock simula el servicio del tablero de juego,
+ * permitiendo probar la lógica de movimientos,
+ * posicionamiento y validación de acciones en el tablero.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { jest } from '@jest/globals';
 import { BOARD_CONFIG, ROOMS } from '../../../src/config/gameConstants.js';
 

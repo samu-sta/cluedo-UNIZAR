@@ -1,3 +1,13 @@
+/*************************************************
+ * Test de integración para mock del modelo Account
+ * 
+ * Este mock simula el comportamiento del modelo
+ * Account, permitiendo realizar pruebas unitarias e
+ * integradas sin depender de una base de datos real.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { jest } from '@jest/globals';
 
 const mockAccounts = new Map();

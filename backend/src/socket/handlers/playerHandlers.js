@@ -1,4 +1,14 @@
-import { GAME_STATES, SOCKET_EVENTS } from '../../config/constants.js';
+/*************************************************
+ * Manejadores de eventos de jugadores
+ * 
+ * Contiene los controladores específicos para eventos
+ * relacionados con jugadores, como conexión, desconexión,
+ * solicitud de cartas y preparación para jugar.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
+import { SOCKET_EVENTS, GAME_STATES, GAME_CONFIG } from '../../config/constants.js';
 import MESSAGES from '../../messages/messages.js';
 
 /**

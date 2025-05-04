@@ -1,3 +1,13 @@
+/*************************************************
+ * Manejadores de eventos de WebSocket
+ * 
+ * Define los controladores para los diferentes eventos
+ * de WebSocket, gestionando la interacción en tiempo
+ * real entre clientes y servidor.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { handlePlayerConnection, handlePlayerLeave, handleRequestCards, handlePlayerReady } from './handlers/playerHandlers.js';
 import { handlePassTurn, handleRollDice, handleMovePlayer } from './handlers/turnHandlers.js';
 import { handleMakeAccusation, handleMakeSuggestion, handleShowCard } from './handlers/suggestionHandlers.js';

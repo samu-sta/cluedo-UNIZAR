@@ -1,3 +1,13 @@
+/*************************************************
+ * Utilidades para gestión del juego
+ * 
+ * Funciones de consulta y manipulación de estados
+ * del juego, incluyendo obtención de cartas, tablero
+ * y verificación de acciones durante la partida.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import GameModel from "../models/Game.js";
 import CardModel from "../models/Card.js";
 import BoardModel from "../models/Board.js";

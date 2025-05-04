@@ -1,3 +1,13 @@
+/*************************************************
+ * Servicio de gestión de sugerencias
+ * 
+ * Controla la mecánica de sugerencias y acusaciones
+ * del juego, validando las propuestas y procesando
+ * las respuestas de los jugadores.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { gameService } from './GameService.js';
 import { turnService } from './TurnService.js';
 import { boardService } from './BoardService.js';

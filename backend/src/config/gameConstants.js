@@ -1,3 +1,13 @@
+/*************************************************
+ * Constantes específicas del juego
+ * 
+ * Este archivo define las constantes relacionadas con
+ * el juego Cluedo, incluyendo personajes, armas,
+ * habitaciones y configuración del tablero.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 export const ROOMS_DATA = [
   { name: 'Biblioteca' },
   { name: 'Cocina' },

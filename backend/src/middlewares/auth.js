@@ -1,3 +1,11 @@
+/*************************************************
+ * AUTH MIDDLEWARE
+ * 
+ * 
+ * This middleware checks if the user is authenticated by verifying the JWT token.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
 import auth from '../utils/auth.js';
 import MESSAGES from '../messages/messages.js';
 import AccountModel from '../models/Account.js';

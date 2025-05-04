@@ -1,3 +1,13 @@
+/*************************************************
+ * Test de integración para mock de PlayerService
+ * 
+ * Este mock simula el servicio de gestión de jugadores,
+ * permitiendo probar la interacción entre jugadores,
+ * sus posiciones en el tablero y gestión de cartas.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { jest } from '@jest/globals';
 import { CHARACTERS } from '../../../src/config/gameConstants.js';
 

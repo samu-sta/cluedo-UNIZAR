@@ -1,3 +1,5 @@
+
+
 import { Router } from 'express';
 import gameController from '../controllers/Game.Controller.js';
 import { authMiddleware } from '../middlewares/auth.js';

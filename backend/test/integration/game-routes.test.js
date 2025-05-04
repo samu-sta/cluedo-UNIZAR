@@ -1,10 +1,10 @@
 /*************************************************
- * Test de integración para rutas de juego
+ * Test de integración para rutas del juego
  * 
- * Este test verifica la integración correcta
- * entre las rutas de juego, los controladores y
- * los modelos, validando la creación, unión y
- * gestión de partidas de Cluedo.
+ * Este test verifica la correcta integración entre
+ * las rutas de la API del juego, controladores y
+ * modelos, asegurando el correcto flujo de datos
+ * y gestión de estados del juego.
  * 
  * Autor: DANIEL SANAGUSTIN
  *************************************************/

@@ -1,3 +1,13 @@
+/*************************************************
+ * Modelo de datos para puertas del tablero
+ * 
+ * Define la estructura de datos para las puertas
+ * de las habitaciones en el tablero, permitiendo
+ * el acceso entre habitaciones y pasillos.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 

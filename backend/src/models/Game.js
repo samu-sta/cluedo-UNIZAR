@@ -1,3 +1,13 @@
+/*************************************************
+ * Modelo de datos para partidas de juego
+ * 
+ * Define la estructura de datos para las partidas
+ * del juego Cluedo, estableciendo la base para
+ * almacenar la información de cada partida.
+ * 
+ * Autor: DANIEL SANAGUSTIN
+ *************************************************/
+
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.js';
 
