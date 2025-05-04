@@ -1,3 +1,13 @@
+/*************************************************
+ * Sala de juego
+ * 
+ * Componente principal que gestiona la experiencia
+ * de juego, incluyendo el tablero, los jugadores,
+ * y las interacciones durante una partida.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useGameSocket from './hooks/useGameSocket';

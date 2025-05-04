@@ -1,3 +1,13 @@
+/*************************************************
+ * Página de registro
+ * 
+ * Formulario para que los nuevos usuarios puedan crear
+ * una cuenta proporcionando su email, nombre de usuario
+ * y contraseña con validación de campos.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../../utils/constants';
 import useRegisterPage from './hooks/useRegisterPage';

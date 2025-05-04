@@ -1,3 +1,13 @@
+/*************************************************
+ * Página de inicio de sesión
+ * 
+ * Formulario para que los usuarios puedan acceder a 
+ * sus cuentas existentes mediante email y contraseña,
+ * con validación de campos y gestión de errores.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../../utils/constants';
 import useLoginPage from './hooks/useLoginPage';

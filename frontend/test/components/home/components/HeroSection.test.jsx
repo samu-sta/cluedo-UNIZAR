@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente HeroSection
+ * 
+ * Verifica que la sección principal de bienvenida
+ * muestre correctamente el título, descripción,
+ * botones de acción y estadísticas del juego.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import HeroSection from '../../../../src/components/home/components/HeroSection';

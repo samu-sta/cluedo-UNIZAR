@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el hook useLeaveGameModal
+ * 
+ * Verifica el comportamiento del modal de confirmación
+ * para abandonar la partida, controlando el flujo de
+ * confirmación y cancelación de esta acción.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { renderHook, act } from '@testing-library/react';
 import useLeaveGameModal from '../../../../src/components/gameRoom/hooks/useLeaveGameModal';
 

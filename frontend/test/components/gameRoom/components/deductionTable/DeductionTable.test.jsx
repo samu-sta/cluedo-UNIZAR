@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente DeductionTable
+ * 
+ * Verifica el funcionamiento de la tabla de deducción,
+ * que permite a los jugadores marcar sus pistas para
+ * ayudar a resolver el misterio del juego.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import DeductionTable from '../../../../../src/components/gameRoom/components/deductionTable/DeductionTable';

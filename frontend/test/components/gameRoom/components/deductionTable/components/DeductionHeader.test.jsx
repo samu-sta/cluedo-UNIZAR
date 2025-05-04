@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente DeductionHeader
+ * 
+ * Verifica el comportamiento del encabezado de la
+ * tabla de deducción, incluyendo el título y
+ * la funcionalidad de colapsar/expandir la tabla.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import DeductionHeader from '../../../../../../src/components/gameRoom/components/deductionTable/components/DeductionHeader';

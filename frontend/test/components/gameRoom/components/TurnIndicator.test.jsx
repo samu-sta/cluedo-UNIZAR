@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente TurnIndicator
+ * 
+ * Verifica el comportamiento del indicador de turno,
+ * mostrando el jugador activo y el número de turno
+ * actual en la interfaz de la sala de juego.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import TurnIndicator from '../../../../src/components/gameRoom/components/TurnIndicator';

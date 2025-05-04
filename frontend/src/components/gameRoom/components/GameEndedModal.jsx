@@ -1,3 +1,13 @@
+/*************************************************
+ * Modal de fin de juego
+ * 
+ * Muestra una ventana cuando la partida termina,
+ * indicando el ganador, la solución del caso y
+ * ofreciendo opciones para salir de la sala.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import useGameEndedModal from '../hooks/useGameEndedModal';

@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente AccusationModal
+ * 
+ * Verifica el funcionamiento del modal de acusación,
+ * incluyendo la selección de elementos para acusar
+ * y la validación del formulario de acusación.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent, within } from '@testing-library/react';
 import AccusationModal from '../../../../src/components/gameRoom/components/AccusationModal';

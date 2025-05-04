@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente LeaveGameModal
+ * 
+ * Verifica el comportamiento del modal de confirmación
+ * para abandonar la partida, incluyendo las opciones
+ * para confirmar o cancelar la acción.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import LeaveGameModal from '../../../../src/components/gameRoom/components/LeaveGameModal';

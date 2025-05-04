@@ -1,3 +1,13 @@
+/*************************************************
+ * Componente principal de la aplicación
+ * 
+ * Este componente establece la estructura general
+ * de la aplicación y las rutas principales para la
+ * navegación entre diferentes vistas.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { useState } from 'react';
 import Header from './components/header/Header.jsx';
 import Footer from './components/footer/Footer.jsx';

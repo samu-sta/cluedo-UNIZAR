@@ -1,3 +1,13 @@
+/*************************************************
+ * Constantes de la aplicación
+ * 
+ * Define valores constantes utilizados en toda la
+ * aplicación, como rutas, configuraciones de formularios,
+ * y otros valores estáticos.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 export const HOME = {
   HERO: {
     ASIDE: "¡Nuevo juego!",

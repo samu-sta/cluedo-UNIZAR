@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente SuggestionResponseModal
+ * 
+ * Verifica el comportamiento del modal que muestra las
+ * respuestas de los jugadores a una sugerencia, incluyendo
+ * las cartas reveladas y los jugadores que respondieron.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import SuggestionResponseModal from '../../../../src/components/gameRoom/components/SuggestionResponseModal';

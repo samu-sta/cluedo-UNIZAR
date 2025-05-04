@@ -1,3 +1,13 @@
+/*************************************************
+ * Componente de cabecera
+ * 
+ * Muestra la barra de navegación superior de la aplicación,
+ * incluyendo enlaces de navegación, logo y controles de
+ * usuario como inicio de sesión y cierre de sesión.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import './styles/Header.css';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from 'react-router-dom';

@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente PlayerToken
+ * 
+ * Verifica el comportamiento del token que representa
+ * a un jugador en el tablero, mostrando su color
+ * característico y gestionando su posición.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import PlayerToken from '../../../../../../src/components/gameRoom/components/board/components/PlayerToken';

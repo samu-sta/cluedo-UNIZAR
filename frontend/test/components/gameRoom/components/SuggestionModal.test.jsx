@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente SuggestionModal
+ * 
+ * Verifica el comportamiento del modal para realizar
+ * sugerencias durante el juego, permitiendo seleccionar
+ * un personaje, arma y habitación actual.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent, within } from '@testing-library/react';
 import SuggestionModal from '../../../../src/components/gameRoom/components/SuggestionModal';

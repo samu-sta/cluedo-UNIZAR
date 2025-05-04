@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente DiceRoller
+ * 
+ * Verifica el funcionamiento del componente que muestra
+ * y gestiona los dados del juego, incluyendo la animación
+ * de tirada y la visualización del resultado.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import DiceRoller from '../../../../src/components/gameRoom/components/DiceRoller';

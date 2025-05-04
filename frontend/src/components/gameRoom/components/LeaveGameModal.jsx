@@ -1,3 +1,13 @@
+/*************************************************
+ * Modal para abandonar partida
+ * 
+ * Muestra una confirmación cuando el usuario intenta
+ * salir de una partida en curso, advirtiendo de las
+ * posibles consecuencias para sus compañeros.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { createPortal } from 'react-dom';
 import '../styles/LeaveGameModal.css';
 

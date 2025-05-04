@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el hook useHeader
+ * 
+ * Verifica el funcionamiento del hook que gestiona
+ * el comportamiento responsivo del encabezado,
+ * incluyendo el menú móvil y sus estados.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { renderHook, act } from '@testing-library/react';
 import useHeader from '../../../../src/components/header/hooks/useHeader';
 import useIsMobile from '../../../../src/components/common/hooks/useIsMobile';

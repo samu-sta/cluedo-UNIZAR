@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el hook useSuggestionResponseModal
+ * 
+ * Verifica el comportamiento del modal que muestra
+ * las respuestas de otros jugadores a una sugerencia,
+ * controlando su visibilidad y actualización.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { renderHook, act } from '@testing-library/react';
 import { useSuggestionResponseModal } from '../../../../src/components/gameRoom/hooks/useSuggestionResponseModal';
 

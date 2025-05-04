@@ -1,3 +1,13 @@
+/*************************************************
+ * Indicador de turno
+ * 
+ * Muestra información sobre el turno actual del juego,
+ * incluyendo qué jugador tiene el turno y botones de
+ * acción disponibles para el usuario activo.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import '../styles/TurnIndicator.css';
 
 const TurnIndicator = ({

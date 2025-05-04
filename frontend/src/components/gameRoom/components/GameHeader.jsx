@@ -1,3 +1,13 @@
+/*************************************************
+ * Cabecera del juego
+ * 
+ * Muestra información importante sobre la partida actual,
+ * como el ID de la sala, estado del juego y jugadores
+ * conectados, con opciones para abandonar.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { FaCheck } from 'react-icons/fa';
 import { LuCopy } from "react-icons/lu";
 import useCopyGameId from '../hooks/useCopyGameId';

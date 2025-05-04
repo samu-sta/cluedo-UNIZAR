@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente IncorrectAccusationModal
+ * 
+ * Verifica el comportamiento del modal que se muestra
+ * cuando un jugador realiza una acusación incorrecta,
+ * informando sobre las consecuencias de dicho error.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import IncorrectAccusationModal from '../../../../src/components/gameRoom/components/IncorrectAccusationModal';

@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el hook useGameTurn
+ * 
+ * Verifica el manejo de turnos de jugadores durante
+ * la partida, incluyendo la identificación de cuándo
+ * es el turno del usuario y el control para pasar turno.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { renderHook, act } from '@testing-library/react';
 import { useGameTurn } from '../../../../src/components/gameRoom/hooks/useGameTurn';
 

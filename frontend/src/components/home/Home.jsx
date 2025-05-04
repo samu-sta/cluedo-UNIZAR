@@ -1,3 +1,13 @@
+/*************************************************
+ * Página de inicio
+ * 
+ * Página principal que muestra la presentación del juego,
+ * características principales y botones de acción para
+ * comenzar a jugar o registrarse.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { useEffect } from 'react';
 import useIsMobile from '../common/hooks/useIsMobile';
 import HeroSection from './components/HeroSection';

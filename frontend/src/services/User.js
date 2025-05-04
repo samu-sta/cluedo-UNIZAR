@@ -1,3 +1,13 @@
+/*************************************************
+ * Servicios de gestión de usuarios
+ * 
+ * Proporciona funciones para interactuar con la API
+ * de usuarios, incluyendo registro, inicio de sesión,
+ * cierre de sesión y gestión de perfiles.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 const API_URL = 'http://localhost:3000/api';
 
 export const registerUser = async (data) => {

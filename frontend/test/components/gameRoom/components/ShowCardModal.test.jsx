@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente ShowCardModal
+ * 
+ * Verifica el comportamiento del modal para mostrar
+ * cartas como respuesta a sugerencias, permitiendo
+ * seleccionar y revelar cartas a otros jugadores.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import ShowCardModal from '../../../../src/components/gameRoom/components/ShowCardModal';

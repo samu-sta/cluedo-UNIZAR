@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente DeductionGrid
+ * 
+ * Verifica el comportamiento de la cuadrícula principal
+ * de la tabla de deducción que aloja las categorías
+ * de personajes, armas y habitaciones.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import DeductionGrid from '../../../../../../src/components/gameRoom/components/deductionTable/components/DeductionGrid';

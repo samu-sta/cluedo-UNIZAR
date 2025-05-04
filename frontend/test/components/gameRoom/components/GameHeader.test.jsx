@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente GameHeader
+ * 
+ * Verifica el comportamiento del encabezado de la sala
+ * de juego, incluyendo el contador de turno, estado de
+ * partida y opciones para copiar el ID de la partida.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import GameHeader from '../../../../src/components/gameRoom/components/GameHeader';

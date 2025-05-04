@@ -1,3 +1,13 @@
+/*************************************************
+ * Esquemas de validación
+ * 
+ * Define esquemas para validación de formularios y
+ * datos de entrada, utilizando ZOD para garantizar
+ * la integridad y formato de los datos.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { z } from "zod";
 
 const RegisterUserSchema = z.object({

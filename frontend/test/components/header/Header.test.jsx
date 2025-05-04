@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente Header
+ * 
+ * Verifica el comportamiento del encabezado de la
+ * aplicación, incluyendo la navegación, el menú
+ * responsive y opciones de autenticación.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Header from '../../../src/components/header/Header';

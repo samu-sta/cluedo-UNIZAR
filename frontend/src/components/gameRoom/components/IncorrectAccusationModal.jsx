@@ -1,3 +1,13 @@
+/*************************************************
+ * Modal de acusación incorrecta
+ * 
+ * Muestra una ventana cuando un jugador realiza una
+ * acusación incorrecta, notificándole que ha sido
+ * eliminado de la partida y permitiéndole salir.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { createPortal } from 'react-dom';
 import '../styles/IncorrectAccusationModal.css';
 

@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el hook useIsMobile
+ * 
+ * Verifica que el hook detecte correctamente si la 
+ * interfaz se está mostrando en un dispositivo móvil
+ * basándose en el ancho de la ventana.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { renderHook, act } from '@testing-library/react';
 import useIsMobile from '../../../../src/components/common/hooks/useIsMobile';

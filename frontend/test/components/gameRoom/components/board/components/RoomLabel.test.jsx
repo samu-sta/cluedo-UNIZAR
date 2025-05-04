@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente RoomLabel
+ * 
+ * Verifica la correcta renderización de las etiquetas
+ * de las habitaciones en el tablero, mostrando su nombre
+ * y posicionándose correctamente dentro de cada sala.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import RoomLabel from '../../../../../../src/components/gameRoom/components/board/components/RoomLabel';

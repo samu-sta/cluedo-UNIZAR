@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente RulesSection
+ * 
+ * Verifica que la sección de reglas del juego muestre
+ * correctamente el título, descripción y la lista
+ * de reglas principales con su formato adecuado.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import RulesSection from '../../../../src/components/home/components/RulesSection';

@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente NotFound
+ * 
+ * Verifica que la página de error 404 muestre 
+ * correctamente el mensaje de página no encontrada
+ * y proporcione opciones para volver al inicio.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';

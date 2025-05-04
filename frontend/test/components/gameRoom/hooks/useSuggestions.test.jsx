@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el hook useSuggestions
+ * 
+ * Verifica la gestión de sugerencias y acusaciones
+ * durante el juego, incluyendo la interfaz modal y
+ * el intercambio de información entre jugadores.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { renderHook, act } from '@testing-library/react';
 import { useSuggestions } from '../../../../src/components/gameRoom/hooks/useSuggestions';
 

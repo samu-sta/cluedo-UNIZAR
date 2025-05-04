@@ -1,3 +1,13 @@
+/*************************************************
+ * Lanzador de dados
+ * 
+ * Componente que permite a los jugadores lanzar los 
+ * dados durante su turno, mostrando animaciones y
+ * resultados obtenidos para el movimiento.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { useState, useEffect } from 'react';
 import '../styles/DiceRoller.css';
 import Die from './Die';

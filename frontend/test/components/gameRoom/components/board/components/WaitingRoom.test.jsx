@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente WaitingRoom
+ * 
+ * Verifica la visualización de la sala de espera
+ * que se muestra antes de iniciar la partida, incluido
+ * el contador regresivo y la lista de jugadores.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import WaitingRoom from '../../../../../../src/components/gameRoom/components/board/components/WaitingRoom';

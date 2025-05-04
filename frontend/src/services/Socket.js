@@ -1,3 +1,13 @@
+/*************************************************
+ * Servicios de gestión de conexiones WebSocket
+ * 
+ * Proporciona funciones para establecer, gestionar y
+ * cerrar conexiones de socket con el servidor para
+ * la comunicación en tiempo real durante el juego.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { io } from 'socket.io-client';
 
 let socket = null;

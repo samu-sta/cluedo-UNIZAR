@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente Die
+ * 
+ * Verifica la correcta renderización del dado individual,
+ * mostrando el valor correspondiente y aplicando
+ * las clases CSS adecuadas para su visualización.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Die from '../../../../src/components/gameRoom/components/Die';

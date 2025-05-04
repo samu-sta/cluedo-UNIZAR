@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para la página de registro
+ * 
+ * Verifica el funcionamiento correcto de la página
+ * de registro, incluyendo la validación de formularios,
+ * manejo de errores y redirección tras el registro.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, fireEvent, act, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter, MemoryRouter, Routes, Route } from 'react-router-dom';

@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente CTASection
+ * 
+ * Verifica que la sección de llamada a la acción
+ * muestre correctamente los textos promocionales
+ * y botones para registro de usuarios.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import CTASection from '../../../../src/components/home/components/CTASection';

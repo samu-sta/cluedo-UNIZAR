@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente DeductionItem
+ * 
+ * Verifica el comportamiento de cada elemento individual
+ * de la tabla de deducción, incluyendo la visualización
+ * de estados y la gestión de clics del usuario.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import DeductionItem from '../../../../../../src/components/gameRoom/components/deductionTable/components/DeductionItem';

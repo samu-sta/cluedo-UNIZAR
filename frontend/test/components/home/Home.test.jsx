@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente Home
+ * 
+ * Verifica que la página principal de la aplicación
+ * muestre correctamente las secciones de bienvenida,
+ * características y llamadas a la acción.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Home from '../../../src/components/home/Home';

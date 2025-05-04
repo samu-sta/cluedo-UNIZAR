@@ -1,3 +1,13 @@
+/*************************************************
+ * Página de no encontrado
+ * 
+ * Se muestra cuando un usuario accede a una ruta
+ * que no existe en la aplicación, proporcionando
+ * opciones para volver a páginas válidas.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../utils/constants";
 import "./NotFound.css";

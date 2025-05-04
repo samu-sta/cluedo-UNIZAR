@@ -1,3 +1,13 @@
+/*************************************************
+ * Modal de acusación
+ * 
+ * Componente que muestra una ventana modal para que
+ * los jugadores realicen acusaciones formales,
+ * seleccionando sospechoso, arma y habitación.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import '../styles/AccusationModal.css';

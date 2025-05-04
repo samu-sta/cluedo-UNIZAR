@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para la página de inicio de sesión
+ * 
+ * Verifica el funcionamiento correcto de la página
+ * de login, incluyendo la validación de formularios,
+ * manejo de errores y redirección tras inicio de sesión.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, fireEvent, act, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter, MemoryRouter, Routes, Route } from 'react-router-dom';

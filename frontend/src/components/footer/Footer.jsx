@@ -1,3 +1,13 @@
+/*************************************************
+ * Componente de pie de página
+ * 
+ * Muestra información de derechos de autor, enlaces
+ * y datos adicionales en la parte inferior de la
+ * aplicación.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import './styles/Footer.css';
 
 const Footer = () => {

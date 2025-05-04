@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el hook useGameSocket
+ * 
+ * Verifica el funcionamiento del hook principal que
+ * gestiona la conexión del socket y el estado del juego,
+ * coordinando todas las acciones de la partida.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { renderHook, act } from '@testing-library/react';
 import useGameSocket from '../../../../src/components/gameRoom/hooks/useGameSocket';
 

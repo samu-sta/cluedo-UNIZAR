@@ -1,3 +1,13 @@
+/*************************************************
+ * Servicios de gestión de partidas
+ * 
+ * Proporciona funciones para interactuar con la API 
+ * del backend relacionadas con la creación, unión y 
+ * gestión de partidas de juego.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 const API_URL = 'http://localhost:3000/api';
 
 export const createGame = async () => {

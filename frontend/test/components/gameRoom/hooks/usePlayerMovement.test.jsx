@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el hook usePlayerMovement
+ * 
+ * Verifica la gestión del movimiento de jugadores,
+ * incluyendo tiradas de dados, cálculo de movimientos
+ * válidos y proceso de desplazamiento en el tablero.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { renderHook, act } from '@testing-library/react';
 import { usePlayerMovement } from '../../../../src/components/gameRoom/hooks/usePlayerMovement';
 

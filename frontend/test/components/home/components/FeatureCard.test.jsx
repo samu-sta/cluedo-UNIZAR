@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente FeatureCard
+ * 
+ * Verifica que las tarjetas de características
+ * muestren correctamente el ícono, título y 
+ * descripción de cada función del juego.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { render, screen, fireEvent } from '@testing-library/react';
 import FeatureCard from '../../../../src/components/home/components/FeatureCard';
 

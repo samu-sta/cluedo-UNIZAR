@@ -1,3 +1,13 @@
+/*************************************************
+ * Modal para mostrar carta
+ * 
+ * Permite a los jugadores seleccionar una carta para
+ * mostrar en respuesta a una sugerencia de otro
+ * jugador, manteniendo la mecánica de pistas.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React, { useState, useEffect } from 'react';
 import GameCard from './playerCards/components/GameCard';
 import '../styles/ShowCardModal.css';

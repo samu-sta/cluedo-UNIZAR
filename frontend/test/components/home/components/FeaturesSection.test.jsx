@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente FeaturesSection
+ * 
+ * Verifica que la sección de características muestre
+ * correctamente el título, descripción y la lista
+ * de tarjetas con las funciones del juego.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { render, screen } from '@testing-library/react';
 import FeaturesSection from '../../../../src/components/home/components/FeaturesSection';
 import { HOME } from '../../../../src/utils/constants';

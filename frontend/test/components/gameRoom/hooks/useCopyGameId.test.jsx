@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el hook useCopyGameId
+ * 
+ * Verifica la funcionalidad para copiar el ID de la 
+ * partida al portapapeles, incluyendo la confirmación
+ * visual para el usuario y el manejo del estado.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { renderHook, act } from '@testing-library/react';
 import useCopyGameId from '../../../../src/components/gameRoom/hooks/useCopyGameId';
 

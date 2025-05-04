@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente FormField
+ * 
+ * Verifica que el componente de campo de formulario
+ * renderice correctamente diferentes tipos de campos
+ * y gestione apropiadamente los errores y estados.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import FormField from '../../../src/components/auth/components/FormField';

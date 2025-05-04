@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el hook useGameEndedModal
+ * 
+ * Verifica el comportamiento del modal de fin de juego,
+ * incluyendo su aparición cuando la partida termina
+ * y las opciones para el usuario tras finalizar.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { renderHook, act } from '@testing-library/react';
 import useGameEndedModal from '../../../../src/components/gameRoom/hooks/useGameEndedModal';
 

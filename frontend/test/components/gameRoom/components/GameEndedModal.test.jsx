@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente GameEndedModal
+ * 
+ * Verifica el comportamiento del modal de fin de partida,
+ * mostrando el resultado final, el ganador, la solución
+ * y proporcionando opciones para volver al menú.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { useNavigate } from 'react-router-dom';

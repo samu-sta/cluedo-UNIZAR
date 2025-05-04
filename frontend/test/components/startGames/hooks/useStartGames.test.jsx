@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el hook useStartGames
+ * 
+ * Verifica la lógica del hook que gestiona la creación
+ * y unión a partidas, incluyendo el manejo de estado,
+ * errores y respuestas del servidor.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { renderHook, act } from '@testing-library/react';
 import { useNavigate } from 'react-router-dom';
 import useStartGames from '../../../../src/components/startGames/hooks/useStartGames';

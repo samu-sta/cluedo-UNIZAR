@@ -1,3 +1,13 @@
+/*************************************************
+ * Modal de respuesta a sugerencia
+ * 
+ * Muestra las respuestas de otros jugadores a una 
+ * sugerencia realizada, indicando qué cartas fueron
+ * mostradas y por qué jugadores.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { useSuggestionResponseModal } from '../hooks/useSuggestionResponseModal';
 import CharacterBadge from '../../../components/common/CharacterBadge';
 import GameCard from './playerCards/components/GameCard';

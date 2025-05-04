@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente GameRoom
+ * 
+ * Verifica el funcionamiento correcto de la sala de
+ * juego principal, incluyendo la integración de sus
+ * componentes y el manejo de estados del juego.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';

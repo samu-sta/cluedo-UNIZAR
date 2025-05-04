@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente Footer
+ * 
+ * Verifica que el pie de página muestre correctamente
+ * la información de créditos y copyright del juego,
+ * así como su estilo y estructura adecuados.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Footer from '../../../src/components/footer/Footer';

@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente Board
+ * 
+ * Verifica el comportamiento del tablero de juego,
+ * incluyendo la renderización de celdas, personajes,
+ * habitaciones y el manejo de movimientos del jugador.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Board } from '../../../../../src/components/gameRoom/components/board/Board';

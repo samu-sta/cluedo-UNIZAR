@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente BoardCell
+ * 
+ * Verifica el comportamiento de las celdas individuales
+ * del tablero de juego, incluyendo su apariencia,
+ * resaltado y manejo de eventos de clic.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import BoardCell from '../../../../../../src/components/gameRoom/components/board/components/BoardCell';

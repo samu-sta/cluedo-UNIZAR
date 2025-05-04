@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el hook useSocketConnection
+ * 
+ * Verifica la inicialización y gestión de la conexión
+ * con el servidor mediante WebSockets, incluyendo la
+ * autenticación y manejo de eventos de conexión.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { renderHook, act, waitFor } from '@testing-library/react';
 import { useSocketConnection } from '../../../../src/components/gameRoom/hooks/useSocketConnection';
 import { joinGame } from '../../../../src/services/Game';

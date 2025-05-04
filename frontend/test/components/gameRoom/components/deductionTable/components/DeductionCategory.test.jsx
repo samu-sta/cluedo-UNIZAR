@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente DeductionCategory
+ * 
+ * Verifica la visualización y comportamiento de cada
+ * categoría de la tabla de deducción (personajes, armas
+ * o habitaciones) dentro del juego.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import DeductionCategory from '../../../../../../src/components/gameRoom/components/deductionTable/components/DeductionCategory';

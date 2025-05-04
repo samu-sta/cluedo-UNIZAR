@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente CharacterBadge
+ * 
+ * Verifica que la insignia de personaje muestre
+ * correctamente el nombre del personaje y aplique
+ * los colores apropiados según sus propiedades.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import CharacterBadge from '../../../src/components/common/CharacterBadge';

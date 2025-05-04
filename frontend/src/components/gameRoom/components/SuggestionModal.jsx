@@ -1,3 +1,13 @@
+/*************************************************
+ * Modal de sugerencia
+ * 
+ * Permite a los jugadores realizar una sugerencia sobre
+ * el caso durante su turno, seleccionando un personaje
+ * y un arma para la habitación donde se encuentran.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import '../styles/SuggestionModal.css';

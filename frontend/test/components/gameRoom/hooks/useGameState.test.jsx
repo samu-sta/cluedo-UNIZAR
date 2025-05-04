@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el hook useGameState
+ * 
+ * Verifica el manejo del estado general del juego,
+ * incluyendo jugadores, estado de la partida,
+ * cuenta regresiva y resultados finales.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { renderHook, act } from '@testing-library/react';
 import { useGameState } from '../../../../src/components/gameRoom/hooks/useGameState';
 

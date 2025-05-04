@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el componente StartGames
+ * 
+ * Verifica que la página de inicio de partidas funcione
+ * correctamente, permitiendo al usuario crear nuevas
+ * partidas o unirse a partidas existentes.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { useNavigate } from 'react-router-dom';

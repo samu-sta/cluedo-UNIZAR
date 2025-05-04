@@ -1,3 +1,13 @@
+/*************************************************
+ * Pruebas para el hook usePlayerCards
+ * 
+ * Verifica la gestión de las cartas de los jugadores,
+ * incluyendo su obtención, almacenamiento y el
+ * seguimiento de las cartas mostradas durante el juego.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import { renderHook, act } from '@testing-library/react';
 import { usePlayerCards } from '../../../../src/components/gameRoom/hooks/usePlayerCards';
 

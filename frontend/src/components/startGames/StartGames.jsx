@@ -1,3 +1,13 @@
+/*************************************************
+ * Página de inicio de partidas
+ * 
+ * Componente para crear nuevas partidas o unirse a
+ * partidas existentes, con opciones para generar
+ * salas de juego personalizadas.
+ * 
+ * Autor: SAMUEL FELIPE
+ *************************************************/
+
 import './styles/StartGames.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
