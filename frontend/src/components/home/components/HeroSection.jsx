@@ -14,11 +14,8 @@ const HeroSection = ({ isMobile }) => {
         <p className="home-hero-description">{HOME.HERO.DESCRIPTION}</p>
 
         <nav className="home-hero-buttons">
-          <Link to={ROUTES.REGISTER} className="btn primary with-shadow">
-            {HOME.HERO.REGISTER_BTN}
-          </Link>
-          <Link to={ROUTES.LOGIN} className="btn secondary">
-            {HOME.HERO.LOGIN_BTN}
+          <Link to={ROUTES.GAMES} className="btn primary with-shadow">
+            Jugar partida
           </Link>
         </nav>
 

@@ -8,8 +8,8 @@ const CTASection = () => (
     <p className="home-cta-description">{HOME.CTA.DESCRIPTION}</p>
 
     <section className="home-cta-actions">
-      <Link to={ROUTES.REGISTER} className="btn primary large with-shadow pulse">
-        {HOME.CTA.BUTTON}
+      <Link to={ROUTES.GAMES} className="btn primary large with-shadow pulse">
+        Jugar partida
       </Link>
       <p className="home-cta-note">{HOME.CTA.NOTE}</p>
     </section>

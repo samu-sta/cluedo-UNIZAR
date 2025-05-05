@@ -11,7 +11,7 @@
 import MESSAGES from "../messages/messages.js";
 import { v4 as uuidv4 } from 'uuid';
 import { gameStateManager } from "../socket/GameStateManager.js";
-import gameService from "../services/GameControllerService.js";
+import gameControllerService from "../services/GameControllerService.js";
 import { GAME_STATES } from "../config/constants.js";
 import { GAME_CONFIG } from "../config/constants.js";
 /**
@@ -32,7 +32,7 @@ class GameController {
 
       gameStateManager.registerGame(gameId, user);
 
-      const response = await gameService.prepareGameResponse(user, gameId);
+      const response = await gameControllerService.prepareGameResponse(user, gameId);
       return res.status(201).json(response);
     }
     catch (error) {
@@ -84,7 +84,7 @@ class GameController {
         });
       }
 
-      const response = await gameService.prepareGameResponse(user, gameId);
+      const response = await gameControllerService.prepareGameResponse(user, gameId);
       return res.status(200).json(response);
     }
     catch (error) {
@@ -116,7 +116,7 @@ class GameController {
       const randomIndex = Math.floor(Math.random() * availableGames.length);
       const randomGameId = availableGames[randomIndex];
 
-      const response = await gameService.prepareGameResponse(user, randomGameId);
+      const response = await gameControllerService.prepareGameResponse(user, randomGameId);
       return res.status(200).json(response);
     }
     catch (error) {

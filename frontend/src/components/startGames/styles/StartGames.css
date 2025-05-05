@@ -198,7 +198,6 @@
   40%, 80% { transform: translateX(5px); }
 }
 
-/* Separación para dispositivos móviles */
 @media (max-width: 576px) {
   .game-id-form {
     flex-direction: column;
@@ -206,5 +205,10 @@
   
   .game-id-form .btn {
     width: 100%;
+  }
+
+  .game-buttons{
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }
