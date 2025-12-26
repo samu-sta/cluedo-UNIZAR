@@ -1,7 +1,7 @@
 # 🎲 Cluedo UNIZAR - Documentación del Proyecto
 
 > [!NOTE]
-> Esta documentación refleja el estado actual del proyecto a día 11 de abril de 2025. Contiene información detallada sobre la arquitectura, componentes y funcionalidades implementadas.
+> Este proyecto fue completado el 4 de mayo de 2025, por lo que esta documentación refleja el estado final del proyecto.
 
 ## 💻 1. Tecnologías Utilizadas
 
@@ -12,6 +12,8 @@
 - **Zod 3.24.2**: Validación de formularios
 - **Vite 6.2.0**: Herramienta de compilación y servidor de desarrollo
 - **Socket.IO Client 5.1.0**: Cliente para comunicación en tiempo real
+- **Jest 29.7.0**: Framework de testing
+- **@testing-library/react**: Utilidades para testing de componentes React
 
 ### 1.2 Backend
 - **Node.js**: Entorno de ejecución para JavaScript en servidor
@@ -27,6 +29,7 @@
 - **Dotenv 16.4.7**: Carga variables de entorno desde archivo .env
 - **Zod 3.24.2**: Validación de datos de entrada de peticiones HTTP
 - **UUID 10.0.0**: Generación de identificadores únicos para partidas
+- **Jest 29.7.0**: Framework de testing para pruebas unitarias e integración
 
 
 ## 🏛️ 2. Arquitectura del Proyecto
@@ -52,6 +55,11 @@ cluedo/
 │   │   │   ├── Game.js          # Servicios de partidas
 │   │   │   └── Socket.js        # Configuración de Socket.IO
 │   │   └── schemas/     # Esquemas de validación
+│   ├── test/            # Tests del frontend
+│   │   ├── components/  # Tests de componentes
+│   │   │   ├── gameRoom/       # Tests de componentes de sala de juego
+│   │   │   └── ...
+│   │   └── ...
 │   └── ...
 ├── backend/         # Servidor Node.js
 │   ├── src/
@@ -69,6 +77,7 @@ cluedo/
 │   │   │       ├── gameHandlers.js       # Eventos generales del juego
 │   │   │       ├── movementHandlers.js   # Eventos de movimiento
 │   │   │       ├── suggestionHandlers.js # Eventos de sugerencias y acusaciones
+│   │   │       ├── turnHandlers.js       # Eventos de turnos
 │   │   │       └── utils.js              # Utilidades comunes para handlers
 │   │   ├── services/      # Servicios de lógica de negocio
 │   │   │   ├── GameService.js       # Gestión general de partidas
@@ -82,8 +91,16 @@ cluedo/
 │   │   │   ├── board.js           # Algoritmos de movimiento en el tablero
 │   │   │   └── game.js            # Utilidades generales del juego
 │   │   └── schemas/      # Esquemas para validación
+│   ├── test/            # Tests del backend
+│   │   ├── unit/        # Pruebas unitarias
+│   │   │   └── socket/  # Tests de handlers de socket
+│   │   ├── integration/ # Pruebas de integración
+│   │   ├── setup.js     # Configuración de entorno de pruebas
+│   │   └── __mocks__/   # Mocks centralizados para testing
 │   └── ...
 └── documents/       # Documentación del proyecto
+    ├── README.md         # Este archivo
+    └── Gantt_Cluedo.gan  # Diagrama de Gantt del proyecto
 ```
 
 
@@ -316,24 +333,104 @@ El sistema utiliza autenticación basada en JWT (JSON Web Tokens) con las siguie
   7. En caso de acusación correcta, se muestra un modal de victoria y se finaliza el juego
 
 - **Implementación**:
-  - Frontend: Componentes modales (`AccusationModal`, `IncorrectAccusationModal`)
-  - Backend: Servicios de validación y procesamiento (`SuggestionService`)
+  - Frontend: Componentes modales ([`AccusationModal`](../frontend/src/components/gameRoom/components/AccusationModal.jsx), [`IncorrectAccusationModal`](../frontend/src/components/gameRoom/components/IncorrectAccusationModal.jsx))
+  - Backend: Servicios de validación y procesamiento ([`SuggestionService`](../backend/src/services/SuggestionService.js))
   - Comunicación: Eventos socket para transmisión de acusaciones y resultados
 
-## 🐳 8. Docker
+
+## 🧪 8. Testing
+
+### 8.1 Testing del Backend
+El backend cuenta con una suite completa de pruebas que validan la lógica de negocio y los handlers de socket.
+
+#### 8.1.1 Estructura de Testing
+- **Pruebas unitarias**: Tests aislados de componentes individuales
+  - Handlers de socket ([`turnHandlers.test.js`](../backend/test/unit/socket/handlers/turnHandlers.test.js), [`gameHandlers.test.js`](../backend/test/unit/socket/handlers/gameHandlers.test.js))
+  - Servicios de lógica de negocio
+- **Pruebas de integración**: Tests de integración entre diferentes componentes
+  - Rutas de usuario ([`user-routes.test.js`](../backend/test/integration/user-routes.test.js))
+  - Flujos completos de juego
+
+#### 8.1.2 Configuración de Testing
+- **Framework**: Jest con soporte para ES modules
+- **Mocks centralizados**: Implementación de mocks reutilizables en [`setupMocks.js`](../backend/test/__mocks__/setupMocks.js)
+- **Setup global**: Configuración del entorno de pruebas en [`setup.js`](../backend/test/setup.js) y [`global-setup.js`](../backend/test/global-setup.js)
+- **Variables de entorno**: Configuración específica para testing (JWT_SECRET, NODE_ENV)
+
+#### 8.1.3 Cobertura de Testing Backend
+- ✅ Handlers de eventos socket
+- ✅ Validación de acciones de juego
+- ✅ Gestión de turnos y dados
+- ✅ Sistema de acusaciones y sugerencias
+- ✅ Rutas de autenticación y gestión de usuarios
+- ✅ Gestión del estado de partidas
+
+### 8.2 Testing del Frontend
+El frontend implementa pruebas para componentes y hooks críticos.
+
+#### 8.2.1 Estructura de Testing
+- **Componentes**: Tests de componentes React individuales
+  - Modal de respuesta de sugerencias ([`useSuggestionResponseModal.test.jsx`](../frontend/test/components/gameRoom/hooks/useSuggestionResponseModal.test.jsx))
+  - Tabla de deducciones ([`DeductionTable.test.jsx`](../frontend/test/components/gameRoom/components/deductionTable/DeductionTable.test.jsx))
+  - Componentes del tablero de juego
+- **Hooks personalizados**: Tests de lógica de hooks
+  - useDeductions
+  - useSuggestionResponse
+  - useGameSocket
+
+#### 8.2.2 Configuración de Testing
+- **Framework**: Jest + React Testing Library
+- **Setup**: Configuración en [`jest.setup.js`](../frontend/jest.setup.js) y [`jest.config.js`](../frontend/jest.config.js)
+- **Mocking**: Mocks de componentes y servicios externos
+
+#### 8.2.3 Cobertura de Testing Frontend
+- ✅ Hooks de gestión de estado
+- ✅ Modales de sugerencias y acusaciones
+- ✅ Tabla de deducciones
+- ✅ Integración con Socket.IO
+- ✅ Renderizado de componentes de juego
+
+### 8.3 Comandos de Testing
+
+#### Backend
+```bash
+# Ejecutar todas las pruebas
+npm test
+
+# Ejecutar pruebas en modo watch
+npm run test:watch
+
+# Generar reporte de cobertura
+npm run test:coverage
+```
+
+#### Frontend
+```bash
+# Ejecutar todas las pruebas
+npm test
+
+# Ejecutar pruebas en modo watch
+npm run test:watch
+
+# Generar reporte de cobertura
+npm run test:coverage
+```
+
+
+## 🐳 9. Docker
 
 El proyecto está completamente dockerizado para facilitar el desarrollo y despliegue.
 
-### 8.1 Servicios en Docker Compose
+### 9.1 Servicios en Docker Compose
 - **frontend**: Contenedor para la aplicación React (puerto 5173)
 - **backend**: Contenedor para el servidor Node.js (puerto 3000)
 - **db**: Contenedor para MySQL (puerto 3306)
 
-### 8.2 Volúmenes
+### 9.2 Volúmenes
 - Volumen persistente para datos de MySQL
 - Volúmenes para código fuente (desarrollo)
 
-### 8.3 Variables de Entorno
+### 9.3 Variables de Entorno
 
 > [!IMPORTANT]
 > Nunca incluir archivos .env con credenciales reales en el repositorio. Asegurarse de que estén incluidos en el .gitignore.
@@ -344,7 +441,11 @@ Las configuraciones se manejan mediante variables de entorno que se pueden defin
 - URL de API
 - Secreto JWT
 
-### 8.4 Comandos Útiles
+### 9.4 Archivos Docker
+- **Frontend**: [`.dockerignore`](../frontend/.dockerignore) - Excluye archivos innecesarios del build
+- **Backend**: Configuración similar para optimizar el tamaño de la imagen
+
+### 9.5 Comandos Útiles
 ```bash
 # Levantar servicios
 docker-compose up -d
@@ -360,7 +461,7 @@ docker-compose up -d --build
 ```
 
 
-## 🛡️ 9. Seguridad
+## 🛡️ 10. Seguridad
 
 - **Contraseñas**: Hashed con Argon2, no se almacenan en texto plano
 - **CORS**: Restricciones de origen cruzado configuradas
@@ -371,9 +472,9 @@ docker-compose up -d --build
 > Establecer un JWT_SECRET privado que no se pueda descifrar
 
 
-## ⚙️ 10. Instalación y Configuración (Sin Docker)
+## ⚙️ 11. Instalación y Configuración (Sin Docker)
 
-### 10.1 Instalación de Dependencias
+### 11.1 Instalación de Dependencias
 
 #### Frontend
 ```bash
@@ -393,12 +494,12 @@ cd backend
 npm install
 ```
 
-### 10.2 Configuración de Variables de Entorno
+### 11.2 Configuración de Variables de Entorno
 
 > [!NOTE]
 > El proyecto requiere que se creen los archivos .env en la carpeta backend, siguiendo la estructura del .env.example.
 
-### 10.3 Ejecución del frontend y backend
+### 11.3 Ejecución del frontend y backend
 
 #### Frontend
 ```bash
@@ -417,40 +518,29 @@ cd backend
 npm start
 ```
 
-## 📷 11. Capturas de Pantalla
+## 📷 12. Capturas de Pantalla
 
-### 11.1 Página de Inicio
+### 12.1 Página de Inicio
 ![home-1](https://github.com/user-attachments/assets/526330b3-b676-40ed-a988-379921742dd4)
 ![home-2](https://github.com/user-attachments/assets/78563d1c-2d44-46c4-9465-d622b74a9f73)
 ![home-3](https://github.com/user-attachments/assets/876bd374-8307-429c-9a41-dc619cf7f206)
 ![home-4](https://github.com/user-attachments/assets/d8211a83-abfc-4089-9270-d6744c5f5000)
 
-### 11.2 Interfaz de Juego
+### 12.2 Interfaz de Juego
 ![game-1](https://github.com/user-attachments/assets/54e4fa6d-9fc3-4f35-8561-4155fa812c71)
 ![game-2](https://github.com/user-attachments/assets/ebba0655-37eb-42bf-8bb0-3712b18606c1)
 ![game-3](https://github.com/user-attachments/assets/3e586cc5-7e48-47d3-88be-c0dbc8a4943a)
 
-## 🔮 12. Consideraciones Futuras
-
-Actualmente, el equipo se está enfocando en las siguientes áreas de mejora:
-
-### 12.1 Testing
-- Implementación de pruebas unitarias para componentes críticos
-- Pruebas de integración para la comunicación entre frontend y backend
-- Pruebas end-to-end para simular flujos completos de usuario
-- Pruebas de carga para verificar el rendimiento con múltiples partidas simultáneas
-
-### 12.2 Corrección de Bugs
-- Resolver problemas de reconexión cuando un jugador se desconecta temporalmente
-- Corregir comportamiento inconsistente en la tabla de deducciones en dispositivos móviles
-- Solucionar problemas de renderizado en diferentes navegadores
-- Arreglar errores relacionados con la distribución de cartas y validación de movimientos
-
-### 12.3 Refactorización del Frontend
-- Mejorar la estructura de componentes para facilitar mantenimiento
-- Estandarizar el manejo de estado entre componentes
-- Mejorar la experiencia de usuario en dispositivos móviles
-- Implementar mejores prácticas de accesibilidad
-
 ---
-Esta documentación es un recurso vivo que será actualizado conforme el proyecto evolucione.
+
+## 📊 14. Cronología del Proyecto
+
+Basado en el diagrama de Gantt ([`Gantt_Cluedo.gan`](Gantt_Cluedo.gan)), el proyecto se desarrolló en las siguientes fases:
+
+1. **Fase 1**: Planificación y diseño inicial (20-21 febrero 2025)
+2. **Fase 2**: Desarrollo del sistema de autenticación y base de datos
+3. **Fase 3**: Implementación del tablero y sistema de partidas
+4. **Fase 4**: Sistema de movimientos y distribución de cartas (17-24 marzo 2025)
+5. **Fase 5**: Sistema de acusaciones y finalización (31 marzo - 10 abril 2025)
+6. **Fase 6**: Testing y documentación (21-28 abril 2025)
+7. **Fase Final**: Presentación y entrega (4 mayo 2025)
